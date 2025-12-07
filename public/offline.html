@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#08090a">
+  <title>ZZIK - 오프라인</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #08090a;
+      color: #f5f5f5;
+    }
+
+    .container {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      padding-top: env(safe-area-inset-top, 20px);
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 32px;
+      background: linear-gradient(135deg, #FF6B5B 0%, #CC4A3A 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      color: #a8a8a8;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 280px;
+      margin-bottom: 32px;
+    }
+
+    .retry-btn {
+      background: linear-gradient(135deg, #FF6B5B 0%, #CC4A3A 100%);
+      color: white;
+      border: none;
+      padding: 16px 48px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .retry-btn:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+
+    .status {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #666;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">찍</div>
+    <div class="icon">📡</div>
+    <h1>인터넷 연결 없음</h1>
+    <p>
+      네트워크 연결을 확인해주세요.<br>
+      연결되면 자동으로 새로고침됩니다.
+    </p>
+    <button class="retry-btn" onclick="retry()">다시 시도</button>
+  </div>
+  <div class="status" id="status">연결 대기 중...</div>
+
+  <script>
+    let checking = false;
+
+    function retry() {
+      if (checking) return;
+      checking = true;
+
+      const btn = document.querySelector('.retry-btn');
+      const status = document.getElementById('status');
+
+      btn.textContent = '연결 중...';
+      btn.classList.add('loading');
+      status.textContent = '서버에 연결 중...';
+
+      fetch('https://zzik.kr/api/health', {
+        method: 'HEAD',
+        cache: 'no-store',
+        mode: 'no-cors'
+      })
+        .then(() => {
+          status.textContent = '연결 성공! 새로고침 중...';
+          window.location.reload();
+        })
+        .catch(() => {
+          btn.textContent = '다시 시도';
+          btn.classList.remove('loading');
+          status.textContent = '연결 실패. 네트워크를 확인해주세요.';
+          checking = false;
+        });
+    }
+
+    // Auto retry when online
+    window.addEventListener('online', () => {
+      document.getElementById('status').textContent = '연결됨! 새로고침 중...';
+      setTimeout(() => window.location.reload(), 500);
+    });
+
+    // Check connection status periodically
+    setInterval(() => {
+      if (navigator.onLine && !checking) {
+        retry();
+      }
+    }, 5000);
+
+    // Update status on load
+    if (navigator.onLine) {
+      document.getElementById('status').textContent = '서버 연결 확인 중...';
+      setTimeout(retry, 1000);
+    } else {
+      document.getElementById('status').textContent = '오프라인 상태';
+    }
+  </script>
+</body>
+</html>

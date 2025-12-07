@@ -1,0 +1,11 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '오프라인 | ZZIK',
+  description: '인터넷 연결이 끊어졌습니다. 연결 상태를 확인해주세요.',
+  robots: 'noindex, nofollow',
+};
+
+export default function OfflineLayout({ children }: { children: React.ReactNode }) {
+  return children;
+}

@@ -1,0 +1,43 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="#0a0a0a"/>
+
+  <!-- Inner glow -->
+  <rect x="40" y="40" width="944" height="944" rx="160" fill="url(#innerGlow)"/>
+
+  <!-- Z Logo -->
+  <g transform="translate(256, 256)">
+    <!-- Main Z shape -->
+    <path d="M0 0 H512 L0 512 H512"
+          stroke="#ea8c15"
+          stroke-width="80"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+
+    <!-- Glow effect -->
+    <path d="M0 0 H512 L0 512 H512"
+          stroke="#ea8c15"
+          stroke-width="80"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+          opacity="0.5"
+          filter="url(#glow)"/>
+  </g>
+
+  <defs>
+    <linearGradient id="innerGlow" x1="512" y1="40" x2="512" y2="984" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>

@@ -1,0 +1,519 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+// ============================================
+// USER & AUTH
+// ============================================
+
+model User {
+  id                String                     @id @default(uuid())
+  email             String                     @unique
+  name              String?
+  nickname          String?
+  avatarUrl         String?                    @map("avatar_url")
+  profileImage      String?                    @map("profile_image")
+  preferencesVector Unsupported("vector(768)")? @map("preferences_vector")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  journeys               Journey[]
+  memberships            Member[]
+  checkIns               CheckIn[]
+  popupParticipations    PopupParticipation[]
+  popupCheckins          PopupCheckin[]
+  leader                 Leader?
+  referrals              LeaderReferral[]       @relation("ReferredUser")
+  notifications          Notification[]
+  notificationPreference NotificationPreferences?
+  pushSubscriptions      PushSubscription[]
+
+  @@map("users")
+}
+
+// ============================================
+// STORE (Business)
+// ============================================
+
+model Store {
+  id             String  @id @default(uuid())
+  name           String
+  description    String?
+  category       String
+  latitude       Float
+  longitude      Float
+  address        String
+  phone          String?
+  qrCode         String  @unique @map("qr_code")
+  geofenceRadius Int     @default(100) @map("geofence_radius")
+  ownerId        String? @map("owner_id")
+  isActive       Boolean @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  members    Member[]
+  checkIns   CheckIn[]
+  journeys   Journey[]
+  liveOffers LiveOffer[]
+  popups     Popup[]
+
+  @@map("stores")
+}
+
+// ============================================
+// MEMBER (User-Store N:M with Loyalty)
+// ============================================
+
+model Member {
+  id                   String         @id @default(uuid())
+  userId               String         @map("user_id")
+  storeId              String         @map("store_id")
+  loyaltyIndex         Float          @default(0) @map("loyalty_index")
+  loyaltySegment       LoyaltySegment @default(NEW) @map("loyalty_segment")
+  totalVisits          Int            @default(0) @map("total_visits")
+  totalSpend           Int            @default(0) @map("total_spend")
+  avgVerificationScore Float          @default(0) @map("avg_verification_score")
+  lastVisitAt          DateTime?      @map("last_visit_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([userId, storeId])
+  @@map("members")
+}
+
+enum LoyaltySegment {
+  VIP
+  REGULAR
+  NEW
+  CHURNED
+
+  @@map("loyalty_segment")
+}
+
+// ============================================
+// CHECK-IN (Triple Verification)
+// ============================================
+
+model CheckIn {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  storeId         String   @map("store_id")
+  gpsVerified     Boolean  @default(false) @map("gps_verified")
+  gpsDistance     Float?   @map("gps_distance")
+  gpsAccuracy     Float?   @map("gps_accuracy")
+  qrVerified      Boolean  @default(false) @map("qr_verified")
+  receiptVerified Boolean  @default(false) @map("receipt_verified")
+  receiptText     String?  @map("receipt_text")
+  totalScore      Float    @default(0) @map("total_score")
+  passed          Boolean  @default(false)
+  userLat         Float?   @map("user_lat")
+  userLng         Float?   @map("user_lng")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("check_ins")
+}
+
+// ============================================
+// JOURNEY (Photo/Video Content)
+// ============================================
+
+model Journey {
+  id           String                     @id @default(uuid())
+  userId       String                     @map("user_id")
+  storeId      String?                    @map("store_id")
+  checkInId    String?                    @map("check_in_id")
+  photoUrl     String?                    @map("photo_url")
+  videoUrl     String?                    @map("video_url")
+  caption      String?
+  vibeAnalysis Json?                      @map("vibe_analysis")
+  vibeVector   Unsupported("vector(768)")? @map("vibe_vector")
+  isPublic     Boolean                    @default(true) @map("is_public")
+  createdAt    DateTime                   @default(now()) @map("created_at")
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store Store? @relation(fields: [storeId], references: [id], onDelete: SetNull)
+
+  @@map("journeys")
+}
+
+// ============================================
+// LIVE OFFER (Time-limited Deals)
+// ============================================
+
+model LiveOffer {
+  id                 String         @id @default(uuid())
+  storeId            String         @map("store_id")
+  title              String
+  description        String?
+  discountType       DiscountType   @map("discount_type")
+  discountValue      Float          @map("discount_value")
+  minLoyaltySegment  LoyaltySegment? @map("min_loyalty_segment")
+  startsAt           DateTime       @map("starts_at")
+  expiresAt          DateTime       @map("expires_at")
+  maxClaims          Int?           @map("max_claims")
+  currentClaims      Int            @default(0) @map("current_claims")
+  isActive           Boolean        @default(true) @map("is_active")
+  createdAt          DateTime       @default(now()) @map("created_at")
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@map("live_offers")
+}
+
+enum DiscountType {
+  PERCENT
+  FIXED
+  FREEBIE
+
+  @@map("discount_type")
+}
+
+// ============================================
+// POPUP (Crowdfunding Campaigns)
+// ============================================
+
+model Popup {
+  id                  String       @id @default(uuid())
+  brandName           String       @map("brand_name")
+  title               String
+  description         String?
+  location            String
+  latitude            Float?
+  longitude           Float?
+  category            String
+  imageUrl            String?      @map("image_url")
+  goalParticipants    Int          @map("goal_participants")
+  currentParticipants Int          @default(0) @map("current_participants")
+  status              PopupStatus  @default(funding)
+  startsAt            DateTime?    @map("starts_at")
+  endsAt              DateTime?    @map("ends_at")
+  deadlineAt          DateTime     @map("deadline_at")
+  leaderId            String?      @map("leader_id")
+  storeId             String?      @map("store_id")
+  createdAt           DateTime     @default(now()) @map("created_at")
+  updatedAt           DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  leader        Leader?              @relation(fields: [leaderId], references: [id], onDelete: SetNull)
+  store         Store?               @relation(fields: [storeId], references: [id], onDelete: SetNull)
+  participations PopupParticipation[]
+  checkins      PopupCheckin[]
+  qrCodes       PopupQrCode[]
+  referrals     LeaderReferral[]
+  earnings      LeaderEarning[]
+
+  @@map("popups")
+}
+
+enum PopupStatus {
+  funding
+  confirmed
+  completed
+  cancelled
+
+  @@map("popup_status")
+}
+
+// ============================================
+// POPUP PARTICIPATION
+// ============================================
+
+model PopupParticipation {
+  id             String   @id @default(uuid())
+  popupId        String   @map("popup_id")
+  userId         String   @map("user_id")
+  referralCode   String?  @map("referral_code")
+  referredBy     String?  @map("referred_by")
+  isGuest        Boolean  @default(false) @map("is_guest")
+  participatedAt DateTime @default(now()) @map("participated_at")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  popup Popup @relation(fields: [popupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("popup_participations")
+}
+
+// ============================================
+// POPUP CHECK-IN
+// ============================================
+
+model PopupCheckin {
+  id            String   @id @default(uuid())
+  popupId       String   @map("popup_id")
+  userId        String   @map("user_id")
+  gpsScore      Float    @default(0) @map("gps_score")
+  qrScore       Float    @default(0) @map("qr_score")
+  receiptScore  Float    @default(0) @map("receipt_score")
+  totalScore    Float    @default(0) @map("total_score")
+  gpsDistance   Float?   @map("gps_distance")
+  gpsAccuracy   Float?   @map("gps_accuracy")
+  qrVerified    Boolean  @default(false) @map("qr_verified")
+  receiptVerified Boolean @default(false) @map("receipt_verified")
+  userLatitude  Float?   @map("user_latitude")
+  userLongitude Float?   @map("user_longitude")
+  passed        Boolean  @default(false)
+  verifiedAt    DateTime @default(now()) @map("verified_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  popup Popup @relation(fields: [popupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Relations for leader earnings
+  earnings LeaderEarning[]
+
+  @@map("popup_checkins")
+}
+
+// ============================================
+// POPUP QR CODES
+// ============================================
+
+model PopupQrCode {
+  id        String    @id @default(uuid())
+  popupId   String    @map("popup_id")
+  secretKey String    @map("secret_key")
+  isActive  Boolean   @default(true) @map("is_active")
+  createdAt DateTime  @default(now()) @map("created_at")
+  expiresAt DateTime? @map("expires_at")
+
+  popup Popup @relation(fields: [popupId], references: [id], onDelete: Cascade)
+
+  @@map("popup_qr_codes")
+}
+
+// ============================================
+// LEADER (Influencer/Referrer)
+// ============================================
+
+model Leader {
+  id             String   @id @default(uuid())
+  userId         String   @unique @map("user_id")
+  referralCode   String   @unique @map("referral_code")
+  tier           String   @default("Bronze")
+  totalReferrals Int      @default(0) @map("total_referrals")
+  totalCheckins  Int      @default(0) @map("total_checkins")
+  totalEarnings  Float    @default(0) @map("total_earnings")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  popups   Popup[]
+  referrals LeaderReferral[]
+  earnings LeaderEarning[]
+  payouts  LeaderPayout[]
+
+  @@map("leaders")
+}
+
+// ============================================
+// LEADER REFERRAL
+// ============================================
+
+model LeaderReferral {
+  id              String   @id @default(uuid())
+  leaderId        String   @map("leader_id")
+  referredUserId  String   @map("referred_user_id")
+  popupId         String   @map("popup_id")
+  referralCode    String   @map("referral_code")
+  participationId String?  @map("participation_id")
+  checkinId       String?  @map("checkin_id")
+  checkedIn       Boolean  @default(false) @map("checked_in")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  leader       Leader @relation(fields: [leaderId], references: [id], onDelete: Cascade)
+  referredUser User   @relation("ReferredUser", fields: [referredUserId], references: [id], onDelete: Cascade)
+  popup        Popup  @relation(fields: [popupId], references: [id], onDelete: Cascade)
+
+  @@map("leader_referrals")
+}
+
+// ============================================
+// LEADER EARNING
+// ============================================
+
+model LeaderEarning {
+  id             String              @id @default(uuid())
+  leaderId       String              @map("leader_id")
+  referralId     String?             @map("referral_id")
+  popupId        String?             @map("popup_id")
+  checkinId      String?             @map("checkin_id")
+  amount         Float
+  tierAtEarning  String              @default("Bronze") @map("tier_at_earning")
+  status         LeaderEarningStatus @default(pending)
+  source         String              @default("referral")
+  createdAt      DateTime            @default(now()) @map("created_at")
+  confirmedAt    DateTime?           @map("confirmed_at")
+  paidAt         DateTime?           @map("paid_at")
+
+  leader  Leader        @relation(fields: [leaderId], references: [id], onDelete: Cascade)
+  popup   Popup?        @relation(fields: [popupId], references: [id], onDelete: SetNull)
+  checkin PopupCheckin? @relation(fields: [checkinId], references: [id], onDelete: SetNull)
+
+  @@map("leader_earnings")
+}
+
+enum LeaderEarningStatus {
+  pending
+  confirmed
+  paid
+  cancelled
+
+  @@map("leader_earning_status")
+}
+
+// ============================================
+// LEADER PAYOUT
+// ============================================
+
+model LeaderPayout {
+  id                  String             @id @default(uuid())
+  leaderId            String             @map("leader_id")
+  amount              Float
+  fee                 Float              @default(0)
+  netAmount           Float              @default(0) @map("net_amount")
+  status              LeaderPayoutStatus @default(pending)
+  bankName            String?            @map("bank_name")
+  accountNumber       String?            @map("account_number")
+  accountHolder       String?            @map("account_holder")
+  earningsCount       Int                @default(0) @map("earnings_count")
+  earningsPeriodStart DateTime?          @map("earnings_period_start")
+  earningsPeriodEnd   DateTime?          @map("earnings_period_end")
+  rejectReason        String?            @map("reject_reason")
+  cancelReason        String?            @map("cancel_reason")
+  adminNotes          String?            @map("admin_notes")
+  processedBy         String?            @map("processed_by")
+  transactionId       String?            @map("transaction_id")
+  requestedAt         DateTime           @default(now()) @map("requested_at")
+  confirmedAt         DateTime?          @map("confirmed_at")
+  processingAt        DateTime?          @map("processing_at")
+  paidAt              DateTime?          @map("paid_at")
+  rejectedAt          DateTime?          @map("rejected_at")
+  cancelledAt         DateTime?          @map("cancelled_at")
+  createdAt           DateTime           @default(now()) @map("created_at")
+  updatedAt           DateTime           @updatedAt @map("updated_at")
+
+  leader Leader @relation(fields: [leaderId], references: [id], onDelete: Cascade)
+
+  @@map("leader_payouts")
+}
+
+enum LeaderPayoutStatus {
+  pending
+  confirmed
+  processing
+  paid
+  rejected
+  cancelled
+
+  @@map("leader_payout_status")
+}
+
+// ============================================
+// NOTIFICATIONS
+// ============================================
+
+model Notification {
+  id        String               @id @default(uuid())
+  userId    String               @map("user_id")
+  type      NotificationType
+  title     String
+  message   String
+  data      Json                 @default("{}")
+  priority  NotificationPriority @default(medium)
+  read      Boolean              @default(false)
+  readAt    DateTime?            @map("read_at")
+  expiresAt DateTime?            @map("expires_at")
+  createdAt DateTime             @default(now()) @map("created_at")
+  updatedAt DateTime             @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  participation_confirmed
+  popup_opened
+  checkin_verified
+  leader_earning
+  tier_upgrade
+  goal_progress
+  deadline_reminder
+  new_popup
+
+  @@map("notification_type")
+}
+
+enum NotificationPriority {
+  low
+  medium
+  high
+  urgent
+
+  @@map("notification_priority")
+}
+
+// ============================================
+// NOTIFICATION PREFERENCES
+// ============================================
+
+model NotificationPreferences {
+  userId                String    @id @map("user_id")
+  pushEnabled           Boolean   @default(true) @map("push_enabled")
+  inAppEnabled          Boolean   @default(true) @map("in_app_enabled")
+  emailEnabled          Boolean   @default(false) @map("email_enabled")
+  participationConfirmed Boolean  @default(true) @map("participation_confirmed")
+  popupOpened           Boolean   @default(true) @map("popup_opened")
+  checkinVerified       Boolean   @default(true) @map("checkin_verified")
+  leaderEarning         Boolean   @default(true) @map("leader_earning")
+  tierUpgrade           Boolean   @default(true) @map("tier_upgrade")
+  goalProgress          Boolean   @default(true) @map("goal_progress")
+  deadlineReminder      Boolean   @default(true) @map("deadline_reminder")
+  newPopup              Boolean   @default(true) @map("new_popup")
+  quietHoursEnabled     Boolean   @default(false) @map("quiet_hours_enabled")
+  quietHoursStart       String?   @map("quiet_hours_start")
+  quietHoursEnd         String?   @map("quiet_hours_end")
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_preferences")
+}
+
+// ============================================
+// PUSH SUBSCRIPTIONS
+// ============================================
+
+model PushSubscription {
+  id           String   @id @default(uuid())
+  userId       String   @map("user_id")
+  endpoint     String
+  p256dhKey    String   @map("p256dh_key")
+  authKey      String   @map("auth_key")
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("push_subscriptions")
+}

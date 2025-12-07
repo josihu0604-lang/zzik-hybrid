@@ -1,0 +1,102 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+coverage/
+
+# Misc
+*.pem
+
+# Local tools & binaries
+gh_*/
+*.zip
+
+# Logs
+logs/
+
+# Browser extension (local dev only)
+browser-tools-extension/
+.vercel
+.env*.local
+
+# Supabase temp
+supabase/.temp/
+
+# Sentry
+.sentryclirc
+sentry.properties
+
+# Business Documents (Confidential)
+ZZIK_BUSINESS_PACKAGE_FINAL/
+ZZIK_BUSINESS_PACKAGE_FINAL.tar.gz
+ZZIK_BUSINESS_RESEARCH_COMPLETE.tar.gz
+business-research-tools.tar.gz
+docs/business/
+scripts/business-research/
+research-output/
+*.xlsx
+*.csv
+
+# Analysis Reports (Development Only)
+AI_*.md
+*_REPORT.md
+*_SUMMARY.md
+*_SUMMARY.txt
+*_ANALYSIS*.md
+OPTIMIZATION*.md
+IMPROVEMENT*.md
+ISSUE_LIST*.md
+*_ISSUES*.md
+*_FIXED.md
+*_IMPLEMENTATION*.md
+UX_FIXES*.md
+TEST_*.md
+SECURITY_*.md
+SENTRY_*.md
+WEB_VITALS*.md
+VIRTUAL_LIST*.md
+README-*.md
+.ultra-sync-state.json
+*.tar.gz
+
+# Test outputs
+playwright-report/
+test-results/
+
+# Development docs & scripts (local only)
+docs/
+scripts/
+apply_ux_fixes.sh

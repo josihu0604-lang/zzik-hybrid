@@ -1,0 +1,31 @@
+{
+  "model": "sonnet",
+  "env": {
+    "MAX_THINKING_TOKENS": "16000",
+    "SKIP_ENV_VALIDATION": "true"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(vercel:*)",
+      "Bash(npx:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(timeout:*)",
+      "Bash(which:*)",
+      "Bash(sleep:*)",
+      "Bash(kill:*)",
+      "mcp__github__*",
+      "mcp__context7__*",
+      "mcp__memory__*",
+      "mcp__thinking__*"
+    ],
+    "deny": ["Read(.env)", "Read(.env.*)", "Read(./secrets/**)"]
+  },
+  "includeCoAuthoredBy": true
+}

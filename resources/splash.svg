@@ -1,0 +1,34 @@
+<svg width="2732" height="2732" viewBox="0 0 2732 2732" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="2732" height="2732" fill="#0a0a0a"/>
+
+  <!-- Center Logo -->
+  <g transform="translate(1016, 1016)">
+    <!-- Logo container -->
+    <rect x="-50" y="-50" width="800" height="800" rx="120" fill="#1a1a1a" opacity="0.5"/>
+
+    <!-- Z Logo -->
+    <path d="M100 100 H600 L100 600 H600"
+          stroke="#ea8c15"
+          stroke-width="60"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+  </g>
+
+  <!-- ZZIK Text -->
+  <text x="1366" y="1650"
+        font-family="SF Pro Display, -apple-system, system-ui, sans-serif"
+        font-size="120"
+        font-weight="700"
+        fill="#ffffff"
+        text-anchor="middle">ZZIK</text>
+
+  <!-- Tagline -->
+  <text x="1366" y="1720"
+        font-family="SF Pro Display, -apple-system, system-ui, sans-serif"
+        font-size="48"
+        font-weight="400"
+        fill="rgba(255,255,255,0.6)"
+        text-anchor="middle">Triple Verification</text>
+</svg>
