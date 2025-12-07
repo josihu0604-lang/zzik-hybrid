@@ -13,6 +13,7 @@ dist/
 .env
 .env.local
 .env.*.local
+.env*.local
 
 # IDE
 .vscode/
@@ -29,14 +30,16 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+logs/
 
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
-scripts/business-research/
 
 # Testing
 coverage/
+playwright-report/
+test-results/
 
 # Misc
 *.pem
@@ -44,14 +47,11 @@ coverage/
 # Local tools & binaries
 gh_*/
 *.zip
-
-# Logs
-logs/
+*.tar.gz
 
 # Browser extension (local dev only)
 browser-tools-extension/
 .vercel
-.env*.local
 
 # Supabase temp
 supabase/.temp/
@@ -66,7 +66,6 @@ ZZIK_BUSINESS_PACKAGE_FINAL.tar.gz
 ZZIK_BUSINESS_RESEARCH_COMPLETE.tar.gz
 business-research-tools.tar.gz
 docs/business/
-scripts/business-research/
 research-output/
 *.xlsx
 *.csv
@@ -77,12 +76,12 @@ AI_*.md
 *_SUMMARY.md
 *_SUMMARY.txt
 *_ANALYSIS*.md
-OPTIMIZATION*.md
-IMPROVEMENT*.md
-ISSUE_LIST*.md
 *_ISSUES*.md
 *_FIXED.md
 *_IMPLEMENTATION*.md
+OPTIMIZATION*.md
+IMPROVEMENT*.md
+ISSUE_LIST*.md
 UX_FIXES*.md
 TEST_*.md
 SECURITY_*.md
@@ -91,11 +90,6 @@ WEB_VITALS*.md
 VIRTUAL_LIST*.md
 README-*.md
 .ultra-sync-state.json
-*.tar.gz
-
-# Test outputs
-playwright-report/
-test-results/
 
 # Development docs & scripts (local only)
 docs/
