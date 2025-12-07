@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS agencies (
 );
 
 -- Payouts table - placeholder for payout management
--- Note: leader_payouts already exists in migration 20250108
+-- This is a generic payouts table for the VIP experience system
 CREATE TABLE IF NOT EXISTS payouts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   amount DECIMAL(12,2) NOT NULL,
