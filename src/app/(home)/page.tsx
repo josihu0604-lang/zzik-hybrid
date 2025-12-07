@@ -1,97 +1,198 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Flame, Bell, MapPin, Users } from 'lucide-react';
+import { Flame, Bell, MapPin, Users, Ticket, Star, Calendar } from 'lucide-react';
 import { BottomNav } from '@/components/layout/BottomNav';
-import { BentoGrid, BentoItem } from '@/components/layout/BentoGrid';
-import { BentoPopupCard } from '@/components/popup/BentoPopupCard';
-import { PopupPreviewSheet } from '@/components/popup/PopupPreviewSheet';
-import { BentoGridSkeleton } from '@/components/feedback/ShimmerSkeleton';
-import { CategoryFilter, DEFAULT_CATEGORIES } from '@/components/home/CategoryFilter';
-import { RealtimeNotification } from '@/components/realtime/RealtimeNotification';
-import { PullToRefresh } from '@/components/feedback/PullToRefresh';
-import { useRealtimePopupList } from '@/hooks/useRealtimeParticipation';
 import { hasCompletedOnboarding } from '@/components/onboarding';
 import { ErrorBoundary } from '@/components/error';
-import { useToast } from '@/components/ui/Toast';
 import { useTranslation } from '@/i18n';
 import { GlobalHero } from '@/components/home/GlobalHero';
-import type { Participant } from '@/types/participant';
+import { getLocalizedPrice, type CountryCode } from '@/lib/currency';
 
 /**
- * ZZIK Home Page - 2026 Bento Grid Style
+ * ZZIK Home Page - K-POP VIP Experience Platform
  *
- * Design:
- * - 컴팩트 헤더 (앱 스타일)
- * - 카테고리 탭 필터
- * - Bento Grid 레이아웃 (Hero + Featured + Standard)
- * - Shimmer 스켈레톤
+ * Design: Linear Deep Space + Flame Coral Accent
  */
 
-// Types
-interface PopupData {
+// Experience Types
+type ExperienceType = 'hightough' | 'soundcheck' | 'backstage' | 'popup';
+
+interface Experience {
   id: string;
-  brandName: string;
-  brandLogo?: string;
-  imageUrl?: string;
   title: string;
+  artistName: string;
+  artistImage?: string;
+  type: ExperienceType;
   location: string;
-  currentParticipants: number;
-  goalParticipants: number;
-  daysLeft: number;
-  deadlineAt: string;
-  category: 'fashion' | 'beauty' | 'kpop' | 'food' | 'cafe' | 'lifestyle' | 'culture' | 'tech';
-  status: 'funding' | 'confirmed' | 'completed' | 'cancelled';
-  isParticipated?: boolean;
+  date: string;
+  basePrice: number;
+  spotsLeft: number;
+  totalSpots: number;
+  imageUrl?: string;
 }
 
-interface ApiResponse {
-  success: boolean;
-  data?: {
-    popups: PopupData[];
-    total: number;
-    source: 'database' | 'mock';
-  };
-  error?: string;
+// Mock Data - K-POP VIP Experiences
+const MOCK_EXPERIENCES: Experience[] = [
+  {
+    id: '1',
+    title: 'BLACKPINK World Tour',
+    artistName: 'BLACKPINK',
+    type: 'hightough',
+    location: 'Bangkok, Thailand',
+    date: '2025-03-15',
+    basePrice: 150,
+    spotsLeft: 12,
+    totalSpots: 50,
+  },
+  {
+    id: '2',
+    title: 'BTS Comeback Special',
+    artistName: 'BTS',
+    type: 'soundcheck',
+    location: 'Seoul, Korea',
+    date: '2025-04-20',
+    basePrice: 300,
+    spotsLeft: 5,
+    totalSpots: 30,
+  },
+  {
+    id: '3',
+    title: 'NewJeans Fan Meeting',
+    artistName: 'NewJeans',
+    type: 'backstage',
+    location: 'Tokyo, Japan',
+    date: '2025-05-10',
+    basePrice: 1500,
+    spotsLeft: 3,
+    totalSpots: 10,
+  },
+  {
+    id: '4',
+    title: 'Stray Kids Concert',
+    artistName: 'Stray Kids',
+    type: 'hightough',
+    location: 'Manila, Philippines',
+    date: '2025-06-01',
+    basePrice: 150,
+    spotsLeft: 25,
+    totalSpots: 100,
+  },
+  {
+    id: '5',
+    title: 'TWICE Dome Tour',
+    artistName: 'TWICE',
+    type: 'soundcheck',
+    location: 'Osaka, Japan',
+    date: '2025-06-15',
+    basePrice: 300,
+    spotsLeft: 8,
+    totalSpots: 40,
+  },
+];
+
+const EXPERIENCE_TYPE_LABELS: Record<ExperienceType, string> = {
+  hightough: 'Meet & Greet',
+  soundcheck: 'Soundcheck',
+  backstage: 'Backstage',
+  popup: 'Popup Event',
+};
+
+const EXPERIENCE_TYPE_COLORS: Record<ExperienceType, string> = {
+  hightough: 'bg-flame-500/20 text-flame-400',
+  soundcheck: 'bg-purple-500/20 text-purple-400',
+  backstage: 'bg-spark-500/20 text-spark-400',
+  popup: 'bg-blue-500/20 text-blue-400',
+};
+
+function ExperienceCard({ experience }: { experience: Experience }) {
+  const { t } = useTranslation();
+  const price = getLocalizedPrice(experience.basePrice, 'TH' as CountryCode);
+  const progress = ((experience.totalSpots - experience.spotsLeft) / experience.totalSpots) * 100;
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      className="bg-space-850 rounded-2xl overflow-hidden border border-white/[0.06]"
+    >
+      <Link href={`/experience/${experience.id}`} className="block">
+        {/* Image Placeholder */}
+        <div className="relative h-40 bg-gradient-to-br from-space-800 to-space-900 flex items-center justify-center">
+          <div className="text-4xl font-bold text-white/10">
+            {experience.artistName.charAt(0)}
+          </div>
+
+          {/* Type Badge */}
+          <span className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${EXPERIENCE_TYPE_COLORS[experience.type]}`}>
+            {EXPERIENCE_TYPE_LABELS[experience.type]}
+          </span>
+
+          {/* Spots Left */}
+          <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full text-xs text-white/80 flex items-center gap-1">
+            <Ticket size={12} />
+            {experience.spotsLeft} {t('experience.spotsLeft')}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-4">
+          <div className="flex items-start justify-between mb-2">
+            <div>
+              <h3 className="font-semibold text-white/90 line-clamp-1">{experience.title}</h3>
+              <p className="text-sm text-white/50 flex items-center gap-1 mt-0.5">
+                <Star size={12} className="text-spark-400" />
+                {experience.artistName}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-flame-400 font-bold">{price.formatted}</p>
+              <p className="text-xs text-white/40">per person</p>
+            </div>
+          </div>
+
+          {/* Location & Date */}
+          <div className="flex items-center gap-3 text-xs text-white/50 mb-3">
+            <span className="flex items-center gap-1">
+              <MapPin size={12} />
+              {experience.location}
+            </span>
+            <span className="flex items-center gap-1">
+              <Calendar size={12} />
+              {new Date(experience.date).toLocaleDateString()}
+            </span>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="h-1.5 bg-space-800 rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="h-full bg-gradient-to-r from-flame-500 to-flame-400 rounded-full"
+            />
+          </div>
+          <p className="text-xs text-white/40 mt-1">
+            {Math.round(progress)}% {t('experience.booked')}
+          </p>
+        </div>
+      </Link>
+    </motion.article>
+  );
 }
 
 function HomeContent() {
   const router = useRouter();
-  const toast = useToast();
   const { t } = useTranslation();
-  const [popups, setPopups] = useState<PopupData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [experiences] = useState<Experience[]>(MOCK_EXPERIENCES);
   const [isCheckingOnboarding, setIsCheckingOnboarding] = useState(true);
-  const [participatingIds, setParticipatingIds] = useState<Set<string>>(new Set());
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [latestParticipant, setLatestParticipant] = useState<Participant | null>(null);
 
-  // Bottom Sheet 상태
-  const [selectedPopup, setSelectedPopup] = useState<PopupData | null>(null);
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-
-  // Realtime 업데이트 핸들러
-  const handleRealtimeUpdate = useCallback((update: { popupId: string; newCount: number }) => {
-    setPopups((prev) =>
-      prev.map((p) =>
-        p.id === update.popupId ? { ...p, currentParticipants: update.newCount } : p
-      )
-    );
-    setLatestParticipant({
-      id: `participant-${Date.now()}`,
-      name: '새로운 참여자',
-      avatar: undefined,
-    });
-    setTimeout(() => setLatestParticipant(null), 5000);
-  }, []);
-
-  useRealtimePopupList(true, handleRealtimeUpdate);
-
-  // 온보딩 체크
+  // Onboarding check
   useEffect(() => {
     if (!hasCompletedOnboarding()) {
       router.replace('/onboarding');
@@ -100,154 +201,7 @@ function HomeContent() {
     }
   }, [router]);
 
-  // API 호출 함수
-  const loadPopups = useCallback(
-    async (showLoading = true) => {
-      try {
-        if (showLoading) setIsLoading(true);
-        const categoryParam = activeCategory !== 'all' ? `&category=${activeCategory}` : '';
-        const response = await fetch(`/api/popup?limit=20${categoryParam}`);
-        const result: ApiResponse = await response.json();
-
-        if (result.success && result.data) {
-          setPopups(result.data.popups);
-          setError(null);
-        } else {
-          setError(result.error || '팝업 데이터를 불러오는데 실패했습니다.');
-        }
-      } catch (err) {
-        console.error('[Home] Failed to load popups:', err);
-        const errorMessage =
-          err instanceof Error ? err.message : '팝업 데이터를 불러오는데 실패했습니다.';
-        setError(errorMessage);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [activeCategory]
-  );
-
-  // 초기 로딩
-  useEffect(() => {
-    if (isCheckingOnboarding) return;
-    loadPopups();
-  }, [isCheckingOnboarding, loadPopups]);
-
-  // 풀 투 리프레시 핸들러
-  const handleRefresh = useCallback(async () => {
-    await loadPopups(false);
-  }, [loadPopups]);
-
-  // 카드 클릭 핸들러 - Bottom Sheet 열기
-  const handleCardClick = useCallback(
-    (popupId: string) => {
-      const popup = popups.find((p) => p.id === popupId);
-      if (popup) {
-        setSelectedPopup(popup);
-        setIsSheetOpen(true);
-      }
-    },
-    [popups]
-  );
-
-  // Sheet 닫기 핸들러
-  const handleSheetClose = useCallback(() => {
-    setIsSheetOpen(false);
-    // 애니메이션 후 popup 초기화
-    setTimeout(() => setSelectedPopup(null), 300);
-  }, []);
-
-  // 참여 핸들러
-  const handleParticipate = useCallback(
-    async (popupId: string) => {
-      if (participatingIds.has(popupId)) return;
-
-      const getCsrfToken = (): string | null => {
-        const cookies = document.cookie.split(';');
-        for (const cookie of cookies) {
-          const [name, value] = cookie.trim().split('=');
-          if (name === 'csrf_token') return value;
-        }
-        return null;
-      };
-
-      const csrfToken = getCsrfToken();
-      setParticipatingIds((prev) => new Set([...prev, popupId]));
-
-      // Optimistic update
-      setPopups((prev) =>
-        prev.map((p) =>
-          p.id === popupId
-            ? { ...p, isParticipated: true, currentParticipants: p.currentParticipants + 1 }
-            : p
-        )
-      );
-
-      try {
-        const response = await fetch('/api/popup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(csrfToken ? { 'x-csrf-token': csrfToken } : {}),
-          },
-          body: JSON.stringify({ popupId }),
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-          // Rollback
-          setPopups((prev) =>
-            prev.map((p) =>
-              p.id === popupId
-                ? { ...p, isParticipated: false, currentParticipants: p.currentParticipants - 1 }
-                : p
-            )
-          );
-          if (response.status === 401) {
-            toast.info('로그인이 필요합니다');
-            window.location.href = '/login?redirect=/';
-          } else {
-            toast.error('참여에 실패했습니다. 다시 시도해주세요.');
-          }
-        }
-      } catch (err) {
-        console.error('[Home] Participation failed:', err);
-        // Rollback
-        setPopups((prev) =>
-          prev.map((p) =>
-            p.id === popupId
-              ? { ...p, isParticipated: false, currentParticipants: p.currentParticipants - 1 }
-              : p
-          )
-        );
-        const errorMessage =
-          err instanceof Error && err.message
-            ? err.message
-            : '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
-        toast.error(errorMessage);
-      } finally {
-        setParticipatingIds((prev) => {
-          const next = new Set(prev);
-          next.delete(popupId);
-          return next;
-        });
-      }
-    },
-    [participatingIds, toast]
-  );
-
-  // 필터링된 팝업
-  const filteredPopups = useMemo(() => {
-    const funding = popups.filter((p) => p.status === 'funding');
-    if (activeCategory === 'all') return funding;
-    return funding.filter((p) => p.category === activeCategory);
-  }, [popups, activeCategory]);
-
-  const totalParticipants = useMemo(
-    () => popups.reduce((sum, p) => sum + p.currentParticipants, 0),
-    [popups]
-  );
+  const totalBookings = experiences.reduce((sum, e) => sum + (e.totalSpots - e.spotsLeft), 0);
 
   if (isCheckingOnboarding) {
     return <div className="min-h-screen bg-space-950" aria-busy="true" />;
@@ -255,15 +209,13 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen bg-space-950 text-white pb-24">
-      <RealtimeNotification participant={latestParticipant} />
-
       {/* Compact App Header */}
       <header
         className="sticky top-0 z-50 bg-space-950/90 backdrop-blur-lg border-b border-white/[0.06]"
         role="banner"
       >
         <div className="flex items-center justify-between px-4 h-14">
-          {/* Logo + Participant Count */}
+          {/* Logo + Stats */}
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               <Flame size={20} className="text-flame-500" />
@@ -271,7 +223,7 @@ function HomeContent() {
             </div>
             <div className="flex items-center gap-1 text-xs text-white/50">
               <Users size={12} />
-              <span className="tabular-nums">{totalParticipants.toLocaleString()}</span>
+              <span className="tabular-nums">{totalBookings.toLocaleString()}</span>
             </div>
           </div>
 
@@ -293,98 +245,37 @@ function HomeContent() {
             </button>
           </div>
         </div>
-
-        {/* Category Filter */}
-        <CategoryFilter
-          categories={DEFAULT_CATEGORIES}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-        />
       </header>
 
       {/* Global Hero Section */}
       <GlobalHero onGetStarted={() => {
-        document.getElementById('popup-list')?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('experience-list')?.scrollIntoView({ behavior: 'smooth' });
       }} />
 
-      {/* Main Content with Pull to Refresh */}
-      <PullToRefresh onRefresh={handleRefresh} className="min-h-[calc(100vh-140px)]">
-        <main className="px-5 pt-4" role="main" id="popup-list">
-          {/* Section Header */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse" />
-              <h2 className="text-sm font-semibold text-white/80">
-                {t('experience.trending')} <span className="text-flame-500">{filteredPopups.length}</span>
-              </h2>
-            </div>
-            <Link href="/live" className="text-xs text-white/40 hover:text-white/60">
-              {t('experience.viewAll')}
-            </Link>
+      {/* Main Content */}
+      <main className="px-5 pt-6" role="main" id="experience-list">
+        {/* Section Header */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse" />
+            <h2 className="text-sm font-semibold text-white/80">
+              {t('experience.trending')} <span className="text-flame-500">{experiences.length}</span>
+            </h2>
           </div>
+          <Link href="/experiences" className="text-xs text-white/40 hover:text-white/60">
+            {t('experience.viewAll')}
+          </Link>
+        </div>
 
-          {/* Experience Cards Grid */}
-          {/* Loading - Shimmer Skeleton */}
-          {isLoading && <BentoGridSkeleton count={5} />}
-
-          {/* Error */}
-          {error && !isLoading && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-8 border border-red-500/20 rounded-xl bg-red-500/[0.03]"
-              role="alert"
-            >
-              <p className="text-red-400 text-sm mb-2">{error}</p>
-              <button
-                onClick={() => window.location.reload()}
-                className="text-xs text-white/60 underline"
-              >
-                {t('error.tryAgain')}
-              </button>
-            </motion.div>
-          )}
-
-          {/* Empty */}
-          {!isLoading && !error && filteredPopups.length === 0 && (
-            <div className="text-center py-12 border border-white/[0.06] rounded-xl">
-              <p className="text-white/60 text-sm mb-1">{t('experience.noExperiences')}</p>
-              <p className="text-white/40 text-xs">{t('experience.newExperiences')}</p>
-            </div>
-          )}
-
-          {/* Bento Grid - 2026 Style */}
-          {!isLoading && !error && filteredPopups.length > 0 && (
-            <BentoGrid gap={3} animated>
-              {filteredPopups.map((popup, index) => {
-                // 카드 크기 결정: 첫 번째=hero, 2-3번째=featured, 나머지=standard
-                const size = index === 0 ? 'hero' : index <= 2 ? 'featured' : 'standard';
-
-                return (
-                  <BentoItem key={popup.id} size={size}>
-                    <BentoPopupCard
-                      popup={popup}
-                      size={size}
-                      onParticipate={handleParticipate}
-                      onCardClick={handleCardClick}
-                    />
-                  </BentoItem>
-                );
-              })}
-            </BentoGrid>
-          )}
-        </main>
-      </PullToRefresh>
+        {/* Experience Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {experiences.map((experience) => (
+            <ExperienceCard key={experience.id} experience={experience} />
+          ))}
+        </div>
+      </main>
 
       <BottomNav />
-
-      {/* Bottom Sheet - Popup Preview */}
-      <PopupPreviewSheet
-        popup={selectedPopup}
-        isOpen={isSheetOpen}
-        onClose={handleSheetClose}
-        onParticipate={handleParticipate}
-      />
     </div>
   );
 }

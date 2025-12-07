@@ -1,12 +1,8 @@
 /**
  * ZZIK Hooks - 통합 export
  *
- * 전체 22개 커스텀 훅 export
+ * K-POP VIP Experience Platform Hooks
  */
-
-// Real-time hooks
-export { useRealtimeParticipants } from './useRealtimeParticipants';
-export { useRealtimeParticipation } from './useRealtimeParticipation';
 
 // Share & Social
 export { useShare } from './useShare';
@@ -76,19 +72,6 @@ export { useOnlineStatus, useOfflineSync, useOfflineData } from './useOffline';
 
 // Security
 export { useCsrf } from './useCsrf';
-
-// Participation
-export { useParticipation } from './useParticipation';
-
-// Popup Detail
-export { usePopupDetail } from './usePopupDetail';
-export type { PopupDetailData, CategoryColor } from './usePopupDetail';
-export {
-  CATEGORY_COLORS,
-  DEFAULT_COLOR,
-  getCategoryColor,
-  getBrandInitials,
-} from './usePopupDetail';
 
 // Referral System
 export { useReferral } from './useReferral';

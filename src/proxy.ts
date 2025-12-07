@@ -103,7 +103,7 @@ function handleCorsPreflightRequest(request: NextRequest): NextResponse {
   return addCorsHeaders(request, response);
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Handle CORS for API routes

@@ -72,19 +72,6 @@ export function LazyWrapper({ fallback = <LoadingOverlay />, children }: LazyWra
 // LAZY LOADED COMPONENTS
 // ============================================================================
 
-// Heavy popup components
-export const LazyCelebrationModal = lazy(() =>
-  import('@/components/popup/CelebrationModal').then((m) => ({ default: m.CelebrationModal }))
-);
-
-export const LazyCategoryFilter = lazy(() =>
-  import('@/components/popup/CategoryFilter').then((m) => ({ default: m.CategoryFilter }))
-);
-
-export const LazyLiveStats = lazy(() =>
-  import('@/components/popup/LiveStats').then((m) => ({ default: m.LiveStats }))
-);
-
 // Verification modal - heavy component with GPS and animations
 export const LazyVerificationModal = lazy(() =>
   import('@/components/verification/VerificationModal').then((m) => ({
@@ -146,31 +133,13 @@ export async function loadPrediction() {
 /**
  * Prefetch component on hover/focus for faster loading
  */
-export function prefetchComponent(
-  componentName: 'celebration' | 'category' | 'stats' | 'verification'
-) {
+export function prefetchComponent(componentName: 'verification' | 'map') {
   switch (componentName) {
-    case 'celebration':
-      import('@/components/popup/CelebrationModal');
-      break;
-    case 'category':
-      import('@/components/popup/CategoryFilter');
-      break;
-    case 'stats':
-      import('@/components/popup/LiveStats');
-      break;
     case 'verification':
       import('@/components/verification/VerificationModal');
       break;
+    case 'map':
+      import('@/components/map/MapboxMap');
+      break;
   }
-}
-
-/**
- * Prefetch all popup-related components
- */
-export function prefetchPopupComponents() {
-  prefetchComponent('celebration');
-  prefetchComponent('category');
-  prefetchComponent('stats');
-  prefetchComponent('verification');
 }
