@@ -99,6 +99,7 @@ test-results/
 
 # Development docs & scripts (local only)
 docs/
+!docs/archive/
 scripts/
 # But keep essential mobile dev scripts
 !scripts/get-local-ip.js
