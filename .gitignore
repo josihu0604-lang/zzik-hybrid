@@ -95,6 +95,9 @@ README-*.md
 # Test outputs
 playwright-report/
 test-results/
+tmp/
+audit-screenshot.png
+*-screenshot.png
 
 # Development docs & scripts (local only)
 docs/

@@ -175,7 +175,7 @@ capabilities:
 
 | Server        | Command                                      | Purpose         |
 | ------------- | -------------------------------------------- | --------------- |
-| browser-tools | `npx @agentdeskai/browser-tools-mcp@latest`  | 브라우저 자동화 |
+| browser-tools | Native Playwright (see `src/lib/browser-tools.ts`) | 브라우저 자동화 |
 | github        | `npx -y @modelcontextprotocol/server-github` | GitHub 연동     |
 | memory        | Built-in                                     | Knowledge graph |
 | context7      | Built-in                                     | 라이브러리 문서 |

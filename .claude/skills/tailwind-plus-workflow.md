@@ -156,17 +156,15 @@ function Example() {
 
 ### 3.1 실시간 디자인 검증 도구
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `getConsoleLogs` | JS 에러 수집 | 콘솔 에러 0개 확인 |
-| `getNetworkLogs` | API 요청 분석 | 네트워크 에러 확인 |
-| `takeScreenshot` | 스크린샷 캡처 | 시각적 기록 |
-| `runAccessibilityAudit` | WCAG 검사 | 접근성 90+ 목표 |
-| `runPerformanceAudit` | Lighthouse 성능 | Performance 90+ 목표 |
-| `runSEOAudit` | SEO 검사 | SEO 90+ 목표 |
-| `runBestPracticesAudit` | 웹 표준 | Best Practices 확인 |
-| `runDebuggerMode` | 전체 디버깅 | 모든 디버깅 순차 실행 |
-| `runAuditMode` | 전체 감사 | 모든 감사 순차 실행 |
+Native Playwright-based tools (see `src/lib/browser-tools.ts`):
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| `getConsoleLogs` | JS 에러 수집 | `import { getConsoleLogs } from '@/lib/browser-tools'` |
+| `getNetworkLogs` | API 요청 분석 | `import { getNetworkLogs } from '@/lib/browser-tools'` |
+| `takeScreenshot` | 스크린샷 캡처 | `import { takeScreenshot } from '@/lib/browser-tools'` |
+| `runAccessibilityAudit` | WCAG 검사 | `import { runAccessibilityAudit } from '@/lib/browser-tools'` |
+| `runBrowserAudit` | 전체 감사 | `import { runBrowserAudit } from '@/lib/browser-tools'` |
 
 ### 3.2 검증 기준
 
@@ -230,27 +228,60 @@ SEO:
 # 1. 개발 서버 시작
 pnpm dev
 
-# 2. BrowserTools 서버 시작 (별도 터미널)
-npx @agentdeskai/browser-tools-server@latest
+# 2. 브라우저 감사 실행
+pnpm audit:browser
 
-# 3. Chrome에서 개발 페이지 열기
-# Chrome DevTools > BrowserToolsMCP 패널 열기
+# 3. 특정 감사 실행
+pnpm audit:accessibility  # 접근성만
+pnpm audit:console       # 콘솔 로그만
+pnpm audit:network       # 네트워크 요청만
 
-# 4. Claude Code에서 검증
-# "이 페이지의 접근성을 검사해줘"
-# "콘솔 에러 확인해줘"
-# "성능 감사 실행해줘"
+# 4. 프로그래매틱 사용 예시
+# TypeScript에서 직접 사용:
+import { runBrowserAudit } from '@/lib/browser-tools';
+
+const result = await runBrowserAudit({
+  url: 'http://localhost:3000',
+  thresholds: {
+    accessibility: 90,
+    performance: 90,
+  },
+});
 ```
 
 ### 4.3 자동화 스크립트
 
 ```json
-// package.json에 추가
+// package.json scripts (already configured)
 {
   "scripts": {
-    "uxui:audit": "echo 'BrowserTools MCP로 감사 실행'",
-    "uxui:screenshot": "echo 'BrowserTools로 스크린샷 캡처'"
+    "audit:browser": "playwright test e2e/browser-audit.spec.ts",
+    "audit:accessibility": "playwright test e2e/browser-audit.spec.ts --grep 'accessibility'",
+    "audit:console": "playwright test e2e/browser-audit.spec.ts --grep 'console'",
+    "audit:network": "playwright test e2e/browser-audit.spec.ts --grep 'network'"
   }
+}
+```
+
+```typescript
+// 프로그래매틱 사용 예시
+import { runBrowserAudit } from '@/lib/browser-tools';
+
+async function auditPage() {
+  const result = await runBrowserAudit({
+    url: 'http://localhost:3000',
+    thresholds: {
+      performance: 90,
+      accessibility: 90,
+      'best-practices': 90,
+      seo: 90,
+    },
+  });
+
+  console.log('Console Errors:', result.consoleLogs.filter(l => l.type === 'error'));
+  console.log('Failed Requests:', result.failedRequests);
+  console.log('Accessibility Violations:', result.accessibility?.violations);
+  console.log('Performance Score:', result.performance?.score);
 }
 ```
 
@@ -330,23 +361,53 @@ npx @agentdeskai/browser-tools-server@latest
 
 ## Quick Reference
 
-### BrowserTools MCP 도구 요약
+### Native Playwright Browser Tools
 
+```typescript
+// Available in: src/lib/browser-tools.ts
+
+// 1. Get Console Logs
+import { getConsoleLogs } from '@/lib/browser-tools';
+const logs = await getConsoleLogs('http://localhost:3000');
+
+// 2. Get Network Logs
+import { getNetworkLogs } from '@/lib/browser-tools';
+const requests = await getNetworkLogs('http://localhost:3000');
+
+// 3. Take Screenshot
+import { takeScreenshot } from '@/lib/browser-tools';
+await takeScreenshot('http://localhost:3000', 'screenshot.png');
+
+// 4. Run Accessibility Audit
+import { runAccessibilityAudit } from '@/lib/browser-tools';
+const a11yResults = await runAccessibilityAudit('http://localhost:3000');
+
+// 5. Run Full Browser Audit
+import { runBrowserAudit } from '@/lib/browser-tools';
+const results = await runBrowserAudit({
+  url: 'http://localhost:3000',
+  thresholds: {
+    performance: 90,
+    accessibility: 90,
+    'best-practices': 90,
+    seo: 90,
+  },
+});
 ```
-디버깅:
-- getConsoleLogs: 콘솔 로그
-- getNetworkLogs: 네트워크 요청
-- takeScreenshot: 스크린샷
 
-감사:
-- runAccessibilityAudit: 접근성
-- runPerformanceAudit: 성능
-- runSEOAudit: SEO
-- runBestPracticesAudit: 웹 표준
+### CLI Commands
 
-통합:
-- runDebuggerMode: 전체 디버깅
-- runAuditMode: 전체 감사
+```bash
+# Run all browser audits
+pnpm audit:browser
+
+# Run specific audits
+pnpm audit:accessibility  # WCAG compliance
+pnpm audit:console       # Console logs
+pnpm audit:network       # Network requests
+
+# Get audit info
+pnpm audit:info
 ```
 
 ### Tailwind Plus 접근
