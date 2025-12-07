@@ -25,11 +25,6 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
-    "mcp:start": "./scripts/mcp/start-browser-tools.sh",
-    "mcp:stop": "./scripts/mcp/stop-browser-tools.sh",
-    "mcp:install-guide": "echo '브라우저에서 열기: file:///home/ubuntu/zzik-hybrid/scripts/mcp/install-extension.html' && xdg-open ./scripts/mcp/install-extension.html 2>/dev/null || open ./scripts/mcp/install-extension.html 2>/dev/null || echo '위 경로를 브라우저에 붙여넣으세요'",
-    "uxui:server": "npx @agentdeskai/browser-tools-server@1.2.0",
-    "uxui:info": "echo '\\n=== UXUI Audit Workflow ===\\n1. pnpm dev (개발 서버)\\n2. pnpm uxui:server (BrowserTools 서버 - 별도 터미널)\\n3. Chrome DevTools > BrowserToolsMCP 패널 열기\\n4. Claude에서 접근성/성능/SEO 검사 요청\\n'",
     "mobile:ip": "node scripts/get-local-ip.js",
     "mobile:setup": "node scripts/mobile-dev-setup.js",
     "prepare": "husky",
@@ -48,12 +43,7 @@
     "mobile:run:ios": "CAPACITOR_DEV=true cap run ios --livereload --external",
     "mobile:run:android": "CAPACITOR_DEV=true cap run android --livereload --external",
     "mobile:build:ios": "cap sync ios && cd ios/App && xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -archivePath build/ZZIK.xcarchive archive",
-    "mobile:build:android": "cap sync android && cd android && ./gradlew assembleRelease",
-    "tokenize:dry-run": "tsx scripts/tokenize-rgba.ts --dry-run",
-    "tokenize": "tsx scripts/tokenize-rgba.ts",
-    "research:market": "tsx scripts/business-research/market-research-agent.ts",
-    "research:pricing": "tsx scripts/business-research/pricing-strategy-analyzer.ts",
-    "research:all": "pnpm research:market && pnpm research:pricing"
+    "mobile:build:android": "cap sync android && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
     "@capacitor/camera": "^7.0.2",
