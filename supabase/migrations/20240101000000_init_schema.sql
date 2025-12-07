@@ -4,9 +4,10 @@
 -- Based on: BACKEND_DEVELOPMENT_PLAN.md
 --
 -- IMPLEMENTATION NOTES:
--- - Table 'leaders' from plan renamed to 'vip_leaders' to avoid conflict
---   with existing 'leaders' table in popup system (migration 20250106)
+-- - Table 'leaders' from plan renamed to 'vip_leaders' to ensure no naming
+--   conflicts with the existing 'leaders' table in the popup system
 -- - Tables 'agencies' and 'payouts' created as placeholders (not in plan)
+-- - This migration can be run independently or alongside other migrations
 -- ============================================================================
 
 -- Enable necessary extensions
@@ -193,7 +194,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
 
 CREATE TABLE IF NOT EXISTS vip_leaders (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE,
+  user_id UUID UNIQUE REFERENCES auth.users(id) ON DELETE CASCADE,
 
   -- Referral
   referral_code TEXT UNIQUE NOT NULL,
@@ -324,6 +325,8 @@ AS $$
 DECLARE
   v_booking bookings;
   v_spots_available INTEGER;
+  v_leader_id UUID;
+  v_commission_rate DECIMAL(4,2);
 BEGIN
   -- Lock the experience row for update
   SELECT total_spots - booked_spots INTO v_spots_available
@@ -357,21 +360,21 @@ BEGIN
 
   -- If referral, create leader transaction
   IF p_referrer_id IS NOT NULL THEN
-    -- Check if leader exists and is active
-    IF EXISTS (
-      SELECT 1 FROM vip_leaders
-      WHERE user_id = p_referrer_id AND status = 'active'
-    ) THEN
+    -- Get leader details if exists and active
+    SELECT id, commission_rate INTO v_leader_id, v_commission_rate
+    FROM vip_leaders
+    WHERE user_id = p_referrer_id AND status = 'active';
+
+    -- Only process if active leader found
+    IF v_leader_id IS NOT NULL THEN
       INSERT INTO leader_transactions (leader_id, booking_id, amount_usd, commission_rate)
-      SELECT l.id, v_booking.id, p_price_usd * l.commission_rate, l.commission_rate
-      FROM vip_leaders l
-      WHERE l.user_id = p_referrer_id AND l.status = 'active';
+      VALUES (v_leader_id, v_booking.id, p_price_usd * v_commission_rate, v_commission_rate);
 
       -- Update leader stats
       UPDATE vip_leaders
       SET total_referrals = total_referrals + 1,
           monthly_referrals = monthly_referrals + 1
-      WHERE user_id = p_referrer_id;
+      WHERE id = v_leader_id;
     END IF;
   END IF;
 
