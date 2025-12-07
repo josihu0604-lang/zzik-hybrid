@@ -2,6 +2,11 @@
 -- ZZIK Backend - VIP Experience Marketplace Initial Schema
 -- Migration: 20240101000000_init_schema.sql
 -- Based on: BACKEND_DEVELOPMENT_PLAN.md
+--
+-- IMPLEMENTATION NOTES:
+-- - Table 'leaders' from plan renamed to 'vip_leaders' to avoid conflict
+--   with existing 'leaders' table in popup system (migration 20250106)
+-- - Tables 'agencies' and 'payouts' created as placeholders (not in plan)
 -- ============================================================================
 
 -- Enable necessary extensions
@@ -31,8 +36,8 @@ CREATE TABLE IF NOT EXISTS agencies (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Payouts table - placeholder for payout management
--- This is a generic payouts table for the VIP experience system
+-- Payouts table - Generic payout records for the VIP experience system
+-- Used for tracking payment transactions for leader commissions
 CREATE TABLE IF NOT EXISTS payouts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   amount DECIMAL(12,2) NOT NULL,
@@ -180,8 +185,10 @@ CREATE INDEX IF NOT EXISTS idx_bookings_referrer ON bookings(referrer_id);
 CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
 
 -- ============================================================================
--- LEADERS (리더/인플루언서) - VIP Experience Version
--- Note: This is separate from the existing leaders table for popup system
+-- VIP_LEADERS (리더/인플루언서) - VIP Experience Referral System
+-- Note: Renamed from 'leaders' to 'vip_leaders' to coexist with the existing
+-- 'leaders' table used by the popup check-in system (migration 20250106).
+-- Both systems can operate independently with their own leader structures.
 -- ============================================================================
 
 CREATE TABLE IF NOT EXISTS vip_leaders (
