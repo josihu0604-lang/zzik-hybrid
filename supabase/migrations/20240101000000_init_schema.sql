@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS agencies (
 CREATE TABLE IF NOT EXISTS payouts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   amount DECIMAL(12,2) NOT NULL,
-  status TEXT DEFAULT 'pending',
+  status transaction_status DEFAULT 'pending',
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -193,7 +193,7 @@ CREATE INDEX IF NOT EXISTS idx_bookings_status ON bookings(status);
 
 CREATE TABLE IF NOT EXISTS vip_leaders (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES auth.users(id) UNIQUE,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE,
 
   -- Referral
   referral_code TEXT UNIQUE NOT NULL,
@@ -250,8 +250,8 @@ CREATE INDEX IF NOT EXISTS idx_localized_prices_lookup ON localized_prices(exper
 
 CREATE TABLE IF NOT EXISTS leader_transactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  leader_id UUID REFERENCES vip_leaders(id),
-  booking_id UUID REFERENCES bookings(id),
+  leader_id UUID REFERENCES vip_leaders(id) ON DELETE CASCADE,
+  booking_id UUID REFERENCES bookings(id) ON DELETE CASCADE,
 
   -- Amount
   amount_usd DECIMAL(10,2) NOT NULL,
@@ -357,16 +357,22 @@ BEGIN
 
   -- If referral, create leader transaction
   IF p_referrer_id IS NOT NULL THEN
-    INSERT INTO leader_transactions (leader_id, booking_id, amount_usd, commission_rate)
-    SELECT l.id, v_booking.id, p_price_usd * l.commission_rate, l.commission_rate
-    FROM vip_leaders l
-    WHERE l.user_id = p_referrer_id;
+    -- Check if leader exists and is active
+    IF EXISTS (
+      SELECT 1 FROM vip_leaders
+      WHERE user_id = p_referrer_id AND status = 'active'
+    ) THEN
+      INSERT INTO leader_transactions (leader_id, booking_id, amount_usd, commission_rate)
+      SELECT l.id, v_booking.id, p_price_usd * l.commission_rate, l.commission_rate
+      FROM vip_leaders l
+      WHERE l.user_id = p_referrer_id AND l.status = 'active';
 
-    -- Update leader stats
-    UPDATE vip_leaders
-    SET total_referrals = total_referrals + 1,
-        monthly_referrals = monthly_referrals + 1
-    WHERE user_id = p_referrer_id;
+      -- Update leader stats
+      UPDATE vip_leaders
+      SET total_referrals = total_referrals + 1,
+          monthly_referrals = monthly_referrals + 1
+      WHERE user_id = p_referrer_id;
+    END IF;
   END IF;
 
   RETURN v_booking;
