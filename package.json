@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbo",
+    "dev:mobile": "next dev --turbo --hostname 0.0.0.0",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "build:analyze": "ANALYZE=true next build --webpack",
@@ -29,6 +30,8 @@
     "mcp:install-guide": "echo '브라우저에서 열기: file:///home/ubuntu/zzik-hybrid/scripts/mcp/install-extension.html' && xdg-open ./scripts/mcp/install-extension.html 2>/dev/null || open ./scripts/mcp/install-extension.html 2>/dev/null || echo '위 경로를 브라우저에 붙여넣으세요'",
     "uxui:server": "npx @agentdeskai/browser-tools-server@1.2.0",
     "uxui:info": "echo '\\n=== UXUI Audit Workflow ===\\n1. pnpm dev (개발 서버)\\n2. pnpm uxui:server (BrowserTools 서버 - 별도 터미널)\\n3. Chrome DevTools > BrowserToolsMCP 패널 열기\\n4. Claude에서 접근성/성능/SEO 검사 요청\\n'",
+    "mobile:ip": "node scripts/get-local-ip.js",
+    "mobile:setup": "node scripts/mobile-dev-setup.js",
     "prepare": "husky",
     "cap:init": "cap init",
     "cap:sync": "cap sync",
