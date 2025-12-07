@@ -218,17 +218,20 @@ export async function getConsoleLogs(
   url: string
 ): Promise<Array<{ type: string; text: string }>> {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  
+  try {
+    const page = await browser.newPage();
 
-  const logs: Array<{ type: string; text: string }> = [];
-  page.on('console', (msg) => {
-    logs.push({ type: msg.type(), text: msg.text() });
-  });
+    const logs: Array<{ type: string; text: string }> = [];
+    page.on('console', (msg) => {
+      logs.push({ type: msg.type(), text: msg.text() });
+    });
 
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await browser.close();
-
-  return logs;
+    await page.goto(url, { waitUntil: 'networkidle' });
+    return logs;
+  } finally {
+    await browser.close();
+  }
 }
 
 /**
@@ -243,37 +246,40 @@ export async function getNetworkLogs(url: string): Promise<
   }>
 > {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  
+  try {
+    const page = await browser.newPage();
 
-  const requests: Array<{
-    url: string;
-    status: number | null;
-    method: string;
-    error?: string;
-  }> = [];
+    const requests: Array<{
+      url: string;
+      status: number | null;
+      method: string;
+      error?: string;
+    }> = [];
 
-  page.on('response', (response) => {
-    const request = response.request();
-    requests.push({
-      url: request.url(),
-      status: response.status(),
-      method: request.method(),
+    page.on('response', (response) => {
+      const request = response.request();
+      requests.push({
+        url: request.url(),
+        status: response.status(),
+        method: request.method(),
+      });
     });
-  });
 
-  page.on('requestfailed', (req) => {
-    requests.push({
-      url: req.url(),
-      status: null,
-      method: req.method(),
-      error: req.failure()?.errorText || 'Unknown error',
+    page.on('requestfailed', (req) => {
+      requests.push({
+        url: req.url(),
+        status: null,
+        method: req.method(),
+        error: req.failure()?.errorText || 'Unknown error',
+      });
     });
-  });
 
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await browser.close();
-
-  return requests;
+    await page.goto(url, { waitUntil: 'networkidle' });
+    return requests;
+  } finally {
+    await browser.close();
+  }
 }
 
 /**
@@ -285,13 +291,17 @@ export async function takeScreenshot(
   fullPage: boolean = true
 ): Promise<string> {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  
+  try {
+    const page = await browser.newPage();
 
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await page.screenshot({ path, fullPage });
-  await browser.close();
+    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.screenshot({ path, fullPage });
 
-  return path;
+    return path;
+  } finally {
+    await browser.close();
+  }
 }
 
 /**
@@ -301,12 +311,16 @@ export async function runAccessibilityAudit(
   url: string
 ): Promise<AxeResults> {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  
+  try {
+    const page = await browser.newPage();
 
-  await page.goto(url, { waitUntil: 'networkidle' });
-  await injectAxe(page);
-  const results = await getAxeResults(page);
+    await page.goto(url, { waitUntil: 'networkidle' });
+    await injectAxe(page);
+    const results = await getAxeResults(page);
 
-  await browser.close();
-  return results;
+    return results;
+  } finally {
+    await browser.close();
+  }
 }
