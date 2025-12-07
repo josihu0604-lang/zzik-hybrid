@@ -1,0 +1,122 @@
+# Kubernetes Deployment for ZZIK Agent System
+# Production-ready configuration with security and scalability
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zzik-agent
+  namespace: zzik
+  labels:
+    app: zzik-agent
+    component: agent-system
+    version: v1.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: zzik-agent
+  template:
+    metadata:
+      labels:
+        app: zzik-agent
+        component: agent-system
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: zzik-agent
+      
+      # Security Context
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        seccompProfile:
+          type: RuntimeDefault
+
+      # Main Container
+      containers:
+        - name: agent
+          image: zzik/agent:latest
+          imagePullPolicy: Always
+          
+          # Resource Limits
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "2000m"
+
+          # Environment Variables
+          env:
+            - name: NODE_ENV
+              value: "production"
+            
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: zzik-agent-secrets
+                  key: anthropic-api-key
+            
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: zzik-agent-secrets
+                  key: github-token
+
+          # Ports
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+
+          # Volume Mounts
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+
+          # Probes
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+      # Volumes
+      volumes:
+        - name: workspace
+          emptyDir:
+            sizeLimit: 10Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zzik-agent
+  namespace: zzik
+spec:
+  type: ClusterIP
+  selector:
+    app: zzik-agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
