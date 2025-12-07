@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   price_usd DECIMAL(10,2) NOT NULL, -- For analytics
 
   -- Referral tracking
-  referrer_id UUID REFERENCES auth.users(id),
+  referrer_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
   referral_code TEXT,
 
   -- Status
