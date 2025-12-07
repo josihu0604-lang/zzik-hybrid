@@ -138,7 +138,7 @@ Pricing Strategy:
 | i18n Config     | `src/i18n/config.ts`                           |
 | Locales         | `src/i18n/locales/[lang].json`                 |
 | Supabase Client | `src/lib/supabase/`                            |
-| Backend Plan    | `BACKEND_DEVELOPMENT_PLAN.md`                  |
+| Backend Plan    | `docs/archive/BACKEND_DEVELOPMENT_PLAN.md`     |
 
 ---
 
