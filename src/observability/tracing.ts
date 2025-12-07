@@ -47,7 +47,7 @@ export class Span {
   ended: boolean = false;
 
   constructor(name: string, attributes?: Record<string, any>) {
-    this.id = `span-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    this.id = `span-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
     this.name = name;
     this.startTime = Date.now();
     this.attributes = attributes || {};
