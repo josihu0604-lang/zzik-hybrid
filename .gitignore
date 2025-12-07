@@ -96,7 +96,5 @@ README-*.md
 playwright-report/
 test-results/
 
-# Development docs & scripts (local only)
-docs/
-scripts/
-apply_ux_fixes.sh
+# Example scripts (can be local only)
+examples/
