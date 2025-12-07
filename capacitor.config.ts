@@ -4,8 +4,13 @@ import type { CapacitorConfig } from '@capacitor/cli';
  * ZZIK Capacitor Configuration
  *
  * Build Modes:
- * - Development: CAPACITOR_DEV=true - Hot reload with localhost
+ * - Development: CAPACITOR_DEV=true - Hot reload with localhost or custom host
  * - App Store: Default - Connects to production server with offline fallback
+ *
+ * Mobile Development:
+ * - Set CAPACITOR_SERVER_URL to your local IP (e.g., http://192.168.1.10:3000)
+ * - Run `pnpm mobile:ip` to find your local IP address
+ * - Use `pnpm dev:mobile` to start dev server accessible from mobile devices
  *
  * App Store Requirements:
  * - Native functionality (Push, Camera, Geolocation)
@@ -13,6 +18,16 @@ import type { CapacitorConfig } from '@capacitor/cli';
  * - Proper splash screen and icons
  */
 const isDev = process.env.CAPACITOR_DEV === 'true';
+const customServerUrl = process.env.CAPACITOR_SERVER_URL;
+
+// Determine the server URL for development
+const getDevServerUrl = () => {
+  if (customServerUrl) {
+    return customServerUrl;
+  }
+  // Default to localhost (works for iOS Simulator and Android Emulator)
+  return 'http://localhost:3000';
+};
 
 const config: CapacitorConfig = {
   appId: 'kr.zzik.app',
@@ -21,7 +36,7 @@ const config: CapacitorConfig = {
 
   // Server configuration
   server: {
-    url: isDev ? 'http://localhost:3000' : 'https://zzik.kr',
+    url: isDev ? getDevServerUrl() : 'https://zzik.kr',
     cleartext: isDev,
     androidScheme: 'https',
     iosScheme: 'capacitor',

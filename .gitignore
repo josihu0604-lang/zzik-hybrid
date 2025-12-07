@@ -33,6 +33,7 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+scripts/business-research/
 
 # Testing
 coverage/
@@ -99,4 +100,7 @@ test-results/
 # Development docs & scripts (local only)
 docs/
 scripts/
+# But keep essential mobile dev scripts
+!scripts/get-local-ip.js
+!scripts/mobile-dev-setup.js
 apply_ux_fixes.sh

@@ -145,17 +145,35 @@ Earn commission by referring fans:
 
 ## Mobile Apps
 
-Built with Capacitor for iOS and Android:
+Built with Capacitor for iOS and Android.
+
+### 📱 Mobile Development (with Live Reload)
+
+```bash
+# Get setup instructions with your local IP
+pnpm mobile:setup
+
+# Start dev server (accessible from mobile)
+pnpm dev:mobile
+
+# Run on real device (use IP from mobile:setup)
+CAPACITOR_DEV=true CAPACITOR_SERVER_URL=http://YOUR_IP:3000 pnpm cap:run:android
+
+# Run on emulator/simulator
+CAPACITOR_DEV=true pnpm cap:run:android
+```
+
+📖 **[Complete Mobile Development Guide →](./MOBILE_DEV.md)**
+
+### 📦 Production Build
 
 ```bash
 # Sync web build to native projects
 pnpm cap:sync
 
-# Open iOS project
-npx cap open ios
-
-# Open Android project
-npx cap open android
+# Open in Xcode / Android Studio
+pnpm cap:open:ios
+pnpm cap:open:android
 ```
 
 ---
