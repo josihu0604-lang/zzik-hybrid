@@ -2,7 +2,7 @@
 
 import { ReactNode, useCallback, useRef, CSSProperties } from 'react';
 import { useVirtualizer, VirtualItem } from '@tanstack/react-virtual';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { colors, typography } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -202,7 +202,7 @@ export function VirtualList<T>({
             const key = getItemKey(item, virtualItem.index);
 
             return (
-              <motion.div
+              <m.div
                 key={key}
                 data-index={virtualItem.index}
                 ref={(el) => {
@@ -224,7 +224,7 @@ export function VirtualList<T>({
                 role="listitem"
               >
                 {renderItem(item, virtualItem.index, virtualItem)}
-              </motion.div>
+              </m.div>
             );
           })}
         </AnimatePresence>
@@ -236,7 +236,7 @@ export function VirtualList<T>({
           {renderLoading ? (
             renderLoading()
           ) : (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="flex items-center gap-2"
@@ -245,7 +245,7 @@ export function VirtualList<T>({
               <span style={{ color: colors.text.secondary, fontSize: typography.fontSize.sm.size }}>
                 불러오는 중...
               </span>
-            </motion.div>
+            </m.div>
           )}
         </div>
       )}

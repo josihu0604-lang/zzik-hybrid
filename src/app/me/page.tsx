@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Users, MapPin, Award, CheckCircle } from 'lucide-react';
@@ -267,7 +267,7 @@ function MePageContent() {
 
         <main className="px-5 pb-24">
           <div className="max-w-lg mx-auto">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="rounded-2xl p-8 text-center"
@@ -285,7 +285,7 @@ function MePageContent() {
               >
                 로그인하기
               </Link>
-            </motion.div>
+            </m.div>
           </div>
         </main>
 
@@ -314,7 +314,7 @@ function MePageContent() {
       <main className="px-5 pb-24" role="main">
         <div className="max-w-lg mx-auto">
           {/* Profile Card */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -2 }}
@@ -362,7 +362,7 @@ function MePageContent() {
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-3" role="list" aria-label="내 활동 통계">
-              <motion.div
+              <m.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="text-center p-4 rounded-xl transition-all duration-300"
                 style={STATS_CARD_FLAME_STYLE}
@@ -384,8 +384,8 @@ function MePageContent() {
                 <p className="text-xs text-linear-text-tertiary font-medium" aria-hidden="true">
                   참여
                 </p>
-              </motion.div>
-              <motion.div
+              </m.div>
+              <m.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="text-center p-4 rounded-xl transition-all duration-300"
                 style={STATS_CARD_GREEN_STYLE}
@@ -407,8 +407,8 @@ function MePageContent() {
                 <p className="text-xs text-linear-text-tertiary font-medium" aria-hidden="true">
                   방문
                 </p>
-              </motion.div>
-              <motion.div
+              </m.div>
+              <m.div
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="text-center p-4 rounded-xl transition-all duration-300"
                 style={STATS_CARD_YELLOW_STYLE}
@@ -430,14 +430,14 @@ function MePageContent() {
                 <p className="text-xs text-linear-text-tertiary font-medium" aria-hidden="true">
                   배지
                 </p>
-              </motion.div>
+              </m.div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Badges Section */}
           <AnimatePresence>
             {recentCheckins.length > 0 && (
-              <motion.section
+              <m.section
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -480,7 +480,7 @@ function MePageContent() {
                       },
                     };
                     return (
-                      <motion.div
+                      <m.div
                         key={checkin.id}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -530,16 +530,16 @@ function MePageContent() {
                             LEGENDARY
                           </p>
                         )}
-                      </motion.div>
+                      </m.div>
                     );
                   })}
                 </div>
-              </motion.section>
+              </m.section>
             )}
           </AnimatePresence>
 
           {/* Leader CTA */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -2 }}
@@ -578,7 +578,7 @@ function MePageContent() {
                 시작하기
               </Link>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Participations */}
           <section className="mb-6" aria-labelledby="participations-heading">
@@ -595,7 +595,7 @@ function MePageContent() {
             </div>
 
             {participations.length === 0 ? (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="rounded-xl p-8 text-center"
@@ -610,11 +610,11 @@ function MePageContent() {
                 >
                   팝업 둘러보기
                 </Link>
-              </motion.div>
+              </m.div>
             ) : (
               <div className="space-y-3" role="list" aria-label="참여한 팝업 목록">
                 {participations.map((p, index) => (
-                  <motion.div
+                  <m.div
                     key={p.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -688,7 +688,7 @@ function MePageContent() {
                         </div>
                       )}
                     </Link>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             )}

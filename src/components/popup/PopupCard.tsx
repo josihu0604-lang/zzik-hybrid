@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Clock, MapPin, Users, Flame } from 'lucide-react';
 import { colors, radii, liquidGlass } from '@/lib/design-tokens';
 import { ProgressBar } from './ProgressBar';
@@ -33,12 +33,7 @@ interface PopupCardProps {
   highlightText?: (text: string) => ReactNode;
 }
 
-function PopupCardComponent({
-  popup,
-  onParticipate,
-  onCardClick,
-  highlightText,
-}: PopupCardProps) {
+function PopupCardComponent({ popup, onParticipate, onCardClick, highlightText }: PopupCardProps) {
   const progress = Math.round((popup.currentParticipants / popup.goalParticipants) * 100);
   const isHot = progress >= 70;
   const isUrgent = popup.daysLeft <= 3;
@@ -57,7 +52,7 @@ function PopupCardComponent({
   };
 
   return (
-    <motion.article
+    <m.article
       onClick={handleClick}
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.98 }}
@@ -103,7 +98,11 @@ function PopupCardComponent({
 
         {/* Progress */}
         <div className="mb-3">
-          <ProgressBar current={popup.currentParticipants} goal={popup.goalParticipants} size="sm" />
+          <ProgressBar
+            current={popup.currentParticipants}
+            goal={popup.goalParticipants}
+            size="sm"
+          />
         </div>
 
         {/* Footer */}
@@ -160,7 +159,7 @@ function PopupCardComponent({
           </div>
         </div>
       </div>
-    </motion.article>
+    </m.article>
   );
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Target, Trophy, Flame, ChevronRight, Settings } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 
@@ -36,7 +36,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
   const isWeekComplete = isReferralComplete && isCheckinComplete;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl overflow-hidden ${className}`}
@@ -50,7 +50,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
       {/* Header */}
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <motion.div
+          <m.div
             className="w-10 h-10 rounded-xl flex items-center justify-center"
             style={{
               background: isWeekComplete
@@ -72,7 +72,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
             ) : (
               <Target size={20} style={{ color: colors.flame[500] }} />
             )}
-          </motion.div>
+          </m.div>
           <div>
             <h3 className="text-white font-bold text-sm">
               {isWeekComplete ? '이번 주 목표 달성!' : '이번 주 목표'}
@@ -113,7 +113,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
             className="h-2 rounded-full overflow-hidden"
             style={{ background: 'rgba(255, 255, 255, 0.1)' }}
           >
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{
                 background: isReferralComplete
@@ -142,7 +142,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
             className="h-2 rounded-full overflow-hidden"
             style={{ background: 'rgba(255, 255, 255, 0.1)' }}
           >
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{
                 background: isCheckinComplete
@@ -160,7 +160,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
       {/* Settings Panel */}
       <AnimatePresence>
         {showSettings && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -184,7 +184,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
                 />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -203,7 +203,7 @@ export function WeeklyGoal({ data, onUpdateGoal, className = '' }: WeeklyGoalPro
           <ChevronRight size={14} style={{ color: colors.flame[500] }} />
         </div>
       )}
-    </motion.div>
+    </m.div>
   );
 }
 

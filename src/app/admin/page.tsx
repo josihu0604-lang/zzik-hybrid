@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import {
   Users,
   Store,
@@ -51,7 +51,7 @@ function StatCard({
   color: string;
 }) {
   return (
-    <motion.div
+    <m.div
       className="p-6 rounded-2xl"
       style={{
         background: colors.space[800],
@@ -81,7 +81,7 @@ function StatCard({
           <Icon size={24} style={{ color }} />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

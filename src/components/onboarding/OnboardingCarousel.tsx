@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { m, AnimatePresence, PanInfo } from '@/lib/motion';
 import { useRouter } from 'next/navigation';
 import { OnboardingStep } from './OnboardingStep';
 import { OnboardingProgress } from './OnboardingProgress';
@@ -204,7 +204,7 @@ export function OnboardingCarousel({
   return (
     <div className="fixed inset-0 z-50 overflow-hidden" style={{ background: colors.space[950] }}>
       {/* 배경 그라디언트 오버레이 */}
-      <motion.div
+      <m.div
         className="absolute inset-0 pointer-events-none"
         animate={{
           background:
@@ -236,7 +236,7 @@ export function OnboardingCarousel({
       </div>
 
       {/* Slides Container */}
-      <motion.div
+      <m.div
         className="relative w-full h-full max-w-lg mx-auto"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
@@ -283,11 +283,11 @@ export function OnboardingCarousel({
               )
           )}
         </AnimatePresence>
-      </motion.div>
+      </m.div>
 
       {/* Navigation Hint (first slide only, respects reduced motion) */}
       {currentSlide === 0 && !prefersReducedMotion && (
-        <motion.div
+        <m.div
           className="absolute bottom-24 pb-safe left-1/2 -translate-x-1/2 text-xs z-10"
           style={{ color: colors.text.tertiary }}
           initial={{ opacity: 0 }}
@@ -296,7 +296,7 @@ export function OnboardingCarousel({
           aria-hidden="true"
         >
           스와이프하여 다음으로
-        </motion.div>
+        </m.div>
       )}
 
       {/* Next Button with Timer (non-last slides) */}

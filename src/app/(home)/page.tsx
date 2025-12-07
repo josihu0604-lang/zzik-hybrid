@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Flame, Bell, MapPin, Users, Ticket, Star, Calendar } from 'lucide-react';
 import { BottomNav } from '@/components/layout/BottomNav';
 import { hasCompletedOnboarding } from '@/components/onboarding';
@@ -114,7 +114,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
   const progress = ((experience.totalSpots - experience.spotsLeft) / experience.totalSpots) * 100;
 
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
@@ -124,12 +124,12 @@ function ExperienceCard({ experience }: { experience: Experience }) {
       <Link href={`/experience/${experience.id}`} className="block">
         {/* Image Placeholder */}
         <div className="relative h-40 bg-gradient-to-br from-space-800 to-space-900 flex items-center justify-center">
-          <div className="text-4xl font-bold text-white/10">
-            {experience.artistName.charAt(0)}
-          </div>
+          <div className="text-4xl font-bold text-white/10">{experience.artistName.charAt(0)}</div>
 
           {/* Type Badge */}
-          <span className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${EXPERIENCE_TYPE_COLORS[experience.type]}`}>
+          <span
+            className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${EXPERIENCE_TYPE_COLORS[experience.type]}`}
+          >
             {EXPERIENCE_TYPE_LABELS[experience.type]}
           </span>
 
@@ -170,7 +170,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
 
           {/* Progress Bar */}
           <div className="h-1.5 bg-space-800 rounded-full overflow-hidden">
-            <motion.div
+            <m.div
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -182,7 +182,7 @@ function ExperienceCard({ experience }: { experience: Experience }) {
           </p>
         </div>
       </Link>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -248,9 +248,11 @@ function HomeContent() {
       </header>
 
       {/* Global Hero Section */}
-      <GlobalHero onGetStarted={() => {
-        document.getElementById('experience-list')?.scrollIntoView({ behavior: 'smooth' });
-      }} />
+      <GlobalHero
+        onGetStarted={() => {
+          document.getElementById('experience-list')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
 
       {/* Main Content */}
       <main className="px-5 pt-6" role="main" id="experience-list">
@@ -259,7 +261,8 @@ function HomeContent() {
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse" />
             <h2 className="text-sm font-semibold text-white/80">
-              {t('experience.trending')} <span className="text-flame-500">{experiences.length}</span>
+              {t('experience.trending')}{' '}
+              <span className="text-flame-500">{experiences.length}</span>
             </h2>
           </div>
           <Link href="/experiences" className="text-xs text-white/40 hover:text-white/60">

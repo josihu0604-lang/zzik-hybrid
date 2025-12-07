@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useMemo } from 'react';
-import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { m, AnimatePresence, type Variants } from '@/lib/motion';
 import { usePathname } from 'next/navigation';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { duration, easing } from '@/lib/animations';
@@ -78,7 +78,7 @@ export function PageTransition({ children }: PageTransitionProps) {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <motion.div
+      <m.div
         key={pathname}
         variants={activeVariants}
         initial="initial"
@@ -87,7 +87,7 @@ export function PageTransition({ children }: PageTransitionProps) {
         style={{ willChange: prefersReducedMotion ? 'auto' : 'transform, opacity' }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }
@@ -150,7 +150,7 @@ export function SlideTransition({ children }: PageTransitionProps) {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <motion.div
+      <m.div
         key={pathname}
         variants={activeVariants}
         initial="initial"
@@ -162,7 +162,7 @@ export function SlideTransition({ children }: PageTransitionProps) {
         }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Flame } from 'lucide-react';
 import { usePullToRefresh } from '@/hooks/usePullToRefresh';
 import { colors } from '@/lib/design-tokens';
@@ -52,7 +52,7 @@ export function PullToRefresh({
       {/* Pull Indicator */}
       <AnimatePresence>
         {showIndicator && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -40 }}
             animate={{
               opacity: 1,
@@ -77,7 +77,7 @@ export function PullToRefresh({
                 transition: 'border-color 200ms, box-shadow 200ms',
               }}
             >
-              <motion.div
+              <m.div
                 animate={{
                   scale: 0.5 + pullProgress * 0.5,
                   rotate: isRefreshing ? 360 : pullProgress * 180,
@@ -96,11 +96,11 @@ export function PullToRefresh({
                   }}
                   strokeWidth={2.5}
                 />
-              </motion.div>
+              </m.div>
             </div>
 
             {/* 텍스트 라벨 */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0 }}
               animate={{ opacity: pullProgress > 0.3 ? 1 : 0 }}
               className="text-center mt-2 text-xs font-medium"
@@ -113,20 +113,20 @@ export function PullToRefresh({
                 : isReadyToRefresh
                   ? '놓아서 새로고침'
                   : '당겨서 새로고침'}
-            </motion.p>
-          </motion.div>
+            </m.p>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Content with pull transform */}
-      <motion.div
+      <m.div
         animate={{
           y: pullDistance,
         }}
         transition={{ type: 'spring', stiffness: 400, damping: 30 }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

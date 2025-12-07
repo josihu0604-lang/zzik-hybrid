@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Check, MapPin, QrCode, Receipt, Loader2, Sparkles } from 'lucide-react';
 import { colors, gradients, opacity } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -61,7 +61,7 @@ export function VerificationSuccess({
       {showConfetti && !prefersReducedMotion && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(20)].map((_, i) => (
-            <motion.div
+            <m.div
               key={i}
               className="absolute w-2 h-2 rounded-full"
               style={{
@@ -88,14 +88,14 @@ export function VerificationSuccess({
       )}
 
       {/* Success Badge */}
-      <motion.div
+      <m.div
         className="flex flex-col items-center"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: 'spring', duration: 0.6 }}
       >
         {/* Badge Icon */}
-        <motion.div
+        <m.div
           className="relative mb-6"
           animate={{
             scale: [1, 1.05, 1],
@@ -103,14 +103,14 @@ export function VerificationSuccess({
           transition={{ duration: 2, repeat: Infinity }}
         >
           {/* Glow Effect */}
-          <motion.div
+          <m.div
             className="absolute inset-0 rounded-full blur-xl"
             style={{ background: badge.color }}
             animate={{ opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
 
-          <motion.div
+          <m.div
             className="relative w-24 h-24 rounded-full flex items-center justify-center"
             style={{
               background: `linear-gradient(135deg, ${badge.color} 0%, ${badge.color}80 100%)`,
@@ -125,22 +125,22 @@ export function VerificationSuccess({
             ) : (
               <span className="text-4xl">{badge.emoji}</span>
             )}
-          </motion.div>
+          </m.div>
 
           {/* Sparkles */}
           {isPassed && (
-            <motion.div
+            <m.div
               className="absolute -top-2 -right-2"
               animate={{ rotate: [0, 15, -15, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
               <Sparkles size={24} style={{ color: colors.spark[400] }} />
-            </motion.div>
+            </m.div>
           )}
-        </motion.div>
+        </m.div>
 
         {/* Badge Label */}
-        <motion.h3
+        <m.h3
           className="text-2xl font-black mb-2"
           style={{ color: badge.color }}
           initial={{ opacity: 0, y: 20 }}
@@ -148,10 +148,10 @@ export function VerificationSuccess({
           transition={{ delay: 0.2 }}
         >
           {badge.label}
-        </motion.h3>
+        </m.h3>
 
         {/* Score Display */}
-        <motion.div
+        <m.div
           className="flex items-center gap-2 mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -159,10 +159,10 @@ export function VerificationSuccess({
         >
           <span className="text-4xl font-black text-white">{score}</span>
           <span className="text-linear-text-tertiary text-xl">/ 100점</span>
-        </motion.div>
+        </m.div>
 
         {/* Score Breakdown */}
-        <motion.div
+        <m.div
           className="w-full max-w-xs space-y-2 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -242,10 +242,10 @@ export function VerificationSuccess({
               {receiptScore}/{MAX_SCORES.receipt}점
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Complete Button */}
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={onComplete}
@@ -273,20 +273,20 @@ export function VerificationSuccess({
           ) : (
             '닫기'
           )}
-        </motion.button>
+        </m.button>
 
         {/* Info Text */}
         {isPassed && (
-          <motion.p
+          <m.p
             className="text-center text-linear-text-tertiary text-xs mt-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
             방문 인증 완료! 프로필에서 배지를 확인하세요
-          </motion.p>
+          </m.p>
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

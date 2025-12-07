@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Trophy, TrendingUp, Users, MapPin } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 
@@ -60,7 +60,7 @@ export function TopPerformers({ performers, className = '' }: TopPerformersProps
       </div>
 
       {/* Top Performer Card */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.02, y: -2 }}
@@ -123,13 +123,13 @@ export function TopPerformers({ performers, className = '' }: TopPerformersProps
             </p>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Other Performers */}
       {otherPerformers.length > 0 && (
         <div className="space-y-2">
           {otherPerformers.map((performer, index) => (
-            <motion.div
+            <m.div
               key={performer.popupId}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -170,7 +170,7 @@ export function TopPerformers({ performers, className = '' }: TopPerformersProps
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       )}

@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Plus, Minus, Locate, Maximize2, Loader2 } from 'lucide-react';
 import { colors, liquidGlass, radii } from '@/lib/design-tokens';
 
@@ -59,12 +59,12 @@ export const MapControls = memo(function MapControls({
         <ControlButton
           icon={
             isLocating ? (
-              <motion.div
+              <m.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
               >
                 <Loader2 size={18} />
-              </motion.div>
+              </m.div>
             ) : (
               <Locate size={18} />
             )
@@ -106,7 +106,7 @@ function ControlButton({
   disabled = false,
 }: ControlButtonProps) {
   return (
-    <motion.button
+    <m.button
       onClick={onClick}
       disabled={disabled}
       className="w-12 h-12 flex items-center justify-center transition-colors disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-flame-500"
@@ -120,7 +120,7 @@ function ControlButton({
       title={label}
     >
       {icon}
-    </motion.button>
+    </m.button>
   );
 }
 

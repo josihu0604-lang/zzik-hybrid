@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import {
   Building2,
   Mail,
@@ -81,20 +81,15 @@ export default function SettingsPage() {
   return (
     <div className="p-6 lg:p-8 space-y-8">
       {/* Header */}
-      <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+      <m.div variants={fadeInUp} initial="hidden" animate="visible">
         <h1 className="text-2xl lg:text-3xl font-bold text-white">설정</h1>
         <p className="mt-1" style={{ color: colors.text.secondary }}>
           브랜드 정보 및 계정 설정을 관리하세요
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Profile Section */}
-      <motion.section
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.1 }}
-      >
+      <m.section variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.1 }}>
         <GlassCard padding="lg">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
@@ -112,7 +107,7 @@ export default function SettingsPage() {
               </div>
             </div>
             {hasChanges && (
-              <motion.span
+              <m.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="px-3 py-1 rounded-full text-xs font-medium"
@@ -122,7 +117,7 @@ export default function SettingsPage() {
                 }}
               >
                 수정됨
-              </motion.span>
+              </m.span>
             )}
           </div>
 
@@ -194,10 +189,10 @@ export default function SettingsPage() {
             </PrimaryButton>
           </div>
         </GlassCard>
-      </motion.section>
+      </m.section>
 
       {/* Settings Menu */}
-      <motion.section
+      <m.section
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
@@ -207,8 +202,8 @@ export default function SettingsPage() {
           const Icon = item.icon;
 
           return (
-            <motion.div key={item.label} variants={staggerItem}>
-              <motion.button whileHover={{ x: 4 }} whileTap={{ scale: 0.99 }} className="w-full">
+            <m.div key={item.label} variants={staggerItem}>
+              <m.button whileHover={{ x: 4 }} whileTap={{ scale: 0.99 }} className="w-full">
                 <GlassCard padding="md" hover={false}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -228,22 +223,17 @@ export default function SettingsPage() {
                     <ChevronRight size={20} style={{ color: colors.text.tertiary }} />
                   </div>
                 </GlassCard>
-              </motion.button>
-            </motion.div>
+              </m.button>
+            </m.div>
           );
         })}
-      </motion.section>
+      </m.section>
 
       {/* Danger Zone */}
-      <motion.section
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.5 }}
-      >
+      <m.section variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.5 }}>
         <GlassCard padding="lg">
           <h3 className="font-semibold text-white mb-4">계정</h3>
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             className="w-full flex items-center justify-between p-4 rounded-xl transition-colors"
@@ -257,12 +247,12 @@ export default function SettingsPage() {
               <span style={{ color: colors.error }}>로그아웃</span>
             </div>
             <ChevronRight size={20} style={{ color: colors.error }} />
-          </motion.button>
+          </m.button>
         </GlassCard>
-      </motion.section>
+      </m.section>
 
       {/* Footer */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -275,7 +265,7 @@ export default function SettingsPage() {
         <p className="text-xs mt-1" style={{ color: colors.text.muted }}>
           "참여하면 열린다" | Join to Open
         </p>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors } from '@/lib/design-tokens';
 import type { UserBadges, BadgeCategory } from '@/lib/badges';
 import { getTotalBadgePoints } from '@/lib/badges';
@@ -91,23 +91,23 @@ function BadgeGridComponent({
           >
             획득한 배지 ({filteredEarned.length})
           </h2>
-          <motion.div
+          <m.div
             className={compact ? 'flex flex-wrap gap-2' : 'grid grid-cols-3 gap-3'}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {filteredEarned.map((badge) => (
-              <motion.div key={badge.id} variants={itemVariants}>
+              <m.div key={badge.id} variants={itemVariants}>
                 <BadgeCard
                   badge={badge}
                   earned
                   compact={compact}
                   onClick={() => onBadgeClick?.(badge.id)}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </section>
       )}
 
@@ -121,14 +121,14 @@ function BadgeGridComponent({
           >
             진행 중 ({filteredInProgress.length})
           </h2>
-          <motion.div
+          <m.div
             className={compact ? 'flex flex-wrap gap-2' : 'grid grid-cols-3 gap-3'}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {filteredInProgress.map((badge) => (
-              <motion.div key={badge.id} variants={itemVariants}>
+              <m.div key={badge.id} variants={itemVariants}>
                 <BadgeCard
                   badge={badge}
                   progress={badge.progress}
@@ -136,9 +136,9 @@ function BadgeGridComponent({
                   compact={compact}
                   onClick={() => onBadgeClick?.(badge.id)}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </section>
       )}
 
@@ -152,22 +152,22 @@ function BadgeGridComponent({
           >
             미획득 ({filteredLocked.length})
           </h2>
-          <motion.div
+          <m.div
             className={compact ? 'flex flex-wrap gap-2' : 'grid grid-cols-3 gap-3'}
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             {filteredLocked.map((badge) => (
-              <motion.div key={badge.id} variants={itemVariants}>
+              <m.div key={badge.id} variants={itemVariants}>
                 <BadgeCard
                   badge={badge}
                   compact={compact}
                   onClick={() => onBadgeClick?.(badge.id)}
                 />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </section>
       )}
 

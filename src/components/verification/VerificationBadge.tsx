@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Check, MapPin, Star } from 'lucide-react';
 import { colors, opacity } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -97,7 +97,7 @@ export function VerificationBadge({
   const Icon = style.icon;
 
   const badge = (
-    <motion.div
+    <m.div
       className={`
         inline-flex items-center rounded-full font-bold
         ${config.padding} ${config.text} ${config.gap}
@@ -144,7 +144,7 @@ export function VerificationBadge({
       {score !== undefined && status === 'verified' && (
         <span className="opacity-75">({score}점)</span>
       )}
-    </motion.div>
+    </m.div>
   );
 
   return badge;
@@ -191,7 +191,7 @@ export function VerificationStamp({
   }
 
   return (
-    <motion.div
+    <m.div
       className={`${sizeClass} relative`}
       initial={{ scale: 0, rotate: -180 }}
       animate={{ scale: 1, rotate: 0 }}
@@ -225,7 +225,7 @@ export function VerificationStamp({
       </div>
 
       {/* 별 장식 */}
-      <motion.div
+      <m.div
         className="absolute -top-1 -right-1"
         animate={!prefersReducedMotion ? { rotate: [0, 360] } : undefined}
         transition={
@@ -237,8 +237,8 @@ export function VerificationStamp({
           fill={colors.spark[500]}
           style={{ color: colors.spark[500] }}
         />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 }
 

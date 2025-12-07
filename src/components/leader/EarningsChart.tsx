@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { TrendingUp, TrendingDown, Minus, BarChart3, LineChart } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { duration, easing } from '@/lib/animations';
@@ -78,7 +78,7 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
         : colors.text.secondary;
 
   return (
-    <motion.div
+    <m.div
       initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={
@@ -239,7 +239,7 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
           </p>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -272,7 +272,7 @@ function BarChartView({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -288,7 +288,7 @@ function BarChartView({
           const isToday = index === data.length - 1;
 
           return (
-            <motion.div
+            <m.div
               key={day.date}
               className="flex-1 flex flex-col items-center"
               initial={prefersReducedMotion ? { scaleY: 1 } : { scaleY: 0 }}
@@ -341,11 +341,11 @@ function BarChartView({
                   {getLabel(day.date)}
                 </span>
               )}
-            </motion.div>
+            </m.div>
           );
         })}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -414,7 +414,7 @@ function LineChartView({
   }, [data, period]);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -453,7 +453,7 @@ function LineChartView({
         ))}
 
         {/* Area fill */}
-        <motion.path
+        <m.path
           d={areaPath}
           fill="url(#areaGradient)"
           initial={{ opacity: 0 }}
@@ -462,7 +462,7 @@ function LineChartView({
         />
 
         {/* Line */}
-        <motion.path
+        <m.path
           d={linePath}
           fill="none"
           stroke={colors.spark[500]}
@@ -486,7 +486,7 @@ function LineChartView({
             <circle cx={point.x} cy={point.y} r="10" fill="transparent" />
 
             {/* Visible point */}
-            <motion.circle
+            <m.circle
               cx={point.x}
               cy={point.y}
               r="4"
@@ -544,7 +544,7 @@ function LineChartView({
           </text>
         ))}
       </svg>
-    </motion.div>
+    </m.div>
   );
 }
 

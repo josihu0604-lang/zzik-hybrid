@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { X, RotateCcw } from 'lucide-react';
 import {
   type PopupCategory,
@@ -90,7 +90,7 @@ export function FilterPanel({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -99,7 +99,7 @@ export function FilterPanel({
           />
 
           {/* Panel */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: '100%' }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '100%' }}
@@ -140,7 +140,7 @@ export function FilterPanel({
                 </div>
                 <div className="flex items-center gap-2">
                   {activeCount > 0 && (
-                    <motion.button
+                    <m.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={onReset}
@@ -152,7 +152,7 @@ export function FilterPanel({
                     >
                       <RotateCcw size={12} />
                       초기화
-                    </motion.button>
+                    </m.button>
                   )}
                   <button
                     ref={closeButtonRef}
@@ -172,7 +172,7 @@ export function FilterPanel({
                   {ALL_CATEGORIES.map((category) => {
                     const isSelected = selectedCategories.includes(category);
                     return (
-                      <motion.button
+                      <m.button
                         key={category}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -189,7 +189,7 @@ export function FilterPanel({
                         }}
                       >
                         {CATEGORY_LABELS[category]}
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
@@ -222,7 +222,7 @@ export function FilterPanel({
                   {ALL_STATUSES.map((status) => {
                     const isSelected = selectedStatus === status;
                     return (
-                      <motion.button
+                      <m.button
                         key={status}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -239,7 +239,7 @@ export function FilterPanel({
                         }}
                       >
                         {STATUS_LABELS[status]}
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                   <span className="sr-only">좌우로 스크롤하여 더 많은 옵션을 확인하세요</span>
@@ -253,7 +253,7 @@ export function FilterPanel({
                   {ALL_SORTS.map((sort) => {
                     const isSelected = selectedSort === sort;
                     return (
-                      <motion.button
+                      <m.button
                         key={sort}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
@@ -270,14 +270,14 @@ export function FilterPanel({
                         }}
                       >
                         {SORT_LABELS[sort]}
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
               </div>
 
               {/* Apply Button */}
-              <motion.button
+              <m.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onClose}
@@ -288,9 +288,9 @@ export function FilterPanel({
                 }}
               >
                 적용하기
-              </motion.button>
+              </m.button>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

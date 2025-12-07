@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 
 interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
@@ -20,7 +20,7 @@ const colorMap = {
 
 export function LoadingSpinner({ size = 'md', color = 'orange' }: LoadingSpinnerProps) {
   return (
-    <motion.div
+    <m.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
       className={`border-2 rounded-full ${sizeMap[size]} ${colorMap[color]}`}

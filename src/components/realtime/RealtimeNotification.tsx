@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { colors, opacity, zIndex, typography } from '@/lib/design-tokens';
 import { getColorFromName } from '@/lib/color-utils';
 import type { Participant } from '@/types/participant';
@@ -27,7 +27,7 @@ export function RealtimeNotification({ participant, className = '' }: RealtimeNo
   return (
     <AnimatePresence>
       {participant && (
-        <motion.div
+        <m.div
           key={participant.id}
           initial={{ opacity: 0, y: -20, x: '-50%' }}
           animate={{ opacity: 1, y: 0, x: '-50%' }}
@@ -69,7 +69,7 @@ export function RealtimeNotification({ participant, className = '' }: RealtimeNo
             </div>
 
             {/* Animated pulse */}
-            <motion.div
+            <m.div
               className="w-2 h-2 rounded-full"
               style={{ background: colors.flame[500] }}
               animate={{
@@ -82,7 +82,7 @@ export function RealtimeNotification({ participant, className = '' }: RealtimeNo
               }}
             />
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -101,7 +101,7 @@ export function RealtimeBadge({ isConnected, isDemo, className = '' }: RealtimeB
   if (!isConnected) return null;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full ${className}`}
@@ -112,7 +112,7 @@ export function RealtimeBadge({ isConnected, isDemo, className = '' }: RealtimeB
         border: `1px solid ${isDemo ? `rgba(255, 217, 61, ${opacity[30]})` : `rgba(34, 197, 94, ${opacity[30]})`}`,
       }}
     >
-      <motion.div
+      <m.div
         className="w-1.5 h-1.5 rounded-full"
         style={{ background: isDemo ? colors.spark[400] : colors.success }}
         animate={{
@@ -135,7 +135,7 @@ export function RealtimeBadge({ isConnected, isDemo, className = '' }: RealtimeB
       >
         {isDemo ? 'DEMO' : 'LIVE'}
       </span>
-    </motion.div>
+    </m.div>
   );
 }
 

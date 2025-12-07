@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import {
   Plus,
   Search,
@@ -199,7 +199,7 @@ export default function CampaignsPage() {
   return (
     <div className="p-6 lg:p-8 space-y-6">
       {/* Header */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -212,7 +212,7 @@ export default function CampaignsPage() {
           </p>
         </div>
         <Link href="/brand/campaigns/new">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white"
@@ -222,12 +222,12 @@ export default function CampaignsPage() {
             }}
           >
             <Plus size={20} />새 캠페인
-          </motion.button>
+          </m.button>
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* Filters */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -247,7 +247,7 @@ export default function CampaignsPage() {
         {/* Status Filter */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {statusFilters.map((filter) => (
-            <motion.button
+            <m.button
               key={filter.value}
               whileTap={{ scale: 0.95 }}
               onClick={() => setStatusFilter(filter.value)}
@@ -262,10 +262,10 @@ export default function CampaignsPage() {
               }}
             >
               {filter.label}
-            </motion.button>
+            </m.button>
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Campaign List */}
       {loading ? (
@@ -275,15 +275,10 @@ export default function CampaignsPage() {
           ))}
         </div>
       ) : (
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="space-y-4"
-        >
+        <m.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-4">
           <AnimatePresence mode="popLayout">
             {filteredCampaigns.length === 0 ? (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="text-center py-12"
@@ -298,14 +293,14 @@ export default function CampaignsPage() {
                 <p className="text-sm mt-1" style={{ color: colors.text.secondary }}>
                   다른 검색어나 필터를 시도해보세요
                 </p>
-              </motion.div>
+              </m.div>
             ) : (
               filteredCampaigns.map((campaign) => {
                 const status = statusConfig[campaign.status] || statusConfig.draft;
                 const StatusIcon = status.icon;
 
                 return (
-                  <motion.div
+                  <m.div
                     key={campaign.id}
                     variants={staggerItem}
                     layout
@@ -374,7 +369,7 @@ export default function CampaignsPage() {
                                   className="h-2 rounded-full overflow-hidden"
                                   style={{ background: 'rgba(255, 107, 91, 0.1)' }}
                                 >
-                                  <motion.div
+                                  <m.div
                                     initial={{ width: 0 }}
                                     animate={{
                                       width: `${campaign.progress_percent}%`,
@@ -427,12 +422,12 @@ export default function CampaignsPage() {
                         </div>
                       </GlassCard>
                     </Link>
-                  </motion.div>
+                  </m.div>
                 );
               })
             )}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
       )}
     </div>
   );

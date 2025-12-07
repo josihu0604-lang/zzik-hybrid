@@ -24,7 +24,7 @@ import type { Transition, Variants, TargetAndTransition } from 'framer-motion';
  * const prefersReducedMotion = useReducedMotion();
  *
  * // 조건부 애니메이션
- * <motion.div
+ * <m.div
  *   animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
  * />
  * ```
@@ -72,7 +72,7 @@ interface SafeAnimationResult {
  *   whileHover: { scale: 1.02 },
  * });
  *
- * <motion.div {...animation} />
+ * <m.div {...animation} />
  * ```
  */
 export function useSafeAnimation(config: SafeAnimationConfig): SafeAnimationResult {
@@ -122,7 +122,7 @@ export function useSafeAnimation(config: SafeAnimationConfig): SafeAnimationResu
  * };
  *
  * const safeVariants = useSafeVariants(cardVariants);
- * <motion.div variants={safeVariants} />
+ * <m.div variants={safeVariants} />
  * ```
  */
 export function useSafeVariants(variants: Variants): Variants {

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { ReactNode } from 'react';
 import {
   Search,
@@ -221,7 +221,7 @@ export function EmptyState({
     },
   };
 
-  const MotionWrapper = disableAnimation ? 'div' : motion.div;
+  const MotionWrapper = disableAnimation ? 'div' : m.div;
 
   return (
     <MotionWrapper
@@ -291,7 +291,7 @@ export function EmptyState({
           {...(!disableAnimation && { variants: buttonVariants })}
         >
           {displayActionLabel && onAction && (
-            <motion.button
+            <m.button
               onClick={onAction}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -304,11 +304,11 @@ export function EmptyState({
               aria-label={displayActionLabel}
             >
               {displayActionLabel}
-            </motion.button>
+            </m.button>
           )}
 
           {secondaryActionLabel && onSecondaryAction && (
-            <motion.button
+            <m.button
               onClick={onSecondaryAction}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -322,7 +322,7 @@ export function EmptyState({
               aria-label={secondaryActionLabel}
             >
               {secondaryActionLabel}
-            </motion.button>
+            </m.button>
           )}
         </MotionWrapper>
       )}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import {
   TrendingUp,
   Users,
@@ -150,7 +150,7 @@ export default function BrandDashboardPage() {
   return (
     <div className="p-6 lg:p-8 space-y-8">
       {/* Header */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -163,7 +163,7 @@ export default function BrandDashboardPage() {
           </p>
         </div>
         <Link href="/brand/campaigns/new">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white"
@@ -173,12 +173,12 @@ export default function BrandDashboardPage() {
             }}
           >
             <Plus size={20} />새 캠페인 만들기
-          </motion.button>
+          </m.button>
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* Stats Grid */}
-      <motion.div
+      <m.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
@@ -189,7 +189,7 @@ export default function BrandDashboardPage() {
           const value = summary[stat.key];
 
           return (
-            <motion.div key={stat.key} variants={staggerItem}>
+            <m.div key={stat.key} variants={staggerItem}>
               <GlassCard padding="md" hover glow="flame">
                 <div className="flex items-start justify-between">
                   <div className="p-2 rounded-lg" style={{ background: `${stat.color}20` }}>
@@ -209,29 +209,24 @@ export default function BrandDashboardPage() {
                   </p>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
           );
         })}
-      </motion.div>
+      </m.div>
 
       {/* Recent Campaigns */}
-      <motion.section
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.3 }}
-      >
+      <m.section variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.3 }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-white">최근 캠페인</h2>
           <Link href="/brand/campaigns">
-            <motion.span
+            <m.span
               whileHover={{ x: 4 }}
               className="flex items-center gap-1 text-sm"
               style={{ color: colors.flame[500] }}
             >
               전체 보기
               <ChevronRight size={16} />
-            </motion.span>
+            </m.span>
           </Link>
         </div>
 
@@ -285,7 +280,7 @@ export default function BrandDashboardPage() {
                           className="h-2 rounded-full overflow-hidden"
                           style={{ background: 'rgba(255, 107, 91, 0.1)' }}
                         >
-                          <motion.div
+                          <m.div
                             initial={{ width: 0 }}
                             animate={{ width: `${campaign.progress_percent}%` }}
                             transition={{ duration: 0.8, delay: 0.2 }}
@@ -304,10 +299,10 @@ export default function BrandDashboardPage() {
             );
           })}
         </div>
-      </motion.section>
+      </m.section>
 
       {/* Quick Stats */}
-      <motion.section
+      <m.section
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -353,7 +348,7 @@ export default function BrandDashboardPage() {
             </div>
           </div>
         </GlassCard>
-      </motion.section>
+      </m.section>
     </div>
   );
 }

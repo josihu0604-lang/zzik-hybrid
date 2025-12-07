@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -77,7 +77,7 @@ export default function Loading() {
     <div className="min-h-screen" style={{ background: colors.space[950] }}>
       {/* Animated background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-20">
-        <motion.div
+        <m.div
           className="absolute -top-40 -right-40 w-96 h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 107, 91, 0.15) 0%, transparent 60%)',

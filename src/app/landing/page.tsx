@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import Link from 'next/link';
 import { Flame, Users, MapPin, Sparkles, Download, ChevronRight, Star } from 'lucide-react';
 import { colors, gradients } from '@/lib/design-tokens';
@@ -106,14 +106,14 @@ export default function LandingPage() {
           }}
         />
 
-        <motion.div
+        <m.div
           className="max-w-4xl mx-auto text-center relative z-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Badge */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
             style={{
@@ -123,10 +123,10 @@ export default function LandingPage() {
           >
             <span className="w-2 h-2 rounded-full bg-flame-500 animate-pulse" />
             <span className="text-sm text-flame-400">팝업 크라우드펀딩 플랫폼</span>
-          </motion.div>
+          </m.div>
 
           {/* Headline */}
-          <motion.h1
+          <m.h1
             variants={itemVariants}
             className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6"
           >
@@ -140,20 +140,20 @@ export default function LandingPage() {
             >
               열린다
             </span>
-          </motion.h1>
+          </m.h1>
 
           {/* Subheadline */}
-          <motion.p
+          <m.p
             variants={itemVariants}
             className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10"
           >
             좋아하는 브랜드의 팝업스토어, 이제 당신이 결정해요.
             <br className="hidden sm:block" />
             참여하고, 목표를 채우고, 함께 열어요.
-          </motion.p>
+          </m.p>
 
           {/* CTAs */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
@@ -182,10 +182,10 @@ export default function LandingPage() {
                 <Download size={20} />앱 다운로드
               </a>
             )}
-          </motion.div>
+          </m.div>
 
           {/* Stats */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="flex items-center justify-center gap-8 sm:gap-16 mt-16 pt-8 border-t border-white/[0.06]"
           >
@@ -195,14 +195,14 @@ export default function LandingPage() {
                 <div className="text-sm text-white/40">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </section>
 
       {/* Features Section */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.div
+          <m.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -212,11 +212,11 @@ export default function LandingPage() {
             <p className="text-white/60 max-w-xl mx-auto">
               원하는 팝업에 참여하면 목표 인원이 모였을 때 팝업이 열려요
             </p>
-          </motion.div>
+          </m.div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <motion.div
+              <m.div
                 key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -236,7 +236,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                 <p className="text-white/60">{feature.description}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -245,7 +245,7 @@ export default function LandingPage() {
       {/* Social Proof */}
       <section className="py-20 px-6 bg-space-900/50">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -261,14 +261,14 @@ export default function LandingPage() {
               참여하니까 진짜 열리더라구요&rdquo;
             </blockquote>
             <cite className="text-white/40 not-italic">- 김**님, ZZIK 사용자</cite>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       {/* Download CTA */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -316,7 +316,7 @@ export default function LandingPage() {
                 Google Play
               </a>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 

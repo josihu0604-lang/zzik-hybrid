@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { WifiOff, RefreshCw, Home, Signal } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { onNetworkChange, isOnline as checkOnline } from '@/lib/offline';
 
 export default function OfflinePage() {
@@ -47,7 +47,7 @@ export default function OfflinePage() {
     <div className="min-h-screen bg-space-950 flex items-center justify-center p-4">
       <AnimatePresence mode="wait">
         {showReconnected ? (
-          <motion.div
+          <m.div
             key="reconnected"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -61,9 +61,9 @@ export default function OfflinePage() {
             </div>
             <h1 className="text-white text-xl font-bold mb-2">연결되었습니다!</h1>
             <p className="text-white/60 text-sm">홈으로 이동합니다...</p>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div
+          <m.div
             key="offline"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ export default function OfflinePage() {
                 홈으로 (캐시된 페이지)
               </Button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { type ReactNode } from 'react';
 import { colors, glass, radii, spacing } from '@/lib/design-tokens';
 
@@ -235,7 +235,7 @@ export function SkeletonMap({ height = '50vh' }: { height?: string }) {
   return (
     <div className="relative bg-space-800 overflow-hidden" style={{ height }}>
       {/* Animated gradient overlay */}
-      <motion.div
+      <m.div
         className="absolute inset-0"
         animate={{
           opacity: [0.3, 0.5, 0.3],
@@ -253,7 +253,7 @@ export function SkeletonMap({ height = '50vh' }: { height?: string }) {
       {/* Map markers placeholder */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <motion.div
+          <m.div
             animate={{
               scale: [1, 1.1, 1],
               opacity: [0.5, 0.8, 0.5],

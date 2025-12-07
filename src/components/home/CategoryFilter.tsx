@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors } from '@/lib/design-tokens';
 import { duration } from '@/lib/animations';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -71,7 +71,7 @@ export function CategoryFilter({
         {categories.map((cat) => {
           const isActive = activeCategory === cat.value;
           return (
-            <motion.button
+            <m.button
               key={cat.value}
               ref={isActive ? activeRef : undefined}
               onClick={() => handleCategoryClick(cat.value)}
@@ -92,7 +92,7 @@ export function CategoryFilter({
             >
               {cat.emoji && <span className="mr-1">{cat.emoji}</span>}
               {cat.label}
-            </motion.button>
+            </m.button>
           );
         })}
       </div>

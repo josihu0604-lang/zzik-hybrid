@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { zIndex } from '@/lib/design-tokens';
 
 // ============================================================================
@@ -80,7 +80,7 @@ function ToastItem({ toast, onDismiss }: { toast: Toast; onDismiss: () => void }
   const styles = toastStyles[toast.type];
 
   return (
-    <motion.div
+    <m.div
       layout
       initial={{ opacity: 0, y: -20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -111,7 +111,7 @@ function ToastItem({ toast, onDismiss }: { toast: Toast; onDismiss: () => void }
 
       {/* Celebration glow effect */}
       {toast.type === 'celebration' && (
-        <motion.div
+        <m.div
           className="absolute inset-0 rounded-2xl bg-orange-500/20 blur-xl -z-10"
           animate={{
             opacity: [0.3, 0.6, 0.3],
@@ -123,7 +123,7 @@ function ToastItem({ toast, onDismiss }: { toast: Toast; onDismiss: () => void }
           }}
         />
       )}
-    </motion.div>
+    </m.div>
   );
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -64,7 +64,7 @@ export function VerificationProgress({
           />
 
           {/* Progress fill */}
-          <motion.div
+          <m.div
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -85,7 +85,7 @@ export function VerificationProgress({
       {/* Individual Items */}
       <div className="space-y-3">
         {items.map((item, index) => (
-          <motion.div
+          <m.div
             key={item.label}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -117,12 +117,12 @@ export function VerificationProgress({
               }}
             >
               {item.status === 'checking' ? (
-                <motion.span
+                <m.span
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                 >
                   ⏳
-                </motion.span>
+                </m.span>
               ) : (
                 item.icon
               )}
@@ -169,7 +169,7 @@ export function VerificationProgress({
                 {item.status === 'fail' && '✗ 인증 실패'}
               </span>
             </div>
-          </motion.div>
+          </m.div>
         ))}
       </div>
     </div>

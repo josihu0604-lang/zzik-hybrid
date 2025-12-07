@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { ReactNode } from 'react';
 import {
   AlertTriangle,
@@ -165,7 +165,7 @@ export function ErrorState({
     : 'min-h-[60vh] flex items-center justify-center';
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`${containerClasses} px-6 py-12 ${className}`}
@@ -175,7 +175,7 @@ export function ErrorState({
     >
       <div className="flex flex-col items-center text-center max-w-md">
         {/* Icon */}
-        <motion.div
+        <m.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', delay: 0.1 }}
@@ -186,31 +186,31 @@ export function ErrorState({
           }}
         >
           {icon || <IconComponent size={40} style={{ color: config.color }} aria-hidden="true" />}
-        </motion.div>
+        </m.div>
 
         {/* Title */}
-        <motion.h1
+        <m.h1
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
           className="text-xl font-bold text-white mb-2"
         >
           {displayTitle}
-        </motion.h1>
+        </m.h1>
 
         {/* Description */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="text-linear-text-secondary text-sm max-w-sm mb-8"
         >
           {displayDescription}
-        </motion.p>
+        </m.p>
 
         {/* Error Details (Dev mode) */}
         {showDetails && error && (
-          <motion.details
+          <m.details
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25 }}
@@ -235,11 +235,11 @@ export function ErrorState({
                 </pre>
               )}
             </div>
-          </motion.details>
+          </m.details>
         )}
 
         {/* Action Buttons */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -247,7 +247,7 @@ export function ErrorState({
         >
           {/* Retry Button */}
           {onRetry && (
-            <motion.button
+            <m.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleRetry}
@@ -265,11 +265,11 @@ export function ErrorState({
                 aria-hidden="true"
               />
               {isRetrying ? '재시도 중...' : config.retryLabel}
-            </motion.button>
+            </m.button>
           )}
 
           {/* Home Button */}
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleGoHome}
@@ -283,11 +283,11 @@ export function ErrorState({
           >
             <Home size={18} aria-hidden="true" />
             홈으로
-          </motion.button>
-        </motion.div>
+          </m.button>
+        </m.div>
 
         {/* Back Button */}
-        <motion.button
+        <m.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -297,11 +297,11 @@ export function ErrorState({
         >
           <ArrowLeft size={16} aria-hidden="true" />
           이전 페이지로 돌아가기
-        </motion.button>
+        </m.button>
 
         {/* Help Link */}
         {helpUrl && (
-          <motion.a
+          <m.a
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.45 }}
@@ -311,10 +311,10 @@ export function ErrorState({
             className="mt-4 text-xs text-linear-text-tertiary hover:text-flame-500 transition-colors"
           >
             도움이 필요하신가요?
-          </motion.a>
+          </m.a>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Check, Loader2, Heart, Bookmark, Share2, ThumbsUp } from 'lucide-react';
 import { colors, radii, spacing, typography } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -188,7 +188,7 @@ export function OptimisticButton({
   // }, [isActive, count]);
 
   return (
-    <motion.button
+    <m.button
       onClick={handleClick}
       disabled={disabled || isLoading}
       whileHover={{ scale: 1.05 }}
@@ -206,7 +206,7 @@ export function OptimisticButton({
     >
       {/* Icon with animation */}
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={optimisticState ? 'active' : 'inactive'}
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -225,13 +225,13 @@ export function OptimisticButton({
           ) : (
             displayInactiveIcon
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       {/* Count */}
       {optimisticCount !== undefined && (
         <AnimatePresence mode="wait">
-          <motion.span
+          <m.span
             key={optimisticCount}
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -241,7 +241,7 @@ export function OptimisticButton({
             className="font-medium"
           >
             {optimisticCount}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       )}
 
@@ -254,7 +254,7 @@ export function OptimisticButton({
 
       {/* Success pulse animation */}
       {optimisticState && !isLoading && (
-        <motion.div
+        <m.div
           initial={{ scale: 1, opacity: 0.5 }}
           animate={{ scale: 2, opacity: 0 }}
           transition={{ duration: 0.4 }}
@@ -262,7 +262,7 @@ export function OptimisticButton({
           style={{ background: displayActiveColor }}
         />
       )}
-    </motion.button>
+    </m.button>
   );
 }
 

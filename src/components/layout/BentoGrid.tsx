@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, Children, cloneElement, isValidElement, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { spacing, layout } from '@/lib/design-tokens';
 
 /**
@@ -102,7 +102,7 @@ export function BentoItem({ children, size = 'standard', className = '', style }
   }, [size]);
 
   return (
-    <motion.div
+    <m.div
       variants={itemVariants}
       className={className}
       style={{
@@ -111,7 +111,7 @@ export function BentoItem({ children, size = 'standard', className = '', style }
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -153,7 +153,7 @@ export function BentoGrid({ children, gap = 3, animated = true, className = '' }
     });
   }, [children]);
 
-  const GridComponent = animated ? motion.div : 'div';
+  const GridComponent = animated ? m.div : 'div';
   const gridProps = animated
     ? {
         variants: containerVariants,

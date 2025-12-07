@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Clock, CheckCircle, Wallet, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { colors } from '@/lib/design-tokens';
@@ -51,7 +51,7 @@ export function PayoutSummary({ data, className = '' }: PayoutSummaryProps) {
   ];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl overflow-hidden ${className}`}
@@ -92,7 +92,7 @@ export function PayoutSummary({ data, className = '' }: PayoutSummaryProps) {
             const percentage = total > 0 ? (item.amount / total) * 100 : 0;
 
             return (
-              <motion.div
+              <m.div
                 key={item.label}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -119,7 +119,7 @@ export function PayoutSummary({ data, className = '' }: PayoutSummaryProps) {
                     className="h-1.5 rounded-full overflow-hidden"
                     style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                   >
-                    <motion.div
+                    <m.div
                       className="h-full rounded-full"
                       style={{ background: item.color }}
                       initial={{ width: 0 }}
@@ -128,14 +128,14 @@ export function PayoutSummary({ data, className = '' }: PayoutSummaryProps) {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
 
         {/* Request Payout Button */}
         {data.confirmed >= 10000 && (
-          <motion.button
+          <m.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -149,10 +149,10 @@ export function PayoutSummary({ data, className = '' }: PayoutSummaryProps) {
           >
             <Wallet size={16} />
             {data.confirmed.toLocaleString()} 정산 요청하기
-          </motion.button>
+          </m.button>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

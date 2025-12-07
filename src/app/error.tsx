@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import * as Sentry from '@sentry/nextjs';
 import { Button } from '@/components/ui/Button';
 
@@ -138,7 +138,7 @@ export default function Error({ error, reset }: ErrorProps) {
     <div className="min-h-screen bg-space-950 flex items-center justify-center p-4">
       {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div
+        <m.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(239, 68, 68, 0.12) 0%, transparent 70%)',
@@ -153,7 +153,7 @@ export default function Error({ error, reset }: ErrorProps) {
       </div>
 
       {/* Error Card (DES-198: 에러 바운더리 스타일 개선) */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative max-w-md w-full p-8 rounded-2xl text-center"
@@ -257,7 +257,7 @@ export default function Error({ error, reset }: ErrorProps) {
           </a>
           에 문의해주세요
         </p>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, m } from '@/lib/motion';
 import React, { forwardRef, useId } from 'react';
 import { TouchTarget } from './button';
 import { Link } from './link';
@@ -119,7 +119,7 @@ export const SidebarItem = forwardRef(function SidebarItem(
   return (
     <span className={clsx(className, 'relative')}>
       {current && (
-        <motion.span
+        <m.span
           layoutId="current-indicator"
           className="absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white"
         />

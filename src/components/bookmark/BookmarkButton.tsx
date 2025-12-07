@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Heart, Bookmark } from 'lucide-react';
 import { usePopupBookmark } from '@/hooks/useBookmark';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -74,7 +74,7 @@ export function BookmarkButton({
   );
 
   return (
-    <motion.button
+    <m.button
       onClick={handleToggle}
       whileHover={prefersReducedMotion ? undefined : { scale: 1.1 }}
       whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
@@ -96,7 +96,7 @@ export function BookmarkButton({
           : '이 팝업을 북마크에 추가할 수 있습니다'}
       </span>
       {/* Icon */}
-      <motion.div
+      <m.div
         animate={
           prefersReducedMotion
             ? { scale: 1 }
@@ -113,7 +113,7 @@ export function BookmarkButton({
           className={isBookmarked ? '' : 'text-linear-text-secondary hover:text-white'}
           strokeWidth={2}
         />
-      </motion.div>
+      </m.div>
 
       {/* Burst Effect */}
       <AnimatePresence>
@@ -121,7 +121,7 @@ export function BookmarkButton({
           <>
             {/* Particles */}
             {[...Array(6)].map((_, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 className="absolute w-1.5 h-1.5 rounded-full"
                 style={{
@@ -147,7 +147,7 @@ export function BookmarkButton({
             ))}
 
             {/* Ring */}
-            <motion.div
+            <m.div
               className="absolute inset-0 rounded-full"
               style={{
                 border: `2px solid ${colors.flame[500]}`,
@@ -160,7 +160,7 @@ export function BookmarkButton({
           </>
         )}
       </AnimatePresence>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -171,7 +171,7 @@ export function BookmarkCount({ count, className = '' }: { count: number; classN
   if (count === 0) return null;
 
   return (
-    <motion.span
+    <m.span
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       className={`absolute -top-1 -right-1 w-4 h-4 rounded-full font-bold flex items-center justify-center ${className}`}
@@ -183,7 +183,7 @@ export function BookmarkCount({ count, className = '' }: { count: number; classN
       }}
     >
       {count > 9 ? '9+' : count}
-    </motion.span>
+    </m.span>
   );
 }
 

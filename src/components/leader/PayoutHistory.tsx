@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import {
   Wallet,
   Clock,
@@ -91,7 +91,7 @@ export function PayoutHistory({ payouts, className = '' }: PayoutHistoryProps) {
 
   if (payouts.length === 0) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className={`rounded-xl p-6 text-center ${className}`}
@@ -109,12 +109,12 @@ export function PayoutHistory({ payouts, className = '' }: PayoutHistoryProps) {
         <p className="text-linear-text-tertiary text-xs mt-1">
           체크인 수익이 1만원 이상 되면 정산 요청할 수 있어요
         </p>
-      </motion.div>
+      </m.div>
     );
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl overflow-hidden ${className}`}
@@ -180,7 +180,7 @@ export function PayoutHistory({ payouts, className = '' }: PayoutHistoryProps) {
           ))}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -210,7 +210,7 @@ function PayoutItem({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -266,7 +266,7 @@ function PayoutItem({
       {/* Expanded Details */}
       <AnimatePresence>
         {isExpanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -350,10 +350,10 @@ function PayoutItem({
               {/* Status Description */}
               <p className="text-linear-text-tertiary text-xs text-center">{status.description}</p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { useRouter } from 'next/navigation';
 import {
   ChevronLeft,
@@ -88,7 +88,7 @@ function SettingsToggle({
   label?: string;
 }) {
   return (
-    <motion.button
+    <m.button
       onClick={() => onChange(!enabled)}
       className="relative w-12 h-7 rounded-full transition-colors"
       style={{
@@ -99,12 +99,12 @@ function SettingsToggle({
       aria-checked={enabled}
       aria-label={label}
     >
-      <motion.div
+      <m.div
         className="absolute top-1 w-5 h-5 rounded-full bg-white shadow-md"
         animate={{ left: enabled ? '24px' : '4px' }}
         transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       />
-    </motion.button>
+    </m.button>
   );
 }
 

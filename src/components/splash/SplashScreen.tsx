@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Flame } from 'lucide-react';
 import { colors, gradients } from '@/lib/design-tokens';
 
@@ -48,7 +48,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
   return (
     <AnimatePresence>
       {phase !== 'exit' && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
           style={{ background: colors.space[950] }}
           exit={{ opacity: 0 }}
@@ -57,7 +57,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
           {/* 배경 그라디언트 */}
           <div className="absolute inset-0 overflow-hidden">
             {/* 중앙 글로우 */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
               style={{
                 background: `radial-gradient(circle, ${colors.flame[500]}15 0%, transparent 70%)`,
@@ -71,7 +71,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
             />
 
             {/* 하단 글로우 */}
-            <motion.div
+            <m.div
               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px]"
               style={{
                 background: `linear-gradient(180deg, transparent 0%, ${colors.flame[500]}10 100%)`,
@@ -83,14 +83,14 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
           </div>
 
           {/* 로고 컨테이너 */}
-          <motion.div
+          <m.div
             className="relative z-10 flex flex-col items-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
           >
             {/* 로고 아이콘 */}
-            <motion.div
+            <m.div
               className="relative mb-6"
               animate={{
                 y: [0, -8, 0],
@@ -102,7 +102,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
               }}
             >
               {/* 불꽃 배경 링 */}
-              <motion.div
+              <m.div
                 className="absolute inset-0 -m-4 rounded-full"
                 style={{
                   background: `conic-gradient(from 0deg, ${colors.flame[500]}, ${colors.spark[500]}, ${colors.ember[500]}, ${colors.flame[500]})`,
@@ -114,7 +114,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
               />
 
               {/* 메인 로고 원 */}
-              <motion.div
+              <m.div
                 className="relative w-28 h-28 rounded-full flex items-center justify-center"
                 style={{
                   background: gradients.flame,
@@ -140,18 +140,18 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
                 />
 
                 {/* 불꽃 아이콘 */}
-                <motion.div
+                <m.div
                   initial={{ scale: 0, rotate: -30 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 0.4, duration: 0.4, type: 'spring' }}
                 >
                   <Flame size={52} className="text-white drop-shadow-lg" strokeWidth={2.5} />
-                </motion.div>
-              </motion.div>
+                </m.div>
+              </m.div>
 
               {/* 파티클 효과 */}
               {[...Array(6)].map((_, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   className="absolute w-2 h-2 rounded-full"
                   style={{
@@ -174,10 +174,10 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
                   }}
                 />
               ))}
-            </motion.div>
+            </m.div>
 
             {/* 브랜드명 */}
-            <motion.h1
+            <m.h1
               className="text-5xl font-black tracking-tight mb-2"
               style={{
                 background: gradients.flame,
@@ -190,12 +190,12 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               ZZIK
-            </motion.h1>
+            </m.h1>
 
             {/* 슬로건 */}
             <AnimatePresence>
               {phase === 'tagline' && (
-                <motion.p
+                <m.p
                   className="text-lg font-medium"
                   style={{ color: colors.text.secondary }}
                   initial={{ opacity: 0, y: 10 }}
@@ -204,13 +204,13 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
                   transition={{ duration: 0.4 }}
                 >
                   참여하면, 열려요
-                </motion.p>
+                </m.p>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
 
           {/* 로딩 인디케이터 */}
-          <motion.div
+          <m.div
             className="absolute bottom-20 left-1/2 -translate-x-1/2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -218,7 +218,7 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
           >
             <div className="flex gap-1.5">
               {[0, 1, 2].map((i) => (
-                <motion.div
+                <m.div
                   key={i}
                   className="w-2 h-2 rounded-full"
                   style={{ background: colors.flame[500] }}
@@ -234,8 +234,8 @@ export function SplashScreen({ onComplete, minDuration = 2500 }: SplashScreenPro
                 />
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import {
   Users,
   Clock,
@@ -92,7 +92,7 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
 
   if (referrals.length === 0) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className={`rounded-xl p-6 text-center ${className}`}
@@ -106,12 +106,12 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
         <p className="text-linear-text-tertiary text-xs mt-1">
           추천 링크를 공유해서 첫 리퍼럴을 만들어보세요!
         </p>
-      </motion.div>
+      </m.div>
     );
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl overflow-hidden ${className}`}
@@ -166,7 +166,7 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
         <div className="px-4 py-2 flex items-center gap-2 overflow-x-auto scrollbar-hide">
           <Filter size={14} className="text-linear-text-tertiary flex-shrink-0" />
           {FILTER_OPTIONS.map((option) => (
-            <motion.button
+            <m.button
               key={option.value}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -180,7 +180,7 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
               }}
             >
               {option.label}
-            </motion.button>
+            </m.button>
           ))}
         </div>
       )}
@@ -197,7 +197,7 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
 
         {/* Show More/Less Button */}
         {hasMore && (
-          <motion.button
+          <m.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={() => setIsExpanded(!isExpanded)}
@@ -216,10 +216,10 @@ export function ReferralList({ referrals, className = '', showFilter = true }: R
                 {filteredReferrals.length - 5}명 더 보기 <ChevronDown size={14} />
               </>
             )}
-          </motion.button>
+          </m.button>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -246,7 +246,7 @@ function ReferralItem({ referral, index }: { referral: Referral; index: number }
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 10 }}
@@ -296,7 +296,7 @@ function ReferralItem({ referral, index }: { referral: Referral; index: number }
           {formatDate(referral.referredAt)}
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

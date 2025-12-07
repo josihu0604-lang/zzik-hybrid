@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors } from '@/lib/design-tokens';
 
 interface ProgressBarProps {
@@ -26,7 +26,7 @@ export function ProgressBar({ current, goal, size = 'md', showLabel = true }: Pr
         className={`${heights[size]} w-full rounded-full overflow-hidden`}
         style={{ background: 'rgba(255, 255, 255, 0.08)' }}
       >
-        <motion.div
+        <m.div
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 0.5, ease: 'easeOut' }}

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Share2, MessageCircle, Instagram, Copy, Link2, ExternalLink } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 import { colors } from '@/lib/design-tokens';
@@ -130,7 +130,7 @@ export function QuickActions({ referralCode, referralLink, className = '' }: Qui
   ];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl p-4 ${className}`}
@@ -141,7 +141,7 @@ export function QuickActions({ referralCode, referralLink, className = '' }: Qui
     >
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-white font-bold text-sm">빠른 공유</h3>
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={handleNativeShare}
@@ -153,14 +153,14 @@ export function QuickActions({ referralCode, referralLink, className = '' }: Qui
         >
           <Share2 size={12} />
           더보기
-        </motion.button>
+        </m.button>
       </div>
 
       <div className="grid grid-cols-4 gap-2">
         {actions.map((action, index) => {
           const Icon = action.icon;
           return (
-            <motion.button
+            <m.button
               key={action.label}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -178,7 +178,7 @@ export function QuickActions({ referralCode, referralLink, className = '' }: Qui
               <span className="text-micro text-linear-text-secondary font-medium">
                 {action.label}
               </span>
-            </motion.button>
+            </m.button>
           );
         })}
       </div>
@@ -199,7 +199,7 @@ export function QuickActions({ referralCode, referralLink, className = '' }: Qui
           <ExternalLink size={12} className="text-linear-text-tertiary" />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

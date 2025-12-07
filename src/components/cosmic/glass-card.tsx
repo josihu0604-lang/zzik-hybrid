@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { m, type HTMLMotionProps } from '@/lib/motion';
 import { forwardRef } from 'react';
 import { liquidGlass, shadows } from '@/lib/design-tokens';
 
@@ -11,14 +11,18 @@ import { liquidGlass, shadows } from '@/lib/design-tokens';
  * Features: blur + saturate, multi-layer shadows, specular highlights
  */
 
+type GlowType = 'flame' | 'primary' | 'secondary' | 'accent' | 'success';
+type PaddingType = 'sm' | 'md' | 'lg' | 'none';
+type VariantType = 'frosted' | 'standard';
+
 interface GlassCardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   hover?: boolean;
-  glow?: 'flame' | 'primary' | 'secondary' | 'accent' | 'success' | null;
-  padding?: 'sm' | 'md' | 'lg' | 'none';
-  variant?: 'frosted' | 'standard'; // DES-077: 2개만 유지
+  glow?: GlowType | null;
+  padding?: PaddingType;
+  variant?: VariantType; // DES-077: 2개만 유지
 }
 
-const paddingMap = {
+const paddingMap: Record<PaddingType, string> = {
   none: '',
   sm: 'p-4',
   md: 'p-5',
@@ -26,7 +30,7 @@ const paddingMap = {
 };
 
 // DES-072: 시맨틱 네이밍 사용
-const glowMap = {
+const glowMap: Record<GlowType, string> = {
   flame: shadows.glow.primary, // 레거시 호환 (flame → primary)
   primary: shadows.glow.primary,
   secondary: shadows.glow.secondary,
@@ -63,7 +67,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     const glassStyle = liquidGlass[variant];
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         whileHover={hoverEffect}
         className={`rounded-[20px] ${paddingMap[padding]} transition-shadow relative overflow-hidden ${className}`}
@@ -77,7 +81,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           aria-hidden="true"
         />
         <div className="relative">{children as React.ReactNode}</div>
-      </motion.div>
+      </m.div>
     );
   }
 );

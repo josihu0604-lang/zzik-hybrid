@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { AnimatedCounter } from './animated-counter';
 
 interface StatCardProps {
@@ -30,7 +30,7 @@ export function StatCard({
   format,
 }: StatCardProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay }}
@@ -40,6 +40,6 @@ export function StatCard({
         <AnimatedCounter value={value} suffix={suffix} prefix={prefix} format={format} />
       </p>
       <p className="text-white/50 text-xs mt-1">{label}</p>
-    </motion.div>
+    </m.div>
   );
 }

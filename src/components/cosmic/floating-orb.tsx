@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 
 interface FloatingOrbProps {
   size?: 'sm' | 'md' | 'lg';
@@ -16,7 +16,7 @@ const sizeMap = {
 
 export function FloatingOrb({ size = 'lg', className = '', delay = 0 }: FloatingOrbProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
         opacity: [0.2, 0.4, 0.2],

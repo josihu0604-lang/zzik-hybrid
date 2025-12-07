@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Link2, Copy, Check, Users, TrendingUp, ExternalLink } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 
@@ -95,7 +95,7 @@ export function ReferralLink({
         >
           {referralUrl}
         </div>
-        <motion.button
+        <m.button
           onClick={handleCopy}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -113,7 +113,7 @@ export function ReferralLink({
           ) : (
             <Copy size={16} style={{ color: colors.spark[400] }} />
           )}
-        </motion.button>
+        </m.button>
       </div>
     );
   }
@@ -169,7 +169,7 @@ export function ReferralLink({
         >
           {referralUrl}
         </div>
-        <motion.button
+        <m.button
           onClick={handleCopy}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -195,13 +195,13 @@ export function ReferralLink({
               복사
             </>
           )}
-        </motion.button>
+        </m.button>
       </div>
 
       {/* Stats (expandable) */}
       <AnimatePresence>
         {stats && showStats && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -256,7 +256,7 @@ export function ReferralLink({
                 </p>
               </div>
             )}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 

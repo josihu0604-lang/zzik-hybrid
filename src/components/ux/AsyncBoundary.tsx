@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, ReactNode, Component, ErrorInfo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { RefreshCw, AlertTriangle } from 'lucide-react';
 import { colors, typography } from '@/lib/design-tokens';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
@@ -42,7 +42,7 @@ export interface AsyncBoundaryProps {
 
 function DefaultErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center justify-center py-8 px-4 text-center"
@@ -71,7 +71,7 @@ function DefaultErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
         {error.message || '일시적인 오류가 발생했습니다.'}
       </p>
 
-      <motion.button
+      <m.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={resetErrorBoundary}
@@ -84,8 +84,8 @@ function DefaultErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
       >
         <RefreshCw size={16} />
         다시 시도
-      </motion.button>
-    </motion.div>
+      </m.button>
+    </m.div>
   );
 }
 
@@ -326,7 +326,7 @@ export function LoadingOverlay({
   if (!isLoading) return null;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -344,7 +344,7 @@ export function LoadingOverlay({
           {message}
         </p>
       )}
-    </motion.div>
+    </m.div>
   );
 }
 

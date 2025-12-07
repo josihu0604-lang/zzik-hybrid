@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useState, useCallback, useRef, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
+import { m, useMotionValue, useTransform, AnimatePresence } from '@/lib/motion';
 import { RefreshCw, ArrowDown } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -166,7 +166,7 @@ export function PullToRefresh({
       style={{ touchAction: state === 'idle' ? 'auto' : 'none' }}
     >
       {/* Pull Indicator */}
-      <motion.div
+      <m.div
         className="absolute left-0 right-0 flex flex-col items-center justify-center pointer-events-none"
         style={{
           top: 0,
@@ -177,7 +177,7 @@ export function PullToRefresh({
           zIndex: 10,
         }}
       >
-        <motion.div
+        <m.div
           className="w-10 h-10 rounded-full flex items-center justify-center"
           style={{
             background: `${colors.flame[500]}20`,
@@ -197,11 +197,11 @@ export function PullToRefresh({
               }}
             />
           )}
-        </motion.div>
+        </m.div>
 
         <AnimatePresence mode="wait">
           {state !== 'idle' && (
-            <motion.span
+            <m.span
               initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 5 }}
@@ -209,19 +209,19 @@ export function PullToRefresh({
               style={{ color: colors.text.secondary }}
             >
               {getStatusText()}
-            </motion.span>
+            </m.span>
           )}
         </AnimatePresence>
-      </motion.div>
+      </m.div>
 
       {/* Content */}
-      <motion.div
+      <m.div
         style={{
           y: useTransform(pullDistance, (v) => v * 0.3),
         }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -301,12 +301,12 @@ export function InfiniteScroll({
       {isLoading && (
         <div className="flex justify-center py-4">
           {loader || (
-            <motion.div
+            <m.div
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             >
               <RefreshCw size={24} style={{ color: colors.flame[500] }} />
-            </motion.div>
+            </m.div>
           )}
         </div>
       )}

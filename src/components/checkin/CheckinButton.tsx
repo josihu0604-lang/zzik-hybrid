@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { MapPin, Check, Loader2 } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { VerificationModal } from '@/components/verification';
@@ -144,7 +144,7 @@ export function CheckinButton({
   return (
     <>
       {/* Main Button */}
-      <motion.button
+      <m.button
         onClick={() => {
           if (!isDisabled && !isCheckedIn) {
             // DES-029: 체크인 버튼 클릭 햅틱
@@ -180,7 +180,7 @@ export function CheckinButton({
         {config.icon}
         {config.text}
         {isCheckedIn && score > 0 && <span className="text-sm opacity-80">({score}점)</span>}
-      </motion.button>
+      </m.button>
 
       {/* Loading state description for screen readers */}
       {config.statusDescription && (
@@ -191,13 +191,13 @@ export function CheckinButton({
 
       {/* Checked-in Badge (below button) */}
       {isCheckedIn && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="mt-3 flex justify-center"
         >
           <VerificationBadge score={score} status="verified" size="md" animated />
-        </motion.div>
+        </m.div>
       )}
 
       {/* Verification Modal */}

@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { useHorizontalScroll } from '@/hooks/useScrollEffects';
 import { colors } from '@/lib/design-tokens';
 
@@ -51,7 +51,7 @@ export function HorizontalScrollIndicator({
       {/* 왼쪽 그라데이션 힌트 */}
       <AnimatePresence>
         {!scrollState.atStart && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -82,14 +82,14 @@ export function HorizontalScrollIndicator({
                 />
               </svg>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* 오른쪽 그라데이션 힌트 */}
       <AnimatePresence>
         {!scrollState.atEnd && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -120,7 +120,7 @@ export function HorizontalScrollIndicator({
                 />
               </svg>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -134,7 +134,7 @@ export function HorizontalScrollIndicator({
           aria-valuemax={100}
           aria-label="스크롤 진행률"
         >
-          <motion.div
+          <m.div
             className="h-full"
             style={{
               width: `${scrollState.scrollPercentage}%`,
@@ -165,7 +165,7 @@ export function ScrollHint({ direction, show }: ScrollHintProps) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: direction === 'left' ? 10 : -10 }}
           animate={{
             opacity: [0.3, 0.7, 0.3],
@@ -217,7 +217,7 @@ export function ScrollHint({ direction, show }: ScrollHintProps) {
               )}
             </svg>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

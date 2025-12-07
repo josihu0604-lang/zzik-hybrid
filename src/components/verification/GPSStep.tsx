@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { MapPin, Loader2, Check, X, Navigation } from 'lucide-react';
 import { colors, gradients, opacity } from '@/lib/design-tokens';
 import type { GpsVerificationResult } from '@/lib/geo';
@@ -57,7 +57,7 @@ export function GPSStep({
   // 로딩 상태
   if (isLoading) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex flex-col items-center py-8"
@@ -65,7 +65,7 @@ export function GPSStep({
         {/* 펄스 애니메이션 */}
         <div className="relative mb-6">
           {!prefersReducedMotion && (
-            <motion.div
+            <m.div
               className="absolute inset-0 rounded-full"
               style={{ background: colors.temperature.warm.bg }}
               animate={{
@@ -75,7 +75,7 @@ export function GPSStep({
               transition={{ duration: 1.5, repeat: Infinity }}
             />
           )}
-          <motion.div
+          <m.div
             className="w-20 h-20 rounded-full flex items-center justify-center"
             style={{
               background: gradients.flame,
@@ -87,24 +87,24 @@ export function GPSStep({
             }
           >
             <Navigation size={32} className="text-white" />
-          </motion.div>
+          </m.div>
         </div>
 
         <p className="text-white font-bold text-lg mb-2">위치 확인 중...</p>
         <p className="text-linear-text-tertiary text-sm">GPS 신호를 찾고 있어요</p>
-      </motion.div>
+      </m.div>
     );
   }
 
   // 에러 상태
   if (error) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex flex-col items-center py-8"
       >
-        <motion.div
+        <m.div
           className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
           style={{
             background: `rgba(239, 68, 68, ${opacity[20]})`,
@@ -115,12 +115,12 @@ export function GPSStep({
           transition={{ type: 'spring', duration: 0.5 }}
         >
           <X size={40} style={{ color: colors.error }} />
-        </motion.div>
+        </m.div>
 
         <p className="text-white font-bold text-lg mb-2">위치 확인 실패</p>
         <p className="text-linear-text-tertiary text-sm text-center mb-6 max-w-xs">{error}</p>
 
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={onRetry}
@@ -132,8 +132,8 @@ export function GPSStep({
           }}
         >
           다시 시도
-        </motion.button>
-      </motion.div>
+        </m.button>
+      </m.div>
     );
   }
 
@@ -143,13 +143,13 @@ export function GPSStep({
     const isSuccess = result.withinRange;
 
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex flex-col items-center py-8"
       >
         {/* 결과 아이콘 */}
-        <motion.div
+        <m.div
           className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
           style={{
             background: isSuccess ? gradients.success : `rgba(239, 68, 68, ${opacity[20]})`,
@@ -164,7 +164,7 @@ export function GPSStep({
           ) : (
             <X size={40} style={{ color: colors.error }} />
           )}
-        </motion.div>
+        </m.div>
 
         {/* 정확도 라벨 */}
         <p className="font-bold text-lg mb-1" style={{ color: accuracyInfo.color }}>
@@ -178,7 +178,7 @@ export function GPSStep({
         </div>
 
         {/* 점수 */}
-        <motion.div
+        <m.div
           className="px-4 py-2 rounded-lg mb-4"
           style={{
             background: isSuccess
@@ -193,7 +193,7 @@ export function GPSStep({
           <span className="font-bold" style={{ color: isSuccess ? colors.success : colors.error }}>
             GPS 점수: {result.score}/40점
           </span>
-        </motion.div>
+        </m.div>
 
         {/* GPS 정확도 정보 */}
         {accuracy && (
@@ -203,7 +203,7 @@ export function GPSStep({
         {/* 실패 시 안내 */}
         <AnimatePresence>
           {!isSuccess && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -216,13 +216,13 @@ export function GPSStep({
               <p className="text-sm" style={{ color: colors.spark[500] }}>
                 팝업 현장에서 100m 이내로 이동해주세요
               </p>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
 
         {/* 재시도 버튼 */}
         {!isSuccess && (
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onRetry}
@@ -234,9 +234,9 @@ export function GPSStep({
             }}
           >
             위치 다시 확인
-          </motion.button>
+          </m.button>
         )}
-      </motion.div>
+      </m.div>
     );
   }
 

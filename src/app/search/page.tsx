@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, Suspense, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Search,
@@ -128,7 +128,7 @@ function PopupCard({ popup }: { popup: PopupItem }) {
   const isConfirmed = popup.status === 'confirmed';
 
   return (
-    <motion.div
+    <m.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={() => router.push(`/popup/${popup.id}`)}
@@ -218,7 +218,7 @@ function PopupCard({ popup }: { popup: PopupItem }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -371,7 +371,7 @@ function SearchContent() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {TRENDING_SEARCHES.map((term) => (
-                  <motion.button
+                  <m.button
                     key={term}
                     onClick={() => {
                       setInputValue(term);
@@ -386,7 +386,7 @@ function SearchContent() {
                     }}
                   >
                     {term}
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
             </div>
@@ -411,7 +411,7 @@ function SearchContent() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {recentSearches.map((term) => (
-                    <motion.button
+                    <m.button
                       key={term}
                       onClick={() => {
                         setInputValue(term);
@@ -426,7 +426,7 @@ function SearchContent() {
                       }}
                     >
                       {term}
-                    </motion.button>
+                    </m.button>
                   ))}
                 </div>
               </div>

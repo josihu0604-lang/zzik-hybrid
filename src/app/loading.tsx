@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { SkeletonMainPage } from '@/components/ui/Skeleton';
 
 /**
@@ -15,7 +15,7 @@ export default function Loading() {
     <div className="min-h-screen bg-space-950">
       {/* Animated gradient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-30">
-        <motion.div
+        <m.div
           className="absolute -top-40 -right-40 w-96 h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 107, 91, 0.15) 0%, transparent 60%)',

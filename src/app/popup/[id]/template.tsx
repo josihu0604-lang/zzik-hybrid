@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 
 /**
  * Popup Detail Template - iOS 스타일 슬라이드 전환
@@ -15,7 +15,7 @@ interface TemplateProps {
 
 export default function PopupDetailTemplate({ children }: TemplateProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: '30%' }}
       animate={{ opacity: 1, x: 0 }}
       transition={{
@@ -25,6 +25,6 @@ export default function PopupDetailTemplate({ children }: TemplateProps) {
       style={{ minHeight: '100vh' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback, useMemo, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Camera, X, Keyboard, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { logger } from '@/lib/logger';
@@ -231,7 +231,7 @@ export const QRScanner = memo(function QRScanner({
   }, []);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -241,7 +241,7 @@ export const QRScanner = memo(function QRScanner({
       aria-modal="true"
       aria-labelledby="qr-scanner-title"
     >
-      <motion.div
+      <m.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -300,14 +300,14 @@ export const QRScanner = memo(function QRScanner({
         <div className="p-4">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
-              <motion.div
+              <m.div
                 key="success"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="py-12 text-center"
               >
-                <motion.div
+                <m.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', delay: 0.1 }}
@@ -315,24 +315,24 @@ export const QRScanner = memo(function QRScanner({
                   style={{ background: `${colors.success}20` }}
                 >
                   <CheckCircle size={32} style={{ color: colors.success }} />
-                </motion.div>
+                </m.div>
                 <p className="text-white font-bold">인증 성공!</p>
                 <p className="text-linear-text-tertiary text-sm mt-1">QR 코드가 확인되었습니다</p>
-              </motion.div>
+              </m.div>
             ) : status === 'error' ? (
-              <motion.div
+              <m.div
                 key="error"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="py-12 text-center"
               >
-                <motion.div
+                <m.div
                   className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
                   style={{ background: `${colors.error}20` }}
                 >
                   <AlertCircle size={32} style={{ color: colors.error }} />
-                </motion.div>
+                </m.div>
                 <p className="text-white font-bold">인증 실패</p>
                 <p className="text-linear-text-tertiary text-sm mt-1">{errorMessage}</p>
                 <button
@@ -346,9 +346,9 @@ export const QRScanner = memo(function QRScanner({
                 >
                   다시 시도
                 </button>
-              </motion.div>
+              </m.div>
             ) : mode === 'camera' ? (
-              <motion.div
+              <m.div
                 key="camera"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -396,7 +396,7 @@ export const QRScanner = memo(function QRScanner({
                       </div>
 
                       {/* Scanning Animation */}
-                      <motion.div
+                      <m.div
                         className="absolute left-1/2 -translate-x-1/2 w-48 h-0.5"
                         style={{ background: colors.flame[500] }}
                         animate={{ y: [80, 200, 80] }}
@@ -410,9 +410,9 @@ export const QRScanner = memo(function QRScanner({
                     </p>
                   </>
                 )}
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.div
+              <m.div
                 key="manual"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -457,7 +457,7 @@ export const QRScanner = memo(function QRScanner({
 
                 {/* Error Message */}
                 {errorMessage && (
-                  <motion.p
+                  <m.p
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center text-sm mb-3"
@@ -465,11 +465,11 @@ export const QRScanner = memo(function QRScanner({
                     role="alert"
                   >
                     {errorMessage}
-                  </motion.p>
+                  </m.p>
                 )}
 
                 {/* Submit Button */}
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleManualSubmit}
@@ -490,13 +490,13 @@ export const QRScanner = memo(function QRScanner({
                   ) : (
                     '코드 확인'
                   )}
-                </motion.button>
-              </motion.div>
+                </m.button>
+              </m.div>
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 });
 

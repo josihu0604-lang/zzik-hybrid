@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import {
   Users,
   TrendingUp,
@@ -91,7 +91,7 @@ export function NotificationToast({
   }, [duration, onClose]);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -50, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -50, scale: 0.9 }}
@@ -109,7 +109,7 @@ export function NotificationToast({
     >
       {/* Progress Bar - PERF-004: Framer Motion 자체 애니메이션으로 처리 (state 업데이트 없음) */}
       {duration > 0 && (
-        <motion.div
+        <m.div
           className="absolute bottom-0 left-0 h-0.5"
           initial={{ scaleX: 1 }}
           animate={{ scaleX: 0 }}
@@ -150,7 +150,7 @@ export function NotificationToast({
           <X size={16} className="text-linear-text-tertiary" />
         </button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

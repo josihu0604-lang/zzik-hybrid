@@ -3,7 +3,7 @@
 import { memo, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Clock, Star, MapPin, Ticket, Sparkles } from 'lucide-react';
 import { colors, radii, gradients, typography, liquidGlass } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -61,7 +61,11 @@ const TYPE_COLORS: Record<ExperienceType, string> = {
   popup: colors.flame[300],
 };
 
-function getUrgencyLevel(daysLeft: number, spotsLeft: number, totalSpots: number): 'low' | 'medium' | 'high' | 'soldout' {
+function getUrgencyLevel(
+  daysLeft: number,
+  spotsLeft: number,
+  totalSpots: number
+): 'low' | 'medium' | 'high' | 'soldout' {
   if (spotsLeft === 0) return 'soldout';
   const spotsPercentage = (spotsLeft / totalSpots) * 100;
   if (daysLeft <= 2 || spotsPercentage <= 10) return 'high';
@@ -127,7 +131,7 @@ function ExperienceCardComponent({
   const isCompact = size === 'compact';
 
   return (
-    <motion.article
+    <m.article
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
       whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
@@ -214,10 +218,7 @@ function ExperienceCardComponent({
             }}
           >
             <Clock size={12} />
-            {experience.daysLeft <= 1
-              ? t('experience.closingSoon')
-              : `D-${experience.daysLeft}`
-            }
+            {experience.daysLeft <= 1 ? t('experience.closingSoon') : `D-${experience.daysLeft}`}
           </span>
         )}
 
@@ -270,10 +271,7 @@ function ExperienceCardComponent({
         {/* Price + Spots Row */}
         <div className="flex items-center justify-between mb-2">
           {/* Price */}
-          <span
-            className="text-base font-bold"
-            style={{ color: colors.spark[400] }}
-          >
+          <span className="text-base font-bold" style={{ color: colors.spark[400] }}>
             {formatPrice(experience.price, experience.currency)}
           </span>
 
@@ -284,14 +282,13 @@ function ExperienceCardComponent({
           >
             {isSoldOut
               ? t('experience.soldOut')
-              : t('experience.spotsLeft', { spots: experience.spotsLeft })
-            }
+              : t('experience.spotsLeft', { spots: experience.spotsLeft })}
           </span>
         </div>
 
         {/* CTA Button */}
         {!isCompact && (
-          <motion.button
+          <m.button
             onClick={handleBookClick}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -317,13 +314,13 @@ function ExperienceCardComponent({
                 {t('experience.book')}
               </>
             )}
-          </motion.button>
+          </m.button>
         )}
       </div>
 
       {/* Urgent Border Animation */}
       {isUrgent && !isSoldOut && !prefersReducedMotion && (
-        <motion.div
+        <m.div
           className="absolute inset-0 pointer-events-none"
           style={{
             borderRadius: radii['2xl'],
@@ -333,7 +330,7 @@ function ExperienceCardComponent({
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
-    </motion.article>
+    </m.article>
   );
 }
 

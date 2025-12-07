@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useEffect, useRef, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Search, Filter, X, MapPin, ChevronDown } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { getCategoryColor } from '@/lib/color-utils';
@@ -199,7 +199,7 @@ export const MapFilters = memo(function MapFilters({
         </div>
 
         {/* Filter Toggle */}
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleFilterToggle}
@@ -228,13 +228,13 @@ export const MapFilters = memo(function MapFilters({
               {selectedCategories.length}
             </span>
           )}
-        </motion.button>
+        </m.button>
       </div>
 
       {/* Filter Panel */}
       <AnimatePresence>
         {isFilterOpen && (
-          <motion.div
+          <m.div
             ref={filterPanelRef}
             id="filter-panel"
             initial={{ opacity: 0, y: -10, height: 0 }}
@@ -300,7 +300,7 @@ export const MapFilters = memo(function MapFilters({
 
                   <AnimatePresence>
                     {isSortOpen && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -5 }}
@@ -328,7 +328,7 @@ export const MapFilters = memo(function MapFilters({
                             {option.label}
                           </button>
                         ))}
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>
@@ -345,13 +345,13 @@ export const MapFilters = memo(function MapFilters({
                 )}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Results Count */}
       {hasFilters && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-2 px-3 py-2 rounded-lg"
@@ -368,7 +368,7 @@ export const MapFilters = memo(function MapFilters({
             <span className="text-white font-bold">{filteredCount}</span>
             <span className="text-linear-text-tertiary">/{totalCount}</span> 개 팝업
           </span>
-        </motion.div>
+        </m.div>
       )}
     </div>
   );

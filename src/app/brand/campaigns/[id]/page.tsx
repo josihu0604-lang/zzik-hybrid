@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import {
   ArrowLeft,
   MapPin,
@@ -175,7 +175,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
   return (
     <div className="p-6 lg:p-8 space-y-6">
       {/* Header */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -183,14 +183,14 @@ export default function CampaignDetailPage({ params }: PageParams) {
       >
         <div className="flex items-start gap-4">
           <Link href="/brand/campaigns">
-            <motion.button
+            <m.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="p-2 rounded-xl mt-1"
               style={{ background: 'rgba(255, 255, 255, 0.05)' }}
             >
               <ArrowLeft size={20} style={{ color: colors.text.secondary }} />
-            </motion.button>
+            </m.button>
           </Link>
           <div>
             <div className="flex items-center gap-3 flex-wrap">
@@ -207,23 +207,18 @@ export default function CampaignDetailPage({ params }: PageParams) {
             </p>
           </div>
         </div>
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className="p-2 rounded-xl"
           style={{ background: 'rgba(255, 255, 255, 0.05)' }}
         >
           <MoreHorizontal size={20} style={{ color: colors.text.secondary }} />
-        </motion.button>
-      </motion.div>
+        </m.button>
+      </m.div>
 
       {/* Campaign Info Card */}
-      <motion.div
-        variants={fadeInUp}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.1 }}
-      >
+      <m.div variants={fadeInUp} initial="hidden" animate="visible" transition={{ delay: 0.1 }}>
         <GlassCard padding="lg" glow="flame">
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Image */}
@@ -279,7 +274,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
                   className="h-3 rounded-full overflow-hidden"
                   style={{ background: 'rgba(255, 107, 91, 0.1)' }}
                 >
-                  <motion.div
+                  <m.div
                     initial={{ width: 0 }}
                     animate={{ width: `${campaign.progress_percent}%` }}
                     transition={{ duration: 0.8, delay: 0.3 }}
@@ -294,16 +289,16 @@ export default function CampaignDetailPage({ params }: PageParams) {
             </div>
           </div>
         </GlassCard>
-      </motion.div>
+      </m.div>
 
       {/* Stats Grid */}
-      <motion.div
+      <m.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
         className="grid grid-cols-2 lg:grid-cols-4 gap-4"
       >
-        <motion.div variants={staggerItem}>
+        <m.div variants={staggerItem}>
           <GlassCard padding="md">
             <div className="flex items-center justify-between mb-2">
               <Users size={20} style={{ color: colors.flame[500] }} />
@@ -315,9 +310,9 @@ export default function CampaignDetailPage({ params }: PageParams) {
               참여자
             </p>
           </GlassCard>
-        </motion.div>
+        </m.div>
 
-        <motion.div variants={staggerItem}>
+        <m.div variants={staggerItem}>
           <GlassCard padding="md">
             <div className="flex items-center justify-between mb-2">
               <Target size={20} style={{ color: colors.spark[500] }} />
@@ -329,11 +324,11 @@ export default function CampaignDetailPage({ params }: PageParams) {
               달성률
             </p>
           </GlassCard>
-        </motion.div>
+        </m.div>
 
         {showCheckinStats && (
           <>
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="md">
                 <div className="flex items-center justify-between mb-2">
                   <CheckCircle size={20} style={{ color: colors.success }} />
@@ -345,9 +340,9 @@ export default function CampaignDetailPage({ params }: PageParams) {
                   체크인
                 </p>
               </GlassCard>
-            </motion.div>
+            </m.div>
 
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="md">
                 <div className="flex items-center justify-between mb-2">
                   <TrendingUp size={20} style={{ color: colors.info }} />
@@ -359,14 +354,14 @@ export default function CampaignDetailPage({ params }: PageParams) {
                   전환율
                 </p>
               </GlassCard>
-            </motion.div>
+            </m.div>
           </>
         )}
-      </motion.div>
+      </m.div>
 
       {/* Charts */}
       {stats && (
-        <motion.div
+        <m.div
           variants={fadeInUp}
           initial="hidden"
           animate="visible"
@@ -378,7 +373,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
             <h3 className="font-semibold text-white mb-4">일별 참여 추이</h3>
             <div className="h-40 flex items-end gap-1">
               {stats.daily_participants.slice(-7).map((day, idx) => (
-                <motion.div
+                <m.div
                   key={day.date}
                   initial={{ height: 0 }}
                   animate={{
@@ -425,7 +420,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
                     className="h-2 rounded-full overflow-hidden"
                     style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                   >
-                    <motion.div
+                    <m.div
                       initial={{ width: 0 }}
                       animate={{
                         width: `${
@@ -455,7 +450,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
                     className="h-2 rounded-full overflow-hidden"
                     style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                   >
-                    <motion.div
+                    <m.div
                       initial={{ width: 0 }}
                       animate={{
                         width: `${
@@ -485,7 +480,7 @@ export default function CampaignDetailPage({ params }: PageParams) {
                     className="h-2 rounded-full overflow-hidden"
                     style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                   >
-                    <motion.div
+                    <m.div
                       initial={{ width: 0 }}
                       animate={{
                         width: `${
@@ -516,18 +511,18 @@ export default function CampaignDetailPage({ params }: PageParams) {
               </div>
             </GlassCard>
           )}
-        </motion.div>
+        </m.div>
       )}
 
       {/* Actions */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
         transition={{ delay: 0.5 }}
         className="flex gap-4"
       >
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-medium"
@@ -539,8 +534,8 @@ export default function CampaignDetailPage({ params }: PageParams) {
         >
           <Edit size={18} />
           수정하기
-        </motion.button>
-        <motion.button
+        </m.button>
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-medium"
@@ -551,8 +546,8 @@ export default function CampaignDetailPage({ params }: PageParams) {
         >
           <BarChart3 size={18} />
           리포트 다운로드
-        </motion.button>
-      </motion.div>
+        </m.button>
+      </m.div>
     </div>
   );
 }

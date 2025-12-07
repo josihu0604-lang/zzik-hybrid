@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import Link from 'next/link';
 import { Sparkles, RefreshCw, Home, Wifi, Server } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -69,7 +69,7 @@ export default function AIDemoError({ error, reset }: ErrorProps) {
     <div className="min-h-screen bg-space-950 flex items-center justify-center p-4">
       {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div
+        <m.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
           style={{
             background: `radial-gradient(circle, ${errorInfo.color} 0%, transparent 70%)`,
@@ -84,7 +84,7 @@ export default function AIDemoError({ error, reset }: ErrorProps) {
       </div>
 
       {/* Error Card */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative max-w-md w-full p-8 rounded-2xl text-center"
@@ -147,7 +147,7 @@ export default function AIDemoError({ error, reset }: ErrorProps) {
             </Button>
           </Link>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

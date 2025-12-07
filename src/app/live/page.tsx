@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ZzikLogo } from '@/components/cosmic';
@@ -261,7 +261,7 @@ function LivePageContent() {
 
               {/* Clear Button */}
               {searchQuery && (
-                <motion.div
+                <m.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
@@ -274,20 +274,20 @@ function LivePageContent() {
                     size="sm"
                     onClick={handleClearSearch}
                   />
-                </motion.div>
+                </m.div>
               )}
             </div>
 
             {/* Search Results Count */}
             {searchQuery && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-2 text-sm text-linear-text-secondary"
               >
                 <span className="text-linear-orange font-semibold">{sortedPopups.length}개</span>의
                 검색 결과
-              </motion.div>
+              </m.div>
             )}
           </div>
 
@@ -348,7 +348,7 @@ function LivePageContent() {
           {sortedPopups.length > 0 ? (
             <div className="flex flex-col gap-4">
               {displayedPopups.map((popup, index) => (
-                <motion.div
+                <m.div
                   key={popup.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -364,12 +364,12 @@ function LivePageContent() {
                         : undefined
                     }
                   />
-                </motion.div>
+                </m.div>
               ))}
             </div>
           ) : (
             /* Empty State for Search */
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center justify-center py-20 px-6 text-center"
@@ -433,12 +433,12 @@ function LivePageContent() {
                   </button>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {/* Load More Button */}
           {hasMore && sortedPopups.length > 0 && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-6">
+            <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-6">
               <Button
                 variant="ghost"
                 size="lg"
@@ -464,7 +464,7 @@ function LivePageContent() {
                   `더보기 (${sortedPopups.length - displayCount}개 남음)`
                 )}
               </Button>
-            </motion.div>
+            </m.div>
           )}
         </div>
       </main>

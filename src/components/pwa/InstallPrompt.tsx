@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Download, X, Smartphone, Share } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 
@@ -93,7 +93,7 @@ export function InstallPrompt() {
 
   return (
     <AnimatePresence>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
@@ -168,7 +168,7 @@ export function InstallPrompt() {
             </div>
           ) : (
             // Android/Desktop: 네이티브 설치
-            <motion.button
+            <m.button
               onClick={handleInstall}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -180,10 +180,10 @@ export function InstallPrompt() {
             >
               <Download size={18} />
               설치하기
-            </motion.button>
+            </m.button>
           )}
         </div>
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }
@@ -248,7 +248,7 @@ export function UpdatePrompt() {
   return (
     <AnimatePresence>
       {showUpdate && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -273,7 +273,7 @@ export function UpdatePrompt() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

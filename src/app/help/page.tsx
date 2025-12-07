@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { useRouter } from 'next/navigation';
 import {
   ChevronLeft,
@@ -169,7 +169,7 @@ function FAQItem({ faq }: { faq: FAQ }) {
 
   return (
     <div style={{ borderBottom: `1px solid ${colors.border.subtle}` }}>
-      <motion.button
+      <m.button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-4 px-4 flex items-start justify-between text-left"
         whileTap={{ backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
@@ -189,11 +189,11 @@ function FAQItem({ faq }: { faq: FAQ }) {
         ) : (
           <ChevronDown size={20} style={{ color: colors.text.tertiary }} />
         )}
-      </motion.button>
+      </m.button>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -205,7 +205,7 @@ function FAQItem({ faq }: { faq: FAQ }) {
                 {faq.answer}
               </p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -230,7 +230,7 @@ function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="py-8 text-center"
@@ -247,7 +247,7 @@ function ContactForm() {
         <p className="text-sm" style={{ color: colors.text.secondary }}>
           영업일 기준 1-2일 내에 답변 드리겠습니다
         </p>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -390,7 +390,7 @@ export default function HelpPage() {
             { id: 'faq', label: '자주 묻는 질문' },
             { id: 'contact', label: '1:1 문의' },
           ].map((tab) => (
-            <motion.button
+            <m.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as 'faq' | 'contact')}
               className="flex-1 py-3 rounded-lg font-medium text-sm"
@@ -401,7 +401,7 @@ export default function HelpPage() {
               whileTap={{ scale: 0.98 }}
             >
               {tab.label}
-            </motion.button>
+            </m.button>
           ))}
         </div>
 
@@ -409,7 +409,7 @@ export default function HelpPage() {
           <>
             {/* Category Filter */}
             <div className="flex gap-2 overflow-x-auto pb-2">
-              <motion.button
+              <m.button
                 onClick={() => setSelectedCategory(null)}
                 whileTap={{ scale: 0.95 }}
                 className="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium"
@@ -424,12 +424,12 @@ export default function HelpPage() {
                 }}
               >
                 전체
-              </motion.button>
+              </m.button>
               {SUPPORT_CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 const isSelected = selectedCategory === cat.id;
                 return (
-                  <motion.button
+                  <m.button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
                     whileTap={{ scale: 0.95 }}
@@ -444,7 +444,7 @@ export default function HelpPage() {
                   >
                     <Icon size={14} />
                     {cat.label}
-                  </motion.button>
+                  </m.button>
                 );
               })}
             </div>

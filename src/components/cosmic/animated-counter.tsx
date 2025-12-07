@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { m, useMotionValue, useTransform, animate } from '@/lib/motion';
 
 interface AnimatedCounterProps {
   value: number;
@@ -34,10 +34,10 @@ export function AnimatedCounter({
   const formatted = format ? format(displayValue) : displayValue.toLocaleString();
 
   return (
-    <motion.span className="tabular-nums">
+    <m.span className="tabular-nums">
       {prefix}
       {formatted}
       {suffix}
-    </motion.span>
+    </m.span>
   );
 }

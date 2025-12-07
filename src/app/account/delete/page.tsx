@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { useRouter } from 'next/navigation';
 import {
   ChevronLeft,
@@ -141,7 +141,7 @@ export default function DeleteAccountPage() {
 
   // Step 1: Warning and reason selection
   const renderStep1 = () => (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -191,7 +191,7 @@ export default function DeleteAccountPage() {
       </div>
 
       {/* Data Download Option */}
-      <motion.button
+      <m.button
         onClick={handleDownloadData}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -204,7 +204,7 @@ export default function DeleteAccountPage() {
       >
         <Download size={18} />
         삭제 전 내 데이터 다운로드
-      </motion.button>
+      </m.button>
 
       {/* Reason Selection */}
       <div style={GLASS_CARD_STYLE}>
@@ -213,7 +213,7 @@ export default function DeleteAccountPage() {
         </h4>
         <div className="space-y-2">
           {DELETION_REASONS.map((item) => (
-            <motion.button
+            <m.button
               key={item.value}
               onClick={() => setReason(item.value)}
               whileTap={{ scale: 0.98 }}
@@ -237,12 +237,12 @@ export default function DeleteAccountPage() {
               {reason === item.value && (
                 <CheckCircle size={18} style={{ color: colors.flame[500] }} />
               )}
-            </motion.button>
+            </m.button>
           ))}
         </div>
 
         {reason === 'other' && (
-          <motion.textarea
+          <m.textarea
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             className="w-full mt-4 p-4 rounded-xl resize-none"
@@ -264,12 +264,12 @@ export default function DeleteAccountPage() {
       <Button variant="danger" size="lg" fullWidth onClick={() => setStep(2)}>
         계정 삭제 진행
       </Button>
-    </motion.div>
+    </m.div>
   );
 
   // Step 2: Confirmation
   const renderStep2 = () => (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
@@ -361,17 +361,17 @@ export default function DeleteAccountPage() {
           이전으로
         </Button>
       </div>
-    </motion.div>
+    </m.div>
   );
 
   // Step 3: Deletion Complete
   const renderComplete = () => (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4"
     >
-      <motion.div
+      <m.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.2, type: 'spring' }}
@@ -379,7 +379,7 @@ export default function DeleteAccountPage() {
         style={{ background: 'rgba(239, 68, 68, 0.15)' }}
       >
         <CheckCircle size={40} style={{ color: colors.error }} />
-      </motion.div>
+      </m.div>
 
       <h2 className="text-2xl font-bold mb-3" style={{ color: colors.text.primary }}>
         계정 삭제가 예약되었습니다
@@ -393,7 +393,7 @@ export default function DeleteAccountPage() {
       <Button variant="secondary" size="lg" onClick={() => router.push('/')}>
         홈으로 돌아가기
       </Button>
-    </motion.div>
+    </m.div>
   );
 
   return (

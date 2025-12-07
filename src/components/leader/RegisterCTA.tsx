@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Rocket, Gift, TrendingUp, Users, Check, Loader2 } from 'lucide-react';
 import { TIER_COLORS, type LeaderTier } from '@/lib/leader';
 
@@ -47,7 +47,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-2xl overflow-hidden ${className}`}
@@ -65,7 +65,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
             'linear-gradient(135deg, rgba(255, 107, 91, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
         }}
       >
-        <motion.div
+        <m.div
           className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
           style={{
             background: 'linear-gradient(135deg, #FF6B5B 0%, #A855F7 100%)',
@@ -79,7 +79,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
           }}
         >
           <Rocket size={32} className="text-white" />
-        </motion.div>
+        </m.div>
         <h2 className="text-white text-xl font-black mb-2">ZZIK 리더가 되어보세요!</h2>
         <p className="text-linear-text-tertiary text-sm">친구를 추천하고 수익을 창출하세요</p>
       </div>
@@ -90,7 +90,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
           {BENEFITS.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
-              <motion.div
+              <m.div
                 key={benefit.title}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -111,7 +111,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
                   <p className="text-white font-semibold text-sm">{benefit.title}</p>
                   <p className="text-linear-text-tertiary text-xs">{benefit.description}</p>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
@@ -155,7 +155,7 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
         </div>
 
         {/* Register Button */}
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onHoverStart={() => setIsHovered(true)}
@@ -179,13 +179,13 @@ export function RegisterCTA({ onRegister, isLoading = false, className = '' }: R
               리더로 등록하기
             </>
           )}
-        </motion.button>
+        </m.button>
 
         <p className="text-center text-linear-text-tertiary text-xs mt-3">
           등록 즉시 추천 코드가 발급됩니다
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

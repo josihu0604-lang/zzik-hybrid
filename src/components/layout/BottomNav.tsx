@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Flame, Map, User, type LucideIcon } from 'lucide-react';
 import { colors, glass, radii, typography, brand } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -158,14 +158,14 @@ export function BottomNav() {
                 </span>
                 {/* DES-159: 탭 인디케이터 애니메이션 - 슬라이드 효과 */}
                 {active && (
-                  <motion.div
+                  <m.div
                     layoutId="activeTab"
                     className="flex gap-0.5 mt-0.5"
                     aria-hidden="true"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   >
-                    <motion.div
+                    <m.div
                       className="w-1 h-1 rounded-full"
                       style={{
                         background: brand.primary,
@@ -182,7 +182,7 @@ export function BottomNav() {
                       className="w-1 h-1 rounded-full"
                       style={{ background: brand.primary, opacity: 0.3 }}
                     />
-                  </motion.div>
+                  </m.div>
                 )}
               </Link>
             );

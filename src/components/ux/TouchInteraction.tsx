@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useRef, useState, useCallback } from 'react';
-import { motion, PanInfo, useMotionValue, AnimatePresence } from 'framer-motion';
+import { m, PanInfo, useMotionValue, AnimatePresence } from '@/lib/motion';
 import { Trash2, Edit, Share } from 'lucide-react';
 import { colors, radii } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -53,7 +53,7 @@ export function TouchTarget({
   };
 
   return (
-    <motion.button
+    <m.button
       onClick={handleClick}
       disabled={disabled}
       whileHover={!disabled ? { scale: 1.02 } : undefined}
@@ -68,7 +68,7 @@ export function TouchTarget({
       aria-disabled={disabled}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -169,7 +169,7 @@ export function SwipeAction({
     const bgColor = action.type !== 'custom' ? DEFAULT_ACTION_COLORS[action.type] : action.color;
 
     return (
-      <motion.button
+      <m.button
         key={action.label}
         onClick={() => {
           action.onAction();
@@ -186,7 +186,7 @@ export function SwipeAction({
       >
         {icon}
         <span className="text-xs mt-1 font-medium">{action.label}</span>
-      </motion.button>
+      </m.button>
     );
   };
 
@@ -211,7 +211,7 @@ export function SwipeAction({
       )}
 
       {/* Content */}
-      <motion.div
+      <m.div
         drag="x"
         dragConstraints={{
           left: rightActions.length > 0 ? -rightActionsWidth : 0,
@@ -225,7 +225,7 @@ export function SwipeAction({
         className="relative bg-space-950"
       >
         {children}
-      </motion.div>
+      </m.div>
 
       {/* Tap to close overlay */}
       {isOpen && (
@@ -325,7 +325,7 @@ export function LongPressMenu({
         {isOpen && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -335,7 +335,7 @@ export function LongPressMenu({
             />
 
             {/* Menu */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -351,7 +351,7 @@ export function LongPressMenu({
               }}
             >
               {items.map((item, index) => (
-                <motion.button
+                <m.button
                   key={item.label}
                   onClick={() => handleItemClick(item)}
                   whileHover={{ background: 'rgba(255, 255, 255, 0.05)' }}
@@ -364,9 +364,9 @@ export function LongPressMenu({
                 >
                   {item.icon}
                   <span className="text-sm font-medium">{item.label}</span>
-                </motion.button>
+                </m.button>
               ))}
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>
@@ -433,7 +433,7 @@ export function DoubleTapLike({
       {/* Heart Animation */}
       <AnimatePresence>
         {showHeart && (
-          <motion.div
+          <m.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 1.5, opacity: 0 }}
@@ -443,7 +443,7 @@ export function DoubleTapLike({
             <svg width="80" height="80" viewBox="0 0 24 24" fill={colors.flame[500]} stroke="none">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

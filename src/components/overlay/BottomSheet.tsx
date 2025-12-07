@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, PanInfo, useAnimation } from 'framer-motion';
+import { m, AnimatePresence, PanInfo, useAnimation } from '@/lib/motion';
 import { colors, radii, liquidGlass, zIndex } from '@/lib/design-tokens';
 import { springConfig, duration } from '@/lib/animations';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -163,7 +163,7 @@ export function BottomSheet({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -181,7 +181,7 @@ export function BottomSheet({
           />
 
           {/* Sheet */}
-          <motion.div
+          <m.div
             ref={sheetRef}
             initial={{ y: '100vh' }}
             animate={controls}
@@ -240,7 +240,7 @@ export function BottomSheet({
                 {children}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

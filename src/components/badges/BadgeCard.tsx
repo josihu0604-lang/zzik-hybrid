@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Lock } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import type { Badge, EarnedBadge } from '@/lib/badges';
@@ -35,7 +35,7 @@ function BadgeCardComponent({
   // Compact badge (icon only)
   if (compact) {
     return (
-      <motion.button
+      <m.button
         type="button"
         className="relative flex items-center justify-center rounded-xl transition-colors"
         style={{
@@ -60,13 +60,13 @@ function BadgeCardComponent({
             aria-hidden="true"
           />
         )}
-      </motion.button>
+      </m.button>
     );
   }
 
   // Full badge card
   return (
-    <motion.button
+    <m.button
       type="button"
       className="relative flex flex-col items-center p-4 rounded-2xl transition-colors text-center w-full"
       style={{
@@ -132,7 +132,7 @@ function BadgeCardComponent({
             aria-valuemin={0}
             aria-valuemax={100}
           >
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{ background: rarityColor }}
               initial={{ width: 0 }}
@@ -157,7 +157,7 @@ function BadgeCardComponent({
           </span>
         </div>
       )}
-    </motion.button>
+    </m.button>
   );
 }
 

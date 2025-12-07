@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import {
   Users,
   TrendingUp,
@@ -82,7 +82,7 @@ export function NotificationItem({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 20 }}
@@ -144,7 +144,7 @@ export function NotificationItem({
       >
         <X size={12} className="text-linear-text-tertiary" />
       </button>
-    </motion.div>
+    </m.div>
   );
 }
 

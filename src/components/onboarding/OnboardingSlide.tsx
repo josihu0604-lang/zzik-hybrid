@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import type { ReactNode } from 'react';
 
 /**
@@ -38,7 +38,7 @@ export function OnboardingSlide({
   // Dynamic heading element based on headingLevel prop
   const HeadingTag = `h${headingLevel}` as const;
   return (
-    <motion.div
+    <m.div
       className="absolute inset-0 flex flex-col items-center justify-center px-8
                  landscape:flex-row landscape:gap-8 landscape:py-4"
       initial={{ opacity: 0, x: 100 }}
@@ -57,7 +57,7 @@ export function OnboardingSlide({
       }}
     >
       {/* Icon/Illustration Area */}
-      <motion.div
+      <m.div
         className="mb-12 landscape:mb-0 landscape:flex-shrink-0"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{
@@ -67,10 +67,10 @@ export function OnboardingSlide({
         transition={{ delay: 0.2, duration: 0.5 }}
       >
         {icon}
-      </motion.div>
+      </m.div>
 
       {/* Text Content - DES-122: 랜드스케이프 모드 대응 */}
-      <motion.div
+      <m.div
         className="text-center max-w-sm landscape:text-left landscape:max-w-md"
         initial={{ y: 30, opacity: 0 }}
         animate={{
@@ -85,11 +85,11 @@ export function OnboardingSlide({
         <p className="text-linear-text-secondary text-base leading-relaxed landscape:text-sm">
           {subtext}
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Additional Content (for last slide) */}
       {children && (
-        <motion.div
+        <m.div
           className="mt-8 w-full max-w-sm"
           initial={{ y: 30, opacity: 0 }}
           animate={{
@@ -99,9 +99,9 @@ export function OnboardingSlide({
           transition={{ delay: 0.4, duration: 0.5 }}
         >
           {children}
-        </motion.div>
+        </m.div>
       )}
-    </motion.div>
+    </m.div>
   );
 }
 

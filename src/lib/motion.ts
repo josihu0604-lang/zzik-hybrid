@@ -24,6 +24,7 @@ export {
   m, // Use instead of motion for LazyMotion compatibility
   motion, // Full motion component (larger bundle)
   AnimatePresence,
+  LayoutGroup,
 
   // Hooks
   useAnimate,
@@ -37,12 +38,18 @@ export {
   useSpring,
   useTransform,
   useVelocity,
+  useDragControls,
+
+  // Functions
+  animate,
 
   // Types
   type Variants,
   type Transition,
   type TargetAndTransition,
   type MotionProps,
+  type HTMLMotionProps,
+  type PanInfo,
 } from 'framer-motion';
 
 // Re-export animation presets

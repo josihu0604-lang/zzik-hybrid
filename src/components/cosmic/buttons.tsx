@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors, shadows, radii, spacing, typography, zIndex } from '@/lib/design-tokens';
 import { duration, easing } from '@/lib/animations';
 
@@ -66,7 +66,7 @@ export function PrimaryButton({
   const styles = sizeStyles[size];
 
   return (
-    <motion.button
+    <m.button
       whileHover={{
         scale: 1.02,
         boxShadow: shadows.glow.primary,
@@ -106,7 +106,7 @@ export function PrimaryButton({
         {loading && <LoadingDots />}
         {children}
       </span>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -123,7 +123,7 @@ export function SecondaryButton({
   const styles = sizeStyles[size];
 
   return (
-    <motion.button
+    <m.button
       whileHover={{
         scale: 1.02,
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -154,7 +154,7 @@ export function SecondaryButton({
         {loading && <LoadingDots />}
         {children}
       </span>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -171,7 +171,7 @@ export function GhostButton({
   const styles = sizeStyles[size];
 
   return (
-    <motion.button
+    <m.button
       whileHover={{
         scale: 1.02,
         backgroundColor: 'rgba(255, 255, 255, 0.06)',
@@ -201,13 +201,13 @@ export function GhostButton({
         {loading && <LoadingDots />}
         {children}
       </span>
-    </motion.button>
+    </m.button>
   );
 }
 
 function LoadingDots() {
   return (
-    <motion.div
+    <m.div
       animate={{ rotate: 360 }}
       transition={{
         repeat: Infinity,
@@ -244,7 +244,7 @@ export function IconButton({
   className = '',
 }: IconButtonProps) {
   return (
-    <motion.button
+    <m.button
       whileHover={{
         scale: 1.1,
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -272,6 +272,6 @@ export function IconButton({
       }}
     >
       {children}
-    </motion.button>
+    </m.button>
   );
 }

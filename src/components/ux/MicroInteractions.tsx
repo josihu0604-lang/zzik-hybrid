@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, ReactNode, MouseEvent } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Check, X, Loader2, Sparkles } from 'lucide-react';
 import { colors, radii, spacing, typography } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -173,36 +173,36 @@ export function AnimatedButton({
     switch (state) {
       case 'loading':
         return (
-          <motion.span
+          <m.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex items-center gap-2"
           >
             <Loader2 size={config.iconSize} className="animate-spin" />
             {loadingText}
-          </motion.span>
+          </m.span>
         );
       case 'success':
         return (
-          <motion.span
+          <m.span
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="flex items-center gap-2"
           >
             <Check size={config.iconSize} strokeWidth={3} />
             {successMessage || '완료'}
-          </motion.span>
+          </m.span>
         );
       case 'error':
         return (
-          <motion.span
+          <m.span
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="flex items-center gap-2"
           >
             <X size={config.iconSize} strokeWidth={3} />
             {errorMessage || '실패'}
-          </motion.span>
+          </m.span>
         );
       default:
         return (
@@ -215,7 +215,7 @@ export function AnimatedButton({
   };
 
   return (
-    <motion.button
+    <m.button
       onClick={handleClick}
       disabled={disabled || state !== 'idle'}
       whileHover={state === 'idle' ? { scale: 1.02 } : undefined}
@@ -229,7 +229,7 @@ export function AnimatedButton({
       aria-disabled={disabled || state !== 'idle'}
     >
       <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -267,7 +267,7 @@ export function SuccessAnimation({
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
@@ -275,7 +275,7 @@ export function SuccessAnimation({
           className="flex flex-col items-center gap-3"
         >
           {/* Checkmark Circle */}
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15, delay: 0.1 }}
@@ -287,17 +287,17 @@ export function SuccessAnimation({
               border: `2px solid ${colors.success}`,
             }}
           >
-            <motion.div
+            <m.div
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
               transition={{ duration: 0.3, delay: 0.2 }}
             >
               <Check size={iconSize} style={{ color: colors.success }} strokeWidth={3} />
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* Message */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -305,12 +305,12 @@ export function SuccessAnimation({
             style={{ fontSize: size === 'sm' ? '14px' : size === 'md' ? '16px' : '18px' }}
           >
             {message}
-          </motion.p>
+          </m.p>
 
           {/* Confetti/Sparkles */}
-          <motion.div className="absolute inset-0 pointer-events-none">
+          <m.div className="absolute inset-0 pointer-events-none">
             {[...Array(8)].map((_, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ x: 0, y: 0, opacity: 1 }}
                 animate={{
@@ -323,10 +323,10 @@ export function SuccessAnimation({
                 className="absolute left-1/2 top-1/2"
               >
                 <Sparkles size={12} style={{ color: colors.spark[400] }} />
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -366,7 +366,7 @@ export function FailureAnimation({
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
@@ -374,7 +374,7 @@ export function FailureAnimation({
           className="flex flex-col items-center gap-3"
         >
           {/* X Circle with Shake */}
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             animate={{ scale: 1, x: [0, -5, 5, -5, 5, 0] }}
             transition={{
@@ -390,10 +390,10 @@ export function FailureAnimation({
             }}
           >
             <X size={iconSize} style={{ color: colors.error }} strokeWidth={3} />
-          </motion.div>
+          </m.div>
 
           {/* Message */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -401,8 +401,8 @@ export function FailureAnimation({
             style={{ fontSize: size === 'sm' ? '14px' : size === 'md' ? '16px' : '18px' }}
           >
             {message}
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -464,7 +464,7 @@ export function RippleEffect({
       {children}
       <AnimatePresence>
         {ripples.map((ripple) => (
-          <motion.span
+          <m.span
             key={ripple.id}
             initial={{ scale: 0, opacity: 0.5 }}
             animate={{ scale: 1, opacity: 0 }}
@@ -526,7 +526,7 @@ export function PressEffect({
   };
 
   return (
-    <motion.div
+    <m.div
       whileHover={!disabled ? { scale: 1.01 } : undefined}
       whileTap={!disabled ? { scale } : undefined}
       onClick={handleTap}
@@ -534,7 +534,7 @@ export function PressEffect({
       style={{ cursor: disabled ? 'default' : 'pointer' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 

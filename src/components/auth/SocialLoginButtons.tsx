@@ -6,7 +6,7 @@
  * Social authentication buttons (Google, Kakao, Apple)
  */
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { GoogleIcon, KakaoIcon } from '@/components/cosmic';
 
 interface SocialLoginButtonsProps {
@@ -23,7 +23,7 @@ export function SocialLoginButtons({
   return (
     <div className="space-y-3">
       {/* Google */}
-      <motion.button
+      <m.button
         type="button"
         whileHover={{ scale: 1.02, borderColor: 'rgba(255, 255, 255, 0.2)' }}
         whileTap={{ scale: 0.98 }}
@@ -39,10 +39,10 @@ export function SocialLoginButtons({
       >
         <GoogleIcon size={20} aria-hidden="true" />
         Google로 계속하기
-      </motion.button>
+      </m.button>
 
       {/* Kakao */}
-      <motion.button
+      <m.button
         type="button"
         whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(254, 229, 0, 0.25)' }}
         whileTap={{ scale: 0.98 }}
@@ -66,10 +66,10 @@ export function SocialLoginButtons({
           <KakaoIcon size={20} aria-hidden="true" />
           카카오로 계속하기
         </div>
-      </motion.button>
+      </m.button>
 
       {/* Apple */}
-      <motion.button
+      <m.button
         type="button"
         whileHover={{ scale: 1.02, borderColor: 'rgba(255, 255, 255, 0.25)' }}
         whileTap={{ scale: 0.98 }}
@@ -95,7 +95,7 @@ export function SocialLoginButtons({
           </svg>
           Apple로 계속하기
         </div>
-      </motion.button>
+      </m.button>
     </div>
   );
 }

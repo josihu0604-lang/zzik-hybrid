@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import { Search, X, SlidersHorizontal } from 'lucide-react';
 import { colors, spacing, typography } from '@/lib/design-tokens';
 
@@ -76,7 +76,7 @@ export function SearchBar({
 
   return (
     <form onSubmit={handleSubmit} className={`relative ${className}`}>
-      <motion.div
+      <m.div
         className="flex items-center rounded-xl transition-all"
         // DES-220: gap을 spacing 토큰으로 통일
         style={{
@@ -125,7 +125,7 @@ export function SearchBar({
         {/* Clear Button - 48px touch target for accessibility */}
         <AnimatePresence>
           {value && (
-            <motion.button
+            <m.button
               type="button"
               onClick={handleClear}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -135,7 +135,7 @@ export function SearchBar({
               aria-label="검색어 지우기"
             >
               <X size={18} className="text-linear-text-tertiary" />
-            </motion.button>
+            </m.button>
           )}
         </AnimatePresence>
 
@@ -155,7 +155,7 @@ export function SearchBar({
 
             {/* Filter Count Badge */}
             {activeFilterCount > 0 && (
-              <motion.span
+              <m.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full font-bold flex items-center justify-center"
@@ -167,11 +167,11 @@ export function SearchBar({
                 }}
               >
                 {activeFilterCount > 9 ? '9+' : activeFilterCount}
-              </motion.span>
+              </m.span>
             )}
           </button>
         )}
-      </motion.div>
+      </m.div>
     </form>
   );
 }

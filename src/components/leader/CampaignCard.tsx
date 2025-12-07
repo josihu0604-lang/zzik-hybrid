@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { Users, MapPin, Coins, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { colors, layout } from '@/lib/design-tokens';
@@ -51,7 +51,7 @@ export function CampaignCard({ campaign, index = 0 }: CampaignCardProps) {
   const status = statusConfig[campaign.status];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.05 }}
@@ -142,7 +142,7 @@ export function CampaignCard({ campaign, index = 0 }: CampaignCardProps) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }
 

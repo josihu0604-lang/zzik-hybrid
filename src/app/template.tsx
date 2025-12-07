@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 
 /**
  * App Template - 페이지 전환 애니메이션
@@ -16,7 +16,7 @@ interface TemplateProps {
 
 export default function Template({ children }: TemplateProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -25,6 +25,6 @@ export default function Template({ children }: TemplateProps) {
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

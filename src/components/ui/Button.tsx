@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { colors, shadows, radii, spacing, typography } from '@/lib/design-tokens';
 import { duration, easing } from '@/lib/animations';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -185,7 +185,7 @@ function ButtonSpinner({ size }: { size: ButtonSize }) {
   const spinnerSize = size === 'sm' ? 14 : size === 'md' ? 16 : 18;
 
   return (
-    <motion.div
+    <m.div
       animate={{ rotate: 360 }}
       transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
       style={{
@@ -241,7 +241,7 @@ export function Button({
   };
 
   return (
-    <motion.button
+    <m.button
       type={type}
       onClick={isDisabled ? undefined : onClick}
       disabled={isDisabled}
@@ -319,7 +319,7 @@ export function Button({
         {children}
         {!loading && rightIcon && <span style={{ display: 'inline-flex' }}>{rightIcon}</span>}
       </span>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -422,7 +422,7 @@ export function IconButton({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.button
+    <m.button
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       aria-label={ariaLabel}
@@ -450,7 +450,7 @@ export function IconButton({
       }}
     >
       {icon}
-    </motion.button>
+    </m.button>
   );
 }
 

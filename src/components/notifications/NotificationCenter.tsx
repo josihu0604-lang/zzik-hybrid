@@ -9,7 +9,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from '@/lib/motion';
 import {
   Bell,
   Check,
@@ -109,7 +109,7 @@ function NotificationItem({
   const color = getNotificationColor(notification.type);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -157,7 +157,7 @@ function NotificationItem({
 
       {/* Divider */}
       <div className="h-px bg-white/5" />
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -201,7 +201,7 @@ export function NotificationCenter({ userId }: NotificationCenterProps) {
 
         {/* Unread Badge */}
         {unreadCount > 0 && (
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center text-micro font-bold text-white"
@@ -211,14 +211,14 @@ export function NotificationCenter({ userId }: NotificationCenterProps) {
             }}
           >
             {unreadCount > 99 ? '99+' : unreadCount}
-          </motion.div>
+          </m.div>
         )}
       </button>
 
       {/* Dropdown */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -309,7 +309,7 @@ export function NotificationCenter({ userId }: NotificationCenterProps) {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from '@/lib/motion';
 import { AlertTriangle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
 import { colors, opacity } from '@/lib/design-tokens';
 import { Button } from '@/components/ui/Button';
@@ -91,7 +91,7 @@ export function ErrorFallback({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="min-h-[60vh] flex flex-col items-center justify-center px-6 py-12"
@@ -100,7 +100,7 @@ export function ErrorFallback({
       aria-atomic="true"
     >
       {/* Icon */}
-      <motion.div
+      <m.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: 'spring', delay: 0.1 }}
@@ -111,7 +111,7 @@ export function ErrorFallback({
         }}
       >
         <Icon size={40} style={{ color: config.color }} />
-      </motion.div>
+      </m.div>
 
       {/* Title */}
       <h1 className="text-xl font-bold text-white mb-2 text-center">{displayTitle}</h1>
@@ -123,7 +123,7 @@ export function ErrorFallback({
 
       {/* Error details (dev only) */}
       {process.env.NODE_ENV === 'development' && error && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -141,7 +141,7 @@ export function ErrorFallback({
               {error.stack.split('\n').slice(1, 6).join('\n')}
             </pre>
           )}
-        </motion.div>
+        </m.div>
       )}
 
       {/* Action Buttons */}
@@ -179,7 +179,7 @@ export function ErrorFallback({
           이전 페이지로 돌아가기
         </Button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
