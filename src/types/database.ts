@@ -17,6 +17,9 @@ export interface Database {
           avatar_url: string | null;
           profile_image: string | null;
           preferences_vector: number[] | null;
+          wallet_address: string | null;
+          vip_level: number;
+          z_cash_balance: number;
           created_at: string;
           updated_at: string;
         };
@@ -28,6 +31,9 @@ export interface Database {
           avatar_url?: string | null;
           profile_image?: string | null;
           preferences_vector?: number[] | null;
+          wallet_address?: string | null;
+          vip_level?: number;
+          z_cash_balance?: number;
           created_at?: string;
           updated_at?: string;
         };
@@ -39,6 +45,9 @@ export interface Database {
           avatar_url?: string | null;
           profile_image?: string | null;
           preferences_vector?: number[] | null;
+          wallet_address?: string | null;
+          vip_level?: number;
+          z_cash_balance?: number;
           updated_at?: string;
         };
       };
@@ -713,6 +722,62 @@ export interface Database {
           secret_key?: string;
           is_active?: boolean;
           expires_at?: string | null;
+        };
+      };
+      vibe_cards: {
+        Row: {
+          id: string;
+          user_id: string;
+          popup_id: string | null;
+          token_id: string | null;
+          image_url: string;
+          metadata: Json | null;
+          is_minted: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          popup_id?: string | null;
+          token_id?: string | null;
+          image_url: string;
+          metadata?: Json | null;
+          is_minted?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          popup_id?: string | null;
+          token_id?: string | null;
+          image_url?: string;
+          metadata?: Json | null;
+          is_minted?: boolean;
+        };
+      };
+      transactions: {
+        Row: {
+          id: string;
+          user_id: string;
+          amount: number;
+          type: string;
+          status: string;
+          tx_hash: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          amount: number;
+          type: string;
+          status: string;
+          tx_hash?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          amount?: number;
+          type?: string;
+          status?: string;
+          tx_hash?: string | null;
         };
       };
     };
