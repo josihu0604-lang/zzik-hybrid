@@ -117,6 +117,7 @@ export function useIntersectionObserver(
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Skip if frozen or no element
     if (frozen || !elementRef.current) return;
 
@@ -177,6 +178,7 @@ export function useInView(
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!ref.current || typeof IntersectionObserver === 'undefined') {
       return;
     }

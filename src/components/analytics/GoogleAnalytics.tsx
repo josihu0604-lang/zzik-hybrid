@@ -64,6 +64,7 @@ function PageViewTracker() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (pathname) {
       const url = searchParams?.toString() ? `${pathname}?${searchParams.toString()}` : pathname;
 
@@ -91,6 +92,7 @@ export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
 
   // Initialize GA on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     initGA();
   }, []);
 

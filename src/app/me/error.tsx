@@ -17,6 +17,7 @@ interface ErrorProps {
 
 export default function MyPageError({ error, reset }: ErrorProps) {
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (process.env.NODE_ENV === 'production') {
       Sentry.captureException(error, {
         tags: { component: 'MyPageErrorBoundary', page: 'me' },

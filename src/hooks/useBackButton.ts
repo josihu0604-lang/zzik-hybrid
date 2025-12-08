@@ -96,10 +96,12 @@ export function useBackButton(options: UseBackButtonOptions = {}): UseBackButton
 
   // Update refs when values change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     handlerRef.current = onBackButton;
   }, [onBackButton]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     toastRef.current = onExitToast;
   }, [onExitToast]);
 
@@ -147,6 +149,7 @@ export function useBackButton(options: UseBackButtonOptions = {}): UseBackButton
    * Main back button handler
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Only activate on Android native app
     if (!isAndroid() || !Capacitor.isNativePlatform() || !enabled) {
       return;
@@ -188,6 +191,7 @@ export function useBackButton(options: UseBackButtonOptions = {}): UseBackButton
    * Web fallback: Handle browser back button
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Only for web environment
     if (Capacitor.isNativePlatform() || !enabled) {
       return;

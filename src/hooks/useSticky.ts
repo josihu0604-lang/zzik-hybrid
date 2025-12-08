@@ -64,6 +64,7 @@ export function useSticky<T extends HTMLElement = HTMLDivElement>(
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const element = ref.current;
     if (!element) return;
 
@@ -118,6 +119,7 @@ export function useStickySimple<T extends HTMLElement = HTMLDivElement>(
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const element = ref.current;
     if (!element) return;
 

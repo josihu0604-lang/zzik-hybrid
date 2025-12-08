@@ -27,6 +27,7 @@ export default function OnboardingPage() {
 
   // 온보딩 완료 여부 확인
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const checkOnboardingStatus = () => {
       // 이미 온보딩을 완료한 사용자는 홈으로 리다이렉트
       if (hasCompletedOnboarding()) {

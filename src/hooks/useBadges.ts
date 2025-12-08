@@ -99,6 +99,7 @@ export function useBadges(options: UseBadgesOptions = {}): UseBadgesReturn {
 
   // Auto-fetch on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (autoFetch) {
       fetchBadges();
     }

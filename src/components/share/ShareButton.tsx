@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Share2, Copy, MessageCircle, Link2, X } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 import { colors } from '@/lib/design-tokens';
@@ -179,7 +179,7 @@ export function ShareButton({
   return (
     <>
       {variant === 'button' ? (
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleQuickShare}
@@ -192,9 +192,9 @@ export function ShareButton({
         >
           <Share2 size={16} />
           <span>친구 초대</span>
-        </motion.button>
+        </m.button>
       ) : (
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleQuickShare}
@@ -206,7 +206,7 @@ export function ShareButton({
           aria-label="공유하기"
         >
           <Share2 size={18} className="text-white" />
-        </motion.button>
+        </m.button>
       )}
 
       {/* Share Modal */}
@@ -214,7 +214,7 @@ export function ShareButton({
         {showModal && (
           <>
             {/* Backdrop */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -223,7 +223,7 @@ export function ShareButton({
             />
 
             {/* Modal - MOB-014: swipe-to-dismiss */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
@@ -289,7 +289,7 @@ export function ShareButton({
                 {/* Share Options */}
                 <div className="grid grid-cols-3 gap-3">
                   {/* Copy Link */}
-                  <motion.button
+                  <m.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleCopy}
@@ -306,10 +306,10 @@ export function ShareButton({
                       <Copy size={20} style={{ color: colors.flame[500] }} />
                     </div>
                     <span className="text-white text-xs font-medium">링크 복사</span>
-                  </motion.button>
+                  </m.button>
 
                   {/* Kakao */}
-                  <motion.button
+                  <m.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleKakaoShare}
@@ -326,10 +326,10 @@ export function ShareButton({
                       <MessageCircle size={20} style={{ color: '#FEE500' }} />
                     </div>
                     <span className="text-white text-xs font-medium">카카오톡</span>
-                  </motion.button>
+                  </m.button>
 
                   {/* More (Native Share) */}
-                  <motion.button
+                  <m.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleNativeShare}
@@ -346,10 +346,10 @@ export function ShareButton({
                       <Link2 size={20} className="text-white" />
                     </div>
                     <span className="text-white text-xs font-medium">더보기</span>
-                  </motion.button>
+                  </m.button>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
@@ -39,7 +39,7 @@ export function LoadingSpinner({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.div
+    <m.div
       animate={prefersReducedMotion ? {} : { rotate: 360 }}
       transition={prefersReducedMotion ? {} : { duration: 1, repeat: Infinity, ease: 'linear' }}
       className={`rounded-full ${className}`}
@@ -132,7 +132,7 @@ export function InlineSpinner({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.div
+    <m.div
       animate={prefersReducedMotion ? {} : { rotate: 360 }}
       transition={prefersReducedMotion ? {} : { duration: 1, repeat: Infinity, ease: 'linear' }}
       className={`rounded-full ${className}`}
@@ -185,7 +185,7 @@ export function CardSkeleton({ count = 3, className = '' }: CardSkeletonProps) {
   return (
     <div className={`space-y-3 ${className}`}>
       {Array.from({ length: count }).map((_, i) => (
-        <motion.div
+        <m.div
           key={i}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -197,20 +197,20 @@ export function CardSkeleton({ count = 3, className = '' }: CardSkeletonProps) {
           }}
         >
           <div className="flex items-center gap-4">
-            <motion.div
+            <m.div
               className="w-12 h-12 rounded-xl"
               style={{ background: 'rgba(255, 107, 91, 0.2)' }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
             />
             <div className="flex-1 space-y-2">
-              <motion.div
+              <m.div
                 className="h-3 rounded"
                 style={{ background: 'rgba(255, 255, 255, 0.1)', width: '40%' }}
                 animate={{ opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              <motion.div
+              <m.div
                 className="h-4 rounded"
                 style={{ background: 'rgba(255, 255, 255, 0.15)', width: '80%' }}
                 animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -218,7 +218,7 @@ export function CardSkeleton({ count = 3, className = '' }: CardSkeletonProps) {
               />
             </div>
           </div>
-        </motion.div>
+        </m.div>
       ))}
     </div>
   );

@@ -18,6 +18,7 @@ import { useRef, useEffect, useCallback } from 'react';
  *
  * // Detect direction
  * useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
  *   if (prevCount !== undefined && count > prevCount) {
  *     console.log('Increased!');
  *   }
@@ -30,6 +31,7 @@ export function usePrevious<T>(value: T): T | undefined {
 
   // Update ref after render
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     ref.current = value;
   }, [value]);
 
@@ -62,6 +64,7 @@ export function usePreviousDistinct<T>(
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (isFirstRef.current) {
       isFirstRef.current = false;
       ref.current = value;

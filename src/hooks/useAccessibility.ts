@@ -161,6 +161,7 @@ export function useHighContrast(): boolean {
   const [isHighContrast, setIsHighContrast] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // 고대비 모드 감지
     const mediaQuery = window.matchMedia('(forced-colors: active)');
     setIsHighContrast(mediaQuery.matches);

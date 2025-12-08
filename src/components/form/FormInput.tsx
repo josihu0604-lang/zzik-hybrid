@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef, useState, useId, type InputHTMLAttributes } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Eye, EyeOff, AlertCircle, Check } from 'lucide-react';
 
 /**
@@ -174,7 +174,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         {/* Error / Helper Text */}
         <AnimatePresence mode="wait">
           {hasError ? (
-            <motion.p
+            <m.p
               key="error"
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
@@ -193,9 +193,9 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             >
               <AlertCircle size={12} aria-hidden="true" />
               {error}
-            </motion.p>
+            </m.p>
           ) : helperText ? (
-            <motion.p
+            <m.p
               key="helper"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -203,7 +203,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               className="mt-2 text-xs text-linear-text-tertiary"
             >
               {helperText}
-            </motion.p>
+            </m.p>
           ) : null}
         </AnimatePresence>
       </div>
@@ -438,7 +438,7 @@ export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
               aria-describedby={error ? `${checkboxId}-error` : undefined}
               {...props}
             />
-            <motion.div
+            <m.div
               className={`
                 w-5 h-5 rounded-md border transition-all
                 peer-checked:border-flame-500 peer-checked:bg-flame-500
@@ -450,7 +450,7 @@ export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
               transition={{ duration: 0.3, ease: 'easeOut' }}
               aria-hidden="true"
             />
-            <motion.div
+            <m.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{
                 scale: props.checked ? 1 : 0,
@@ -460,7 +460,7 @@ export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
               className="absolute top-0.5 left-0.5"
             >
               <Check size={14} className="text-white" aria-hidden="true" />
-            </motion.div>
+            </m.div>
           </div>
           <span className="text-sm text-white">{label}</span>
         </label>

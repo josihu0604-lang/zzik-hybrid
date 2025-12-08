@@ -9,12 +9,14 @@ import { LanguageProvider } from '@/i18n';
 import { BaseJsonLd } from '@/components/seo';
 import { baseMetadata, viewport as seoViewport, siteConfig } from '@/lib/seo';
 import { MotionProvider } from '@/components/MotionProvider';
-import { QueryProvider } from '@/components/providers/QueryProvider';
+import { AppProviders } from '@/components/providers/AppProviders';
 import { BottomTabBar } from '@/components/navigation/BottomTabBar';
 import { AppEntry } from '@/components/app';
 import { WebVitals } from '@/components/analytics/WebVitals';
 import { WebVitalsMonitor } from '@/components/analytics/WebVitalsMonitor';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { CurrencyProvider } from '@/hooks/useCurrency';
+import { PerformanceMonitor } from '@/hooks/usePerformanceMode';
 import './globals.css';
 
 // Inter - Latin (English, numbers) - Primary font
@@ -59,56 +61,59 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko" className={`dark ${inter.variable} ${notoSansKR.variable}`}>
-      <body className="min-h-screen bg-space-950 text-white antialiased font-sans">
+      <body className="min-h-screen bg-black text-white antialiased font-sans">
+        <PerformanceMonitor />
+        {/* Desktop Background Decoration */}
+        <div className="hidden lg:block fixed inset-0 z-0 overflow-hidden pointer-events-none bg-space-900">
+          <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-flame-500/5 blur-[120px]" />
+          <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-[120px]" />
+        </div>
         {/* Structured Data for SEO */}
         <BaseJsonLd />
         <MotionProvider>
-          <QueryProvider>
+          <AppProviders>
             <LanguageProvider>
-              <AuthProvider>
-                <ToastProvider>
-                  <ServiceWorkerRegistration />
-                  <PushNotificationPrompt />
-                  <OfflineStatus />
-                  {/* Analytics Integration */}
-                  <GoogleAnalytics />
-                  <WebVitals />
-                  {/* A11Y-014: Skip to main content for accessibility */}
-                  <a
-                    href="#main-content"
-                    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-3 focus:ring-white focus:ring-offset-2 focus:ring-offset-space-950"
-                    style={{
-                      background: '#FF6B5B',
-                      color: 'white',
-                      zIndex: 100, // Accessibility - higher than modals
-                      boxShadow: '0 4px 12px rgba(255, 107, 91, 0.5)',
-                    }}
-                  >
-                    메인 콘텐츠로 이동
-                  </a>
-                  {/* A11Y-015: 시맨틱 header 랜드마크 - 스크린 리더 탐색용 */}
-                  <header role="banner" aria-label="사이트 헤더">
-                    {/*
-                    Header landmark for screen readers.
-                    Actual header content (logo, nav) rendered by page components.
-                    This provides a structural landmark for accessibility tools.
-                  */}
-                  </header>
-                  {/* A11Y-014: 시맨틱 main 요소 with explicit role */}
-                  <main id="main-content" role="main" className="pb-20">
-                    <AppEntry>{children}</AppEntry>
-                  </main>
-                  {/* A11Y-016: 시맨틱 footer 랜드마크 - 네비게이션 포함 */}
-                  <footer role="contentinfo" aria-label="사이트 푸터">
-                    {/* 앱 바텀 네비게이션 - footer 내부로 이동 */}
-                    <BottomTabBar />
-                  </footer>
-                  {/* Web Vitals Monitor (Dev only) */}
-                  <WebVitalsMonitor />
-                </ToastProvider>
-              </AuthProvider>
+              <CurrencyProvider>
+                <AuthProvider>
+                  <ToastProvider>
+                    {/* Desktop App Container */}
+                    <div className="lg:max-w-[430px] lg:mx-auto lg:min-h-screen lg:shadow-2xl lg:border-x lg:border-white/10 bg-space-950 relative min-h-screen z-10 transform-gpu">
+                      <ServiceWorkerRegistration />
+                      <PushNotificationPrompt />
+                      <OfflineStatus />
+                      {/* Analytics Integration */}
+                      <GoogleAnalytics />
+                      <WebVitals />
+                      {/* A11Y-014: Skip to main content for accessibility */}
+                      <a
+                        href="#main-content"
+                        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold focus:outline-none focus:ring-3 focus:ring-white focus:ring-offset-2 focus:ring-offset-space-950"
+                        style={{
+                          background: '#FF6B5B',
+                          color: 'white',
+                          zIndex: 100,
+                          boxShadow: '0 4px 12px rgba(255, 107, 91, 0.5)',
+                        }}
+                      >
+                        메인 콘텐츠로 이동
+                      </a>
+                      {/* A11Y-015: 시맨틱 header 랜드마크 */}
+                      <header role="banner" aria-label="사이트 헤더" />
+                      {/* A11Y-014: 시맨틱 main 요소 */}
+                      <main id="main-content" role="main" className="pb-20">
+                        <AppEntry>{children}</AppEntry>
+                      </main>
+                      {/* A11Y-016: 시맨틱 footer 랜드마크 */}
+                      <footer role="contentinfo" aria-label="사이트 푸터">
+                        <BottomTabBar />
+                      </footer>
+                    </div>
+                    <WebVitalsMonitor />
+                  </ToastProvider>
+                </AuthProvider>
+              </CurrencyProvider>
             </LanguageProvider>
-          </QueryProvider>
+          </AppProviders>
         </MotionProvider>
       </body>
     </html>

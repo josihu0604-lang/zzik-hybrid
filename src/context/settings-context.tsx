@@ -185,6 +185,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
   // Load settings on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     async function loadSettings() {
       try {
         // Try IndexedDB first

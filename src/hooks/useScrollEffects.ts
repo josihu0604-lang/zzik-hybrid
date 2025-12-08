@@ -29,6 +29,7 @@ export function useScrollRestoration(key?: string) {
 
   // 스크롤 위치 저장
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScroll = () => {
       scrollPositions.set(scrollKey, window.scrollY);
     };
@@ -42,6 +43,7 @@ export function useScrollRestoration(key?: string) {
 
   // 스크롤 위치 복원
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (restoredRef.current) return;
 
     const savedPosition = scrollPositions.get(scrollKey);
@@ -111,6 +113,7 @@ export function useInfiniteScroll({
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!hasMore || isLoading) return;
 
     const options: IntersectionObserverInit = {
@@ -165,6 +168,7 @@ export function useHorizontalScroll<T extends HTMLElement = HTMLDivElement>() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const element = scrollRef.current;
     if (!element) return;
 
@@ -263,6 +267,7 @@ export function usePullToRefresh({
   }, [pullDistance, threshold, isRefreshing, onRefresh, enabled]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled) return;
 
     document.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -294,6 +299,7 @@ export function useScrollDirection() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 

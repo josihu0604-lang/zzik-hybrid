@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { m, type HTMLMotionProps } from 'framer-motion';
 import { forwardRef } from 'react';
 import { liquidGlass, shadows } from '@/lib/design-tokens';
 
@@ -63,7 +63,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     const glassStyle = liquidGlass[variant];
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         whileHover={hoverEffect}
         className={`rounded-[20px] ${paddingMap[padding]} transition-shadow relative overflow-hidden ${className}`}
@@ -77,7 +77,7 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           aria-hidden="true"
         />
         <div className="relative">{children as React.ReactNode}</div>
-      </motion.div>
+      </m.div>
     );
   }
 );

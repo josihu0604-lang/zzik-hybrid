@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Frown, Users, Flame, MapPin, ArrowRight, Sparkles } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 
@@ -14,7 +14,7 @@ export function PainPointIcon() {
   return (
     <div className="relative w-48 h-48">
       {/* 배경 원 */}
-      <motion.div
+      <m.div
         className="absolute inset-0 rounded-full"
         style={{
           background: `${colors.flame[500]}1a`,
@@ -31,7 +31,7 @@ export function PainPointIcon() {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex gap-1.5">
           {[...Array(5)].map((_, i) => (
-            <motion.div
+            <m.div
               key={i}
               className="w-4 h-4 rounded-full"
               style={{
@@ -53,7 +53,7 @@ export function PainPointIcon() {
       </div>
 
       {/* 슬픈 얼굴 */}
-      <motion.div
+      <m.div
         className="absolute -bottom-4 -right-4 w-20 h-20 rounded-full flex items-center justify-center"
         style={{
           background: `linear-gradient(135deg, ${colors.flame[500]} 0%, ${colors.ember[500]} 100%)`,
@@ -66,7 +66,7 @@ export function PainPointIcon() {
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
         <Frown size={40} className="text-white" />
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -87,7 +87,7 @@ export function SolutionIcon() {
         >
           {/* 채워지는 바 */}
           {/* DES-216: width → scaleX 애니메이션 (GPU 가속) */}
-          <motion.div
+          <m.div
             className="h-full rounded-full"
             style={{
               background: `linear-gradient(90deg, ${colors.flame[500]} 0%, ${colors.spark[500]} 100%)`,
@@ -107,14 +107,14 @@ export function SolutionIcon() {
         </div>
 
         {/* 퍼센트 텍스트 */}
-        <motion.div
+        <m.div
           className="mt-4 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           // DES-220: opacity 완화 - transition 추가
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <motion.span
+          <m.span
             className="text-4xl font-black"
             style={{ color: colors.flame[500] }}
             animate={{
@@ -127,15 +127,15 @@ export function SolutionIcon() {
             }}
           >
             <Counter />
-          </motion.span>
+          </m.span>
           <span className="text-white text-2xl font-bold">%</span>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* 참여자 아바타들 */}
       <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex -space-x-3">
         {[...Array(5)].map((_, i) => (
-          <motion.div
+          <m.div
             key={i}
             className="w-10 h-10 rounded-full flex items-center justify-center border-2 border-linear-bg"
             style={{
@@ -149,12 +149,12 @@ export function SolutionIcon() {
             }}
           >
             <Users size={16} className="text-white" />
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
       {/* 완료 시 불꽃 */}
-      <motion.div
+      <m.div
         className="absolute -bottom-2 right-0"
         initial={{ scale: 0, opacity: 0 }}
         animate={{
@@ -177,7 +177,7 @@ export function SolutionIcon() {
         >
           <Flame size={28} className="text-white" />
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }
@@ -187,6 +187,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let animationFrame: number;
     let startTime: number | null = null;
     const duration = 3000; // 3초
@@ -217,7 +218,7 @@ function Counter() {
   }, []);
 
   return (
-    <motion.span
+    <m.span
       key={count}
       initial={{ opacity: 0.8, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -226,7 +227,7 @@ function Counter() {
       aria-label={`진행률 ${count}%`}
     >
       {count}
-    </motion.span>
+    </m.span>
   );
 }
 
@@ -236,7 +237,7 @@ export function ActionIcon() {
     <div className="relative w-48 h-48">
       {/* 스파클 효과 */}
       {[...Array(6)].map((_, i) => (
-        <motion.div
+        <m.div
           key={i}
           className="absolute"
           style={{
@@ -258,11 +259,11 @@ export function ActionIcon() {
             size={16}
             style={{ color: i % 2 === 0 ? colors.spark[500] : colors.flame[500] }}
           />
-        </motion.div>
+        </m.div>
       ))}
 
       {/* 메인 카드 */}
-      <motion.div
+      <m.div
         className="absolute inset-0 rounded-2xl p-4 flex flex-col justify-between"
         style={{
           background: `linear-gradient(135deg, ${colors.flame[500]}33 0%, ${colors.spark[500]}1a 100%)`,
@@ -306,7 +307,7 @@ export function ActionIcon() {
             className="h-1.5 rounded-full overflow-hidden"
             style={{ background: 'rgba(255, 255, 255, 0.1)' }}
           >
-            <motion.div
+            <m.div
               className="h-full rounded-full"
               style={{ background: colors.flame[500], width: '72%' }}
               animate={{
@@ -316,10 +317,10 @@ export function ActionIcon() {
             />
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* 참여하기 화살표 */}
-      <motion.div
+      <m.div
         className="absolute -right-8 top-1/2 -translate-y-1/2"
         animate={{
           x: [0, 10, 0],
@@ -338,7 +339,7 @@ export function ActionIcon() {
         >
           <ArrowRight size={24} className="text-white" />
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

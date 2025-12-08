@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import { getSafeAreaInsets, getTouchTargetStyle } from '@/lib/mobile-ux';
 import { colors, radii, shadows, zIndex } from '@/lib/design-tokens';
 
@@ -55,7 +55,7 @@ export function StickyCTA({
   if (!show) return null;
 
   return (
-    <motion.div
+    <m.div
       className="fixed top-0 left-0 right-0"
       style={{
         opacity,
@@ -74,7 +74,7 @@ export function StickyCTA({
           borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
-        <motion.button
+        <m.button
           type="button"
           onClick={disabled || loading ? undefined : onClick}
           disabled={disabled || loading}
@@ -106,17 +106,17 @@ export function StickyCTA({
 
           {/* Loading spinner */}
           {loading && (
-            <motion.div
+            <m.div
               className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              <motion.div
+              <m.div
                 className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
               />
-            </motion.div>
+            </m.div>
           )}
 
           {/* Content */}
@@ -128,9 +128,9 @@ export function StickyCTA({
           >
             {children}
           </span>
-        </motion.button>
+        </m.button>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -173,7 +173,7 @@ export function StickyFormSubmit({
         paddingBottom: 'max(1rem, env(safe-area-inset-bottom))',
       }}
     >
-      <motion.button
+      <m.button
         type="submit"
         form={form}
         onClick={onSubmit}
@@ -210,7 +210,7 @@ export function StickyFormSubmit({
         {/* Loading spinner */}
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
+            <m.div
               className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -227,7 +227,7 @@ export function StickyFormSubmit({
         >
           {children}
         </span>
-      </motion.button>
+      </m.button>
     </div>
   );
 }

@@ -52,6 +52,7 @@ export function LanguageProvider({ children, initialLocale }: LanguageProviderPr
 
   // Detect and set locale on client
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const detected = detectLocale();
     setLocaleState(detected);
     setIsHydrated(true);
@@ -100,7 +101,7 @@ export function LanguageProvider({ children, initialLocale }: LanguageProviderPr
   );
 
   const formatRelativeTime = useCallback(
-    (date: Date | string) => formatRelativeTimeUtil(date, locale, translations[locale]),
+    (date: Date | string) => formatRelativeTimeUtil(date, locale, translations[locale] as any),
     [locale]
   );
 

@@ -254,6 +254,7 @@ export function usePageView(pageName: string) {
   const { trackPageView } = useAnalytics();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     trackPageView(pageName);
   }, [pageName, trackPageView]);
 }

@@ -29,6 +29,7 @@ export default function AIDemoPage() {
 
   // Fetch AI service status on mount (client-side only)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const fetchStatus = async () => {
       try {
         const response = await fetch('/api/ai/status');

@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Crown, Star, Award, Medal, Zap, Gift, TrendingUp } from 'lucide-react';
 import {
   TIER_COLORS,
@@ -90,7 +90,7 @@ export function TierProgress({
   }, [currentIndex]);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl overflow-hidden ${className}`}
@@ -110,7 +110,7 @@ export function TierProgress({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             {/* Tier Badge */}
-            <motion.div
+            <m.div
               className="w-14 h-14 rounded-2xl flex items-center justify-center"
               style={{
                 background: `linear-gradient(135deg, ${tierColor} 0%, ${tierColor}80 100%)`,
@@ -126,7 +126,7 @@ export function TierProgress({
               transition={{ duration: 2, repeat: Infinity }}
             >
               <TierIcon size={28} color="#fff" />
-            </motion.div>
+            </m.div>
 
             <div>
               <div className="flex items-center gap-2">
@@ -168,7 +168,7 @@ export function TierProgress({
             style={{ background: 'rgba(255, 255, 255, 0.1)' }}
           >
             {/* Progress Fill */}
-            <motion.div
+            <m.div
               className="h-full rounded-full relative"
               style={{
                 background: nextTier
@@ -180,7 +180,7 @@ export function TierProgress({
               transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
               {/* Shimmer effect */}
-              <motion.div
+              <m.div
                 className="absolute inset-0"
                 style={{
                   background:
@@ -189,7 +189,7 @@ export function TierProgress({
                 animate={{ x: ['-100%', '100%'] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
               />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Milestone Markers */}
@@ -201,7 +201,7 @@ export function TierProgress({
               const MIcon = milestone.Icon;
 
               return (
-                <motion.div
+                <m.div
                   key={milestone.tier}
                   className="absolute flex flex-col items-center"
                   style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
@@ -219,7 +219,7 @@ export function TierProgress({
                   >
                     {milestone.isReached && <MIcon size={10} color="#fff" />}
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
@@ -258,7 +258,7 @@ export function TierProgress({
 
       {/* Max Tier Celebration */}
       {progressData.isMaxTier && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="px-5 py-3 text-center"
@@ -277,7 +277,7 @@ export function TierProgress({
           <p className="text-linear-text-tertiary text-xs mt-1">
             최고 수수료율 {TIER_COMMISSION_RATES.Platinum}%를 받고 있습니다
           </p>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Next Tier Benefits Preview */}
@@ -338,7 +338,7 @@ export function TierProgress({
           </div>
         </div>
       )}
-    </motion.div>
+    </m.div>
   );
 }
 

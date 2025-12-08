@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TrendingUp, Users, MapPin, Coins } from 'lucide-react';
 import { colors, layout, spacing, rgba, withOpacity } from '@/lib/design-tokens';
 
@@ -78,7 +78,7 @@ export function LeaderStats({
       {stats.map((stat, index) => {
         const Icon = stat.icon;
         return (
-          <motion.div
+          <m.div
             key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,7 +102,7 @@ export function LeaderStats({
               {stat.value}
             </p>
             <p className="text-linear-text-tertiary text-xs">{stat.subValue}</p>
-          </motion.div>
+          </m.div>
         );
       })}
     </div>

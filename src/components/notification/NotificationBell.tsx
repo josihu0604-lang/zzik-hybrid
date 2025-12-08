@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Bell } from 'lucide-react';
 import { NotificationPanel } from './NotificationPanel';
 import { useNotification } from '@/hooks/useNotification';
@@ -32,7 +32,7 @@ export function NotificationBell({ className = '' }: NotificationBellProps) {
   return (
     <>
       {/* Bell Button */}
-      <motion.button
+      <m.button
         onClick={() => setIsPanelOpen(true)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -51,7 +51,7 @@ export function NotificationBell({ className = '' }: NotificationBellProps) {
         {/* Badge */}
         <AnimatePresence>
           {unreadCount > 0 && (
-            <motion.span
+            <m.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
@@ -64,13 +64,13 @@ export function NotificationBell({ className = '' }: NotificationBellProps) {
               }}
             >
               {unreadCount > 99 ? '99+' : unreadCount}
-            </motion.span>
+            </m.span>
           )}
         </AnimatePresence>
 
         {/* DES-208: 알림 뱃지 펄스 통합 (2개 → 1개) */}
         {unreadCount > 0 && (
-          <motion.span
+          <m.span
             className="absolute inset-0 rounded-full"
             style={{ border: `2px solid ${colors.flame[500]}` }}
             animate={{
@@ -86,7 +86,7 @@ export function NotificationBell({ className = '' }: NotificationBellProps) {
             role="presentation"
           />
         )}
-      </motion.button>
+      </m.button>
 
       {/* Panel */}
       <NotificationPanel

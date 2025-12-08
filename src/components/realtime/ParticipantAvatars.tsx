@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import type { Participant } from '@/types/participant';
 import { typography } from '@/lib/design-tokens';
 import { getColorFromName } from '@/lib/color-utils';
@@ -66,7 +66,7 @@ function ParticipantAvatarsComponent({
         {/* DES-213: popLayout 조건부 적용 - 성능 최적화 */}
         <AnimatePresence mode={visibleParticipants.length > 0 ? 'popLayout' : 'sync'}>
           {visibleParticipants.map((participant, index) => (
-            <motion.div
+            <m.div
               key={participant.id}
               initial={{ scale: 0, x: -20, opacity: 0 }}
               animate={{ scale: 1, x: 0, opacity: 1 }}
@@ -98,7 +98,7 @@ function ParticipantAvatarsComponent({
               )}
 
               {/* DES-153: 참여자 아바타 툴팁 - 호버 시 정보 표시 */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 5 }}
                 whileHover={{ opacity: 1, y: 0 }}
                 className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md text-xs font-medium whitespace-nowrap pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
@@ -110,11 +110,11 @@ function ParticipantAvatarsComponent({
                 }}
               >
                 {participant.name}
-              </motion.div>
+              </m.div>
 
               {/* New participant glow */}
               {index === 0 && (
-                <motion.div
+                <m.div
                   className="absolute inset-0 rounded-full"
                   initial={{ opacity: 0.8 }}
                   animate={{ opacity: 0 }}
@@ -125,13 +125,13 @@ function ParticipantAvatarsComponent({
                   }}
                 />
               )}
-            </motion.div>
+            </m.div>
           ))}
         </AnimatePresence>
 
         {/* Remaining count badge */}
         {remainingCount > 0 && (
-          <motion.div
+          <m.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             className="relative rounded-full flex items-center justify-center font-bold shadow-lg"
@@ -150,19 +150,19 @@ function ParticipantAvatarsComponent({
             >
               +{remainingCount > 99 ? '99+' : remainingCount}
             </span>
-          </motion.div>
+          </m.div>
         )}
       </div>
 
       {/* Participant text */}
-      <motion.span
+      <m.span
         key={totalCount}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         className="ml-3 text-linear-text-secondary text-sm"
       >
         <span className="font-bold text-white">{totalCount}</span>명 참여중
-      </motion.span>
+      </m.span>
     </div>
   );
 }

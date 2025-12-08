@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   TrendingUp,
   Users,
@@ -78,7 +78,7 @@ function StatCard({
   const isPositive = change >= 0;
 
   return (
-    <motion.div variants={staggerItem}>
+    <m.div variants={staggerItem}>
       <GlassCard padding="md" hover>
         <div className="flex items-start justify-between">
           <div className="p-2 rounded-lg" style={{ background: `${color}20` }}>
@@ -101,7 +101,7 @@ function StatCard({
           </p>
         </div>
       </GlassCard>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -109,6 +109,7 @@ export default function AnalyticsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
@@ -131,15 +132,15 @@ export default function AnalyticsPage() {
   return (
     <div className="p-6 lg:p-8 space-y-8">
       {/* Header */}
-      <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+      <m.div variants={fadeInUp} initial="hidden" animate="visible">
         <h1 className="text-2xl lg:text-3xl font-bold text-white">분석</h1>
         <p className="mt-1" style={{ color: colors.text.secondary }}>
           캠페인 성과를 분석하고 인사이트를 확인하세요
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Overview Stats */}
-      <motion.div
+      <m.div
         variants={staggerContainer}
         initial="hidden"
         animate="visible"
@@ -176,10 +177,10 @@ export default function AnalyticsPage() {
           icon={MapPin}
           color={colors.success}
         />
-      </motion.div>
+      </m.div>
 
       {/* Charts Row */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -196,7 +197,7 @@ export default function AnalyticsPage() {
             {mockAnalytics.monthly_data.map((month, idx) => (
               <div key={month.month} className="flex-1 flex flex-col items-center gap-1">
                 <div className="w-full flex flex-col gap-1">
-                  <motion.div
+                  <m.div
                     initial={{ height: 0 }}
                     animate={{
                       height: `${(month.participants / maxMonthly) * 140}px`,
@@ -206,7 +207,7 @@ export default function AnalyticsPage() {
                     style={{ background: gradients.flame }}
                     title={`참여: ${month.participants}명`}
                   />
-                  <motion.div
+                  <m.div
                     initial={{ height: 0 }}
                     animate={{
                       height: `${(month.checkins / maxMonthly) * 140}px`,
@@ -263,7 +264,7 @@ export default function AnalyticsPage() {
                   className="h-2 rounded-full overflow-hidden"
                   style={{ background: 'rgba(255, 255, 255, 0.1)' }}
                 >
-                  <motion.div
+                  <m.div
                     initial={{ width: 0 }}
                     animate={{ width: `${cat.value}%` }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -275,10 +276,10 @@ export default function AnalyticsPage() {
             ))}
           </div>
         </GlassCard>
-      </motion.div>
+      </m.div>
 
       {/* Bottom Row */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -338,7 +339,7 @@ export default function AnalyticsPage() {
             ))}
           </div>
         </GlassCard>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

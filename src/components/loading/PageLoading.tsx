@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -50,7 +50,7 @@ export function PageLoading({ variant = 'default', showHeader = true }: PageLoad
 
 function SkeletonBox({ className }: { className?: string }) {
   return (
-    <motion.div
+    <m.div
       className={`skeleton-shimmer ${className}`}
       style={{
         background: `linear-gradient(90deg, ${colors.space[800]} 0%, ${colors.space[700]} 50%, ${colors.space[800]} 100%)`,
@@ -163,7 +163,7 @@ function FormSkeleton() {
 function MinimalSkeleton() {
   return (
     <div className="flex flex-col items-center justify-center py-20">
-      <motion.div
+      <m.div
         className="w-16 h-16 rounded-full"
         style={{
           background: `linear-gradient(135deg, ${colors.flame[500]}20 0%, ${colors.flame[500]}40 100%)`,
@@ -177,14 +177,14 @@ function MinimalSkeleton() {
           repeat: Infinity,
         }}
       />
-      <motion.p
+      <m.p
         className="mt-4 text-sm"
         style={{ color: colors.text.tertiary }}
         animate={{ opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
         로딩 중...
-      </motion.p>
+      </m.p>
     </div>
   );
 }

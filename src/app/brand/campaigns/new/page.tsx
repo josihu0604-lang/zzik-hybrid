@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ArrowLeft, MapPin, Users, Info, Check, Loader2, Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 import { GlassCard, CosmicInput, PrimaryButton, SecondaryButton } from '@/components/cosmic';
@@ -123,21 +123,21 @@ export default function NewCampaignPage() {
   return (
     <div className="p-6 lg:p-8 max-w-2xl mx-auto">
       {/* Header */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
         className="flex items-center gap-4 mb-8"
       >
         <Link href="/brand/campaigns">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-xl"
             style={{ background: 'rgba(255, 255, 255, 0.05)' }}
           >
             <ArrowLeft size={20} style={{ color: colors.text.secondary }} />
-          </motion.button>
+          </m.button>
         </Link>
         <div>
           <h1 className="text-2xl font-bold text-white">새 캠페인 만들기</h1>
@@ -145,10 +145,10 @@ export default function NewCampaignPage() {
             단계 {step}/3
           </p>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Progress */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -166,10 +166,10 @@ export default function NewCampaignPage() {
             />
           ))}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Form Content */}
-      <motion.div
+      <m.div
         key={step}
         variants={staggerContainer}
         initial="hidden"
@@ -179,7 +179,7 @@ export default function NewCampaignPage() {
         {step === 1 && (
           <>
             {/* Step 1: Basic Info */}
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg">
                 <h2 className="text-lg font-semibold text-white mb-4">기본 정보</h2>
 
@@ -225,7 +225,7 @@ export default function NewCampaignPage() {
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                       {categories.map((cat) => (
-                        <motion.button
+                        <m.button
                           key={cat.value}
                           whileTap={{ scale: 0.95 }}
                           onClick={() => updateForm('category', cat.value)}
@@ -254,7 +254,7 @@ export default function NewCampaignPage() {
                           >
                             {cat.label}
                           </p>
-                        </motion.button>
+                        </m.button>
                       ))}
                     </div>
                     {errors.category && (
@@ -265,13 +265,13 @@ export default function NewCampaignPage() {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
 
             {/* Image Upload */}
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg">
                 <h2 className="text-lg font-semibold text-white mb-4">대표 이미지</h2>
-                <motion.div
+                <m.div
                   whileHover={{ scale: 1.01 }}
                   className="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-colors"
                   style={{
@@ -289,16 +289,16 @@ export default function NewCampaignPage() {
                   <p className="text-sm mt-1" style={{ color: colors.text.secondary }}>
                     PNG, JPG (최대 5MB)
                   </p>
-                </motion.div>
+                </m.div>
               </GlassCard>
-            </motion.div>
+            </m.div>
           </>
         )}
 
         {step === 2 && (
           <>
             {/* Step 2: Location & Goal */}
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg">
                 <h2 className="text-lg font-semibold text-white mb-4">위치 정보</h2>
 
@@ -320,7 +320,7 @@ export default function NewCampaignPage() {
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {popularLocations.map((loc) => (
-                        <motion.button
+                        <m.button
                           key={loc}
                           whileTap={{ scale: 0.95 }}
                           onClick={() => updateForm('location', loc)}
@@ -334,15 +334,15 @@ export default function NewCampaignPage() {
                           }}
                         >
                           {loc}
-                        </motion.button>
+                        </m.button>
                       ))}
                     </div>
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
 
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg">
                 <h2 className="text-lg font-semibold text-white mb-4">목표 참여자 수</h2>
 
@@ -365,7 +365,7 @@ export default function NewCampaignPage() {
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {goalPresets.map((goal) => (
-                        <motion.button
+                        <m.button
                           key={goal}
                           whileTap={{ scale: 0.95 }}
                           onClick={() => updateForm('goal_participants', goal)}
@@ -385,7 +385,7 @@ export default function NewCampaignPage() {
                           }}
                         >
                           {goal}명
-                        </motion.button>
+                        </m.button>
                       ))}
                     </div>
                   </div>
@@ -402,14 +402,14 @@ export default function NewCampaignPage() {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
           </>
         )}
 
         {step === 3 && (
           <>
             {/* Step 3: Schedule */}
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg">
                 <h2 className="text-lg font-semibold text-white mb-4">일정 설정</h2>
 
@@ -491,10 +491,10 @@ export default function NewCampaignPage() {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
 
             {/* Summary */}
-            <motion.div variants={staggerItem}>
+            <m.div variants={staggerItem}>
               <GlassCard padding="lg" glow="flame">
                 <h2 className="text-lg font-semibold text-white mb-4">캠페인 요약</h2>
 
@@ -527,13 +527,13 @@ export default function NewCampaignPage() {
                   </div>
                 </div>
               </GlassCard>
-            </motion.div>
+            </m.div>
           </>
         )}
-      </motion.div>
+      </m.div>
 
       {/* Navigation Buttons */}
-      <motion.div
+      <m.div
         variants={fadeInUp}
         initial="hidden"
         animate="visible"
@@ -564,7 +564,7 @@ export default function NewCampaignPage() {
             )}
           </PrimaryButton>
         )}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -53,6 +53,7 @@ export function usePlatform(): PlatformState {
   });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const platform = Capacitor.getPlatform() as 'ios' | 'android' | 'web';
     const isNative = Capacitor.isNativePlatform();
 

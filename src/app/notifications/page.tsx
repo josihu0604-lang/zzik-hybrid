@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Bell, Check, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useNotifications } from '@/hooks/useNotifications';
@@ -137,7 +137,7 @@ export default function NotificationsPage() {
           <AnimatePresence mode="popLayout">
             <div className="space-y-2">
               {notifications.map((notification, index) => (
-                <motion.div
+                <m.div
                   key={notification.id}
                   layout
                   initial={{ opacity: 0, y: 20 }}
@@ -207,7 +207,7 @@ export default function NotificationsPage() {
                       style={{ background: colors.flame[500] }}
                     />
                   )}
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </AnimatePresence>

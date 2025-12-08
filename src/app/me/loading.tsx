@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { SkeletonMePage } from '@/components/ui/Skeleton';
 
 /**
@@ -14,7 +14,7 @@ export default function MeLoading() {
     <div className="min-h-screen bg-space-950">
       {/* Animated gradient background - gentle warmth */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-20">
-        <motion.div
+        <m.div
           className="absolute top-20 right-10 w-72 h-72 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 217, 61, 0.08) 0%, transparent 60%)',
@@ -27,7 +27,7 @@ export default function MeLoading() {
           }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.div
+        <m.div
           className="absolute bottom-20 left-10 w-72 h-72 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 107, 91, 0.06) 0%, transparent 60%)',

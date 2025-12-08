@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import {
   type PopupCategory,
@@ -98,7 +98,7 @@ export function FilterChips({
 
         {/* Reset All */}
         {(categories.length > 1 || (query && categories.length > 0)) && (
-          <motion.button
+          <m.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -111,7 +111,7 @@ export function FilterChips({
             }}
           >
             전체 초기화
-          </motion.button>
+          </m.button>
         )}
       </AnimatePresence>
     </div>
@@ -159,7 +159,7 @@ const FilterChip = memo(function FilterChip({
   const style = variantStyles[variant];
 
   return (
-    <motion.div
+    <m.div
       layout
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -177,7 +177,7 @@ const FilterChip = memo(function FilterChip({
           <X size={12} />
         </button>
       )}
-    </motion.div>
+    </m.div>
   );
 });
 

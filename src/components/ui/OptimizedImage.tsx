@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Image, { type ImageProps } from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 /**
  * OptimizedImage - Enhanced Next.js Image wrapper (DES-097~104)
@@ -152,6 +152,7 @@ export function OptimizedImage({
 
   // DES-103: 자동 재시도 로직
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (hasError && enableRetry && retryCount < maxRetries) {
       const timer = setTimeout(() => {
         setHasError(false);
@@ -253,7 +254,7 @@ export function OptimizedImage({
       {/* Loading Skeleton (DES-100: 테마 지원) */}
       <AnimatePresence>
         {isLoading && showSkeleton && (
-          <motion.div
+          <m.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0"

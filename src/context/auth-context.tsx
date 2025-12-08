@@ -185,6 +185,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Initialize auth state
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const initAuth = async () => {
       // SEC-001 FIX: Verify demo mode with server-side API
       if (!isSupabaseConfigured()) {

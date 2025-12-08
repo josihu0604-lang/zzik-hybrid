@@ -2,31 +2,30 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Flame, Map, User, type LucideIcon } from 'lucide-react';
 import { colors, glass, radii, typography, brand } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
-import { useTranslation } from '@/i18n';
 
 /**
- * Bottom Navigation v2 - Global VIP Experience
+ * Bottom Navigation v2 - 2026 Production Design
  *
  * Navigation Structure:
- * - Experiences - VIP K-POP experiences
- * - Map - Experience locations
- * - Profile - My bookings + Leader dashboard
+ * - 펀딩중 (Live) - Current funding popups
+ * - 맵 (Map) - Confirmed popup locations
+ * - 마이 (Me) - My participations + Leader dashboard
  *
  * Design:
  * - Apple Liquid Glass (blur 24px + saturate 180%)
  * - 48px touch targets (Apple HIG)
  * - Lucide icons
- * - i18n support for EN/KO/RU
+ * - Design token system
  */
 
 interface NavItem {
   href: string;
   icon: LucideIcon;
-  labelKey: string;
+  label: string;
   matchPaths?: string[];
 }
 
@@ -34,26 +33,26 @@ const NAV_ITEMS: NavItem[] = [
   {
     href: '/',
     icon: Flame,
-    labelKey: 'nav.experiences',
-    matchPaths: ['/', '/live', '/popup', '/experience'],
+    label: '펀딩중',
+    matchPaths: ['/', '/live', '/popup'],
   },
   {
     href: '/map',
     icon: Map,
-    labelKey: 'nav.map',
+    label: '맵',
     matchPaths: ['/map'],
   },
   {
     href: '/me',
     icon: User,
-    labelKey: 'nav.profile',
-    matchPaths: ['/me', '/dashboard', '/profile', '/leader', '/bookings'],
+    label: '마이',
+    matchPaths: ['/me', '/dashboard', '/profile', '/leader'],
   },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
-  const { t } = useTranslation();
+  // DES-029: 탭 전환 햅틱 피드백
   const haptic = useHaptic();
 
   const isActive = (item: NavItem) => {
@@ -79,7 +78,7 @@ export function BottomNav() {
           boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
         }}
         role="navigation"
-        aria-label="Main navigation"
+        aria-label="주요 내비게이션"
       >
         <div className="max-w-lg mx-auto flex justify-around py-2 pb-safe px-safe" role="tablist">
           {NAV_ITEMS.map((item, index) => {
@@ -127,7 +126,7 @@ export function BottomNav() {
                   transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)', // DES-122: 탭 전환 최적화
                 }}
                 aria-current={active ? 'page' : undefined}
-                aria-label={t(item.labelKey)}
+                aria-label={`${item.label} ${active ? '(현재 페이지)' : ''}`}
                 role="tab"
                 aria-selected={active}
                 tabIndex={tabIndex}
@@ -149,23 +148,24 @@ export function BottomNav() {
                       : typography.fontWeight.normal,
                     color: active ? brand.primary : colors.text.secondary,
                     transition: 'color 200ms',
+                    // DES-172: 탭 바 스타일 개선 - 더 나은 가독성
                     letterSpacing: '-0.01em',
                     lineHeight: 1.2,
                   }}
                   aria-hidden="true"
                 >
-                  {t(item.labelKey)}
+                  {item.label}
                 </span>
                 {/* DES-159: 탭 인디케이터 애니메이션 - 슬라이드 효과 */}
                 {active && (
-                  <motion.div
+                  <m.div
                     layoutId="activeTab"
                     className="flex gap-0.5 mt-0.5"
                     aria-hidden="true"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   >
-                    <motion.div
+                    <m.div
                       className="w-1 h-1 rounded-full"
                       style={{
                         background: brand.primary,
@@ -182,7 +182,7 @@ export function BottomNav() {
                       className="w-1 h-1 rounded-full"
                       style={{ background: brand.primary, opacity: 0.3 }}
                     />
-                  </motion.div>
+                  </m.div>
                 )}
               </Link>
             );

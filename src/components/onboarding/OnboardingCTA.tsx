@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ChevronRight, Flame, Sparkles } from 'lucide-react';
 import { colors, gradients, shadows } from '@/lib/design-tokens';
 
@@ -39,7 +39,7 @@ export function OnboardingCTA({
 }: OnboardingCTAProps) {
   if (variant === 'secondary') {
     return (
-      <motion.button
+      <m.button
         onClick={onClick}
         disabled={disabled || loading}
         className="w-full py-4 px-6 rounded-2xl font-semibold text-base flex items-center justify-center gap-2 transition-colors"
@@ -55,14 +55,14 @@ export function OnboardingCTA({
         whileTap={{ scale: 0.98 }}
       >
         {text}
-      </motion.button>
+      </m.button>
     );
   }
 
   return (
     <div className="relative w-full">
       {/* 배경 글로우 애니메이션 */}
-      <motion.div
+      <m.div
         className="absolute inset-0 rounded-2xl"
         style={{
           background: gradients.flame,
@@ -81,7 +81,7 @@ export function OnboardingCTA({
       />
 
       {/* 메인 버튼 */}
-      <motion.button
+      <m.button
         onClick={onClick}
         disabled={disabled || loading}
         className="relative w-full py-4 px-6 rounded-2xl font-bold text-lg text-white flex items-center justify-center gap-3 overflow-hidden"
@@ -105,7 +105,7 @@ export function OnboardingCTA({
         />
 
         {/* 스파클 효과 */}
-        <motion.div
+        <m.div
           className="absolute top-2 right-4"
           animate={{
             scale: [1, 1.3, 1],
@@ -115,7 +115,7 @@ export function OnboardingCTA({
           transition={{ duration: 1.5, repeat: Infinity }}
         >
           <Sparkles size={16} className="text-white/60" />
-        </motion.div>
+        </m.div>
 
         {/* 버튼 컨텐츠 */}
         {loading ? (
@@ -124,9 +124,9 @@ export function OnboardingCTA({
           <>
             <Flame size={22} className="text-white" />
             <span>{text}</span>
-            <motion.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>
+            <m.div animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>
               <ChevronRight size={22} className="text-white/80" />
-            </motion.div>
+            </m.div>
           </>
         )}
 
@@ -134,7 +134,7 @@ export function OnboardingCTA({
         {!loading && (
           <>
             {[...Array(3)].map((_, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 className="absolute w-1 h-1 rounded-full bg-white/40"
                 style={{
@@ -156,11 +156,11 @@ export function OnboardingCTA({
             ))}
           </>
         )}
-      </motion.button>
+      </m.button>
 
       {/* 보조 텍스트 */}
       {subtext && (
-        <motion.p
+        <m.p
           className="text-center mt-4 text-sm"
           style={{ color: colors.text.tertiary }}
           initial={{ opacity: 0 }}
@@ -168,7 +168,7 @@ export function OnboardingCTA({
           transition={{ delay: 0.3 }}
         >
           {subtext}
-        </motion.p>
+        </m.p>
       )}
     </div>
   );
@@ -184,7 +184,7 @@ interface OnboardingSkipButtonProps {
 
 export function OnboardingSkipButton({ onClick, text = '건너뛰기' }: OnboardingSkipButtonProps) {
   return (
-    <motion.button
+    <m.button
       onClick={onClick}
       className="px-4 py-3 min-h-[44px] rounded-full flex items-center gap-1.5 text-sm font-medium transition-colors"
       style={{
@@ -202,7 +202,7 @@ export function OnboardingSkipButton({ onClick, text = '건너뛰기' }: Onboard
       aria-label="온보딩 건너뛰기"
     >
       <span>{text}</span>
-    </motion.button>
+    </m.button>
   );
 }
 
@@ -222,7 +222,7 @@ export function OnboardingNextButton({ onClick, progress = 0 }: OnboardingNextBu
   const strokeDashoffset = circumference * (1 - progress);
 
   return (
-    <motion.button
+    <m.button
       onClick={onClick}
       className="relative flex items-center justify-center"
       style={{
@@ -253,7 +253,7 @@ export function OnboardingNextButton({ onClick, progress = 0 }: OnboardingNextBu
           strokeWidth={strokeWidth}
         />
         {/* 진행률 원 */}
-        <motion.circle
+        <m.circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
@@ -278,7 +278,7 @@ export function OnboardingNextButton({ onClick, progress = 0 }: OnboardingNextBu
       >
         <ChevronRight size={24} className="text-white" />
       </div>
-    </motion.button>
+    </m.button>
   );
 }
 
