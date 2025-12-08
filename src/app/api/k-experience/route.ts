@@ -176,6 +176,7 @@ export async function POST(request: NextRequest) {
 
     // TODO: Add admin role check
     // For now, any authenticated user can create (will be restricted later)
+    // Example: Check if user.app_metadata.role === 'admin' or similar
 
     const body = await request.json();
     const {

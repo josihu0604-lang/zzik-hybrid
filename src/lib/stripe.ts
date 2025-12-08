@@ -22,10 +22,6 @@ export function getStripePriceId(
   country: CountryCode,
   experienceType: ExperienceType
 ): string | null {
-  if (typeof process === 'undefined' || !process.env) {
-    return null;
-  }
-  
   const envKey = `STRIPE_PRICE_${country}_${experienceType.toUpperCase()}`;
   
   // Try to get from environment
@@ -45,13 +41,13 @@ export function getStripePriceId(
 export function getAllPriceIdsForType(experienceType: ExperienceType): Record<CountryCode, string | null> {
   const countries: CountryCode[] = ['US', 'TH', 'ID', 'PH', 'KZ', 'TW', 'SG', 'MY', 'JP', 'KR', 'CN'];
   
-  const priceIds: Record<CountryCode, string | null> = {} as any;
+  const priceIds: Partial<Record<CountryCode, string | null>> = {};
   
   for (const country of countries) {
     priceIds[country] = getStripePriceId(country, experienceType);
   }
   
-  return priceIds;
+  return priceIds as Record<CountryCode, string | null>;
 }
 
 /**
@@ -80,9 +76,9 @@ export function validateStripePriceIds(): { country: CountryCode; type: Experien
  * Stripe configuration
  */
 export const STRIPE_CONFIG = {
-  publishableKey: typeof process !== 'undefined' && process.env ? (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '') : '',
-  secretKey: typeof process !== 'undefined' && process.env ? (process.env.STRIPE_SECRET_KEY || '') : '',
-  webhookSecret: typeof process !== 'undefined' && process.env ? (process.env.STRIPE_WEBHOOK_SECRET || '') : '',
+  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
+  secretKey: process.env.STRIPE_SECRET_KEY || '',
+  webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || '',
   
   // Stripe Checkout settings
   mode: 'payment' as const,

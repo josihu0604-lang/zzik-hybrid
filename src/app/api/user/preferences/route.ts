@@ -105,6 +105,7 @@ export async function PUT(request: NextRequest) {
 
     // TODO: Store preferences in database once columns are added
     // For now, just validate and return the preferences
+    // Columns to add: currency_preference, country_preference to users table
     const finalCountry = (countryCode || 'US') as CountryCode;
     const finalCurrency = (currencyCode || COUNTRIES[finalCountry].currency) as CurrencyCode;
 

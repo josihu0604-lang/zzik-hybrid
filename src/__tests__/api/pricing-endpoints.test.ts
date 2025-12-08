@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 // Mock Next.js request/response
 const mockRequest = (url: string, options?: { headers?: Record<string, string> }) => {
