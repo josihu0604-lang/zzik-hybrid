@@ -3,8 +3,11 @@
  * 
  * Maps experience types and countries to Stripe Price IDs
  * Price IDs are configured in environment variables
+ * 
+ * @server-only This module should only be used on the server side
  */
 
+import 'server-only';
 import { type CountryCode, type ExperienceType } from '@/lib/currency';
 
 /**
@@ -19,6 +22,10 @@ export function getStripePriceId(
   country: CountryCode,
   experienceType: ExperienceType
 ): string | null {
+  if (typeof process === 'undefined' || !process.env) {
+    return null;
+  }
+  
   const envKey = `STRIPE_PRICE_${country}_${experienceType.toUpperCase()}`;
   
   // Try to get from environment
@@ -73,9 +80,9 @@ export function validateStripePriceIds(): { country: CountryCode; type: Experien
  * Stripe configuration
  */
 export const STRIPE_CONFIG = {
-  publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '',
-  secretKey: process.env.STRIPE_SECRET_KEY || '',
-  webhookSecret: process.env.STRIPE_WEBHOOK_SECRET || '',
+  publishableKey: typeof process !== 'undefined' && process.env ? (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '') : '',
+  secretKey: typeof process !== 'undefined' && process.env ? (process.env.STRIPE_SECRET_KEY || '') : '',
+  webhookSecret: typeof process !== 'undefined' && process.env ? (process.env.STRIPE_WEBHOOK_SECRET || '') : '',
   
   // Stripe Checkout settings
   mode: 'payment' as const,
