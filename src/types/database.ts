@@ -715,6 +715,117 @@ export interface Database {
           expires_at?: string | null;
         };
       };
+      k_experiences: {
+        Row: {
+          id: string;
+          type: 'hightough' | 'soundcheck' | 'backstage' | 'popup';
+          title: string;
+          description: string | null;
+          artist_name: string;
+          artist_image: string | null;
+          cover_image: string | null;
+          location: string;
+          country: string;
+          base_price_usd: number;
+          spots_total: number;
+          spots_taken: number;
+          deadline: string;
+          status: 'upcoming' | 'ongoing' | 'closed';
+          stripe_price_ids: Json | null;
+          created_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          type: 'hightough' | 'soundcheck' | 'backstage' | 'popup';
+          title: string;
+          description?: string | null;
+          artist_name: string;
+          artist_image?: string | null;
+          cover_image?: string | null;
+          location: string;
+          country: string;
+          base_price_usd: number;
+          spots_total: number;
+          spots_taken?: number;
+          deadline: string;
+          status?: 'upcoming' | 'ongoing' | 'closed';
+          stripe_price_ids?: Json | null;
+          created_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          type?: 'hightough' | 'soundcheck' | 'backstage' | 'popup';
+          title?: string;
+          description?: string | null;
+          artist_name?: string;
+          artist_image?: string | null;
+          cover_image?: string | null;
+          location?: string;
+          country?: string;
+          base_price_usd?: number;
+          spots_total?: number;
+          spots_taken?: number;
+          deadline?: string;
+          status?: 'upcoming' | 'ongoing' | 'closed';
+          stripe_price_ids?: Json | null;
+          updated_at?: string;
+        };
+      };
+      k_experience_bookings: {
+        Row: {
+          id: string;
+          experience_id: string;
+          user_id: string;
+          status: 'pending' | 'confirmed' | 'cancelled';
+          stripe_session_id: string | null;
+          stripe_payment_intent: string | null;
+          amount_paid: number;
+          currency: string;
+          country_code: string;
+          referral_code: string | null;
+          leader_id: string | null;
+          payment_method: string | null;
+          confirmed_at: string | null;
+          cancelled_at: string | null;
+          cancellation_reason: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          experience_id: string;
+          user_id: string;
+          status?: 'pending' | 'confirmed' | 'cancelled';
+          stripe_session_id?: string | null;
+          stripe_payment_intent?: string | null;
+          amount_paid: number;
+          currency: string;
+          country_code: string;
+          referral_code?: string | null;
+          leader_id?: string | null;
+          payment_method?: string | null;
+          confirmed_at?: string | null;
+          cancelled_at?: string | null;
+          cancellation_reason?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          status?: 'pending' | 'confirmed' | 'cancelled';
+          stripe_session_id?: string | null;
+          stripe_payment_intent?: string | null;
+          amount_paid?: number;
+          currency?: string;
+          payment_method?: string | null;
+          confirmed_at?: string | null;
+          cancelled_at?: string | null;
+          cancellation_reason?: string | null;
+          updated_at?: string;
+        };
+      };
     };
     Views: {
       mv_popup_statistics: {
@@ -902,6 +1013,8 @@ export type Notification = Tables<'notifications'>;
 export type NotificationPreferences = Tables<'notification_preferences'>;
 export type PushSubscription = Tables<'push_subscriptions'>;
 export type PopupQrCode = Tables<'popup_qr_codes'>;
+export type KExperience = Tables<'k_experiences'>;
+export type KExperienceBooking = Tables<'k_experience_bookings'>;
 
 // ============================================================================
 // Supabase Query Response Types
