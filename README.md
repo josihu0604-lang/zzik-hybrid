@@ -8,6 +8,7 @@
 ZZIK has pivoted from a local Korean review platform to a **Global K-Experience Verification Platform**, connecting 500M+ global K-Culture fans with authentic experiences.
 
 ### Key Features
+
 - **Triple Verification**: GPS + QR + Receipt verification for 99.2% accuracy.
 - **Global Pricing**: Region-specific pricing with PPP adjustments (KR, JP, US, TW, etc.).
 - **VIP Membership**: Tiered benefits (Silver, Gold, Platinum) for K-POP superfans.
@@ -24,6 +25,7 @@ ZZIK has pivoted from a local Korean review platform to a **Global K-Experience 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - pnpm
 
@@ -56,6 +58,7 @@ pnpm cap:open:android
 ## 🌐 Localization
 
 Currently supported locales:
+
 - 🇰🇷 Korean (`ko`) - Default
 - 🇺🇸 English (`en`)
 - 🇯🇵 Japanese (`ja`)
