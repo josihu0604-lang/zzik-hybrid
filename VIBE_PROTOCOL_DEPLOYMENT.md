@@ -20,6 +20,7 @@ Before deploying to production, ensure you have:
 ### Step 1: Execute Schema Migration
 
 The Vibe Protocol requires additional database tables for:
+
 - **Wallet addresses** and user balances
 - **Vibe cards** (NFT metadata)
 - **Transactions** (ledger)
@@ -137,6 +138,7 @@ The following API routes contain mock data and need to be updated with real Supa
 **Current State**: Returns mock vibe card data
 
 **Required Changes**:
+
 - Integrate with Supabase to create vibe card records
 - Update user Z-CASH balance
 - Create transaction record
@@ -147,6 +149,7 @@ The following API routes contain mock data and need to be updated with real Supa
 **Current State**: Returns mock NFT collection
 
 **Required Changes**:
+
 - Query `vibe_cards` table filtered by authenticated user
 - Return real user vibe cards
 
@@ -161,7 +164,10 @@ export async function GET() {
   const supabase = await createClient();
 
   // Get authenticated user
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
   if (authError || !user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -180,7 +186,7 @@ export async function GET() {
 
   return NextResponse.json({
     success: true,
-    data: data || []
+    data: data || [],
   });
 }
 ```
@@ -192,6 +198,7 @@ export async function GET() {
 ### Local Testing
 
 1. Start the development server:
+
    ```bash
    pnpm dev
    ```
@@ -270,11 +277,13 @@ In Vercel project settings:
 ### Monitoring
 
 1. **Error Tracking**: Configure Sentry (optional but recommended)
+
    ```bash
    NEXT_PUBLIC_SENTRY_DSN=https://...
    ```
 
 2. **Analytics**: Enable Google Analytics (optional)
+
    ```bash
    NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
    ```
@@ -301,7 +310,8 @@ In Vercel project settings:
 
 ### Issue: "Wallet not created automatically"
 
-**Solution**: 
+**Solution**:
+
 1. Check Privy configuration in dashboard
 2. Verify `PRIVY_APP_SECRET` is set correctly
 3. Check browser console for Privy errors
