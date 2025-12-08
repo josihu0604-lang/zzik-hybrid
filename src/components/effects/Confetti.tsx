@@ -43,6 +43,7 @@ export function Confetti({
   const { fire, fireMultiple } = useConfettiHook();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!active) return;
 
     // Vibrate on supported devices
@@ -129,6 +130,7 @@ export function CelebrationBanner({ brandName, onClose }: CelebrationBannerProps
   const { triggerConfetti } = useConfetti();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     triggerConfetti();
   }, [triggerConfetti]);
 

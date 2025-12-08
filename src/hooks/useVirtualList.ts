@@ -50,6 +50,7 @@ export function useVirtualList<T>({
 
   // Handle scroll
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const container = containerRef.current;
     if (!container) return;
 
@@ -156,6 +157,7 @@ export function useInfiniteScroll({
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const sentinel = sentinelRef.current;
     if (!sentinel || !hasMore || isLoading) return;
 

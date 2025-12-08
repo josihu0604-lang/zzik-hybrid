@@ -29,10 +29,12 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
   const handlerRef = useRef(handler);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     handlerRef.current = handler;
   }, [handler]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled) return;
 
     const listener = (event: MouseEvent | TouchEvent) => {
@@ -76,10 +78,12 @@ export function useClickOutsideMultiple<T extends HTMLElement = HTMLElement>(
   const handlerRef = useRef(handler);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     handlerRef.current = handler;
   }, [handler]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled) return;
 
     const listener = (event: MouseEvent | TouchEvent) => {

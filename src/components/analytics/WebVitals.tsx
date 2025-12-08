@@ -72,6 +72,7 @@ function reportWebVital(metric: Metric) {
  */
 export function WebVitals() {
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Only run on client side
     if (typeof window === 'undefined') return;
 

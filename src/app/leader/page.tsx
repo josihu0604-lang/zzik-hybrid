@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Crown, Settings, LogIn, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/context/auth-context';
@@ -121,12 +121,12 @@ const _DEMO_LEADER_DATA: LeaderData = {
 // Login CTA Component
 function LoginCTA() {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center"
     >
-      <motion.div
+      <m.div
         className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
         style={{
           background:
@@ -144,7 +144,7 @@ function LoginCTA() {
         transition={{ duration: 2, repeat: Infinity }}
       >
         <Crown size={40} style={{ color: colors.spark[400] }} />
-      </motion.div>
+      </m.div>
 
       <h2 className="text-white text-xl font-black mb-2">리더 대시보드</h2>
       <p className="text-linear-text-tertiary text-sm mb-8 max-w-xs">
@@ -167,7 +167,7 @@ function LoginCTA() {
           로그인하기
         </Button>
       </Link>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -194,7 +194,7 @@ function TabNavigation({
       }}
     >
       {tabs.map((tab) => (
-        <motion.button
+        <m.button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
           whileHover={{ scale: 1.02 }}
@@ -206,7 +206,7 @@ function TabNavigation({
           }}
         >
           {tab.label}
-        </motion.button>
+        </m.button>
       ))}
     </div>
   );
@@ -345,7 +345,7 @@ function LeaderPageContent() {
         <AnimatePresence mode="wait">
           {/* Demo Badge */}
           {isDemo && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
@@ -357,7 +357,7 @@ function LeaderPageContent() {
               }}
             >
               데모 모드 - 실제 데이터와 다를 수 있습니다
-            </motion.div>
+            </m.div>
           )}
 
           {/* Tab Navigation */}
@@ -365,7 +365,7 @@ function LeaderPageContent() {
 
           {/* Overview Tab */}
           {activeTab === 'overview' && (
-            <motion.div
+            <m.div
               key="overview"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -419,12 +419,12 @@ function LeaderPageContent() {
                 </div>
                 <CampaignList campaigns={leaderData.campaigns} />
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {/* Referrals Tab */}
           {activeTab === 'referrals' && (
-            <motion.div
+            <m.div
               key="referrals"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -472,12 +472,12 @@ function LeaderPageContent() {
                 referralCode={leaderData.referralCode}
                 referralLink={leaderData.referralLink}
               />
-            </motion.div>
+            </m.div>
           )}
 
           {/* Payouts Tab */}
           {activeTab === 'payouts' && (
-            <motion.div
+            <m.div
               key="payouts"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -495,7 +495,7 @@ function LeaderPageContent() {
 
               {/* Payout History */}
               <PayoutHistory payouts={demoPayouts} />
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

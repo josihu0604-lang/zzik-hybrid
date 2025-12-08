@@ -1,7 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   Users,
   Store,
@@ -51,7 +52,7 @@ function StatCard({
   color: string;
 }) {
   return (
-    <motion.div
+    <m.div
       className="p-6 rounded-2xl"
       style={{
         background: colors.space[800],
@@ -81,7 +82,7 @@ function StatCard({
           <Icon size={24} style={{ color }} />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -204,6 +205,7 @@ export default function AdminDashboardPage() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchStats();
   }, []);
 
@@ -328,7 +330,7 @@ export default function AdminDashboardPage() {
           빠른 작업
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a
+          <Link
             href="/admin/users"
             className="p-4 rounded-xl text-center transition-colors"
             style={{
@@ -340,8 +342,8 @@ export default function AdminDashboardPage() {
             <p className="text-sm" style={{ color: colors.text.primary }}>
               사용자 관리
             </p>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/popups"
             className="p-4 rounded-xl text-center transition-colors"
             style={{
@@ -353,8 +355,8 @@ export default function AdminDashboardPage() {
             <p className="text-sm" style={{ color: colors.text.primary }}>
               팝업 승인
             </p>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/payouts"
             className="p-4 rounded-xl text-center transition-colors"
             style={{
@@ -366,8 +368,8 @@ export default function AdminDashboardPage() {
             <p className="text-sm" style={{ color: colors.text.primary }}>
               정산 처리
             </p>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/admin/reports"
             className="p-4 rounded-xl text-center transition-colors"
             style={{
@@ -379,7 +381,7 @@ export default function AdminDashboardPage() {
             <p className="text-sm" style={{ color: colors.text.primary }}>
               신고 처리
             </p>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Copy, Share2, Check, Link2 } from 'lucide-react';
 import { useToast } from '@/components/ui/Toast';
 import { colors } from '@/lib/design-tokens';
@@ -61,7 +61,7 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl p-5 ${className}`}
@@ -92,7 +92,7 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
           >
             {referralCode}
           </span>
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleCopyCode}
@@ -106,7 +106,7 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
             ) : (
               <Copy size={18} style={{ color: colors.spark[400] }} />
             )}
-          </motion.button>
+          </m.button>
         </div>
       </div>
 
@@ -121,7 +121,7 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
           }}
         >
           <span className="text-white text-sm truncate flex-1 mr-2 font-mono">{referralLink}</span>
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleCopyLink}
@@ -135,12 +135,12 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
             ) : (
               <Copy size={18} className="text-white" />
             )}
-          </motion.button>
+          </m.button>
         </div>
       </div>
 
       {/* Share Button */}
-      <motion.button
+      <m.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={handleShare}
@@ -153,13 +153,13 @@ export function ReferralCard({ referralCode, referralLink, className = '' }: Ref
       >
         <Share2 size={18} />
         친구에게 공유하기
-      </motion.button>
+      </m.button>
 
       {/* Info */}
       <p className="text-center text-linear-text-tertiary text-xs mt-3">
         친구가 체크인하면 수익이 발생해요!
       </p>
-    </motion.div>
+    </m.div>
   );
 }
 

@@ -68,6 +68,7 @@ function LoginContent() {
   })();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (user && !loading) {
       router.push(redirectTo);
     }

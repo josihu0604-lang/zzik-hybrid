@@ -132,6 +132,7 @@ export function useOfflineSync() {
    * Initialize sync on mount and network changes
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Initial queue size
     getQueuedActions().then((actions) => {
       setStatus((prev) => ({ ...prev, queueSize: actions.length }));

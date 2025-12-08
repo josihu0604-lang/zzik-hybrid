@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { Home, Search, ArrowLeft, MapPin } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
@@ -19,7 +19,7 @@ export default function NotFound() {
       role="main"
     >
       {/* Lost Icon Animation (DES-199: 404 페이지 브랜드 적용) */}
-      <motion.div
+      <m.div
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: 'spring', duration: 0.8 }}
@@ -38,7 +38,7 @@ export default function NotFound() {
         </div>
 
         {/* Floating question mark */}
-        <motion.span
+        <m.span
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -46,11 +46,11 @@ export default function NotFound() {
           aria-hidden="true"
         >
           ?
-        </motion.span>
-      </motion.div>
+        </m.span>
+      </m.div>
 
       {/* 404 Text */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -72,10 +72,10 @@ export default function NotFound() {
           <br />
           URL을 다시 확인해주세요.
         </p>
-      </motion.div>
+      </m.div>
 
       {/* Action Buttons */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
@@ -94,10 +94,10 @@ export default function NotFound() {
             팝업 검색
           </Button>
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* Back Link */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
@@ -111,7 +111,7 @@ export default function NotFound() {
         >
           이전 페이지로 돌아가기
         </Button>
-      </motion.div>
+      </m.div>
 
       {/* Decorative Elements */}
       <div

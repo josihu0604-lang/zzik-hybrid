@@ -39,10 +39,46 @@ const nextConfig: NextConfig = {
       'date-fns',
       'react-map-gl',
       'mapbox-gl',
+      '@supabase/supabase-js',
+      'react-hook-form',
     ],
     // Performance optimizations
     optimizeCss: true,
     optimizeServerReact: true,
+    // Partial Prerendering is now enabled via cacheComponents
+    // Note: PPR feature moved to cacheComponents in Next.js 15+
+  },
+
+  // Webpack optimizations
+  webpack: (config, { isServer }) => {
+    // Optimize bundle splitting
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            // Separate vendor chunks
+            mapbox: {
+              test: /[\\/]node_modules[\\/](mapbox-gl|react-map-gl)[\\/]/,
+              name: 'mapbox',
+              priority: 20,
+            },
+            framer: {
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              name: 'framer',
+              priority: 15,
+            },
+            supabase: {
+              test: /[\\/]node_modules[\\/]@supabase[\\/]/,
+              name: 'supabase',
+              priority: 10,
+            },
+          },
+        },
+      };
+    }
+    return config;
   },
 
   // Production optimizations

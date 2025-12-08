@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { colors, gradients } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -56,7 +56,7 @@ function FlameParticles({
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       {/* 떠다니는 불꽃 파티클 */}
       {Array.from({ length: 12 }).map((_, i) => (
-        <motion.div
+        <m.div
           key={i}
           className="absolute rounded-full"
           style={{
@@ -83,7 +83,7 @@ function FlameParticles({
       ))}
 
       {/* 글로우 오브 (큰 원) */}
-      <motion.div
+      <m.div
         className="absolute w-64 h-64 rounded-full"
         style={{
           left: '50%',
@@ -146,7 +146,7 @@ export function OnboardingStep({
         : gradients.successFade;
 
   return (
-    <motion.div
+    <m.div
       className="absolute inset-0 flex flex-col"
       custom={direction}
       variants={slideVariants}
@@ -169,17 +169,17 @@ export function OnboardingStep({
       {/* 메인 컨텐츠 영역 */}
       <div className="flex-1 flex flex-col items-center justify-center px-8 pt-20 pb-32">
         {/* 아이콘/일러스트 영역 */}
-        <motion.div
+        <m.div
           className="mb-10"
           initial={{ scale: 0.8, opacity: 0, y: 20 }}
           animate={isActive ? { scale: 1, opacity: 1, y: 0 } : { scale: 0.8, opacity: 0, y: 20 }}
           transition={{ delay: 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           {icon}
-        </motion.div>
+        </m.div>
 
         {/* 텍스트 영역 */}
-        <motion.div
+        <m.div
           className="text-center max-w-sm"
           initial={{ y: 30, opacity: 0 }}
           animate={isActive ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
@@ -197,7 +197,7 @@ export function OnboardingStep({
 
           {/* 강조 텍스트 (있을 경우) */}
           {emphasis && (
-            <motion.p
+            <m.p
               className="text-lg font-bold mb-3"
               style={{ color: colors.flame[500] }}
               initial={{ opacity: 0 }}
@@ -205,7 +205,7 @@ export function OnboardingStep({
               transition={{ delay: 0.3, duration: 0.4 }}
             >
               {emphasis}
-            </motion.p>
+            </m.p>
           )}
 
           {/* 서브텍스트 */}
@@ -215,21 +215,21 @@ export function OnboardingStep({
           >
             {subtext}
           </p>
-        </motion.div>
+        </m.div>
 
         {/* 추가 컨텐츠 (CTA 등) */}
         {children && (
-          <motion.div
+          <m.div
             className="mt-10 w-full max-w-sm"
             initial={{ y: 30, opacity: 0 }}
             animate={isActive ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
             transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             {children}
-          </motion.div>
+          </m.div>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

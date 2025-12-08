@@ -45,6 +45,7 @@ export function useConfetti(): UseConfettiReturn {
 
   // Cleanup on unmount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);

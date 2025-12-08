@@ -2,8 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { Home, Map, Flame, Bell, User } from 'lucide-react';
+import { m } from 'framer-motion';
+import { Home, Map, Flame, Bell, Wallet } from 'lucide-react';
 import { colors, layout, gradients, shadows, rgba } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
 import { useNotifications } from '@/hooks/useNotifications';
@@ -34,7 +34,7 @@ const TABS: TabItem[] = [
   { id: 'map', label: '지도', icon: Map, path: '/map' },
   { id: 'hot', label: '', icon: Flame, path: '/', isCenter: true },
   { id: 'alerts', label: '알림', icon: Bell, path: '/notifications' },
-  { id: 'me', label: 'MY', icon: User, path: '/me' },
+  { id: 'wallet', label: '자산', icon: Wallet, path: '/wallet' },
 ];
 
 export function BottomTabBar() {
@@ -59,7 +59,7 @@ export function BottomTabBar() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50"
+      className="fixed bottom-0 left-0 right-0 z-50 lg:w-[430px] lg:left-1/2 lg:-translate-x-1/2"
       style={{
         paddingBottom: layout.bottomNav.safeAreaBottom,
       }}
@@ -100,7 +100,7 @@ export function BottomTabBar() {
                 className="relative -mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame-500 rounded-full"
                 aria-label="핫 팝업 보기"
               >
-                <motion.div
+                <m.div
                   className="flex items-center justify-center rounded-full"
                   style={{
                     width: 56,
@@ -112,7 +112,7 @@ export function BottomTabBar() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <tab.icon size={28} color="#fff" strokeWidth={2.5} />
-                </motion.div>
+                </m.div>
               </Link>
             );
           }
@@ -126,7 +126,7 @@ export function BottomTabBar() {
               className="relative flex flex-col items-center justify-center flex-1 h-full focus-visible:outline-none"
               aria-current={isActive ? 'page' : undefined}
             >
-              <motion.div className="flex flex-col items-center gap-1" whileTap={{ scale: 0.9 }}>
+              <m.div className="flex flex-col items-center gap-1" whileTap={{ scale: 0.9 }}>
                 {/* 아이콘 */}
                 <div className="relative">
                   <tab.icon
@@ -160,13 +160,13 @@ export function BottomTabBar() {
 
                 {/* 활성 인디케이터 */}
                 {isActive && (
-                  <motion.div
+                  <m.div
                     layoutId="activeTab"
                     className="absolute -bottom-1 w-1 h-1 rounded-full"
                     style={{ background: colors.flame[500] }}
                   />
                 )}
-              </motion.div>
+              </m.div>
             </Link>
           );
         })}

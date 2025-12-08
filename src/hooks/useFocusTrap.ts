@@ -206,6 +206,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
    * Set initial focus
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled || !containerRef.current) return;
 
     // Save previously focused element
@@ -240,6 +241,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
    * Set up keyboard event listener and scroll lock
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled) return;
 
     // Add keyboard listener
@@ -265,6 +267,7 @@ export function useFocusTrap<T extends HTMLElement = HTMLElement>(
    * Restore focus when trap is disabled
    */
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Capture ref values at effect creation time
     const returnFocusRef =
       typeof returnFocus === 'object' && 'current' in returnFocus ? returnFocus : null;

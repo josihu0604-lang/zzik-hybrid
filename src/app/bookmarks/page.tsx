@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import {
   ChevronLeft,
@@ -123,7 +123,7 @@ function BookmarkCard({
   const isConfirmed = popup.status === 'confirmed';
 
   return (
-    <motion.div
+    <m.div
       layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -226,7 +226,7 @@ function BookmarkCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -308,7 +308,7 @@ export default function BookmarksPage() {
             {/* Filter Tabs */}
             <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
               {(['all', 'funding', 'confirmed'] as FilterType[]).map((f) => (
-                <motion.button
+                <m.button
                   key={f}
                   onClick={() => setFilter(f)}
                   whileTap={{ scale: 0.95 }}
@@ -335,7 +335,7 @@ export default function BookmarksPage() {
                   >
                     {filterCounts[f]}
                   </span>
-                </motion.button>
+                </m.button>
               ))}
             </div>
 

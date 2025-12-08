@@ -1,7 +1,7 @@
 'use client';
 
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Marker } from 'react-map-gl';
 import { Check, Flame } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
@@ -57,7 +57,7 @@ export const PopupMarker = memo(function PopupMarker({
         onClick();
       }}
     >
-      <motion.div
+      <m.div
         className="relative cursor-pointer"
         tabIndex={0}
         role="button"
@@ -84,7 +84,7 @@ export const PopupMarker = memo(function PopupMarker({
       >
         {/* Outer glow for confirmed/hot popups */}
         {(isConfirmed || isHot) && (
-          <motion.div
+          <m.div
             className="absolute -inset-2 rounded-full"
             style={{
               background: isConfirmed
@@ -109,7 +109,7 @@ export const PopupMarker = memo(function PopupMarker({
 
         {/* Hover/Select glow effect */}
         {(isHovered || isSelected) && (
-          <motion.div
+          <m.div
             className="absolute inset-0 rounded-full blur-lg"
             style={{
               background: isConfirmed ? colors.success : categoryColor,
@@ -138,7 +138,7 @@ export const PopupMarker = memo(function PopupMarker({
               cy={radius + 2}
             />
             {/* Progress circle */}
-            <motion.circle
+            <m.circle
               stroke={categoryColor}
               fill="none"
               strokeWidth={strokeWidth}
@@ -184,7 +184,7 @@ export const PopupMarker = memo(function PopupMarker({
 
         {/* Participant count badge */}
         {popup.totalParticipants > 50 && (
-          <motion.div
+          <m.div
             className="absolute -top-1 -right-1 px-1.5 py-0.5 rounded-full text-micro font-bold"
             style={{
               background: isConfirmed ? colors.success : categoryColor,
@@ -198,12 +198,12 @@ export const PopupMarker = memo(function PopupMarker({
             {popup.totalParticipants > 999
               ? `${Math.floor(popup.totalParticipants / 1000)}k`
               : popup.totalParticipants}
-          </motion.div>
+          </m.div>
         )}
 
         {/* Selected pulse animation */}
         {isSelected && (
-          <motion.div
+          <m.div
             className="absolute inset-0 rounded-full"
             style={{
               background: isConfirmed ? colors.success : categoryColor,
@@ -222,7 +222,7 @@ export const PopupMarker = memo(function PopupMarker({
 
         {/* Tooltip on hover */}
         {isHovered && !isSelected && (
-          <motion.div
+          <m.div
             className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg whitespace-nowrap pointer-events-none"
             style={{
               background: 'rgba(18, 19, 20, 0.95)',
@@ -270,9 +270,9 @@ export const PopupMarker = memo(function PopupMarker({
                 borderTop: '5px solid rgba(18, 19, 20, 0.95)',
               }}
             />
-          </motion.div>
+          </m.div>
         )}
-      </motion.div>
+      </m.div>
     </Marker>
   );
 });

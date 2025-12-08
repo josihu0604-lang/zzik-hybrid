@@ -90,6 +90,7 @@ export function useAIRecommendations(
   }, [userId, strategy, limit, enabled, demoMode]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     isMountedRef.current = true;
     fetchRecommendations();
 

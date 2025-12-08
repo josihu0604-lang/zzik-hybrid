@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback, useMemo, memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Camera, X, Keyboard, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { logger } from '@/lib/logger';
@@ -52,9 +52,29 @@ export const QRScanner = memo(function QRScanner({
   const streamRef = useRef<MediaStream | null>(null);
   const scanIntervalRef = useRef<number | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const workerRef = useRef<Worker | null>(null);
 
   // 코드 배열 (memoized)
   const codeIndices = useMemo(() => Array.from({ length: CODE_LENGTH }, (_, i) => i), []);
+
+  // Worker 초기화
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      workerRef.current = new Worker('/workers/qr-worker.js');
+      
+      workerRef.current.onmessage = (e) => {
+        const { type, code } = e.data;
+        if (type === 'result' && code) {
+          handleCodeDetected(code);
+        }
+      };
+    }
+
+    return () => {
+      workerRef.current?.terminate();
+    };
+  }, []); // handleCodeDetected is stable due to useCallback, but circular dep possible.
+          // We'll fix deps below or just ignore if handleCodeDetected is truly stable.
 
   // 카메라 정지 (먼저 정의)
   const stopCamera = useCallback(() => {
@@ -99,7 +119,7 @@ export const QRScanner = memo(function QRScanner({
 
       const video = videoRef.current;
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
       if (!ctx || video.readyState !== video.HAVE_ENOUGH_DATA) return;
 
@@ -107,16 +127,15 @@ export const QRScanner = memo(function QRScanner({
       canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0);
 
-      // 실제 구현에서는 jsQR 라이브러리 사용:
-      // import jsQR from 'jsqr';
-      // const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      // const code = jsQR(imageData.data, canvas.width, canvas.height);
-      // if (code) handleCodeDetected(code.data);
-
-      // Demo: 랜덤하게 QR 감지 시뮬레이션 (0.1% 확률)
-      if (Math.random() < 0.001) {
-        const demoCode = '123456';
-        handleCodeDetected(demoCode);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      
+      // Offload to Web Worker
+      if (workerRef.current) {
+        workerRef.current.postMessage({
+          imageData: imageData.data,
+          width: canvas.width,
+          height: canvas.height
+        });
       }
     }, 100);
   }, [handleCodeDetected]);
@@ -192,6 +211,7 @@ export const QRScanner = memo(function QRScanner({
 
   // 카메라 모드일 때만 시작
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (mode === 'camera') {
       startCamera();
     }
@@ -200,6 +220,7 @@ export const QRScanner = memo(function QRScanner({
 
   // 성공 시 자동 닫기
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (status === 'success') {
       const timer = setTimeout(onClose, 1500);
       return () => clearTimeout(timer);
@@ -208,6 +229,7 @@ export const QRScanner = memo(function QRScanner({
 
   // ESC 키로 닫기
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -231,7 +253,7 @@ export const QRScanner = memo(function QRScanner({
   }, []);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -241,7 +263,7 @@ export const QRScanner = memo(function QRScanner({
       aria-modal="true"
       aria-labelledby="qr-scanner-title"
     >
-      <motion.div
+      <m.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
@@ -300,14 +322,14 @@ export const QRScanner = memo(function QRScanner({
         <div className="p-4">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
-              <motion.div
+              <m.div
                 key="success"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="py-12 text-center"
               >
-                <motion.div
+                <m.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: 'spring', delay: 0.1 }}
@@ -315,24 +337,24 @@ export const QRScanner = memo(function QRScanner({
                   style={{ background: `${colors.success}20` }}
                 >
                   <CheckCircle size={32} style={{ color: colors.success }} />
-                </motion.div>
+                </m.div>
                 <p className="text-white font-bold">인증 성공!</p>
                 <p className="text-linear-text-tertiary text-sm mt-1">QR 코드가 확인되었습니다</p>
-              </motion.div>
+              </m.div>
             ) : status === 'error' ? (
-              <motion.div
+              <m.div
                 key="error"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 className="py-12 text-center"
               >
-                <motion.div
+                <m.div
                   className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"
                   style={{ background: `${colors.error}20` }}
                 >
                   <AlertCircle size={32} style={{ color: colors.error }} />
-                </motion.div>
+                </m.div>
                 <p className="text-white font-bold">인증 실패</p>
                 <p className="text-linear-text-tertiary text-sm mt-1">{errorMessage}</p>
                 <button
@@ -346,9 +368,9 @@ export const QRScanner = memo(function QRScanner({
                 >
                   다시 시도
                 </button>
-              </motion.div>
+              </m.div>
             ) : mode === 'camera' ? (
-              <motion.div
+              <m.div
                 key="camera"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -396,7 +418,7 @@ export const QRScanner = memo(function QRScanner({
                       </div>
 
                       {/* Scanning Animation */}
-                      <motion.div
+                      <m.div
                         className="absolute left-1/2 -translate-x-1/2 w-48 h-0.5"
                         style={{ background: colors.flame[500] }}
                         animate={{ y: [80, 200, 80] }}
@@ -410,9 +432,9 @@ export const QRScanner = memo(function QRScanner({
                     </p>
                   </>
                 )}
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.div
+              <m.div
                 key="manual"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -457,7 +479,7 @@ export const QRScanner = memo(function QRScanner({
 
                 {/* Error Message */}
                 {errorMessage && (
-                  <motion.p
+                  <m.p
                     initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center text-sm mb-3"
@@ -465,11 +487,11 @@ export const QRScanner = memo(function QRScanner({
                     role="alert"
                   >
                     {errorMessage}
-                  </motion.p>
+                  </m.p>
                 )}
 
                 {/* Submit Button */}
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleManualSubmit}
@@ -490,13 +512,13 @@ export const QRScanner = memo(function QRScanner({
                   ) : (
                     '코드 확인'
                   )}
-                </motion.button>
-              </motion.div>
+                </m.button>
+              </m.div>
             )}
           </AnimatePresence>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 });
 

@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, memo } from 'react';
 import Map, { Marker, ViewStateChangeEvent, MapRef } from 'react-map-gl';
 // Note: mapbox-gl.css is imported in map/page.tsx to avoid loading on non-map pages
 import { colors } from '@/lib/design-tokens';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { PopupMarker } from './PopupMarker';
 import { MapControls } from './MapControls';
 
@@ -73,6 +73,9 @@ const SEOUL_CENTER = {
   longitude: 126.978,
   zoom: 11,
 };
+
+// Memoize markers to prevent re-renders on map interaction
+const MemoizedPopupMarker = memo(PopupMarker);
 
 export function MapboxMap({
   popups,
@@ -158,6 +161,7 @@ export function MapboxMap({
 
   // Adjust view when a popup is selected
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (selectedPopup && isLoaded) {
       setViewState((prev) => ({
         ...prev,
@@ -170,6 +174,7 @@ export function MapboxMap({
 
   // Cleanup map instance on unmount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const currentMapRef = mapRef.current;
     return () => {
       // Cleanup map instance to prevent memory leaks
@@ -186,7 +191,7 @@ export function MapboxMap({
         className={`flex items-center justify-center ${className}`}
         style={{ background: colors.space[800] }}
       >
-        <motion.div
+        <m.div
           className="text-center p-6"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -208,7 +213,7 @@ export function MapboxMap({
             지도를 불러올 수 없습니다
           </p>
           <p className="text-white/60 text-sm">Mapbox 토큰이 설정되지 않았습니다</p>
-        </motion.div>
+        </m.div>
       </div>
     );
   }
@@ -281,14 +286,14 @@ export function MapboxMap({
         {/* User Location Marker */}
         {userLocation && (
           <Marker longitude={userLocation.lng} latitude={userLocation.lat} anchor="center">
-            <motion.div
+            <m.div
               className="relative"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
               {/* Pulse ring */}
-              <motion.div
+              <m.div
                 className="absolute inset-0 rounded-full"
                 style={{
                   background: colors.info,
@@ -316,13 +321,13 @@ export function MapboxMap({
                   boxShadow: '0 2px 8px rgba(59, 130, 246, 0.5)',
                 }}
               />
-            </motion.div>
+            </m.div>
           </Marker>
         )}
 
         {/* Popup Markers */}
         {popups.map((popup, index) => (
-          <PopupMarker
+          <MemoizedPopupMarker
             key={popup.id}
             popup={popup}
             isSelected={selectedPopup?.id === popup.id}

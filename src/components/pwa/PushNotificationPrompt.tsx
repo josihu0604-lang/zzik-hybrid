@@ -8,7 +8,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Bell, X } from 'lucide-react';
 import {
   isPushSupported,
@@ -27,6 +27,7 @@ export function PushNotificationPrompt() {
   const [isRequesting, setIsRequesting] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const checkShouldShow = async () => {
       // Check if push is supported
       if (!isPushSupported()) {
@@ -101,7 +102,7 @@ export function PushNotificationPrompt() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
@@ -185,7 +186,7 @@ export function PushNotificationPrompt() {
               }}
             />
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

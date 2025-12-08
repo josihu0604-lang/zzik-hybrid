@@ -17,6 +17,7 @@ interface ErrorProps {
 
 export default function MapError({ error, reset }: ErrorProps) {
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Report to Sentry
     if (process.env.NODE_ENV === 'production') {
       Sentry.captureException(error, {

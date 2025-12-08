@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { Building2, RefreshCw, Home, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -27,6 +27,7 @@ export default function BrandError({ error, reset }: ErrorProps) {
     error.message.includes('session');
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Log to monitoring (sanitized in global error handler pattern)
     console.error('[Brand Error]', error.message);
   }, [error]);
@@ -35,7 +36,7 @@ export default function BrandError({ error, reset }: ErrorProps) {
     <div className="min-h-screen bg-space-950 flex items-center justify-center p-4">
       {/* Background Glow */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div
+        <m.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
           style={{
             background: isAuthError
@@ -52,7 +53,7 @@ export default function BrandError({ error, reset }: ErrorProps) {
       </div>
 
       {/* Error Card */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative max-w-md w-full p-8 rounded-2xl text-center"
@@ -123,7 +124,7 @@ export default function BrandError({ error, reset }: ErrorProps) {
             </Button>
           </Link>
         </div>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

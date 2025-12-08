@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { m, useInView, useScroll, useTransform } from 'framer-motion';
 
 /**
  * ScrollAnimations - 스크롤 애니메이션 컴포넌트
@@ -55,7 +55,7 @@ export function FadeInOnScroll({
   const isInView = useInView(ref, { once, amount: threshold });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: yOffset }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
@@ -68,7 +68,7 @@ export function FadeInOnScroll({
       style={{ willChange: 'opacity, transform' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -128,7 +128,7 @@ export function SlideInOnScroll({
   const initial = getInitialPosition();
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, ...initial }}
       animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...initial }}
@@ -141,7 +141,7 @@ export function SlideInOnScroll({
       style={{ willChange: 'opacity, transform' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -181,7 +181,7 @@ export function ScaleOnScroll({
   const isInView = useInView(ref, { once, amount: 0.3 });
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, scale: startScale }}
       animate={isInView ? { opacity: 1, scale: endScale } : { opacity: 0, scale: startScale }}
@@ -194,7 +194,7 @@ export function ScaleOnScroll({
       style={{ willChange: 'opacity, transform' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -260,7 +260,7 @@ export function StaggeredList({
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       variants={container}
       initial="hidden"
@@ -268,11 +268,11 @@ export function StaggeredList({
       className={className}
     >
       {children.map((child, index) => (
-        <motion.div key={index} variants={item} className={itemClassName}>
+        <m.div key={index} variants={item} className={itemClassName}>
           {child}
-        </motion.div>
+        </m.div>
       ))}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -313,7 +313,7 @@ export function ParallaxScroll({
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      <motion.div style={{ y }}>{children}</motion.div>
+      <m.div style={{ y }}>{children}</m.div>
     </div>
   );
 }
@@ -350,7 +350,7 @@ export function ScrollProgress({
   const { scrollYProgress } = useScroll();
 
   return (
-    <motion.div
+    <m.div
       className={`fixed left-0 right-0 ${position === 'top' ? 'top-0' : 'bottom-0'} ${className}`}
       style={{
         height,
@@ -429,7 +429,7 @@ export function RevealOnScroll({
 
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
-      <motion.div
+      <m.div
         initial={{ clipPath: clipPath.initial }}
         animate={isInView ? { clipPath: clipPath.animate } : { clipPath: clipPath.initial }}
         transition={{
@@ -439,7 +439,7 @@ export function RevealOnScroll({
         }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

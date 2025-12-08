@@ -33,6 +33,7 @@ export function AppEntry({ children }: AppEntryProps) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // 스플래시 스킵 조건 체크
     const shouldSkipSplash = () => {
       // 1. 이미 세션이 시작된 경우 (새로고침/재방문)

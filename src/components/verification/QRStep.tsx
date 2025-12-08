@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useMemo, useRef, memo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { QrCode, Keyboard, Camera, Check, AlertCircle } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -106,14 +106,14 @@ export const QRStep = memo(function QRStep({
   // 인증 완료 상태
   if (result?.verified) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="py-8 text-center"
         role="status"
         aria-live="polite"
       >
-        <motion.div
+        <m.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', delay: 0.1 }}
@@ -122,12 +122,12 @@ export const QRStep = memo(function QRStep({
           aria-hidden="true"
         >
           <Check size={40} style={{ color: colors.success }} />
-        </motion.div>
+        </m.div>
         <h3 className="text-white font-bold text-xl mb-2">QR 인증 완료!</h3>
         <p className="text-linear-text-secondary mb-1">
           추가 <span style={{ color: colors.spark[500] }}>{result.score}점</span> 획득!
         </p>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -150,7 +150,7 @@ export const QRStep = memo(function QRStep({
         </div>
 
         <div className="space-y-3 mb-6" role="group" aria-label="인증 방식 선택">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleModeChange('camera')}
@@ -173,9 +173,9 @@ export const QRStep = memo(function QRStep({
               <p className="text-white font-semibold">카메라로 스캔</p>
               <p className="text-linear-text-tertiary text-sm">QR 코드를 직접 스캔합니다</p>
             </div>
-          </motion.button>
+          </m.button>
 
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleModeChange('manual')}
@@ -200,7 +200,7 @@ export const QRStep = memo(function QRStep({
                 {CODE_LENGTH}자리 코드를 입력합니다
               </p>
             </div>
-          </motion.button>
+          </m.button>
         </div>
 
         <button
@@ -245,7 +245,7 @@ export const QRStep = memo(function QRStep({
 
           {/* Scanning Animation */}
           {!prefersReducedMotion && (
-            <motion.div
+            <m.div
               className="absolute left-1/2 -translate-x-1/2 w-48 h-0.5"
               style={{ background: colors.flame[500] }}
               animate={{ y: [80, 200, 80] }}
@@ -335,7 +335,7 @@ export const QRStep = memo(function QRStep({
 
       {/* Error Message */}
       {displayError && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-center gap-2 mb-4"
@@ -346,7 +346,7 @@ export const QRStep = memo(function QRStep({
           <span className="text-sm" style={{ color: colors.error }}>
             {displayError}
           </span>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Actions */}
@@ -362,7 +362,7 @@ export const QRStep = memo(function QRStep({
         >
           뒤로
         </button>
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleManualSubmit}
@@ -375,7 +375,7 @@ export const QRStep = memo(function QRStep({
           aria-busy={isLoading}
         >
           {isLoading ? '확인 중...' : '확인'}
-        </motion.button>
+        </m.button>
       </div>
     </div>
   );

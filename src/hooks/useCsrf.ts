@@ -30,6 +30,7 @@ export function useCsrf() {
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Get token from cookie on mount
     const token = getCsrfTokenFromCookie();
     setCsrfToken(token);

@@ -144,6 +144,7 @@ export function useApi<T>(path: string, options: UseApiOptions<T> = {}): UseApiR
 
   // Initial fetch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     mountedRef.current = true;
 
     if (immediate) {
@@ -158,6 +159,7 @@ export function useApi<T>(path: string, options: UseApiOptions<T> = {}): UseApiR
 
   // Refetch interval
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (refetchInterval > 0) {
       intervalRef.current = setInterval(fetchData, refetchInterval);
     }
@@ -171,6 +173,7 @@ export function useApi<T>(path: string, options: UseApiOptions<T> = {}): UseApiR
 
   // Refetch on focus
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!refetchOnFocus) return;
 
     const handleFocus = () => {

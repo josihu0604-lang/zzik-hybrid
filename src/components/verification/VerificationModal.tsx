@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { X, MapPin, QrCode, Receipt, Check } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { GPSStep } from './GPSStep';
@@ -133,6 +133,7 @@ export function VerificationModal({
 
   // GPS 인증 결과 처리
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (gpsResult && currentStep === 'gps') {
       setGpsScore(gpsResult.score);
 
@@ -323,7 +324,7 @@ export function VerificationModal({
       {isOpen && (
         <>
           {/* Backdrop - DES-055: Debounced click, DES-057: Consistent exit */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -344,7 +345,7 @@ export function VerificationModal({
           />
 
           {/* Modal - DES-057: Consistent exit animation */}
-          <motion.div
+          <m.div
             ref={focusTrapRef}
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -409,7 +410,7 @@ export function VerificationModal({
 
                       return (
                         <div key={step.id} className="flex items-center">
-                          <motion.div
+                          <m.div
                             className="flex items-center gap-2 px-3 py-2 rounded-lg"
                             style={{
                               background: isActive
@@ -451,7 +452,7 @@ export function VerificationModal({
                             >
                               {step.label}
                             </span>
-                          </motion.div>
+                          </m.div>
 
                           {index < STEPS.length - 1 && (
                             <div
@@ -492,7 +493,7 @@ export function VerificationModal({
               <div className="px-5 pb-8 pb-safe">
                 <AnimatePresence mode="wait">
                   {currentStep === 'gps' && (
-                    <motion.div
+                    <m.div
                       key="gps"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -507,11 +508,11 @@ export function VerificationModal({
                         onVerify={handleGpsVerify}
                         onRetry={handleGpsRetry}
                       />
-                    </motion.div>
+                    </m.div>
                   )}
 
                   {currentStep === 'qr' && (
-                    <motion.div
+                    <m.div
                       key="qr"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -524,11 +525,11 @@ export function VerificationModal({
                         onVerify={handleQrVerify}
                         onSkip={handleQrSkip}
                       />
-                    </motion.div>
+                    </m.div>
                   )}
 
                   {currentStep === 'receipt' && (
-                    <motion.div
+                    <m.div
                       key="receipt"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -544,11 +545,11 @@ export function VerificationModal({
                         onVerify={handleReceiptVerify}
                         onSkip={handleReceiptSkip}
                       />
-                    </motion.div>
+                    </m.div>
                   )}
 
                   {currentStep === 'success' && (
-                    <motion.div
+                    <m.div
                       key="success"
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -562,12 +563,12 @@ export function VerificationModal({
                         onComplete={handleComplete}
                         isLoading={isCompleting}
                       />
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

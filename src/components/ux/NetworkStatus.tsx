@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { WifiOff, Wifi, RefreshCw, X } from 'lucide-react';
 import { colors, zIndex } from '@/lib/design-tokens';
 
@@ -25,6 +25,7 @@ export function useNetworkStatus() {
   const [lastOnlineTime, setLastOnlineTime] = useState<Date | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // 초기 상태 설정
     setIsOnline(navigator.onLine);
 
@@ -87,6 +88,7 @@ export function NetworkStatus({
 
   // 오프라인/온라인 콜백
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!isOnline && onOffline) {
       onOffline();
     }
@@ -97,6 +99,7 @@ export function NetworkStatus({
 
   // 온라인 복구 시 dismiss 리셋
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (isOnline) {
       setIsDismissed(false);
     }
@@ -130,7 +133,7 @@ export function NetworkStatus({
   return (
     <AnimatePresence>
       {(!isOnline || wasOffline) && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: position === 'top' ? -50 : 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: position === 'top' ? -50 : 50 }}
@@ -183,7 +186,7 @@ export function NetworkStatus({
             {/* Actions */}
             <div className="flex items-center gap-2">
               {!isOnline && onRetry && (
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleRetry}
@@ -199,11 +202,11 @@ export function NetworkStatus({
                     className={`text-white ${isRetrying ? 'animate-spin' : ''}`}
                     aria-hidden="true"
                   />
-                </motion.button>
+                </m.button>
               )}
 
               {dismissible && !isOnline && (
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleDismiss}
@@ -214,11 +217,11 @@ export function NetworkStatus({
                   aria-label="알림 닫기"
                 >
                   <X size={16} className="text-white" aria-hidden="true" />
-                </motion.button>
+                </m.button>
               )}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -259,7 +262,7 @@ export function OfflineBanner({
   if (isOnline) return null;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`rounded-xl p-4 ${className}`}
@@ -288,7 +291,7 @@ export function OfflineBanner({
           </p>
 
           {onRetry && (
-            <motion.button
+            <m.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleRetry}
@@ -305,11 +308,11 @@ export function OfflineBanner({
                 aria-hidden="true"
               />
               {isRetrying ? '연결 중...' : '다시 연결'}
-            </motion.button>
+            </m.button>
           )}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

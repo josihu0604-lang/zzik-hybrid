@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, Suspense, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   Search,
@@ -128,7 +128,7 @@ function PopupCard({ popup }: { popup: PopupItem }) {
   const isConfirmed = popup.status === 'confirmed';
 
   return (
-    <motion.div
+    <m.div
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={() => router.push(`/popup/${popup.id}`)}
@@ -218,7 +218,7 @@ function PopupCard({ popup }: { popup: PopupItem }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -234,6 +234,7 @@ function SearchContent() {
 
   // Load recent searches
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const saved = localStorage.getItem(RECENT_SEARCHES_KEY);
     if (saved) {
       setRecentSearches(JSON.parse(saved));
@@ -242,6 +243,7 @@ function SearchContent() {
 
   // Set initial query from URL
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (initialQuery) {
       search.setQuery(initialQuery);
     }
@@ -268,6 +270,7 @@ function SearchContent() {
 
   // Update search query when debounced value changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     search.setQuery(debouncedInputValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedInputValue]);
@@ -371,7 +374,7 @@ function SearchContent() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {TRENDING_SEARCHES.map((term) => (
-                  <motion.button
+                  <m.button
                     key={term}
                     onClick={() => {
                       setInputValue(term);
@@ -386,7 +389,7 @@ function SearchContent() {
                     }}
                   >
                     {term}
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
             </div>
@@ -411,7 +414,7 @@ function SearchContent() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {recentSearches.map((term) => (
-                    <motion.button
+                    <m.button
                       key={term}
                       onClick={() => {
                         setInputValue(term);
@@ -426,7 +429,7 @@ function SearchContent() {
                       }}
                     >
                       {term}
-                    </motion.button>
+                    </m.button>
                   ))}
                 </div>
               </div>

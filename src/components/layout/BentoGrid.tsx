@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, Children, cloneElement, isValidElement, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { spacing, layout } from '@/lib/design-tokens';
 
 /**
@@ -71,25 +71,21 @@ export function BentoItem({ children, size = 'standard', className = '', style }
   const sizeStyles = useMemo(() => {
     switch (size) {
       case 'hero':
-        // 풀너비 히어로 카드
         return {
-          gridColumn: '1 / -1', // span all columns
+          gridColumn: '1 / -1',
           aspectRatio: '16/9',
         };
       case 'featured':
-        // 2열 중 1개, 정사각형에 가까운 비율
         return {
           gridColumn: 'span 1',
           aspectRatio: '4/5',
         };
       case 'standard':
-        // 2열 기본
         return {
           gridColumn: 'span 1',
           aspectRatio: '4/5',
         };
       case 'compact':
-        // 작은 카드 (3열 시 사용)
         return {
           gridColumn: 'span 1',
           aspectRatio: '1/1',
@@ -102,7 +98,7 @@ export function BentoItem({ children, size = 'standard', className = '', style }
   }, [size]);
 
   return (
-    <motion.div
+    <m.div
       variants={itemVariants}
       className={className}
       style={{
@@ -111,7 +107,7 @@ export function BentoItem({ children, size = 'standard', className = '', style }
       }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -119,16 +115,12 @@ export function BentoItem({ children, size = 'standard', className = '', style }
  * BentoGrid - 메인 그리드 컨테이너
  */
 export function BentoGrid({ children, gap = 3, animated = true, className = '' }: BentoGridProps) {
-  // 자동으로 첫 번째 아이템에 hero 사이즈 적용
   const processedChildren = useMemo(() => {
     const childArray = Children.toArray(children);
 
     return childArray.map((child, index) => {
       if (!isValidElement(child)) return child;
 
-      // 첫 번째 아이템 = hero
-      // 2-3번째 = featured
-      // 나머지 = standard
       let size: CardSize = 'standard';
       if (index === 0) {
         size = 'hero';
@@ -136,7 +128,6 @@ export function BentoGrid({ children, gap = 3, animated = true, className = '' }
         size = 'featured';
       }
 
-      // BentoItem으로 래핑되어 있으면 그대로 사용
       if (child.type === BentoItem) {
         return cloneElement(child, {
           ...(child.props as BentoItemProps),
@@ -144,7 +135,6 @@ export function BentoGrid({ children, gap = 3, animated = true, className = '' }
         });
       }
 
-      // 자동 래핑
       return (
         <BentoItem key={index} size={size}>
           {child}
@@ -153,7 +143,8 @@ export function BentoGrid({ children, gap = 3, animated = true, className = '' }
     });
   }, [children]);
 
-  const GridComponent = animated ? motion.div : 'div';
+  // Use m.div if animated, otherwise div
+  const GridComponent = animated ? m.div : 'div';
   const gridProps = animated
     ? {
         variants: containerVariants,

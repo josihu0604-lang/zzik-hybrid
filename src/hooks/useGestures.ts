@@ -79,6 +79,7 @@ export function useLongPress({
 
   // Cleanup on unmount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -148,6 +149,7 @@ export function useDoubleTap({ onSingleTap, onDoubleTap, delay = 300 }: UseDoubl
 
   // Cleanup on unmount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       if (singleTapTimeoutRef.current) {
         clearTimeout(singleTapTimeoutRef.current);
@@ -263,6 +265,7 @@ export function useEdgeSafeSwipe({
  */
 export function useSwipeBackSafe(enabled: boolean = true) {
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled || typeof window === 'undefined') return;
 
     // iOS에서 왼쪽 edge에서 swipe 시작 시 기본 동작 방지

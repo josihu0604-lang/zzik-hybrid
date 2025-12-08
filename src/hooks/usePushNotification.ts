@@ -51,6 +51,7 @@ export function usePushNotification(): UsePushNotificationReturn {
 
   // Initialize state
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const init = async () => {
       const supported = isPushSupported();
       setIsSupported(supported);

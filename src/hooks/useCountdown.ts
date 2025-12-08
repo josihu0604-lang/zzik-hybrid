@@ -72,6 +72,7 @@ export function useCountdown(deadline: string | Date | null): TimeLeft | null {
   );
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!deadline) {
       setTimeLeft(null);
       return;

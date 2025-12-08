@@ -6,29 +6,36 @@
 
 import ko from './locales/ko.json';
 import en from './locales/en.json';
-import ru from './locales/ru.json';
+import ja from './locales/ja.json';
+import zhTW from './locales/zh-TW.json';
+import th from './locales/th.json';
 
 export const LOCALES = {
-  en: 'en',
   ko: 'ko',
-  ru: 'ru',
+  en: 'en',
+  ja: 'ja',
+  'zh-TW': 'zh-TW',
+  th: 'th',
 } as const;
 
 export type Locale = keyof typeof LOCALES;
 
-// Changed default to English for global expansion
-export const DEFAULT_LOCALE: Locale = 'en';
+export const DEFAULT_LOCALE: Locale = 'ko';
 
 export const LOCALE_NAMES: Record<Locale, string> = {
-  en: 'English',
   ko: '한국어',
-  ru: 'Русский',
+  en: 'English',
+  ja: '日本語',
+  'zh-TW': '繁體中文',
+  th: 'ภาษาไทย',
 };
 
 export const LOCALE_FLAGS: Record<Locale, string> = {
-  en: '🌐',
   ko: '🇰🇷',
-  ru: '🇷🇺',
+  en: '🇺🇸',
+  ja: '🇯🇵',
+  'zh-TW': '🇹🇼',
+  th: '🇹🇭',
 };
 
 // Storage key for persisting locale preference
@@ -36,9 +43,11 @@ export const LOCALE_STORAGE_KEY = 'zzik_locale';
 
 // Translation resources
 export const translations = {
-  en,
   ko,
-  ru,
+  en,
+  ja,
+  'zh-TW': zhTW,
+  th,
 } as const;
 
 // Type-safe translation keys
@@ -81,24 +90,30 @@ export function detectLocale(): Locale {
 
   // Check localStorage first
   const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
-  if (stored && (stored === 'en' || stored === 'ko' || stored === 'ru')) {
+  if (stored && Object.keys(LOCALES).includes(stored)) {
     return stored as Locale;
   }
 
   // Check browser language
-  const browserLang = navigator.language.split('-')[0];
-  if (browserLang === 'ko') return 'ko';
-  if (browserLang === 'ru') return 'ru';
-  if (browserLang === 'en') return 'en';
+  const browserLang = navigator.language;
+  const browserLangBase = browserLang.split('-')[0];
+  
+  // Handle zh-TW specifically
+  if (browserLang === 'zh-TW' || browserLang === 'zh-Hant') return 'zh-TW';
+  if (browserLangBase === 'ko') return 'ko';
+  if (browserLangBase === 'en') return 'en';
+  if (browserLangBase === 'ja') return 'ja';
+  if (browserLangBase === 'th') return 'th';
 
   // Check if user might prefer specific language
   const languages = navigator.languages || [navigator.language];
   for (const lang of languages) {
+    if (lang === 'zh-TW' || lang === 'zh-Hant') return 'zh-TW';
     if (lang.startsWith('ko')) return 'ko';
-    if (lang.startsWith('ru')) return 'ru';
+    if (lang.startsWith('ja')) return 'ja';
+    if (lang.startsWith('th')) return 'th';
   }
 
-  // Default to English for global users
   return DEFAULT_LOCALE;
 }
 
@@ -107,7 +122,16 @@ export function detectLocale(): Locale {
  */
 export function formatDate(date: Date | string, locale: Locale): string {
   const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString(locale === 'ko' ? 'ko-KR' : 'en-US', {
+  const localeMap: Record<Locale, string> = {
+    ko: 'ko-KR',
+    en: 'en-US',
+    ja: 'ja-JP',
+    'zh-TW': 'zh-TW',
+    th: 'th-TH',
+  };
+  const localeStr = localeMap[locale] || 'ko-KR';
+
+  return d.toLocaleDateString(localeStr, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -118,17 +142,31 @@ export function formatDate(date: Date | string, locale: Locale): string {
  * Number formatting by locale
  */
 export function formatNumber(num: number, locale: Locale): string {
-  return num.toLocaleString(locale === 'ko' ? 'ko-KR' : 'en-US');
+  const localeMap: Record<Locale, string> = {
+    ko: 'ko-KR',
+    en: 'en-US',
+    ja: 'ja-JP',
+    'zh-TW': 'zh-TW',
+    th: 'th-TH',
+  };
+  const localeStr = localeMap[locale] || 'ko-KR';
+  
+  return num.toLocaleString(localeStr);
 }
 
 /**
  * Currency formatting by locale
  */
 export function formatCurrency(amount: number, locale: Locale): string {
-  if (locale === 'ko') {
-    return `₩${amount.toLocaleString('ko-KR')}`;
-  }
-  return `$${amount.toLocaleString('en-US')}`;
+  const currencyConfig: Record<Locale, { symbol: string; localeStr: string }> = {
+    ko: { symbol: '₩', localeStr: 'ko-KR' },
+    en: { symbol: '$', localeStr: 'en-US' },
+    ja: { symbol: '¥', localeStr: 'ja-JP' },
+    'zh-TW': { symbol: 'NT$', localeStr: 'zh-TW' },
+    th: { symbol: '฿', localeStr: 'th-TH' },
+  };
+  const config = currencyConfig[locale] || currencyConfig.en;
+  return `${config.symbol}${amount.toLocaleString(config.localeStr)}`;
 }
 
 /**

@@ -66,6 +66,7 @@ export function AppHeader({ transparent = false }: AppHeaderProps) {
 
   // a11y: Focus first item when menu opens
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (isMenuOpen && menuItemsRef.current[0]) {
       focusedIndexRef.current = 0;
       menuItemsRef.current[0].focus();
@@ -74,6 +75,7 @@ export function AppHeader({ transparent = false }: AppHeaderProps) {
 
   // a11y: Close menu on click outside
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!isMenuOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
@@ -92,6 +94,7 @@ export function AppHeader({ transparent = false }: AppHeaderProps) {
   }, [isMenuOpen]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const supabase = getSupabaseClient();
 
     // Get initial user

@@ -1,98 +1,41 @@
 /**
- * ZZIK UI Components - Central Export
- *
- * Design System 2.0 통합 컴포넌트
- * 모든 UI 컴포넌트를 한 곳에서 import 가능
- *
+ * ZZIK UI Component Library
+ * 
+ * Design System: iOS 26 Liquid Glass + Linear 절제 + ZZIK Brand (Flame Coral)
+ * 
  * Usage:
- * import { Button, Typography, Icon, Container } from '@/components/ui'
+ * import { Button, Card, Badge, Input, Modal } from '@/components/ui';
  */
 
-// Layout Components (DES-087~088)
-export { Container, Grid, Flex, Stack } from './Container';
-
-// Typography (DES-080)
-export {
-  Typography,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Body,
-  BodyLarge,
-  BodySmall,
-  Caption,
-  Label,
-} from './Typography';
-
-// Button Components (DES-082~086)
-export { Button, ButtonGroup } from './Button';
-export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
-
-// Icon Components (DES-090~096)
-export {
-  IconWrapper,
-  IconButton,
-  IconWithText,
-  // Common Icons
-  HeartIcon,
-  StarIcon,
-  SearchIcon,
-  XIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  InfoIcon,
-  AlertCircleIcon,
-  AlertTriangleIcon,
-  LoaderIcon,
-} from './Icon';
-export type { IconSize, IconColor } from './Icon';
-
-// Image Components (DES-097~104)
-export { OptimizedImage, IMAGE_SIZES, ASPECT_RATIOS } from './OptimizedImage';
-export type { ErrorFallbackType, SkeletonTheme } from './OptimizedImage';
-
-// Loading Components
-export {
-  LoadingSpinner,
-  FullPageLoader,
-  LoginLoading,
-  LeaderSkeleton,
-  InlineSpinner,
-} from './LoadingSpinner';
-
-// Skeleton Components
-export {
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-  SkeletonAvatar,
-  SkeletonCard,
-  SkeletonMap,
-  SkeletonProfile,
-  SkeletonListItem,
-  SkeletonHeader,
-  SkeletonCategoryFilter,
-  SkeletonStatsBar,
+export { Button, IconButton, type ButtonProps, type IconButtonProps, type ButtonVariant } from './Button';
+export { Card, GlassCard, type CardProps } from './Card';
+export { Badge, type BadgeProps } from './Badge';
+export { Input, type InputProps } from './Input';
+export { Modal, type ModalProps } from './Modal';
+export { 
+  Skeleton, 
+  CardSkeleton, 
+  ListSkeleton, 
   SkeletonMainPage,
   SkeletonLivePage,
   SkeletonMapPage,
   SkeletonMePage,
-  TextSkeleton,
-  ProgressBarSkeleton,
-  PopupCardSkeletonAlt,
-  LiveStatsSkeleton,
-  PageSkeleton,
-  NotificationSkeleton,
+  SkeletonText,
+  SkeletonCircle,
+  SkeletonCard,
+  SkeletonListItem,
   SkeletonGrid,
   SkeletonWrapper,
+  NotificationSkeleton,
+  PopupCardSkeletonAlt,
+  ProgressBarSkeleton,
+  LiveStatsSkeleton,
+  PageSkeleton,
+  TextSkeleton,
 } from './Skeleton';
-
-// Toast/Notification
-export { ToastProvider, useToast } from './Toast';
-
-// Re-export types
-export type { default as OptimizedImageType } from './OptimizedImage';
+export { Toast, useToast, ToastProvider } from './Toast';
+export { Tooltip, type TooltipProps } from './Tooltip';
+export { Avatar, AvatarGroup, type AvatarProps } from './Avatar';
+export { ProgressBar, CircularProgress, type ProgressProps } from './Progress';
+export { Tabs, type TabsProps } from './Tabs';
+export { Switch, type SwitchProps } from './Switch';

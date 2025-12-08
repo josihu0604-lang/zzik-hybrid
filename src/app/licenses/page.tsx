@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronDown, ChevronUp, ExternalLink, Search, Package } from 'lucide-react';
 import { IconButton } from '@/components/ui/Button';
@@ -252,7 +252,7 @@ function LicenseItem({ license }: { license: License }) {
         borderBottom: `1px solid ${colors.border.subtle}`,
       }}
     >
-      <motion.button
+      <m.button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full py-4 px-4 flex items-center justify-between text-left"
         whileTap={{ backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -289,11 +289,11 @@ function LicenseItem({ license }: { license: License }) {
         ) : (
           <ChevronDown size={20} style={{ color: colors.text.tertiary }} />
         )}
-      </motion.button>
+      </m.button>
 
       <AnimatePresence>
         {isExpanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -332,7 +332,7 @@ function LicenseItem({ license }: { license: License }) {
                 {LICENSE_TEXTS[license.license] || `${license.license} License`}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
