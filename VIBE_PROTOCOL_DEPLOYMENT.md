@@ -71,23 +71,13 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 ### Step 2: Configure Row Level Security (RLS)
 
-After creating the tables, enable RLS policies:
+Row Level Security policies are included in the `schema.sql` file and will be created automatically when you execute the script. The policies ensure:
 
-```sql
--- Enable RLS
-ALTER TABLE vibe_cards ENABLE ROW LEVEL SECURITY;
-ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+- Users can only read and insert their own vibe cards
+- Users can only read and insert their own transactions
+- A helper function `increment_z_cash_balance()` is available for atomic balance updates
 
--- Users can read their own vibe cards
-CREATE POLICY "Users can read own vibe cards"
-  ON vibe_cards FOR SELECT
-  USING (auth.uid() = user_id);
-
--- Users can read their own transactions
-CREATE POLICY "Users can read own transactions"
-  ON transactions FOR SELECT
-  USING (auth.uid() = user_id);
-```
+**Note**: The schema.sql script is idempotent and safe to run multiple times.
 
 ---
 

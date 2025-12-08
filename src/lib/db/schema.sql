@@ -25,3 +25,48 @@ CREATE TABLE IF NOT EXISTS transactions (
   tx_hash TEXT, -- Blockchain Transaction Hash (Optional)
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- 04. Row Level Security (RLS)
+ALTER TABLE vibe_cards ENABLE ROW LEVEL SECURITY;
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+
+-- Users can read their own vibe cards
+CREATE POLICY "Users can read own vibe cards"
+  ON vibe_cards FOR SELECT
+  USING (auth.uid() = user_id);
+
+-- Users can insert their own vibe cards
+CREATE POLICY "Users can insert own vibe cards"
+  ON vibe_cards FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+-- Users can read their own transactions
+CREATE POLICY "Users can read own transactions"
+  ON transactions FOR SELECT
+  USING (auth.uid() = user_id);
+
+-- Users can insert their own transactions
+CREATE POLICY "Users can insert own transactions"
+  ON transactions FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+-- 05. Helper Function: Increment Z-CASH Balance
+CREATE OR REPLACE FUNCTION increment_z_cash_balance(
+  user_id UUID,
+  amount DECIMAL(18, 2)
+)
+RETURNS DECIMAL(18, 2)
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  new_balance DECIMAL(18, 2);
+BEGIN
+  UPDATE users
+  SET z_cash_balance = z_cash_balance + amount
+  WHERE id = user_id
+  RETURNING z_cash_balance INTO new_balance;
+  
+  RETURN new_balance;
+END;
+$$;
