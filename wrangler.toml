@@ -1,0 +1,18 @@
+name = "zzik-hybrid"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[build]
+command = "npm run pages:build"
+watch_dir = "src"
+
+[vars]
+NEXT_PUBLIC_SITE_URL = "https://zzik.app"
+# Environment variables should be set in the Cloudflare Dashboard for security
+
+[env.production]
+name = "zzik-hybrid-prod"
+
+[env.preview]
+name = "zzik-hybrid-preview"

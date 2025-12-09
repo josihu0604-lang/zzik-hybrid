@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0c"/>
+      <stop offset="100%" style="stop-color:#121314"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ea8c15"/>
+      <stop offset="100%" style="stop-color:#f5a623"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="108" fill="url(#bgGrad)"/>
+
+  <!-- Outer ring (progress indicator) -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#262626" stroke-width="24"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#orangeGrad)" stroke-width="24"
+          stroke-dasharray="848" stroke-dashoffset="212" stroke-linecap="round"
+          transform="rotate(-90 256 256)" filter="url(#glow)"/>
+
+  <!-- Z letter -->
+  <path d="M168 160h176l-140 192h176" fill="none" stroke="url(#orangeGrad)"
+        stroke-width="32" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Dot (찍) -->
+  <circle cx="384" cy="160" r="16" fill="#ea8c15"/>
+</svg>

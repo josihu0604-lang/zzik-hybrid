@@ -1,0 +1,51 @@
+# ZZIK HYBRID PROJECT RULES
+
+## 1. IDENTITY
+- **Project:** ZZIK Hybrid (Map V2 + Live Offer + Social)
+- **Flow:** Photo Upload → Gemini Analyze → Map Display → Live Offers → Check-in
+- **Theme:** Linear 2026 Deep Space (Dark Mode Only)
+
+## 2. TECH STACK
+- Framework: Next.js 15 (App Router)
+- Language: TypeScript 5.6 (Strict)
+- Styling: Tailwind CSS (Deep Space theme only)
+- Backend: Supabase (Auth, Postgres, Vector, Storage)
+- AI: Gemini Pro Vision (`@google/generative-ai`)
+- Map: Mapbox GL JS or Kakao Maps
+
+## 3. CRITICAL CONSTRAINTS
+- **Vector Dimension: 768** (Gemini Standard) - NEVER change
+- **Check-in: Under 3 seconds** - Performance critical
+- **Auth: Google OAuth Only** - No email/password
+- **GPS Threshold: 50m** - With QR fallback for indoor
+
+## 4. DESIGN SYSTEM
+```
+Background: bg-space-950 (#08090A)
+Surface: bg-space-900 (#0C0E12)
+Accent Coral: text-zzik-coral (#FF5A5F)
+Accent Cyan: text-zzik-cyan (#00D9FF)
+Glass: bg-white/5 backdrop-blur-md
+```
+
+## 5. ALGORITHMS
+```typescript
+// Triple Verification Score
+score = GPS(0.4) + QR(0.4) + Receipt(0.2)
+
+// Loyalty Index
+index = V(0.3) + F(0.3) + R(0.2) + T(0.2)
+// V=Verification, F=Frequency, R=Recency, T=Transaction
+```
+
+## 6. DON'Ts
+- NO light mode UI
+- NO vector dimension changes
+- NO complex state managers (use URL state)
+- NO arbitrary Tailwind values (use config)
+
+## 7. FILE PATTERNS
+- Components: PascalCase (`LinearButton.tsx`)
+- Utilities: camelCase (`gemini.ts`)
+- Types: `types/` directory
+- Server Actions over API Routes for mutations

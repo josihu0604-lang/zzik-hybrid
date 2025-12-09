@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ZZIK</string>
+    <string name="title_activity_main">ZZIK</string>
+    <string name="package_name">com.zzik.app</string>
+    <string name="custom_url_scheme">com.zzik.app</string>
+</resources>
