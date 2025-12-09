@@ -1,0 +1,29 @@
+{
+  "totalIterations": 10000,
+  "survivors": 4607,
+  "survivalRate": 46.07,
+  "avgHealth": 61.723213621786805,
+  "topFailures": [
+    [
+      "Scenario B: Tech Giant Entry",
+      1133
+    ],
+    [
+      "Scenario B: Tech Giant Entry + Scenario D: UX Friction",
+      723
+    ],
+    [
+      "Scenario D: UX Friction + Fast Follower Attack",
+      330
+    ],
+    [
+      "Scenario D: UX Friction + Scenario E: Hype Collapse",
+      279
+    ],
+    [
+      "Scenario B: Tech Giant Entry + Scenario E: Hype Collapse",
+      278
+    ]
+  ],
+  "assessment": "GOLD (🥇) - 평범한 생존력. Pivot 고려."
+}

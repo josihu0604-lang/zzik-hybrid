@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "projectName": "Project U-100",
+    "version": "2.0",
+    "generatedAt": "2025-12-09T16:30:00.000Z",
+    "system": "8-Agent Refactoring System"
+  },
+  "overview": {
+    "totalAgents": 8,
+    "totalTasks": 31,
+    "totalEstimatedHours": 318,
+    "totalEstimatedDays": 40,
+    "newPages": 10,
+    "newComponents": 12,
+    "affectedFiles": 50
+  },
+  "agents": [
+    {
+      "id": "agent-ux-architect",
+      "name": "UX Architect",
+      "emoji": "🎨",
+      "tier": "P0",
+      "domain": ["User Journey", "Navigation", "Onboarding"],
+      "tasks": 4,
+      "hours": 30,
+      "keyDeliverables": [
+        "새로운 Bottom Tab Bar (4탭 구조)",
+        "Tourist-First 온보딩 플로우",
+        "Home 화면 재설계",
+        "Landing Page 외국인 타겟팅"
+      ]
+    },
+    {
+      "id": "agent-pay-master",
+      "name": "Pay Master",
+      "emoji": "💳",
+      "tier": "P0",
+      "domain": ["Stablecoin", "Wallet", "QR Payment"],
+      "tasks": 5,
+      "hours": 80,
+      "keyDeliverables": [
+        "Z-Point 포인트 시스템 (VASP 우회)",
+        "3초 QR 결제 플로우",
+        "Account Abstraction 지갑",
+        "환전 느낌 충전 UI"
+      ]
+    },
+    {
+      "id": "agent-play-curator",
+      "name": "Play Curator",
+      "emoji": "🗺️",
+      "tier": "P0",
+      "domain": ["Map", "Search", "Booking"],
+      "tasks": 5,
+      "hours": 52,
+      "keyDeliverables": [
+        "Z-Pay 가능 매장 마커",
+        "다국어 장소 정보",
+        "실시간 웨이팅 정보",
+        "예약 대행 기능"
+      ]
+    },
+    {
+      "id": "agent-beauty-ai",
+      "name": "Beauty AI",
+      "emoji": "✨",
+      "tier": "P0",
+      "domain": ["AI Skin Analysis", "Clinic Booking"],
+      "tasks": 5,
+      "hours": 82,
+      "keyDeliverables": [
+        "AI 피부 분석 카메라",
+        "피부 타입별 추천",
+        "병원 매칭 + 예약",
+        "Before/After 비교"
+      ]
+    },
+    {
+      "id": "agent-i18n-global",
+      "name": "i18n Global",
+      "emoji": "🌍",
+      "tier": "P1",
+      "domain": ["i18n", "Currency", "Fonts"],
+      "tasks": 3,
+      "hours": 32,
+      "keyDeliverables": [
+        "4개 언어 번역 시스템",
+        "통화 자동 변환",
+        "언어별 폰트 최적화"
+      ]
+    },
+    {
+      "id": "agent-auth-secure",
+      "name": "Auth Secure",
+      "emoji": "🔐",
+      "tier": "P1",
+      "domain": ["Auth", "OAuth", "Privacy"],
+      "tasks": 2,
+      "hours": 16,
+      "keyDeliverables": [
+        "Google/Apple 소셜 로그인",
+        "GDPR 동의 UI"
+      ]
+    },
+    {
+      "id": "agent-perf-ninja",
+      "name": "Perf Ninja",
+      "emoji": "⚡",
+      "tier": "P2",
+      "domain": ["Core Web Vitals", "Bundle Size"],
+      "tasks": 2,
+      "hours": 20,
+      "keyDeliverables": [
+        "LCP < 2.5s 최적화",
+        "초기 번들 200KB 이하"
+      ]
+    },
+    {
+      "id": "agent-qa-guardian",
+      "name": "QA Guardian",
+      "emoji": "🧪",
+      "tier": "P2",
+      "domain": ["E2E Test", "A11Y", "i18n QA"],
+      "tasks": 2,
+      "hours": 20,
+      "keyDeliverables": [
+        "결제 E2E 테스트",
+        "다국어 QA 체크리스트"
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Foundation",
+      "weeks": "1-2",
+      "hours": 46,
+      "agents": ["UX Architect", "i18n Global", "Auth Secure"],
+      "criticalPath": false
+    },
+    {
+      "id": "phase-2",
+      "name": "Pay System",
+      "weeks": "3-4",
+      "hours": 80,
+      "agents": ["Pay Master"],
+      "criticalPath": true
+    },
+    {
+      "id": "phase-3",
+      "name": "Play System",
+      "weeks": "5-6",
+      "hours": 52,
+      "agents": ["Play Curator"],
+      "criticalPath": false
+    },
+    {
+      "id": "phase-4",
+      "name": "Beauty System",
+      "weeks": "7-9",
+      "hours": 82,
+      "agents": ["Beauty AI"],
+      "criticalPath": true
+    },
+    {
+      "id": "phase-5",
+      "name": "Polish & Launch",
+      "weeks": "10-11",
+      "hours": 72,
+      "agents": ["UX Architect", "i18n Global", "Perf Ninja", "QA Guardian"],
+      "criticalPath": false
+    }
+  ],
+  "criticalTasks": [
+    {
+      "id": "PAY-001",
+      "title": "Point System UI (VASP 우회)",
+      "reason": "규제 리스크 완화의 핵심",
+      "hours": 16
+    },
+    {
+      "id": "PAY-003",
+      "title": "Account Abstraction 지갑",
+      "reason": "Web3 UX 혁신의 핵심",
+      "hours": 24
+    },
+    {
+      "id": "PAY-002",
+      "title": "QR Payment Flow",
+      "reason": "3초 결제 UX 목표",
+      "hours": 20
+    },
+    {
+      "id": "BEAUTY-001",
+      "title": "AI Skin Analysis 카메라",
+      "reason": "K-뷰티 차별화 기능",
+      "hours": 20
+    },
+    {
+      "id": "BEAUTY-004",
+      "title": "시술 예약 + 결제 통합",
+      "reason": "High-Ticket 수익원",
+      "hours": 20
+    }
+  ],
+  "threePillarMapping": {
+    "Pay": {
+      "primaryAgent": "Pay Master",
+      "tasks": ["PAY-001", "PAY-002", "PAY-003", "PAY-004", "PAY-005"],
+      "valueProposition": "환전 수수료 0원 스테이블코인 결제"
+    },
+    "Play": {
+      "primaryAgent": "Play Curator",
+      "tasks": ["PLAY-001", "PLAY-002", "PLAY-003", "PLAY-004", "PLAY-005"],
+      "valueProposition": "로컬 핫플레이스 AI 큐레이션"
+    },
+    "Beauty": {
+      "primaryAgent": "Beauty AI",
+      "tasks": ["BEAUTY-001", "BEAUTY-002", "BEAUTY-003", "BEAUTY-004", "BEAUTY-005"],
+      "valueProposition": "AI 피부분석 & K-뷰티 시술 매칭"
+    }
+  },
+  "successCriteria": {
+    "mvp": [
+      "외국인이 30초 내에 앱 가치 이해",
+      "QR 결제 3초 이내 완료",
+      "코인/지갑 용어 완전 제거",
+      "4개 언어 UI 완벽 지원",
+      "AI 피부 분석 → 시술 예약 → 결제 원스톱"
+    ],
+    "quality": [
+      "Lighthouse Performance 90+",
+      "E2E 테스트 주요 시나리오 통과",
+      "번역 누락 0개",
+      "결제 오류율 < 0.1%"
+    ]
+  }
+}

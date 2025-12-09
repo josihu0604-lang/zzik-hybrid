@@ -1,114 +1,221 @@
 'use client';
 
-/**
- * SocialLoginButtons Component
- *
- * Social authentication buttons (Google, Kakao, Apple)
- */
-
 import { m } from 'framer-motion';
-import { GoogleIcon, KakaoIcon } from '@/components/cosmic';
+import { useState } from 'react';
+import { useAuth } from '@/context/auth-context';
+import { useTranslation } from '@/i18n';
+import { Chrome, Apple } from 'lucide-react';
+import Image from 'next/image';
 
 interface SocialLoginButtonsProps {
-  onGoogleLogin: () => void;
-  onKakaoLogin: () => void;
-  onAppleLogin: () => void;
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
+  className?: string;
 }
 
-export function SocialLoginButtons({
-  onGoogleLogin,
-  onKakaoLogin,
-  onAppleLogin,
+export default function SocialLoginButtons({
+  onSuccess,
+  onError,
+  className = '',
 }: SocialLoginButtonsProps) {
+  const { signInWithGoogle, signInWithKakao, signInWithApple } = useAuth();
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState<string | null>(null);
+
+  const handleGoogleLogin = async () => {
+    setLoading('google');
+    try {
+      const { error } = await signInWithGoogle();
+      if (error) {
+        onError?.(error);
+      } else {
+        onSuccess?.();
+      }
+    } catch (err) {
+      onError?.(err as Error);
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  const handleKakaoLogin = async () => {
+    setLoading('kakao');
+    try {
+      const { error } = await signInWithKakao();
+      if (error) {
+        onError?.(error);
+      } else {
+        onSuccess?.();
+      }
+    } catch (err) {
+      onError?.(err as Error);
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  const handleAppleLogin = async () => {
+    setLoading('apple');
+    try {
+      const { error } = await signInWithApple();
+      if (error) {
+        onError?.(error);
+      } else {
+        onSuccess?.();
+      }
+    } catch (err) {
+      onError?.(err as Error);
+    } finally {
+      setLoading(null);
+    }
+  };
+
   return (
-    <div className="space-y-3">
-      {/* Google */}
+    <div className={`space-y-3 ${className}`}>
+      {/* Google Login */}
       <m.button
-        type="button"
-        whileHover={{ scale: 1.02, borderColor: 'rgba(255, 255, 255, 0.2)' }}
-        whileTap={{ scale: 0.98 }}
-        onClick={onGoogleLogin}
-        aria-label="Google 계정으로 로그인"
-        className="w-full min-h-[52px] py-4 rounded-[14px] text-sm font-medium flex items-center justify-center gap-3 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flame-500"
-        style={{
-          background: 'rgba(255, 255, 255, 0.04)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          color: 'rgba(255, 255, 255, 0.9)',
-        }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        onClick={handleGoogleLogin}
+        disabled={loading !== null}
+        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-white text-gray-900 font-semibold hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <GoogleIcon size={20} aria-hidden="true" />
-        Google로 계속하기
+        {loading === 'google' ? (
+          <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+        ) : (
+          <Chrome className="w-5 h-5" />
+        )}
+        <span>{t('auth.googleLogin')}</span>
       </m.button>
 
-      {/* Kakao */}
+      {/* Kakao Login */}
       <m.button
-        type="button"
-        whileHover={{ scale: 1.02, boxShadow: '0 8px 24px rgba(254, 229, 0, 0.25)' }}
-        whileTap={{ scale: 0.98 }}
-        onClick={onKakaoLogin}
-        aria-label="카카오 계정으로 로그인"
-        className="w-full min-h-[52px] py-4 rounded-[14px] text-sm font-bold flex items-center justify-center gap-3 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flame-500 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #FEE500 0%, #FFEB3B 100%)',
-          boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.3)',
-          color: '#191919',
-        }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        onClick={handleKakaoLogin}
+        disabled={loading !== null}
+        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-[#FEE500] text-[#191919] font-semibold hover:bg-[#FDD835] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <div
-          className="absolute top-0 left-0 right-0 h-1/2 rounded-t-[14px] pointer-events-none"
-          aria-hidden="true"
-          style={{
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%)',
-          }}
-        />
-        <div className="relative flex items-center gap-3">
-          <KakaoIcon size={20} aria-hidden="true" />
-          카카오로 계속하기
-        </div>
+        {loading === 'kakao' ? (
+          <div className="w-5 h-5 border-2 border-gray-300 border-t-[#191919] rounded-full animate-spin" />
+        ) : (
+          <KakaoIcon />
+        )}
+        <span>{t('auth.kakaoLogin')}</span>
       </m.button>
 
-      {/* Apple */}
+      {/* Apple Login */}
       <m.button
-        type="button"
-        whileHover={{ scale: 1.02, borderColor: 'rgba(255, 255, 255, 0.25)' }}
-        whileTap={{ scale: 0.98 }}
-        onClick={onAppleLogin}
-        aria-label="Apple 계정으로 로그인"
-        className="w-full min-h-[52px] py-4 rounded-[14px] text-sm font-medium flex items-center justify-center gap-3 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-flame-500 relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
-          boxShadow: 'inset 0 2px 0 rgba(255, 255, 255, 0.5)',
-          color: 'black',
-        }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        onClick={handleAppleLogin}
+        disabled={loading !== null}
+        className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-black text-white font-semibold hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-gray-800"
       >
-        <div
-          className="absolute top-0 left-0 right-0 h-1/2 rounded-t-[14px] pointer-events-none"
-          aria-hidden="true"
-          style={{
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%)',
-          }}
-        />
-        <div className="relative flex items-center gap-3">
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-          </svg>
-          Apple로 계속하기
-        </div>
+        {loading === 'apple' ? (
+          <div className="w-5 h-5 border-2 border-gray-700 border-t-white rounded-full animate-spin" />
+        ) : (
+          <Apple className="w-5 h-5" />
+        )}
+        <span>{t('auth.appleLogin')}</span>
       </m.button>
     </div>
   );
 }
 
-export function AuthDivider() {
+// Kakao Icon Component
+function KakaoIcon() {
   return (
-    <div className="relative my-6">
-      <div className="absolute inset-0 flex items-center">
-        <div className="w-full border-t border-white/10" />
-      </div>
-      <div className="relative flex justify-center">
-        <span className="px-4 bg-space-850 text-white/30 text-xs">또는</span>
-      </div>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M10 3C5.582 3 2 5.896 2 9.5C2 11.637 3.438 13.496 5.579 14.594L4.718 17.801C4.657 18.019 4.897 18.199 5.088 18.074L9.045 15.417C9.357 15.447 9.676 15.462 10 15.462C14.418 15.462 18 12.566 18 8.962C18 5.358 14.418 3 10 3Z"
+        fill="#191919"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Compact Social Login Buttons (for modals or small spaces)
+ */
+export function CompactSocialLogin({
+  onSuccess,
+  onError,
+  className = '',
+}: SocialLoginButtonsProps) {
+  const { signInWithGoogle, signInWithKakao, signInWithApple } = useAuth();
+  const [loading, setLoading] = useState<string | null>(null);
+
+  const handleLogin = async (provider: 'google' | 'kakao' | 'apple') => {
+    setLoading(provider);
+    try {
+      let error;
+      if (provider === 'google') {
+        ({ error } = await signInWithGoogle());
+      } else if (provider === 'kakao') {
+        ({ error } = await signInWithKakao());
+      } else {
+        ({ error } = await signInWithApple());
+      }
+
+      if (error) {
+        onError?.(error);
+      } else {
+        onSuccess?.();
+      }
+    } catch (err) {
+      onError?.(err as Error);
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  return (
+    <div className={`flex gap-3 justify-center ${className}`}>
+      {/* Google */}
+      <button
+        onClick={() => handleLogin('google')}
+        disabled={loading !== null}
+        className="flex-1 flex items-center justify-center p-3 rounded-xl bg-white hover:bg-gray-50 transition-colors disabled:opacity-50"
+        aria-label="Sign in with Google"
+      >
+        {loading === 'google' ? (
+          <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
+        ) : (
+          <Chrome className="w-5 h-5 text-gray-900" />
+        )}
+      </button>
+
+      {/* Kakao */}
+      <button
+        onClick={() => handleLogin('kakao')}
+        disabled={loading !== null}
+        className="flex-1 flex items-center justify-center p-3 rounded-xl bg-[#FEE500] hover:bg-[#FDD835] transition-colors disabled:opacity-50"
+        aria-label="Sign in with Kakao"
+      >
+        {loading === 'kakao' ? (
+          <div className="w-5 h-5 border-2 border-gray-300 border-t-[#191919] rounded-full animate-spin" />
+        ) : (
+          <KakaoIcon />
+        )}
+      </button>
+
+      {/* Apple */}
+      <button
+        onClick={() => handleLogin('apple')}
+        disabled={loading !== null}
+        className="flex-1 flex items-center justify-center p-3 rounded-xl bg-black hover:bg-gray-900 transition-colors disabled:opacity-50 border border-gray-800"
+        aria-label="Sign in with Apple"
+      >
+        {loading === 'apple' ? (
+          <div className="w-5 h-5 border-2 border-gray-700 border-t-white rounded-full animate-spin" />
+        ) : (
+          <Apple className="w-5 h-5 text-white" />
+        )}
+      </button>
     </div>
   );
 }

@@ -1,10 +1,79 @@
 /**
  * ZZIK Hooks - 통합 export
  *
- * 전체 22개 커스텀 훅 export
+ * 전체 35+ 커스텀 훅 export
  */
 
+// ============================================
+// Payment Hooks
+// ============================================
+export { usePayment, useWallet, useTransactions, usePaymentMethods } from './usePayment';
+export type {
+  UsePaymentOptions,
+  UsePaymentReturn,
+  UseWalletReturn,
+  UseTransactionsOptions,
+  UseTransactionsReturn,
+  UsePaymentMethodsReturn,
+} from './usePayment';
+
+// ============================================
+// Review Hooks
+// ============================================
+export { useReviews, useReviewForm, useReviewInteractions, useUserReviews } from './useReview';
+export type {
+  UseReviewsOptions,
+  UseReviewsReturn,
+  UseReviewFormOptions,
+  UseReviewFormReturn,
+  UseReviewInteractionsOptions,
+  UseReviewInteractionsReturn,
+  UseUserReviewsReturn,
+} from './useReview';
+
+// ============================================
+// Social Hooks
+// ============================================
+export { useProfile, useFollow, useFollowers, useFeed, useUserSearch } from './useSocial';
+export type {
+  UseProfileOptions,
+  UseProfileReturn,
+  UseFollowOptions,
+  UseFollowReturn,
+  UseFollowersOptions,
+  UseFollowersReturn,
+  UseFeedOptions,
+  UseFeedReturn,
+  UseUserSearchReturn,
+} from './useSocial';
+
+// ============================================
+// Gamification Hooks
+// ============================================
+export {
+  usePoints,
+  useBadges,
+  useLeaderboard,
+  useAchievements,
+  useGamificationNotifications,
+  usePointsAnimation,
+} from './useGamification';
+export type {
+  UsePointsOptions,
+  UsePointsReturn,
+  UseBadgesOptions,
+  UseBadgesReturn,
+  UseLeaderboardOptions,
+  UseLeaderboardReturn,
+  UseAchievementsOptions,
+  UseAchievementsReturn,
+  UseGamificationNotificationsReturn,
+  UsePointsAnimationReturn,
+} from './useGamification';
+
+// ============================================
 // Real-time hooks
+// ============================================
 export { useRealtimeParticipants } from './useRealtimeParticipants';
 export { useRealtimeParticipation } from './useRealtimeParticipation';
 
