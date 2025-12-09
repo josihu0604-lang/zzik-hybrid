@@ -88,16 +88,6 @@ const nextConfig: NextConfig = {
   // Enable standalone output for Docker/Cloudflare optimizations
   output: 'standalone',
 
-  // Config for development environment
-  server: {
-    allowedDevOrigins: [
-      'localhost:3000',
-      'localhost:3001',
-      'localhost:3002',
-      '*.novita.ai', // Allow Novita sandbox URLs
-    ],
-  },
-
   // Headers for caching, security, and performance
   async headers() {
     return [
