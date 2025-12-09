@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Home, Megaphone, PlusCircle, BarChart3, Settings, ChevronLeft } from 'lucide-react';
 import { ZzikLogoMark } from '@/components/cosmic';
 import { colors, liquidGlass } from '@/lib/design-tokens';
@@ -55,7 +55,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
 
             return (
               <Link key={item.href} href={item.href}>
-                <motion.div
+                <m.div
                   whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors"
@@ -66,7 +66,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
                 >
                   <Icon size={20} />
                   <span className="font-medium">{item.label}</span>
-                </motion.div>
+                </m.div>
               </Link>
             );
           })}
@@ -75,7 +75,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
         {/* Back to main */}
         <div className="p-4 border-t" style={{ borderColor: colors.border.subtle }}>
           <Link href="/">
-            <motion.div
+            <m.div
               whileHover={{ x: -4 }}
               whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-4 py-2 rounded-lg"
@@ -83,7 +83,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
             >
               <ChevronLeft size={18} />
               <span className="text-sm">메인으로 돌아가기</span>
-            </motion.div>
+            </m.div>
           </Link>
         </div>
       </aside>
@@ -126,7 +126,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
 
           return (
             <Link key={item.href} href={item.href}>
-              <motion.div
+              <m.div
                 whileTap={{ scale: 0.9 }}
                 className="flex flex-col items-center gap-1 px-4 py-2"
               >
@@ -144,7 +144,7 @@ export default function BrandLayout({ children }: BrandLayoutProps) {
                 >
                   {item.label}
                 </span>
-              </motion.div>
+              </m.div>
             </Link>
           );
         })}

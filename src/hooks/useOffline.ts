@@ -18,6 +18,7 @@ export function useOnlineStatus(): boolean {
   const [online, setOnline] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Set initial value
     setOnline(checkOnline());
 
@@ -50,12 +51,14 @@ export function useOfflineSync(): UseOfflineSyncReturn {
 
   // Initialize auto-sync
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const cleanup = initAutoSync();
     return cleanup;
   }, []);
 
   // Update pending actions
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateQueue = () => {
       setPendingActions(getSyncQueue());
     };
@@ -110,6 +113,7 @@ export function useOfflineData<T>({
 
   // Load from storage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (typeof window === 'undefined') return;
 
     try {

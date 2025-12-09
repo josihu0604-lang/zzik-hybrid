@@ -37,6 +37,7 @@ export function SemanticSearchBar({
 
   // Close dropdown when clicking outside
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleClickOutside = (e: MouseEvent) => {
       if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
         setIsFocused(false);

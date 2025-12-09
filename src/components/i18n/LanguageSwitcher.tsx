@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Globe, Check } from 'lucide-react';
 import { useTranslation } from '@/i18n/LanguageProvider';
 import { LOCALES, LOCALE_NAMES, LOCALE_FLAGS, type Locale } from '@/i18n/config';
@@ -86,7 +86,7 @@ export function LanguageSwitcher({ variant = 'dropdown', className = '' }: Langu
             />
 
             {/* Dropdown menu */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -8, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.95 }}
@@ -122,7 +122,7 @@ export function LanguageSwitcher({ variant = 'dropdown', className = '' }: Langu
                   {locale === loc && <Check size={16} />}
                 </button>
               ))}
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

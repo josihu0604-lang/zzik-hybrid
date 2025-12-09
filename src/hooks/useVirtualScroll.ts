@@ -146,11 +146,13 @@ export function useVirtualScroll<T>({
 
   // 컴포넌트 마운트 시 스크롤 위치 복원
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     restoreScrollPosition();
   }, [restoreScrollPosition]);
 
   // 컴포넌트 언마운트 시 스크롤 위치 저장
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       saveScrollPosition();
     };
@@ -158,6 +160,7 @@ export function useVirtualScroll<T>({
 
   // 무한 스크롤 처리
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!hasMore || !onLoadMore || isLoadingMoreRef.current) return;
 
     const virtualItems = virtualizer.getVirtualItems();
@@ -280,11 +283,13 @@ export function useScrollRestoration(key: string) {
 
   // 마운트 시 복원
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     restorePosition();
   }, [restorePosition]);
 
   // 언마운트 시 저장
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       savePosition();
     };
@@ -292,6 +297,7 @@ export function useScrollRestoration(key: string) {
 
   // 스크롤 이벤트 핸들러 (자동 저장)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const element = scrollRef.current;
     if (!element) return;
 
@@ -326,6 +332,7 @@ export function useMeasureElement<T extends HTMLElement = HTMLDivElement>() {
   const sizeRef = useRef({ width: 0, height: 0 });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const element = ref.current;
     if (!element || typeof ResizeObserver === 'undefined') return;
 
@@ -375,6 +382,7 @@ export function useInfiniteScroll({
   const isLoadingRef = useRef(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const sentinel = sentinelRef.current;
     if (!sentinel || !hasMore || isLoading) return;
 

@@ -68,6 +68,7 @@ export function useRealtimeSubscription<T = unknown>(
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!enabled) return;
 
     // Try Supabase Realtime

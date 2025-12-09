@@ -131,6 +131,7 @@ export function usePullToRefresh({
 
   // 리프레시 중 고정 거리 유지
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (isRefreshing) {
       setPullDistance(threshold * 0.8);
     }

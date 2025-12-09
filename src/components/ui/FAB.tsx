@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { getTouchTargetStyle } from '@/lib/mobile-ux';
 import { colors, radii, shadows } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
@@ -77,7 +77,7 @@ export function FAB({
   return (
     <AnimatePresence>
       {show && (
-        <motion.button
+        <m.button
           type="button"
           onClick={handleClick}
           disabled={loading}
@@ -107,7 +107,7 @@ export function FAB({
         >
           {/* Loading state */}
           {loading ? (
-            <motion.div
+            <m.div
               className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -119,7 +119,7 @@ export function FAB({
 
               {/* Extended label */}
               {extended && label && (
-                <motion.span
+                <m.span
                   initial={{ width: 0, opacity: 0 }}
                   animate={{ width: 'auto', opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
@@ -127,7 +127,7 @@ export function FAB({
                   className="whitespace-nowrap overflow-hidden"
                 >
                   {label}
-                </motion.span>
+                </m.span>
               )}
             </>
           )}
@@ -141,7 +141,7 @@ export function FAB({
             }}
             aria-hidden="true"
           />
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   );
@@ -187,7 +187,7 @@ export function FABMenu({ icon, items, show = true, position = 'bottom-right' }:
       {/* Backdrop */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -203,7 +203,7 @@ export function FABMenu({ icon, items, show = true, position = 'bottom-right' }:
       <AnimatePresence>
         {isOpen &&
           items.map((item, index) => (
-            <motion.button
+            <m.button
               key={item.label}
               type="button"
               onClick={() => handleItemClick(item)}
@@ -231,16 +231,16 @@ export function FABMenu({ icon, items, show = true, position = 'bottom-right' }:
             >
               <span className="inline-flex items-center justify-center">{item.icon}</span>
               <span className="text-sm">{item.label}</span>
-            </motion.button>
+            </m.button>
           ))}
       </AnimatePresence>
 
       {/* Main FAB */}
       <FAB
         icon={
-          <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
+          <m.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.2 }}>
             {icon}
-          </motion.div>
+          </m.div>
         }
         onClick={handleToggle}
         show={show}

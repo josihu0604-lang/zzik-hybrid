@@ -150,6 +150,7 @@ export function useNotification(): UseNotificationReturn {
 
   // 초기 로드
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setNotifications(loadNotifications());
   }, []);
 

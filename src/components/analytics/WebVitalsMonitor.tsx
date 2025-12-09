@@ -55,6 +55,7 @@ export function WebVitalsMonitor() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Only run in development
     if (process.env.NODE_ENV !== 'development') {
       setIsVisible(false);

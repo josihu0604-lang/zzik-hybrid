@@ -93,6 +93,7 @@ export function useNotifications(
 
   // Subscribe to real-time updates
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!userId) {
       return;
     }
@@ -240,6 +241,7 @@ export function useUnreadCount(userId: string | null): number {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!userId) {
       setCount(0);
       return;

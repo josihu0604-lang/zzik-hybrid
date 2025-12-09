@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors, brand } from '@/lib/design-tokens';
 
 /**
@@ -69,7 +69,7 @@ function ZzikLogoMark({
   const id = `zzik-${Math.random().toString(36).slice(2, 9)}`;
 
   return (
-    <motion.svg
+    <m.svg
       width={size}
       height={size}
       viewBox="0 0 64 64"
@@ -127,7 +127,7 @@ function ZzikLogoMark({
       {/* Geometric Z - Custom Letterform */}
       <g filter="url(#${id}-text-shadow)">
         {/* Z Top Bar */}
-        <motion.rect
+        <m.rect
           x="18"
           y="18"
           width="28"
@@ -141,7 +141,7 @@ function ZzikLogoMark({
         />
 
         {/* Z Diagonal - The Strike */}
-        <motion.rect
+        <m.rect
           x="28"
           y="14"
           width="5"
@@ -156,7 +156,7 @@ function ZzikLogoMark({
         />
 
         {/* Z Bottom Bar */}
-        <motion.rect
+        <m.rect
           x="18"
           y="41"
           width="28"
@@ -171,7 +171,7 @@ function ZzikLogoMark({
       </g>
 
       {/* Spark Accent - Top Right */}
-      <motion.circle
+      <m.circle
         cx="50"
         cy="14"
         r="3"
@@ -195,7 +195,7 @@ function ZzikLogoMark({
         stroke="rgba(255,255,255,0.12)"
         strokeWidth="1"
       />
-    </motion.svg>
+    </m.svg>
   );
 }
 
@@ -331,7 +331,7 @@ export function StampEffect({
   const id = `stamp-${Math.random().toString(36).slice(2, 9)}`;
 
   return (
-    <motion.div
+    <m.div
       className={`relative ${className}`}
       style={{ width: size, height: size }}
       animate={
@@ -353,7 +353,7 @@ export function StampEffect({
         </defs>
 
         {/* Outer Ring - Squircle */}
-        <motion.path
+        <m.path
           d="M40 4 C64 4 76 16 76 40 C76 64 64 76 40 76 C16 76 4 64 4 40 C4 16 16 4 40 4 Z"
           fill="none"
           stroke={`url(#${id}-ring)`}
@@ -374,7 +374,7 @@ export function StampEffect({
         />
 
         {/* Center Fill */}
-        <motion.path
+        <m.path
           d="M40 24 C52 24 56 28 56 40 C56 52 52 56 40 56 C28 56 24 52 24 40 C24 28 28 24 40 24 Z"
           fill={isActive ? colors.flame[500] : 'transparent'}
           stroke={colors.flame[500]}
@@ -386,7 +386,7 @@ export function StampEffect({
 
         {/* Check Mark */}
         {isActive && (
-          <motion.path
+          <m.path
             d="M30 40 L37 47 L50 34"
             stroke="white"
             strokeWidth="3.5"
@@ -403,7 +403,7 @@ export function StampEffect({
       {/* Ripple Effects */}
       {isActive && (
         <>
-          <motion.div
+          <m.div
             className="absolute inset-0"
             style={{
               borderRadius: '30%',
@@ -413,7 +413,7 @@ export function StampEffect({
             animate={{ scale: 1.4, opacity: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           />
-          <motion.div
+          <m.div
             className="absolute inset-0"
             style={{
               borderRadius: '30%',
@@ -425,7 +425,7 @@ export function StampEffect({
           />
         </>
       )}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -442,7 +442,7 @@ export function ZzikLogoAnimated({
   const id = `anim-${Math.random().toString(36).slice(2, 9)}`;
 
   return (
-    <motion.svg
+    <m.svg
       width={size}
       height={size}
       viewBox="0 0 64 64"
@@ -486,7 +486,7 @@ export function ZzikLogoAnimated({
       <rect x="18" y="41" width="28" height="5" rx="2.5" fill="white" />
 
       {/* Animated Spark */}
-      <motion.circle
+      <m.circle
         cx="50"
         cy="14"
         r="3"
@@ -501,7 +501,7 @@ export function ZzikLogoAnimated({
           ease: 'easeInOut',
         }}
       />
-    </motion.svg>
+    </m.svg>
   );
 }
 

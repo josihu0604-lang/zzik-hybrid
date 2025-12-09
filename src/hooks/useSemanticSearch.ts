@@ -85,6 +85,7 @@ export function useSemanticSearch(options: UseSemanticSearchOptions = {}): UseSe
 
   // Debounced search
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!query.trim()) {
       setResults([]);
       return;

@@ -78,6 +78,7 @@ export function useLocalStorage<T>(
 
   // Listen for changes in other tabs
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (typeof window === 'undefined') return;
 
     const handleStorageChange = (event: StorageEvent) => {

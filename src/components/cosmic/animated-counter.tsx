@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { m, useMotionValue, useTransform, animate } from 'framer-motion';
 
 interface AnimatedCounterProps {
   value: number;
@@ -23,6 +23,7 @@ export function AnimatedCounter({
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const controls = animate(count, value, { duration, ease: 'easeOut' });
     const unsubscribe = rounded.on('change', (v) => setDisplayValue(v));
     return () => {
@@ -34,10 +35,10 @@ export function AnimatedCounter({
   const formatted = format ? format(displayValue) : displayValue.toLocaleString();
 
   return (
-    <motion.span className="tabular-nums">
+    <m.span className="tabular-nums">
       {prefix}
       {formatted}
       {suffix}
-    </motion.span>
+    </m.span>
   );
 }

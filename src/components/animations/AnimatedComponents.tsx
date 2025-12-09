@@ -1,7 +1,7 @@
 'use client';
 
 import { type ReactNode, forwardRef } from 'react';
-import { motion, AnimatePresence, type HTMLMotionProps } from 'framer-motion';
+import { m, AnimatePresence, type HTMLMotionProps } from 'framer-motion';
 import {
   fadeIn,
   fadeInUp,
@@ -48,7 +48,7 @@ export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
     }[direction];
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         variants={variants}
         initial="hidden"
@@ -59,7 +59,7 @@ export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -78,7 +78,7 @@ interface ScaleInProps extends Omit<HTMLMotionProps<'div'>, 'variants'> {
 export const ScaleIn = forwardRef<HTMLDivElement, ScaleInProps>(
   ({ children, delay = 0, ...props }, ref) => {
     return (
-      <motion.div
+      <m.div
         ref={ref}
         variants={scaleIn}
         initial="hidden"
@@ -89,7 +89,7 @@ export const ScaleIn = forwardRef<HTMLDivElement, ScaleInProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -107,7 +107,7 @@ interface StaggerListProps extends Omit<HTMLMotionProps<'div'>, 'variants'> {
 export const StaggerList = forwardRef<HTMLDivElement, StaggerListProps>(
   ({ children, ...props }, ref) => {
     return (
-      <motion.div
+      <m.div
         ref={ref}
         variants={staggerContainer}
         initial="hidden"
@@ -115,7 +115,7 @@ export const StaggerList = forwardRef<HTMLDivElement, StaggerListProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -129,7 +129,7 @@ interface StaggerListViewportProps extends Omit<HTMLMotionProps<'div'>, 'variant
 export const StaggerListViewport = forwardRef<HTMLDivElement, StaggerListViewportProps>(
   ({ children, amount = 0.3, ...props }, ref) => {
     return (
-      <motion.div
+      <m.div
         ref={ref}
         variants={staggerContainer}
         initial="hidden"
@@ -138,7 +138,7 @@ export const StaggerListViewport = forwardRef<HTMLDivElement, StaggerListViewpor
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -149,9 +149,9 @@ StaggerListViewport.displayName = 'StaggerListViewport';
 export const StaggerItem = forwardRef<HTMLDivElement, Omit<HTMLMotionProps<'div'>, 'variants'>>(
   ({ children, ...props }, ref) => {
     return (
-      <motion.div ref={ref} variants={staggerItem} {...props}>
+      <m.div ref={ref} variants={staggerItem} {...props}>
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -175,7 +175,7 @@ export const TapScale = forwardRef<HTMLDivElement, TapScaleProps>(
       typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         whileTap={tapScale}
         whileHover={enableHover && supportsHover ? hoverScale : undefined}
@@ -183,7 +183,7 @@ export const TapScale = forwardRef<HTMLDivElement, TapScaleProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -207,7 +207,7 @@ export function ModalAnimation({ isOpen, onClose, children, className = '' }: Mo
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             variants={modalBackdrop}
             initial="hidden"
             animate="visible"
@@ -218,7 +218,7 @@ export function ModalAnimation({ isOpen, onClose, children, className = '' }: Mo
           />
 
           {/* Content */}
-          <motion.div
+          <m.div
             variants={modalContent}
             initial="hidden"
             animate="visible"
@@ -227,7 +227,7 @@ export function ModalAnimation({ isOpen, onClose, children, className = '' }: Mo
             style={{ willChange: 'transform, opacity' }}
           >
             {children}
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>
@@ -256,7 +256,7 @@ export function BottomSheetAnimation({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             variants={modalBackdrop}
             initial="hidden"
             animate="visible"
@@ -267,7 +267,7 @@ export function BottomSheetAnimation({
           />
 
           {/* Sheet */}
-          <motion.div
+          <m.div
             variants={bottomSheet}
             initial="hidden"
             animate="visible"
@@ -276,7 +276,7 @@ export function BottomSheetAnimation({
             style={{ willChange: 'transform' }}
           >
             {children}
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>
@@ -304,7 +304,7 @@ export const SlideIn = forwardRef<HTMLDivElement, SlideInProps>(
           };
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         variants={variants}
         initial="hidden"
@@ -314,7 +314,7 @@ export const SlideIn = forwardRef<HTMLDivElement, SlideInProps>(
         {...props}
       >
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 );
@@ -350,7 +350,7 @@ export function SpinnerAnimation({
   className = '',
 }: SpinnerAnimationProps) {
   return (
-    <motion.div
+    <m.div
       animate={{ rotate: 360 }}
       transition={{ duration: duration.major * 2.5, repeat: Infinity, ease: 'linear' }} // 1s
       className={className}
@@ -360,7 +360,7 @@ export function SpinnerAnimation({
         <circle cx="12" cy="12" r="10" stroke={`${color}30`} strokeWidth="3" />
         <path d="M12 2C6.48 2 2 6.48 2 12" stroke={color} strokeWidth="3" strokeLinecap="round" />
       </svg>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -375,7 +375,7 @@ interface SkeletonAnimationProps {
 
 export function SkeletonAnimation({ className = '', style }: SkeletonAnimationProps) {
   return (
-    <motion.div
+    <m.div
       animate={{
         backgroundPosition: ['200% 0', '-200% 0'],
       }}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { useAuth } from '@/context/auth-context';
 import {
@@ -54,6 +54,7 @@ function ProfilePageContent() {
   });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (user) {
       // Fetch user stats
       const fetchStats = async () => {
@@ -168,7 +169,7 @@ function ProfilePageContent() {
           />
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="relative max-w-sm w-full p-6 rounded-2xl overflow-hidden"
@@ -206,7 +207,7 @@ function ProfilePageContent() {
               </Button>
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     );
   }
@@ -215,7 +216,7 @@ function ProfilePageContent() {
     <div className="min-h-screen bg-linear-bg pt-safe pb-safe overflow-hidden">
       {/* Animated Background (GPU accelerated) */}
       <div className="fixed inset-0 pointer-events-none">
-        <motion.div
+        <m.div
           className="absolute -top-40 -right-40 w-96 h-96 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 107, 91, 0.12) 0%, transparent 70%)',
@@ -229,7 +230,7 @@ function ProfilePageContent() {
           }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <motion.div
+        <m.div
           className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(255, 107, 91, 0.08) 0%, transparent 70%)',
@@ -247,7 +248,7 @@ function ProfilePageContent() {
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
-        <motion.header
+        <m.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="px-6 py-4"
@@ -269,11 +270,11 @@ function ProfilePageContent() {
               </div>
             </div>
           </div>
-        </motion.header>
+        </m.header>
 
         {/* User Info Card */}
         <div className="max-w-lg mx-auto px-6 py-4 w-full">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="relative p-6 rounded-2xl overflow-hidden mb-6"
@@ -332,12 +333,12 @@ function ProfilePageContent() {
                 <p className="text-linear-text-quaternary text-body-xs">VIP 매장</p>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Settings Sections */}
           <div className="space-y-6">
             {settingSections.map((section, sectionIdx) => (
-              <motion.div
+              <m.div
                 key={section.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -419,12 +420,12 @@ function ProfilePageContent() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
           {/* Logout Button */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -439,7 +440,7 @@ function ProfilePageContent() {
             >
               로그아웃
             </Button>
-          </motion.div>
+          </m.div>
 
           {/* App Version */}
           <div className="text-center mt-8 mb-4">

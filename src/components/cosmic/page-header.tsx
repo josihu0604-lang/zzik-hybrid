@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 
 interface PageHeaderProps {
@@ -13,7 +13,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, backHref, action, sticky = true }: PageHeaderProps) {
   return (
-    <motion.header
+    <m.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       className={`${sticky ? 'sticky top-0 z-50' : ''} bg-space-950/80 backdrop-blur-xl border-b border-white/5`}
@@ -45,6 +45,6 @@ export function PageHeader({ title, subtitle, backHref, action, sticky = true }:
         </div>
         {action}
       </div>
-    </motion.header>
+    </m.header>
   );
 }

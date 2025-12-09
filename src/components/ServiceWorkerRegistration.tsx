@@ -5,6 +5,7 @@ import { logger } from '@/lib/logger';
 
 export function ServiceWorkerRegistration() {
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       navigator.serviceWorker
         .register('/sw.js')

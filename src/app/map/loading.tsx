@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { SkeletonMapPage } from '@/components/ui/Skeleton';
 
 /**
@@ -14,7 +14,7 @@ export default function MapLoading() {
     <div className="min-h-screen bg-space-950">
       {/* Animated gradient background - subtle pulsing */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-15">
-        <motion.div
+        <m.div
           className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
             background: 'radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%)',

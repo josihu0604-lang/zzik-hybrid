@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { useState, useMemo, Suspense, lazy, useCallback, useEffect } from 'react';
 import { MapPin, Navigation, AlertCircle } from 'lucide-react';
 import { BottomNav } from '@/components/layout/BottomNav';
@@ -14,17 +14,22 @@ import { calculateDistance, formatDistance } from '@/lib/geo';
 import { getCategoryColor } from '@/lib/color-utils';
 import { Button } from '@/components/ui/Button';
 
-// Mapbox CSS - loaded only on map page to reduce bundle for other pages
-import 'mapbox-gl/dist/mapbox-gl.css';
-
 /**
  * Map Page - 오픈 확정된 팝업 지도
  *
  * 새 개념: 펀딩 완료된 팝업들의 위치를 보여주는 지도
  */
 
-// Lazy load MapboxMap for better performance
-const MapboxMap = lazy(() => import('@/components/map/MapboxMap'));
+// Lazy load MapboxMap for better performance (2.7MB chunk)
+// CSS is dynamically loaded by the component itself
+const MapboxMap = lazy(() =>
+  import('@/components/map/MapboxMap').then((mod) => {
+    // Dynamically import Mapbox CSS only when needed
+    // @ts-ignore - CSS import doesn't need type declarations
+    import('mapbox-gl/dist/mapbox-gl.css');
+    return mod;
+  })
+);
 
 // ============================================================================
 // API TYPES
@@ -214,7 +219,7 @@ function MapLoadingSkeleton() {
     <div className="absolute inset-0 bg-linear-elevated overflow-hidden">
       {/* Animated gradient pulse */}
       <div className="absolute inset-0">
-        <motion.div
+        <m.div
           className="absolute inset-0"
           style={{
             background: 'linear-gradient(90deg, transparent, rgba(255, 107, 91, 0.1), transparent)',
@@ -233,7 +238,7 @@ function MapLoadingSkeleton() {
       {/* Skeleton markers */}
       <div className="absolute inset-0">
         {[...Array(3)].map((_, i) => (
-          <motion.div
+          <m.div
             key={i}
             className="absolute"
             style={{
@@ -261,20 +266,20 @@ function MapLoadingSkeleton() {
                 border: '2px solid rgba(255, 107, 91, 0.3)',
               }}
             />
-          </motion.div>
+          </m.div>
         ))}
       </div>
 
       {/* Loading text */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
+        <m.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
           <div className="flex items-center gap-2 mb-2">
-            <motion.div
+            <m.div
               className="w-2 h-2 rounded-full"
               style={{ background: colors.flame[500] }}
               animate={{
@@ -289,7 +294,7 @@ function MapLoadingSkeleton() {
             />
             <p className="text-linear-text-secondary text-sm font-medium">지도를 불러오는 중...</p>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );
@@ -309,7 +314,7 @@ function MapFallbackUI({
     <div className="relative h-full bg-linear-elevated">
       {/* Info banner */}
       <div className="absolute top-4 left-4 right-4 z-10">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="rounded-xl p-4"
@@ -335,13 +340,13 @@ function MapFallbackUI({
               </p>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Popup Markers (Visual representation) */}
       <div className="absolute inset-0">
         {popups.map((popup, index) => (
-          <motion.button
+          <m.button
             key={popup.id}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -363,7 +368,7 @@ function MapFallbackUI({
           >
             <div className="relative">
               {/* Hover glow effect */}
-              <motion.div
+              <m.div
                 className="absolute inset-0 rounded-full blur-xl"
                 style={{
                   background: CATEGORY_COLORS[popup.category] || colors.flame[500],
@@ -390,7 +395,7 @@ function MapFallbackUI({
 
               {/* Selected pulse */}
               {selectedPopup?.id === popup.id && (
-                <motion.div
+                <m.div
                   className="absolute inset-0 rounded-full"
                   style={{
                     background: CATEGORY_COLORS[popup.category] || colors.flame[500],
@@ -409,7 +414,7 @@ function MapFallbackUI({
             </div>
 
             {/* Tooltip on hover */}
-            <motion.div
+            <m.div
               className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 rounded-lg whitespace-nowrap pointer-events-none"
               style={{
                 background: 'rgba(18, 19, 20, 0.95)',
@@ -421,8 +426,8 @@ function MapFallbackUI({
               transition={{ duration: 0.15 }}
             >
               <p className="text-white text-xs font-medium">{popup.brandName}</p>
-            </motion.div>
-          </motion.button>
+            </m.div>
+          </m.button>
         ))}
       </div>
     </div>
@@ -436,7 +441,12 @@ function MapPageContent() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<'distance' | 'date' | 'popularity'>('distance');
   const [showNearbyOnly, setShowNearbyOnly] = useState(false);
-  const hasMapboxToken = !!process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+  // Check for valid Mapbox token (not demo/placeholder)
+  const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+  const hasMapboxToken = !!mapboxToken && 
+    mapboxToken.startsWith('pk.') && 
+    mapboxToken.length > 50 &&
+    !mapboxToken.includes('demo');
 
   // Data State
   const [allPopups, setAllPopups] = useState<PopupLocation[]>([]);
@@ -449,6 +459,7 @@ function MapPageContent() {
 
   // Fetch popups on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let mounted = true;
 
     const loadPopups = async () => {
@@ -583,7 +594,7 @@ function MapPageContent() {
           </div>
           <div className="flex items-center gap-2">
             {isLoading ? (
-              <motion.div
+              <m.div
                 className="w-2 h-2 rounded-full"
                 style={{ background: colors.flame[500] }}
                 animate={{
@@ -616,7 +627,7 @@ function MapPageContent() {
       <div className="relative h-[55vh] bg-linear-elevated">
         {/* API Error Banner */}
         {apiError && !isDemo && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="absolute top-4 left-4 right-4 z-20 px-4 py-3 rounded-xl"
@@ -630,7 +641,7 @@ function MapPageContent() {
               <AlertCircle size={16} className="text-red-400 flex-shrink-0" />
               <p className="text-red-400 text-sm">데이터를 불러오는 중 문제가 발생했습니다</p>
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {/* MapFilters */}
@@ -715,7 +726,7 @@ function MapPageContent() {
 
           {/* Demo Mode Info */}
           {isDemo && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-4 p-4 rounded-xl"
@@ -741,12 +752,12 @@ function MapPageContent() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {/* GPS Error Message */}
           {gpsError && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-4 p-3 rounded-lg flex items-center gap-2"
@@ -757,14 +768,14 @@ function MapPageContent() {
             >
               <MapPin size={16} className="text-red-400" />
               <p className="text-red-400 text-sm">{gpsError}</p>
-            </motion.div>
+            </m.div>
           )}
 
           {/* Loading Skeleton */}
           {isLoading && (
             <div className="space-y-3">
               {[...Array(3)].map((_, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -776,7 +787,7 @@ function MapPageContent() {
                   }}
                 >
                   {/* Icon skeleton */}
-                  <motion.div
+                  <m.div
                     className="w-12 h-12 rounded-xl"
                     style={{ background: 'rgba(255, 107, 91, 0.2)' }}
                     animate={{
@@ -789,33 +800,33 @@ function MapPageContent() {
                     }}
                   />
                   <div className="flex-1">
-                    <motion.div
+                    <m.div
                       className="h-3 rounded mb-2"
                       style={{ background: 'rgba(255, 255, 255, 0.1)', width: '40%' }}
                       animate={{ opacity: [0.3, 0.6, 0.3] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     />
-                    <motion.div
+                    <m.div
                       className="h-4 rounded mb-2"
                       style={{ background: 'rgba(255, 255, 255, 0.15)', width: '80%' }}
                       animate={{ opacity: [0.3, 0.6, 0.3] }}
                       transition={{ duration: 1.5, repeat: Infinity, delay: 0.1 }}
                     />
-                    <motion.div
+                    <m.div
                       className="h-3 rounded"
                       style={{ background: 'rgba(255, 255, 255, 0.1)', width: '60%' }}
                       animate={{ opacity: [0.3, 0.6, 0.3] }}
                       transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
                     />
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           )}
 
           {/* Empty State */}
           {!isLoading && filteredPopups.length === 0 && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="py-12 text-center"
@@ -829,7 +840,7 @@ function MapPageContent() {
                   ? '범위를 넓히거나 필터를 해제해보세요'
                   : '다른 키워드로 검색해보세요'}
               </p>
-            </motion.div>
+            </m.div>
           )}
 
           {/* Popup List */}
@@ -840,13 +851,13 @@ function MapPageContent() {
                 const isConfirmed = popup.isConfirmed || (popup.progress ?? 0) >= 100;
 
                 return (
-                  <motion.div
+                  <m.div
                     key={popup.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 * index }}
                   >
-                    <motion.div
+                    <m.div
                       className="flex items-center gap-4 p-4 rounded-xl transition-colors cursor-pointer"
                       style={{
                         background: 'rgba(18, 19, 20, 0.6)',
@@ -866,7 +877,7 @@ function MapPageContent() {
                     >
                       {/* Icon with progress ring */}
                       <div className="relative">
-                        <motion.div
+                        <m.div
                           className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold"
                           style={{
                             background: isConfirmed
@@ -879,7 +890,7 @@ function MapPageContent() {
                           }}
                         >
                           {popup.brandName.charAt(0)}
-                        </motion.div>
+                        </m.div>
                         {isConfirmed && (
                           <div
                             className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-white text-micro font-bold"
@@ -941,8 +952,8 @@ function MapPageContent() {
                           </>
                         )}
                       </div>
-                    </motion.div>
-                  </motion.div>
+                    </m.div>
+                  </m.div>
                 );
               })}
             </div>

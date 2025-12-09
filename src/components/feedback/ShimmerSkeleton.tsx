@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -153,7 +153,7 @@ export function BentoGridSkeleton({ count = 5, className = '' }: BentoGridSkelet
   });
 
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       animate="visible"
       variants={{
@@ -167,7 +167,7 @@ export function BentoGridSkeleton({ count = 5, className = '' }: BentoGridSkelet
       style={{ gridAutoRows: 'min-content' }}
     >
       {items.map((size, index) => (
-        <motion.div
+        <m.div
           key={index}
           variants={{
             hidden: { opacity: 0, y: 20 },
@@ -178,9 +178,9 @@ export function BentoGridSkeleton({ count = 5, className = '' }: BentoGridSkelet
           }}
         >
           <ShimmerSkeleton size={size as 'hero' | 'featured' | 'standard'} />
-        </motion.div>
+        </m.div>
       ))}
-    </motion.div>
+    </m.div>
   );
 }
 

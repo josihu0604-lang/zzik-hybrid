@@ -6,7 +6,7 @@
  * Layout wrapper for login/signup page with backgrounds and header
  */
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import Link from 'next/link';
 import { ZzikLogo } from '@/components/cosmic';
 
@@ -40,7 +40,7 @@ function LoginBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
       {/* Orange Orb */}
-      <motion.div
+      <m.div
         className="absolute -top-40 -right-40 w-[400px] h-[400px] rounded-full"
         style={{
           background: 'radial-gradient(circle, rgba(255, 107, 91, 0.15) 0%, transparent 60%)',
@@ -52,7 +52,7 @@ function LoginBackground() {
         }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <motion.div
+      <m.div
         className="absolute -bottom-40 -left-40 w-[300px] h-[300px] rounded-full"
         style={{
           background: 'radial-gradient(circle, rgba(255, 107, 91, 0.1) 0%, transparent 60%)',
@@ -81,7 +81,7 @@ function LoginBackground() {
 
 function LoginHeader() {
   return (
-    <motion.header
+    <m.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -91,7 +91,7 @@ function LoginHeader() {
         <ZzikLogo size={32} />
         <span className="text-white/60 text-sm font-medium">ZZIK</span>
       </Link>
-    </motion.header>
+    </m.header>
   );
 }
 
@@ -101,14 +101,14 @@ interface LoginHeroProps {
 
 export function LoginHero({ mode }: LoginHeroProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.5 }}
       className="mb-8 text-center"
     >
       {/* 미니 도장 */}
-      <motion.div
+      <m.div
         initial={{ scale: 1.5, opacity: 0, rotate: -10 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ delay: 0.2, type: 'spring', stiffness: 400, damping: 20 }}
@@ -129,7 +129,7 @@ export function LoginHero({ mode }: LoginHeroProps) {
           }}
         />
         <span className="text-4xl font-black text-white relative z-10 drop-shadow-lg">Z</span>
-      </motion.div>
+      </m.div>
 
       <h1
         className="font-black tracking-tighter mb-2 text-2xl md:text-3xl lg:text-4xl"
@@ -144,7 +144,7 @@ export function LoginHero({ mode }: LoginHeroProps) {
       <p className="text-white/50 text-sm md:text-base">
         {mode === 'login' ? '찍으면 진짜, 안 찍으면 안 간 거' : 'ZZIK으로 진짜 여행을 기록하세요'}
       </p>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -154,7 +154,7 @@ interface AuthCardProps {
 
 export function AuthCard({ children }: AuthCardProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3, duration: 0.5 }}
@@ -183,7 +183,7 @@ export function AuthCard({ children }: AuthCardProps) {
         />
         {children}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 

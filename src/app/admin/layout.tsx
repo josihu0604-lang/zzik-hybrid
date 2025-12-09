@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import {
   LayoutDashboard,
   Users,
@@ -46,6 +46,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   // Check admin authorization
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     async function checkAuth() {
       try {
         const response = await fetch('/api/me');
@@ -119,7 +120,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       )}
 
       {/* Sidebar */}
-      <motion.aside
+      <m.aside
         className={`fixed lg:static inset-y-0 left-0 z-40 w-64 transform transition-transform lg:transform-none ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
@@ -178,7 +179,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <span className="font-medium">로그아웃</span>
           </button>
         </div>
-      </motion.aside>
+      </m.aside>
 
       {/* Main content */}
       <main className="flex-1 min-h-screen">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import {
   Wallet,
   Calendar,
@@ -116,6 +116,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
   }, [getCsrfHeaders]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (csrfToken) {
       fetchSummary();
     }
@@ -205,7 +206,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
 
   return (
     <>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className={`rounded-xl overflow-hidden ${className}`}
@@ -261,7 +262,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
           {/* Error/Success messages */}
           <AnimatePresence>
             {error && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -278,11 +279,11 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
                 <button onClick={() => setError(null)} className="ml-auto p-1">
                   <X size={14} style={{ color: colors.error }} />
                 </button>
-              </motion.div>
+              </m.div>
             )}
 
             {success && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -299,7 +300,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
                 <button onClick={() => setSuccess(null)} className="ml-auto p-1">
                   <X size={14} style={{ color: colors.success }} />
                 </button>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
 
@@ -384,7 +385,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
           </div>
 
           {/* Request button */}
-          <motion.button
+          <m.button
             onClick={() => setShowModal(true)}
             disabled={!summary?.canRequestPayout}
             whileHover={summary?.canRequestPayout ? { scale: 1.02 } : {}}
@@ -404,14 +405,14 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
               ? `${(summary?.payableAmount || 0).toLocaleString()}원 정산 요청하기`
               : '정산 요청 불가'}
             {summary?.canRequestPayout && <ChevronRight size={16} />}
-          </motion.button>
+          </m.button>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Bank Info Modal */}
       <AnimatePresence>
         {showModal && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -419,7 +420,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
             style={{ background: 'rgba(0, 0, 0, 0.8)' }}
             onClick={() => setShowModal(false)}
           >
-            <motion.div
+            <m.div
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
@@ -530,7 +531,7 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
                 </div>
 
                 {/* Submit button */}
-                <motion.button
+                <m.button
                   onClick={handleRequestPayout}
                   disabled={
                     requesting ||
@@ -558,10 +559,10 @@ export function PayoutRequest({ className = '', onPayoutRequested }: PayoutReque
                       정산 요청 완료
                     </>
                   )}
-                </motion.button>
+                </m.button>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -38,7 +38,7 @@ export function PageLoader({
     >
       {/* Logo */}
       {showLogo && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           className="mb-8"
@@ -52,11 +52,11 @@ export function PageLoader({
           >
             <span className="text-2xl font-black text-white">Z</span>
           </div>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Spinner */}
-      <motion.div
+      <m.div
         className="relative w-12 h-12 mb-4"
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
@@ -74,17 +74,17 @@ export function PageLoader({
             borderTopColor: colors.flame[500],
           }}
         />
-      </motion.div>
+      </m.div>
 
       {/* Message */}
-      <motion.p
+      <m.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
         className="text-linear-text-secondary text-sm"
       >
         {message}
-      </motion.p>
+      </m.p>
 
       {/* Accessibility - Screen reader text */}
       <span className="sr-only">페이지를 불러오는 중입니다. 잠시만 기다려주세요.</span>
@@ -110,7 +110,7 @@ export function InlineLoader({ size = 'md', className = '' }: InlineLoaderProps)
   const dimension = SIZE_MAP[size];
 
   return (
-    <motion.div
+    <m.div
       className={`inline-flex ${className}`}
       style={{ width: dimension, height: dimension }}
       animate={{ rotate: 360 }}
@@ -127,7 +127,7 @@ export function InlineLoader({ size = 'md', className = '' }: InlineLoaderProps)
           strokeLinecap="round"
         />
       </svg>
-    </motion.div>
+    </m.div>
   );
 }
 

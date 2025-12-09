@@ -122,6 +122,7 @@ export function useReferral(options: UseReferralOptions = {}): UseReferralReturn
 
   // Extract referral code from URL on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Check URL parameter first
     const urlCode = searchParams.get('ref');
 

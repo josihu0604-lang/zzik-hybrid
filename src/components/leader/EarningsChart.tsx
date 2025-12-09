@@ -1,11 +1,25 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo, memo } from 'react';
+import { m, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Minus, BarChart3, LineChart } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { duration, easing } from '@/lib/animations';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+
+// Use dynamic imports for charts to reduce initial bundle size
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/Skeleton';
+
+const BarChartView = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.BarChartView })), {
+  loading: () => <Skeleton className="h-28 w-full rounded-lg bg-white/5" />,
+  ssr: false
+});
+
+const LineChartView = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.LineChartView })), {
+  loading: () => <Skeleton className="h-28 w-full rounded-lg bg-white/5" />,
+  ssr: false
+});
 
 /**
  * EarningsChart - 수익 추이 차트
@@ -78,7 +92,7 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
         : colors.text.secondary;
 
   return (
-    <motion.div
+    <m.div
       initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={
@@ -239,14 +253,11 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
           </p>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
-/**
- * BarChartView - 바 차트
- */
-function BarChartView({
+export const BarChartView = memo(function BarChartView({
   data,
   maxAmount,
   period,
@@ -272,7 +283,7 @@ function BarChartView({
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -288,7 +299,7 @@ function BarChartView({
           const isToday = index === data.length - 1;
 
           return (
-            <motion.div
+            <m.div
               key={day.date}
               className="flex-1 flex flex-col items-center"
               initial={prefersReducedMotion ? { scaleY: 1 } : { scaleY: 0 }}
@@ -341,18 +352,15 @@ function BarChartView({
                   {getLabel(day.date)}
                 </span>
               )}
-            </motion.div>
+            </m.div>
           );
         })}
       </div>
-    </motion.div>
+    </m.div>
   );
 }
 
-/**
- * LineChartView - 라인 차트 (SVG)
- */
-function LineChartView({
+export const LineChartView = memo(function LineChartView({
   data,
   maxAmount,
   period,
@@ -414,7 +422,7 @@ function LineChartView({
   }, [data, period]);
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -453,7 +461,7 @@ function LineChartView({
         ))}
 
         {/* Area fill */}
-        <motion.path
+        <m.path
           d={areaPath}
           fill="url(#areaGradient)"
           initial={{ opacity: 0 }}
@@ -462,7 +470,7 @@ function LineChartView({
         />
 
         {/* Line */}
-        <motion.path
+        <m.path
           d={linePath}
           fill="none"
           stroke={colors.spark[500]}
@@ -486,7 +494,7 @@ function LineChartView({
             <circle cx={point.x} cy={point.y} r="10" fill="transparent" />
 
             {/* Visible point */}
-            <motion.circle
+            <m.circle
               cx={point.x}
               cy={point.y}
               r="4"
@@ -544,7 +552,7 @@ function LineChartView({
           </text>
         ))}
       </svg>
-    </motion.div>
+    </m.div>
   );
 }
 

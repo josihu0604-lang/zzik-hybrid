@@ -1,187 +1,85 @@
-# ZZIK - K-POP VIP Experience Platform
+# ZZIK - Global K-Experience Platform
 
-> **Your K-POP VIP Experience** | Hightough - Soundcheck - Backstage
+> "ZZIK it. Experience it. Real."  
+> 찍으면 진짜 - 수요가 증명되면 팝업이 열리는 글로벌 K-체험 플랫폼
 
----
+## 🌍 Global Pivot Strategy (2025)
 
-## Quick Start
+ZZIK has pivoted from a local Korean review platform to a **Global K-Experience Verification Platform**, connecting 500M+ global K-Culture fans with authentic experiences.
+
+### Key Features
+
+- **Triple Verification**: GPS + QR + Receipt verification for 99.2% accuracy.
+- **Global Pricing**: Region-specific pricing with PPP adjustments (KR, JP, US, TW, etc.).
+- **VIP Membership**: Tiered benefits (Silver, Gold, Platinum) for K-POP superfans.
+- **K-Experience**: Curated authentic experiences in K-POP, K-Drama, K-Beauty, and K-Food.
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js 15 (App Router), TypeScript 5.7, Tailwind CSS v4
+- **Mobile**: Capacitor 7.x (iOS + Android Hybrid)
+- **Backend**: Supabase (Auth, Postgres), Stripe (Payments)
+- **Design System**: ZZIK Design System 2.0 (iOS 26 Liquid Glass)
+- **i18n**: Multi-language support (KO, EN, JA, ZH-TW, etc.)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm
+
+### Installation
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Development server
+# Setup Environment Variables
+cp .env.example .env.local
+# Add Stripe keys: STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+# Add Supabase keys: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+# Run Development Server
 pnpm dev
-
-# Production build
-pnpm build
-
-# Type check
-pnpm type-check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## What is ZZIK?
-
-ZZIK is a **K-POP VIP Experience Platform** - a 3-way marketplace connecting:
-
-- **Fans**: Book exclusive VIP experiences with K-POP artists
-- **Artists/Agencies**: List and manage VIP experiences
-- **Leaders**: Refer fans, earn 10-15% commission
-
----
-
-## Experience Types
-
-| Type        | Base Price | Description                         |
-| ----------- | ---------- | ----------------------------------- |
-| Hightough   | $150       | Meet & Greet with artists           |
-| Soundcheck  | $300       | Watch exclusive soundcheck sessions |
-| Backstage   | $1,500     | Full backstage access               |
-| Popup Event | $5         | Brand popup experiences             |
-
----
-
-## Target Markets (11 Countries)
-
-```
-Tier 1A: Thailand, Indonesia, Philippines
-Tier 1B: Kazakhstan (CIS gateway)
-Tier 2:  Taiwan, Singapore, Malaysia
-Tier 3:  Japan, South Korea, USA
-Tier 4:  China (future)
-```
-
-All prices are PPP-adjusted for local purchasing power.
-
----
-
-## Tech Stack
-
-| Layer     | Technology                           |
-| --------- | ------------------------------------ |
-| Framework | Next.js 15 + TypeScript 5.6          |
-| Styling   | Tailwind CSS (Dark Mode)             |
-| Animation | Framer Motion                        |
-| Database  | Supabase PostgreSQL + RLS            |
-| Auth      | Supabase Auth (Kakao, Google, Apple) |
-| Mobile    | Capacitor (iOS/Android)              |
-| i18n      | EN, KO, RU (+ more)                  |
-
----
-
-## Design System
-
-**Linear Deep Space + Flame Coral Accent**
-
-```css
-/* Background */
---bg: #08090a;
---surface: #121314;
---elevated: #1a1c1f;
-
-/* Accent Colors */
---flame: #ff6b5b; /* Primary CTA */
---ember: #cc4a3a; /* Secondary */
---spark: #ffd93d; /* Leader Premium */
-```
-
----
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── (home)/        # Homepage
-│   ├── api/           # API routes
-│   ├── experience/    # Experience details
-│   ├── artists/       # Artist listings
-│   ├── map/           # Map view
-│   ├── me/            # User profile
-│   └── leader/        # Leader dashboard
-├── components/
-│   ├── home/          # GlobalHero, etc.
-│   ├── experience/    # ExperienceCard
-│   └── layout/        # Navigation
-├── lib/
-│   ├── currency.ts    # Multi-currency system
-│   └── supabase/      # Database client
-├── i18n/
-│   └── locales/       # EN, KO, RU translations
-└── hooks/
-    └── useCurrency.tsx
-```
-
----
-
-## Environment Variables
-
-Copy `.env.example` to `.env.local` and configure:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-NEXT_PUBLIC_MAPBOX_TOKEN=your-mapbox-token
-```
-
----
-
-## Leader Program
-
-Earn commission by referring fans:
-
-| Tier     | Referrals | Commission |
-| -------- | --------- | ---------- |
-| Bronze   | 0-9       | 10%        |
-| Silver   | 10-49     | 11%        |
-| Gold     | 50-199    | 13%        |
-| Platinum | 200+      | 15%        |
-
----
-
-## Mobile Apps
-
-Built with Capacitor for iOS and Android.
-
-### 📱 Mobile Development (with Live Reload)
+### Mobile Development
 
 ```bash
-# Get setup instructions with your local IP
-pnpm mobile:setup
-
-# Start dev server (accessible from mobile)
-pnpm dev:mobile
-
-# Run on real device (use IP from mobile:setup)
-CAPACITOR_DEV=true CAPACITOR_SERVER_URL=http://YOUR_IP:3000 pnpm cap:run:android
-
-# Run on emulator/simulator
-CAPACITOR_DEV=true pnpm cap:run:android
-```
-
-📖 **[Complete Mobile Development Guide →](./MOBILE_DEV.md)**
-
-### 📦 Production Build
-
-```bash
-# Sync web build to native projects
+# Sync Capacitor
 pnpm cap:sync
 
-# Open in Xcode / Android Studio
+# Open iOS/Android
 pnpm cap:open:ios
 pnpm cap:open:android
 ```
 
----
+## 🌐 Localization
 
-## License
+Currently supported locales:
 
-Private - All rights reserved
+- 🇰🇷 Korean (`ko`) - Default
+- 🇺🇸 English (`en`)
+- 🇯🇵 Japanese (`ja`)
 
----
+## 📂 Project Structure
 
-_ZZIK | Your K-POP VIP Experience | 11 Countries_
+```
+src/
+├── app/                  # Next.js App Router
+├── components/
+│   ├── catalyst/         # UI Kit
+│   └── k-experience/     # Global K-Experience Components
+├── lib/
+│   ├── payment/          # Stripe Integration
+│   ├── global-pricing.ts # Pricing Logic
+│   ├── vip-ticket.ts     # VIP Ticket Logic
+│   └── currency.ts       # Currency Conversion
+├── i18n/                 # Localization Config & JSONs
+└── ...
+```
+
+## 📜 License
+
+ZZIK Inc. All Rights Reserved.

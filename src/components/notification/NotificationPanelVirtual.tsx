@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useCallback, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Bell, X, Check, Trash2 } from 'lucide-react';
 import { NotificationItem } from './NotificationItem';
 import { VirtualList, EmptyState } from '@/components/ux/VirtualList';
@@ -100,6 +100,7 @@ export function NotificationPanelVirtual({
 
   // Set up focus trap and initial focus
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (isOpen) {
       // Save the currently focused element
       previousActiveElementRef.current = document.activeElement as HTMLElement;
@@ -128,7 +129,7 @@ export function NotificationPanelVirtual({
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -137,7 +138,7 @@ export function NotificationPanelVirtual({
           />
 
           {/* Panel */}
-          <motion.div
+          <m.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -249,7 +250,7 @@ export function NotificationPanelVirtual({
                 overscrollBehavior: 'contain',
               }}
             />
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

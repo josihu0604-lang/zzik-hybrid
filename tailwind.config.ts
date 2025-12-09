@@ -94,7 +94,7 @@ const config: Config = {
           border: 'rgba(255, 255, 255, 0.08)',
           'text-primary': '#f5f5f5',
           'text-secondary': '#a8a8a8',
-          'text-tertiary': '#7a7a7a',
+          'text-tertiary': '#8a8a8a',
           'text-quaternary': '#5a5a5a',
         },
       },
@@ -403,6 +403,16 @@ const config: Config = {
           'border-radius': '16px',
           padding: '20px',
           'box-shadow': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 8px 32px rgba(0, 0, 0, 0.3)',
+          willChange: 'transform, backdrop-filter',
+          transform: 'translateZ(0)',
+        },
+
+        // === Adaptive Glass (Low Power Mode) ===
+        '.low-power .glass-card': {
+          'backdrop-filter': 'none',
+          '-webkit-backdrop-filter': 'none',
+          background: 'rgba(18, 19, 20, 0.95)',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
         },
 
         '.liquid-glass': {
@@ -497,6 +507,14 @@ const config: Config = {
           'backdrop-filter': 'blur(24px)',
           '-webkit-backdrop-filter': 'blur(24px)',
           'border-bottom': '1px solid rgba(255, 255, 255, 0.08)',
+          willChange: 'transform, backdrop-filter',
+          transform: 'translateZ(0)',
+        },
+
+        '.low-power .navbar': {
+          'backdrop-filter': 'none',
+          '-webkit-backdrop-filter': 'none',
+          background: 'rgba(8, 9, 10, 0.95)',
         },
 
         '.tabbar': {
@@ -512,6 +530,14 @@ const config: Config = {
           'backdrop-filter': 'blur(24px)',
           '-webkit-backdrop-filter': 'blur(24px)',
           'border-top': '1px solid rgba(255, 255, 255, 0.08)',
+          willChange: 'transform, backdrop-filter',
+          transform: 'translateZ(0)',
+        },
+
+        '.low-power .tabbar': {
+          'backdrop-filter': 'none',
+          '-webkit-backdrop-filter': 'none',
+          background: 'rgba(8, 9, 10, 0.95)',
         },
 
         '.tabbar-item': {

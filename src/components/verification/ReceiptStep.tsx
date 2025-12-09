@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Receipt, Camera, Upload, Check, X, Loader2, AlertCircle } from 'lucide-react';
 import { colors, opacity, gradients } from '@/lib/design-tokens';
 import type { ReceiptVerificationResult } from '@/lib/verification';
@@ -117,12 +117,12 @@ export function ReceiptStep({
   // 인증 완료 상태
   if (result?.verified) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         className="flex flex-col items-center py-8"
       >
-        <motion.div
+        <m.div
           className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
           style={{
             background: gradients.success,
@@ -133,7 +133,7 @@ export function ReceiptStep({
           transition={{ type: 'spring', duration: 0.5 }}
         >
           <Check size={40} style={{ color: colors.success }} />
-        </motion.div>
+        </m.div>
 
         <p className="text-white font-bold text-xl mb-2">영수증 인증 완료!</p>
         <p className="text-linear-text-secondary mb-1">
@@ -141,7 +141,7 @@ export function ReceiptStep({
         </p>
 
         {/* 검증 세부 정보 */}
-        <motion.div
+        <m.div
           className="mt-4 p-4 rounded-xl w-full max-w-xs"
           style={{
             background: `rgba(34, 197, 94, ${opacity[10]})`,
@@ -165,20 +165,20 @@ export function ReceiptStep({
               </span>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     );
   }
 
   // 인증 실패 상태
   if (result && !result.verified) {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="flex flex-col items-center py-8"
       >
-        <motion.div
+        <m.div
           className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
           style={{
             background: `rgba(239, 68, 68, ${opacity[20]})`,
@@ -189,7 +189,7 @@ export function ReceiptStep({
           transition={{ type: 'spring', duration: 0.5 }}
         >
           <X size={40} style={{ color: colors.error }} />
-        </motion.div>
+        </m.div>
 
         <p className="text-white font-bold text-lg mb-2">영수증 인증 실패</p>
         <p className="text-linear-text-secondary text-sm text-center mb-4 max-w-xs">
@@ -203,7 +203,7 @@ export function ReceiptStep({
         </p>
 
         <div className="flex gap-3">
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleReselect}
@@ -215,8 +215,8 @@ export function ReceiptStep({
             }}
           >
             다시 시도
-          </motion.button>
-          <motion.button
+          </m.button>
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={onSkip}
@@ -226,9 +226,9 @@ export function ReceiptStep({
             }}
           >
             건너뛰기
-          </motion.button>
+          </m.button>
         </div>
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -263,7 +263,7 @@ export function ReceiptStep({
         {/* 에러 메시지 */}
         <AnimatePresence>
           {displayError && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -277,7 +277,7 @@ export function ReceiptStep({
               <span className="text-sm" style={{ color: colors.error }}>
                 {displayError}
               </span>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
 
@@ -313,7 +313,7 @@ export function ReceiptStep({
           >
             다시 선택
           </button>
-          <motion.button
+          <m.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleVerifyReceipt}
@@ -331,7 +331,7 @@ export function ReceiptStep({
             ) : (
               '검증하기'
             )}
-          </motion.button>
+          </m.button>
         </div>
       </div>
     );
@@ -367,7 +367,7 @@ export function ReceiptStep({
 
       <div className="space-y-3 mb-6">
         {/* 카메라 촬영 */}
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleCameraCapture}
@@ -389,10 +389,10 @@ export function ReceiptStep({
             <p className="text-white font-semibold">카메라로 촬영</p>
             <p className="text-linear-text-tertiary text-sm">영수증을 직접 촬영합니다</p>
           </div>
-        </motion.button>
+        </m.button>
 
         {/* 갤러리 선택 */}
-        <motion.button
+        <m.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleGallerySelect}
@@ -414,7 +414,7 @@ export function ReceiptStep({
             <p className="text-white font-semibold">갤러리에서 선택</p>
             <p className="text-linear-text-tertiary text-sm">저장된 영수증을 선택합니다</p>
           </div>
-        </motion.button>
+        </m.button>
       </div>
 
       {/* 안내 메시지 */}

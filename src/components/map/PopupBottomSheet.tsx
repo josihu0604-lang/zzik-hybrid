@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useDragControls, PanInfo } from 'framer-motion';
+import { m, AnimatePresence, useDragControls, PanInfo } from 'framer-motion';
 import Link from 'next/link';
 import { MapPin, Calendar, Users, Navigation, X, ExternalLink } from 'lucide-react';
 import { colors, liquidGlass, radii, shadows } from '@/lib/design-tokens';
@@ -58,6 +58,7 @@ export function PopupBottomSheet({
 
   // ESC 키로 닫기
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -98,7 +99,7 @@ export function PopupBottomSheet({
       {popup && (
         <>
           {/* Backdrop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -109,7 +110,7 @@ export function PopupBottomSheet({
           />
 
           {/* Bottom Sheet */}
-          <motion.div
+          <m.div
             ref={sheetRef}
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
@@ -147,7 +148,7 @@ export function PopupBottomSheet({
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-start gap-3 flex-1">
                   {/* Category Icon */}
-                  <motion.div
+                  <m.div
                     className="w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0"
                     style={{
                       background: categoryColor,
@@ -158,7 +159,7 @@ export function PopupBottomSheet({
                     transition={{ type: 'spring', delay: 0.1 }}
                   >
                     {popup.brandName.charAt(0)}
-                  </motion.div>
+                  </m.div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -196,7 +197,7 @@ export function PopupBottomSheet({
                 </div>
 
                 {/* Close Button */}
-                <motion.button
+                <m.button
                   onClick={onClose}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
                   whileHover={{ scale: 1.1 }}
@@ -204,7 +205,7 @@ export function PopupBottomSheet({
                   aria-label="닫기"
                 >
                   <X size={20} className="text-linear-text-tertiary" />
-                </motion.button>
+                </m.button>
               </div>
 
               {/* Progress Bar (펀딩 진행률) */}
@@ -220,7 +221,7 @@ export function PopupBottomSheet({
                     className="h-2 rounded-full overflow-hidden"
                     style={{ background: colors.border.subtle }}
                   >
-                    <motion.div
+                    <m.div
                       className="h-full rounded-full"
                       style={{ background: categoryColor }}
                       initial={{ width: 0 }}
@@ -265,7 +266,7 @@ export function PopupBottomSheet({
                 <MapPin size={16} className="text-linear-text-tertiary flex-shrink-0" />
                 <p className="text-linear-text-secondary text-sm flex-1">{popup.address}</p>
                 {onNavigate && (
-                  <motion.button
+                  <m.button
                     onClick={onNavigate}
                     className="p-2 rounded-lg"
                     style={{ background: `${categoryColor}20` }}
@@ -274,7 +275,7 @@ export function PopupBottomSheet({
                     aria-label="길찾기"
                   >
                     <Navigation size={16} style={{ color: categoryColor }} />
-                  </motion.button>
+                  </m.button>
                 )}
               </div>
 
@@ -291,7 +292,7 @@ export function PopupBottomSheet({
               {/* CTA Buttons */}
               <div className="flex gap-3 pt-2">
                 <Link href={`/popup/${popup.id}`} className="flex-1">
-                  <motion.div
+                  <m.div
                     className="w-full py-4 rounded-xl text-center font-bold text-white"
                     style={{
                       background: categoryColor,
@@ -304,11 +305,11 @@ export function PopupBottomSheet({
                     whileTap={{ scale: 0.98 }}
                   >
                     {isConfirmed ? '상세보기' : '참여하기'}
-                  </motion.div>
+                  </m.div>
                 </Link>
 
                 {isConfirmed && (
-                  <motion.a
+                  <m.a
                     href={`https://map.kakao.com/link/to/${popup.title},${popup.lat},${popup.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -322,11 +323,11 @@ export function PopupBottomSheet({
                     aria-label="카카오맵에서 길찾기"
                   >
                     <ExternalLink size={20} className="text-white" />
-                  </motion.a>
+                  </m.a>
                 )}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </>
       )}
     </AnimatePresence>

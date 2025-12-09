@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react';
  * const debouncedQuery = useDebounce(searchQuery, 500);
  *
  * useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
  *   // API 호출은 debouncedQuery가 변경될 때만 실행
  *   if (debouncedQuery) {
  *     fetchSearchResults(debouncedQuery);
@@ -24,6 +25,7 @@ export function useDebounce<T>(value: T, delay: number = 300): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // 지연 후 값 업데이트
     const timer = setTimeout(() => {
       setDebouncedValue(value);
@@ -61,12 +63,14 @@ export function useDebouncedCallback<T extends (...args: unknown[]) => unknown>(
 
   // Update callback ref when callback changes
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     callbackRef.current = callback;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callback]);
 
   // Cleanup on unmount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);

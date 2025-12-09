@@ -6,6 +6,8 @@
 
 import { apiClientConfig } from '@/config/app.config';
 import { reportApiError } from './error-reporter';
+import { getCircuitBreaker } from '@/lib/resilience/circuit-breaker';
+import { withExponentialBackoff } from '@/lib/resilience/retry';
 
 // ============================================
 // Types
@@ -296,79 +298,95 @@ class ApiClient {
       ...fetchConfig
     } = config;
 
-    // Check cache for GET requests
-    if (cacheKey && (!fetchConfig.method || fetchConfig.method === 'GET')) {
-      const cached = getCached<T>(cacheKey);
-      if (cached) {
-        return {
-          data: cached,
-          status: 200,
-          headers: new Headers(),
-        };
-      }
-    }
+    // Use Circuit Breaker for safety
+    // Use path as circuit breaker name (simplified grouping)
+    const circuitName = path.split('?')[0]; 
+    const breaker = getCircuitBreaker(circuitName);
 
-    const url = this.buildUrl(path, params);
-
-    const requestConfig: RequestInit = {
-      ...fetchConfig,
-      headers: {
-        ...this.defaultHeaders,
-        ...headers,
-      },
-      body: data ? JSON.stringify(data) : undefined,
-    };
-
-    const response = await this.fetchWithRetry(url, requestConfig, timeout, retries, retryDelay);
-
-    // Handle non-OK responses
-    if (!response.ok) {
-      let errorData: { message?: string; code?: string } | null = null;
-      try {
-        const parsedError = await response.json();
-        if (typeof parsedError === 'object' && parsedError !== null) {
-          errorData = parsedError as { message?: string; code?: string };
+    return breaker.execute(async () => {
+      // Check cache for GET requests
+      if (cacheKey && (!fetchConfig.method || fetchConfig.method === 'GET')) {
+        const cached = getCached<T>(cacheKey);
+        if (cached) {
+          return {
+            data: cached,
+            status: 200,
+            headers: new Headers(),
+          };
         }
-      } catch {
-        // Ignore JSON parse errors - response may not be JSON
       }
 
-      const apiError = new ApiException({
-        message: errorData?.message || response.statusText,
+      const url = this.buildUrl(path, params);
+      const requestConfig: RequestInit = {
+        ...fetchConfig,
+        headers: {
+          ...this.defaultHeaders,
+          ...headers,
+        },
+        body: data ? JSON.stringify(data) : undefined,
+      };
+
+      // Use Exponential Backoff instead of simple retry
+      const response = await withExponentialBackoff(
+        () => this.fetchWithTimeout(url, requestConfig, timeout),
+        {
+          retries,
+          minTimeout: retryDelay,
+          onRetry: (attempt, error) => {
+             // Optional: Log specific retry attempts if needed
+          }
+        }
+      );
+
+      // Handle non-OK responses
+      if (!response.ok) {
+        let errorData: { message?: string; code?: string } | null = null;
+        try {
+          const parsedError = await response.json();
+          if (typeof parsedError === 'object' && parsedError !== null) {
+            errorData = parsedError as { message?: string; code?: string };
+          }
+        } catch {
+          // Ignore JSON parse errors - response may not be JSON
+        }
+
+        const apiError = new ApiException({
+          message: errorData?.message || response.statusText,
+          status: response.status,
+          code: errorData?.code,
+          details: errorData as ApiErrorDetails | Record<string, unknown> | undefined,
+        });
+
+        // Report to error monitoring service
+        reportApiError(apiError, {
+          context: 'ApiClient',
+          action: `${requestConfig.method || 'GET'} ${path}`,
+        });
+
+        throw apiError;
+      }
+
+      // Parse response
+      let responseData: T;
+      const contentType = response.headers.get('content-type');
+
+      if (contentType?.includes('application/json')) {
+        responseData = await response.json();
+      } else {
+        responseData = (await response.text()) as unknown as T;
+      }
+
+      // Cache response
+      if (cacheKey) {
+        setCache(cacheKey, responseData, cacheTTL);
+      }
+
+      return {
+        data: responseData,
         status: response.status,
-        code: errorData?.code,
-        details: errorData as ApiErrorDetails | Record<string, unknown> | undefined,
-      });
-
-      // Report to error monitoring service
-      reportApiError(apiError, {
-        context: 'ApiClient',
-        action: `${requestConfig.method || 'GET'} ${path}`,
-      });
-
-      throw apiError;
-    }
-
-    // Parse response
-    let responseData: T;
-    const contentType = response.headers.get('content-type');
-
-    if (contentType?.includes('application/json')) {
-      responseData = await response.json();
-    } else {
-      responseData = (await response.text()) as unknown as T;
-    }
-
-    // Cache response
-    if (cacheKey) {
-      setCache(cacheKey, responseData, cacheTTL);
-    }
-
-    return {
-      data: responseData,
-      status: response.status,
-      headers: response.headers,
-    };
+        headers: response.headers,
+      };
+    });
   }
 
   // Convenience methods

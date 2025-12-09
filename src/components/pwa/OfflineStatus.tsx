@@ -7,7 +7,7 @@
 
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Wifi, WifiOff, RefreshCw } from 'lucide-react';
 import { useOfflineSync } from '@/hooks/use-offline-sync';
 
@@ -20,7 +20,7 @@ export function OfflineStatus() {
   return (
     <AnimatePresence>
       {shouldShow && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
@@ -73,7 +73,7 @@ export function OfflineStatus() {
               {/* Progress Bar */}
               {status.isSyncing && (
                 <div className="h-1 bg-white/10 overflow-hidden">
-                  <motion.div
+                  <m.div
                     className="h-full bg-green-500"
                     initial={{ x: '-100%' }}
                     animate={{ x: '100%' }}
@@ -88,7 +88,7 @@ export function OfflineStatus() {
               )}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

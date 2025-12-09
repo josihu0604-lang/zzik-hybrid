@@ -7,7 +7,7 @@
  */
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Eye, EyeOff, Lock, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
@@ -66,7 +66,7 @@ export function LoginForm({
       {/* Error Summary - A11Y-016 */}
       <AnimatePresence>
         {error && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, height: 0, y: -10 }}
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
@@ -102,7 +102,7 @@ export function LoginForm({
               {passwordError && <li>{passwordError}</li>}
               {!nicknameError && !emailError && !passwordError && <li>{error}</li>}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -116,7 +116,7 @@ export function LoginForm({
       >
         <AnimatePresence mode="wait">
           {mode === 'signup' && (
-            <motion.div
+            <m.div
               key="nickname"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -148,7 +148,7 @@ export function LoginForm({
                   {nicknameError}
                 </p>
               )}
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
 
@@ -236,7 +236,7 @@ export function LoginForm({
         >
           {isSubmitting ? (
             <span className="flex items-center gap-2">
-              <motion.div
+              <m.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                 className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"

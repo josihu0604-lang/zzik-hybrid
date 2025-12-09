@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { colors } from '@/lib/design-tokens';
 
 /**
@@ -56,7 +56,7 @@ export function OnboardingProgress({
             >
               {/* 타이머 프로그레스 (활성 슬라이드만) */}
               {isActive && (
-                <motion.div
+                <m.div
                   className="absolute inset-0 rounded-full"
                   style={{
                     background: colors.flame[500],
@@ -100,7 +100,7 @@ export function OnboardingProgress({
           >
             {/* 완료된 세그먼트 */}
             {isPast && (
-              <motion.div
+              <m.div
                 className="absolute inset-0 rounded-full"
                 style={{ background: colors.flame[500] }}
                 initial={{ scaleX: 0 }}
@@ -111,7 +111,7 @@ export function OnboardingProgress({
 
             {/* 현재 세그먼트 (타이머 진행) */}
             {isActive && (
-              <motion.div
+              <m.div
                 className="absolute inset-0 rounded-full"
                 style={{
                   background: `linear-gradient(90deg, ${colors.flame[500]} 0%, ${colors.spark[500]} 100%)`,
@@ -149,7 +149,7 @@ export function OnboardingProgressBar({ total, current }: OnboardingProgressBarP
         className="h-1 rounded-full overflow-hidden"
         style={{ background: 'rgba(255, 255, 255, 0.1)' }}
       >
-        <motion.div
+        <m.div
           className="h-full rounded-full"
           style={{
             background: 'linear-gradient(90deg, #FF6B5B 0%, #FFD93D 100%)',

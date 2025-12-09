@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sparkles, Globe, ChevronRight } from 'lucide-react';
 import { useTranslation } from '@/i18n';
+import { memo } from 'react';
 
 /**
  * GlobalHero - K-POP VIP Experience Hero Section
@@ -17,7 +18,8 @@ interface GlobalHeroProps {
   onGetStarted?: () => void;
 }
 
-export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
+// Memoize GlobalHero to prevent re-renders on parent state changes
+export const GlobalHero = memo(function GlobalHero({ onGetStarted }: GlobalHeroProps) {
   const { t } = useTranslation();
 
   return (
@@ -28,7 +30,7 @@ export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
       {/* Animated particles */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(5)].map((_, i) => (
-          <motion.div
+          <m.div
             key={i}
             className="absolute w-1 h-1 rounded-full bg-flame-400/30"
             initial={{
@@ -52,7 +54,7 @@ export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
 
       <div className="relative px-5 pt-8 pb-6">
         {/* Badge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
@@ -61,40 +63,40 @@ export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
         >
           <Sparkles size={12} className="text-spark-400" />
           <span className="text-xs font-medium text-spark-400">VIP Experience</span>
-        </motion.div>
+        </m.div>
 
         {/* Main Headline */}
-        <motion.h1
+        <m.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight"
         >
           {t('hero.headline')}
-        </motion.h1>
+        </m.h1>
 
         {/* Subheadline - Experience Types */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="text-sm text-flame-400 font-medium mb-3"
         >
           {t('hero.subheadline')}
-        </motion.p>
+        </m.p>
 
         {/* Description */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="text-sm text-white/60 mb-5 max-w-sm"
         >
           {t('hero.description')}
-        </motion.p>
+        </m.p>
 
         {/* CTA Button */}
-        <motion.button
+        <m.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -111,10 +113,10 @@ export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
             size={16}
             className="group-hover:translate-x-0.5 transition-transform"
           />
-        </motion.button>
+        </m.button>
 
         {/* Market Indicators */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -122,21 +124,20 @@ export function GlobalHero({ onGetStarted }: GlobalHeroProps) {
         >
           <Globe size={12} />
           <span>{t('hero.markets')}</span>
-        </motion.div>
+        </m.div>
 
         {/* Price Indicator */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
           className="mt-2 text-xs text-white/30"
         >
           {t('hero.fromPrice')}
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-space-950 to-transparent" />
     </section>
-  );
-}
+});

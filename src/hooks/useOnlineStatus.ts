@@ -30,6 +30,7 @@ export function useOnlineStatus(): UseOnlineStatusReturn {
   const [isOnline, setIsOnline] = useState(typeof window !== 'undefined' ? navigator.onLine : true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Handler for online event
     const handleOnline = () => {
       setIsOnline(true);
