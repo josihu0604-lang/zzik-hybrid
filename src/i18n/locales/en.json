@@ -75,6 +75,16 @@
     "earnPoints": "Earned {{points}} points!"
   },
   "onboarding": {
+    "welcome": "Welcome to ZZIK",
+    "selectLanguage": "Select your language",
+    "selectCurrency": "Select your currency",
+    "currencyDescription": "Choose your preferred currency for pricing",
+    "selectCountry": "Select your country",
+    "threePillars": "Discover K-Experience",
+    "featureDescription": "Everything you need for your Korean journey",
+    "letsGo": "Let's Go!",
+    "getStarted": "Get Started",
+    "continueButton": "Continue",
     "slide1": {
       "headline": "Your favorite brand popups,\nwhy always miss them?",
       "subtext": "Ever felt disappointed when wanted popups didn't open?"
@@ -521,9 +531,11 @@
   },
   "home": {
     "welcome": "Welcome back",
+    "welcomeBack": "Welcome back",
     "quickActions": "Quick Actions",
     "featuredExperiences": "Featured Experiences",
     "trendingIn": "Trending in {{city}}",
+    "trendingInSeoul": "Trending in Seoul",
     "exploreCategories": "Explore Categories",
     "viewAll": "View All",
     "nearby": "Nearby",
@@ -532,6 +544,21 @@
     "waitList": "Wait List",
     "trending": "Trending",
     "rewards": "Rewards",
-    "perPerson": "per person"
+    "perPerson": "per person",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "morningGreeting": "Good morning",
+    "afternoonGreeting": "Good afternoon",
+    "eveningGreeting": "Good evening",
+    "categories": {
+      "food": "Food",
+      "cafe": "Cafe",
+      "kpop": "K-POP",
+      "beauty": "Beauty",
+      "shopping": "Shop",
+      "nightlife": "Night",
+      "culture": "Culture",
+      "more": "More"
+    }
   }
 }

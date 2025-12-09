@@ -20,9 +20,9 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   const isValidAppId = appId && appId.length > 5 && !appId.includes('dummy');
 
   useEffect(() => {
-    if (!isValidAppId) {
-      // Only log once on mount
-      console.warn('[AppProviders] Invalid or missing Privy App ID. Auth features disabled.');
+    if (!isValidAppId && process.env.NODE_ENV === 'development') {
+      // Only log in development mode - guest mode is normal for initial setup
+      console.info('[AppProviders] Running in guest mode - Privy auth not configured');
     }
   }, [isValidAppId]);
 

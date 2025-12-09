@@ -54,7 +54,11 @@
     "tokenize": "tsx scripts/tokenize-rgba.ts",
     "research:market": "tsx scripts/business-research/market-research-agent.ts",
     "research:pricing": "tsx scripts/business-research/pricing-strategy-analyzer.ts",
-    "research:all": "pnpm research:market && pnpm research:pricing"
+    "research:all": "pnpm research:market && pnpm research:pricing",
+    "agent:all": "tsx agents/index.ts",
+    "agent:console": "tsx agents/index.ts console",
+    "agent:uxui": "tsx agents/index.ts uxui",
+    "agent:info": "echo '\\n=== ZZIK Agent System ===\\n• agent:all - 모든 에이전트 실행\\n• agent:console - 콘솔 오류 수정 에이전트\\n• agent:uxui - UX/UI 개선 에이전트\\n'"
   },
   "dependencies": {
     "@capacitor/camera": "^7.0.2",
@@ -129,6 +133,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.7",
     "eslint-config-prettier": "^10.1.8",
+    "glob": "^13.0.0",
     "husky": "^9.1.7",
     "import-in-the-middle": "^2.0.0",
     "jsdom": "^27.2.0",

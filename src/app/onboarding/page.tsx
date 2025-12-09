@@ -15,23 +15,33 @@ export default function OnboardingPage() {
   const [step, setStep] = useState<OnboardingStep>('language');
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
+  // 클라이언트 마운트 상태 추적 - Hydration 오류 방지
+  const [isMounted, setIsMounted] = useState(false);
+
+  // 클라이언트 마운트 확인
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Check if user has completed onboarding
   useEffect(() => {
+    if (!isMounted) return;
     const onboardingCompleted = localStorage.getItem('onboarding_completed');
     if (onboardingCompleted === 'true') {
       router.push('/');
     }
-  }, [router]);
+  }, [router, isMounted]);
 
   // Auto-detect language based on browser
   useEffect(() => {
-    const browserLang = navigator.language.split('-')[0];
+    if (!isMounted) return;
+    // SSR 안전: navigator는 클라이언트에서만 접근
+    const browserLang = typeof navigator !== 'undefined' ? navigator.language.split('-')[0] : 'en';
     const supportedLangs = ['en', 'ko', 'ja', 'zh'];
     if (supportedLangs.includes(browserLang)) {
       setSelectedLanguage(browserLang);
     }
-  }, []);
+  }, [isMounted]);
 
   const handleSkip = () => {
     localStorage.setItem('onboarding_completed', 'true');
@@ -61,12 +71,24 @@ export default function OnboardingPage() {
     }
   };
 
+  // Hydration 안전: 클라이언트 마운트 전까지 스켈레톤 표시
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen bg-space-950 flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="w-16 h-16 rounded-full bg-space-800" />
+          <div className="h-4 w-32 bg-space-800 rounded" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-space-900 to-space-950 relative overflow-hidden">
       {/* Skip Button */}
       <button
         onClick={handleSkip}
-        className="absolute top-6 right-6 z-50 text-gray-500 hover:text-gray-700 font-medium transition-colors"
+        className="absolute top-6 right-6 z-50 text-white/60 hover:text-white font-medium transition-colors"
       >
         {t('common.skip')}
       </button>
@@ -78,10 +100,10 @@ export default function OnboardingPage() {
             key={s}
             className={`h-1.5 w-12 rounded-full transition-colors ${
               step === s
-                ? 'bg-purple-600'
+                ? 'bg-flame-500'
                 : i < ['language', 'currency', 'features'].indexOf(step)
-                  ? 'bg-purple-400'
-                  : 'bg-gray-300'
+                  ? 'bg-flame-400'
+                  : 'bg-space-700'
             }`}
           />
         ))}
@@ -99,10 +121,10 @@ export default function OnboardingPage() {
               transition={{ duration: 0.3 }}
               className="w-full max-w-md"
             >
-              <h1 className="text-3xl font-bold text-center mb-3 text-gray-900">
+              <h1 className="text-3xl font-bold text-center mb-3 text-white">
                 {t('onboarding.welcome')}
               </h1>
-              <p className="text-center text-gray-600 mb-8">
+              <p className="text-center text-white/70 mb-8">
                 {t('onboarding.selectLanguage')}
               </p>
               <LanguageSelect
@@ -121,11 +143,11 @@ export default function OnboardingPage() {
               transition={{ duration: 0.3 }}
               className="w-full max-w-md"
             >
-              <h1 className="text-3xl font-bold text-center mb-3 text-gray-900">
+              <h1 className="text-3xl font-bold text-center mb-3 text-white">
                 {t('onboarding.selectCurrency')}
               </h1>
-              <p className="text-center text-gray-600 mb-8">
-                Your preferred currency
+              <p className="text-center text-white/70 mb-8">
+                {t('onboarding.currencyDescription')}
               </p>
               <div className="space-y-3">
                 {[
@@ -140,24 +162,24 @@ export default function OnboardingPage() {
                     onClick={() => setSelectedCurrency(currency.code)}
                     className={`w-full p-4 rounded-xl border-2 transition-all ${
                       selectedCurrency === currency.code
-                        ? 'border-purple-600 bg-purple-50'
-                        : 'border-gray-200 hover:border-purple-300'
+                        ? 'border-flame-500 bg-flame-500/10'
+                        : 'border-space-700 hover:border-flame-400 bg-space-800/50'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <span className="text-2xl">{currency.symbol}</span>
                         <div className="text-left">
-                          <div className="font-semibold text-gray-900">
+                          <div className="font-semibold text-white">
                             {currency.code}
                           </div>
-                          <div className="text-sm text-gray-600">
+                          <div className="text-sm text-white/60">
                             {currency.name}
                           </div>
                         </div>
                       </div>
                       {selectedCurrency === currency.code && (
-                        <div className="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-flame-500 rounded-full flex items-center justify-center">
                           <svg
                             className="w-4 h-4 text-white"
                             fill="none"
@@ -189,11 +211,11 @@ export default function OnboardingPage() {
               transition={{ duration: 0.3 }}
               className="w-full max-w-md"
             >
-              <h1 className="text-3xl font-bold text-center mb-3 text-gray-900">
+              <h1 className="text-3xl font-bold text-center mb-3 text-white">
                 {t('onboarding.threePillars')}
               </h1>
-              <p className="text-center text-gray-600 mb-8">
-                Everything you need for your trip
+              <p className="text-center text-white/70 mb-8">
+                {t('onboarding.featureDescription')}
               </p>
               <FeatureIntro />
             </motion.div>
@@ -202,12 +224,12 @@ export default function OnboardingPage() {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-6 safe-area-bottom">
+      <div className="fixed bottom-0 left-0 right-0 bg-space-900/95 backdrop-blur-lg border-t border-white/10 p-6 safe-area-bottom">
         <div className="max-w-md mx-auto flex space-x-3">
           {step !== 'language' && (
             <button
               onClick={handleBack}
-              className="flex-1 py-4 px-6 rounded-xl border-2 border-gray-300 font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+              className="flex-1 py-4 px-6 rounded-xl border-2 border-space-600 font-semibold text-white hover:bg-space-800 transition-colors"
             >
               {t('common.back')}
             </button>
@@ -215,14 +237,14 @@ export default function OnboardingPage() {
           {step !== 'features' ? (
             <button
               onClick={handleNext}
-              className="flex-1 py-4 px-6 rounded-xl bg-purple-600 font-semibold text-white hover:bg-purple-700 transition-colors"
+              className="flex-1 py-4 px-6 rounded-xl bg-flame-500 font-semibold text-white hover:bg-flame-600 transition-colors shadow-lg shadow-flame-500/30"
             >
               {t('common.next')}
             </button>
           ) : (
             <button
               onClick={handleComplete}
-              className="flex-1 py-4 px-6 rounded-xl bg-purple-600 font-semibold text-white hover:bg-purple-700 transition-colors"
+              className="flex-1 py-4 px-6 rounded-xl bg-flame-500 font-semibold text-white hover:bg-flame-600 transition-colors shadow-lg shadow-flame-500/30"
             >
               {t('onboarding.startExploring')}
             </button>

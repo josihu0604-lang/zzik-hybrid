@@ -20,37 +20,39 @@ export default function TouristHomeScreen({
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-space-950">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
+      <header className="sticky top-0 z-40 bg-space-950/80 backdrop-blur-xl border-b border-white/10">
         <div className="flex items-center justify-between p-6">
           <div>
             <m.h1
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-2xl font-black"
+              className="text-2xl font-black text-white"
             >
               {t('common.home')}
             </m.h1>
-            <p className="text-gray-600 text-sm mt-1">
-              Welcome back, <span className="font-semibold">{userName}</span> 👋
+            <p className="text-white/70 text-sm mt-1">
+              {t('home.welcomeBack')}, <span className="font-semibold text-white">{userName}</span> 👋
             </p>
           </div>
           
           <div className="flex items-center gap-3">
             <Link
               href="/notifications"
-              className="p-2 rounded-xl hover:bg-gray-100 transition-colors relative"
+              className="p-2 rounded-xl hover:bg-white/10 transition-colors relative"
+              aria-label={t('home.notifications')}
             >
-              <Bell className="w-6 h-6 text-gray-700" />
+              <Bell className="w-6 h-6 text-white/80" />
               {/* Notification Badge */}
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-flame-500 rounded-full" />
             </Link>
             <Link
               href="/settings"
-              className="p-2 rounded-xl hover:bg-gray-100 transition-colors"
+              className="p-2 rounded-xl hover:bg-white/10 transition-colors"
+              aria-label={t('home.settings')}
             >
-              <Settings className="w-6 h-6 text-gray-700" />
+              <Settings className="w-6 h-6 text-white/80" />
             </Link>
           </div>
         </div>
@@ -67,17 +69,17 @@ export default function TouristHomeScreen({
         <QuickActions />
 
         {/* Divider */}
-        <div className="h-2 bg-gray-50 my-2" />
+        <div className="h-2 bg-space-900 my-2" />
 
         {/* Featured Experiences */}
         <FeaturedExperiences />
 
         {/* Divider */}
-        <div className="h-2 bg-gray-50 my-2" />
+        <div className="h-2 bg-space-900 my-2" />
 
         {/* Trending Now Section */}
         <div className="py-6 px-6">
-          <h2 className="text-xl font-bold mb-4">Trending in Seoul</h2>
+          <h2 className="text-xl font-bold mb-4 text-white">{t('home.trendingInSeoul')}</h2>
           <div className="grid grid-cols-2 gap-4">
             {/* Trend Cards */}
             {TRENDING_PLACES.map((place, index) => (
@@ -89,7 +91,7 @@ export default function TouristHomeScreen({
               >
                 <Link
                   href={`/play/${place.id}`}
-                  className="block rounded-2xl overflow-hidden bg-gray-50 hover:shadow-lg transition-shadow"
+                  className="block rounded-2xl overflow-hidden bg-space-900 hover:ring-2 hover:ring-flame-500/50 transition-all"
                 >
                   <div className="aspect-square relative">
                     <img
@@ -97,12 +99,12 @@ export default function TouristHomeScreen({
                       alt={place.name}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3">
                       <h3 className="text-white font-bold text-sm mb-1 line-clamp-1">
                         {place.name}
                       </h3>
-                      <p className="text-white/80 text-xs">{place.category}</p>
+                      <p className="text-white/70 text-xs">{place.category}</p>
                     </div>
                   </div>
                 </Link>
@@ -113,7 +115,7 @@ export default function TouristHomeScreen({
 
         {/* Popular Categories */}
         <div className="py-6 px-6">
-          <h2 className="text-xl font-bold mb-4">Explore Categories</h2>
+          <h2 className="text-xl font-bold mb-4 text-white">{t('home.exploreCategories')}</h2>
           <div className="grid grid-cols-4 gap-3">
             {CATEGORIES.map((category, index) => (
               <m.div
@@ -124,10 +126,10 @@ export default function TouristHomeScreen({
               >
                 <Link
                   href={`/play?category=${category.id}`}
-                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-gray-50 transition-colors"
+                  className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-white/5 transition-colors"
                 >
                   <div className="text-3xl">{category.emoji}</div>
-                  <span className="text-xs font-medium text-gray-700 text-center">
+                  <span className="text-xs font-medium text-white/80 text-center">
                     {category.name}
                   </span>
                 </Link>

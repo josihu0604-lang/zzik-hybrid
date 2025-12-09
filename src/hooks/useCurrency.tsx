@@ -43,22 +43,33 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  // Hydration 안전: 초기값은 서버/클라이언트 동일하게 'USD'
+  const [currency, setCurrencyState] = useState<Currency>('USD');
   const [rates, setRates] = useState<ExchangeRates>(MOCK_EXCHANGE_RATES);
   const [loading, setLoading] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load saved currency preference
+  // Hydration 이후 저장된 통화 설정 로드
   useEffect(() => {
-    const saved = localStorage.getItem('user_currency') as Currency;
-    if (saved && CURRENCY_SYMBOLS[saved]) {
-      setCurrency(saved);
+    setIsHydrated(true);
+    // 클라이언트에서만 localStorage 접근
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('user_currency') as Currency;
+      if (saved && CURRENCY_SYMBOLS[saved]) {
+        setCurrencyState(saved);
+      }
     }
   }, []);
 
-  // Save currency preference when changed
-  useEffect(() => {
-    localStorage.setItem('user_currency', currency);
-  }, [currency]);
+  // 통화 변경 핸들러 (localStorage 저장 포함)
+  const setCurrency = useCallback((newCurrency: Currency) => {
+    setCurrencyState(newCurrency);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user_currency', newCurrency);
+    }
+  }, []);
+
+  // 저장은 이제 setCurrency 핸들러에서 처리됨
 
   // Fetch exchange rates (mock implementation)
   const fetchRates = useCallback(async () => {

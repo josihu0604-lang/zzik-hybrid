@@ -47,19 +47,25 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children, initialLocale }: LanguageProviderProps) {
+  // Hydration 안전: 서버와 클라이언트 모두 동일한 초기값 사용
   const [locale, setLocaleState] = useState<Locale>(initialLocale ?? DEFAULT_LOCALE);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Detect and set locale on client
+  // Detect and set locale on client - Hydration 이후에만 실행
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // 클라이언트에서만 locale 감지 및 설정
     const detected = detectLocale();
-    setLocaleState(detected);
+    // 감지된 locale이 현재와 다를 때만 업데이트 (불필요한 리렌더 방지)
+    if (detected !== locale) {
+      setLocaleState(detected);
+    }
     setIsHydrated(true);
 
     // Update HTML lang attribute
-    document.documentElement.lang = detected;
-  }, []);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = detected;
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Set locale and persist
   const setLocale = useCallback((newLocale: Locale) => {

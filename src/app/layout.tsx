@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const fontVariables = getFontVariables();
   
   return (
-    <html lang="ko" className={`dark ${fontVariables}`}>
+    <html lang="ko" suppressHydrationWarning className={`dark ${fontVariables}`}>
       <body className="min-h-screen bg-black text-white antialiased font-sans">
         <PerformanceMonitor />
         {/* Desktop Background Decoration */}
