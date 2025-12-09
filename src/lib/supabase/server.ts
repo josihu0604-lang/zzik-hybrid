@@ -3,19 +3,21 @@ import { cookies } from 'next/headers';
 
 /**
  * Get and validate Supabase URL
- * Throws error if not properly configured
+ * Throws error if not properly configured, unless in Mock Mode
  */
 function getSupabaseUrl(): string {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const isMock = process.env.MOCK_DB === 'true' || process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 
   if (!url) {
+    if (isMock) return 'https://mock.supabase.co';
     throw new Error(
       '[Supabase Server] NEXT_PUBLIC_SUPABASE_URL is not configured. ' +
         'Please set this environment variable.'
     );
   }
 
-  if (url === 'https://placeholder.supabase.co' || url.includes('placeholder')) {
+  if (!isMock && (url === 'https://placeholder.supabase.co' || url.includes('placeholder'))) {
     throw new Error(
       '[Supabase Server] NEXT_PUBLIC_SUPABASE_URL contains placeholder value. ' +
         'Please set a valid Supabase URL.'
@@ -27,19 +29,21 @@ function getSupabaseUrl(): string {
 
 /**
  * Get and validate Supabase Anon Key
- * Throws error if not properly configured
+ * Throws error if not properly configured, unless in Mock Mode
  */
 function getSupabaseAnonKey(): string {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const isMock = process.env.MOCK_DB === 'true' || process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 
   if (!key) {
+    if (isMock) return 'mock-anon-key';
     throw new Error(
       '[Supabase Server] NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured. ' +
         'Please set this environment variable.'
     );
   }
 
-  if (key === 'placeholder-key' || key.includes('placeholder')) {
+  if (!isMock && (key === 'placeholder-key' || key.includes('placeholder'))) {
     throw new Error(
       '[Supabase Server] NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. ' +
         'Please set a valid Supabase anon key.'
@@ -51,19 +55,21 @@ function getSupabaseAnonKey(): string {
 
 /**
  * Get and validate Supabase Service Role Key
- * Throws error if not properly configured
+ * Throws error if not properly configured, unless in Mock Mode
  */
 function getSupabaseServiceKey(): string {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const isMock = process.env.MOCK_DB === 'true' || process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 
   if (!key) {
+    if (isMock) return 'mock-service-key';
     throw new Error(
       '[Supabase Server] SUPABASE_SERVICE_ROLE_KEY is not configured. ' +
         'Admin operations require this environment variable.'
     );
   }
 
-  if (key === 'placeholder-service-key' || key.includes('placeholder')) {
+  if (!isMock && (key === 'placeholder-service-key' || key.includes('placeholder'))) {
     throw new Error(
       '[Supabase Server] SUPABASE_SERVICE_ROLE_KEY contains placeholder value. ' +
         'Please set a valid service role key.'
@@ -73,37 +79,15 @@ function getSupabaseServiceKey(): string {
   return key;
 }
 
-/**
- * Check if Supabase is properly configured for server-side usage
- */
-export function isSupabaseConfigured(): boolean {
-  try {
-    getSupabaseUrl();
-    getSupabaseAnonKey();
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Check if admin client can be created
- */
-export function isAdminConfigured(): boolean {
-  try {
-    getSupabaseUrl();
-    getSupabaseServiceKey();
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-// Type alias for untyped Supabase client (bypasses strict type checking)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UntypedSupabaseClient = ReturnType<typeof createServerClient<any>>;
+// ... existing code ...
 
 export async function createServerSupabaseClient(): Promise<UntypedSupabaseClient> {
+  const isMock = process.env.MOCK_DB === 'true' || process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
+  
+  if (isMock) {
+    return createMockClient();
+  }
+
   const cookieStore = await cookies();
   const url = getSupabaseUrl();
   const key = getSupabaseAnonKey();
@@ -135,6 +119,12 @@ export async function createServerSupabaseClient(): Promise<UntypedSupabaseClien
 
 // Admin client with service role (server-side only)
 export function createAdminClient(): UntypedSupabaseClient {
+  const isMock = process.env.MOCK_DB === 'true' || process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
+  
+  if (isMock) {
+    return createMockClient();
+  }
+
   const url = getSupabaseUrl();
   const key = getSupabaseServiceKey();
 
@@ -149,5 +139,40 @@ export function createAdminClient(): UntypedSupabaseClient {
       autoRefreshToken: false,
       persistSession: false,
     },
+  });
+}
+
+function createMockClient(): any {
+  console.warn('[Supabase] Running in MOCK MODE. Database operations are simulated.');
+  return new Proxy({}, {
+    get: (target, prop) => {
+      if (prop === 'from') {
+        return () => ({
+          select: () => ({
+            eq: () => ({
+              single: () => Promise.resolve({ data: null, error: null }),
+              maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              order: () => Promise.resolve({ data: [], error: null }),
+            }),
+            order: () => Promise.resolve({ data: [], error: null }),
+            limit: () => Promise.resolve({ data: [], error: null }),
+            insert: () => Promise.resolve({ data: null, error: null }),
+            update: () => Promise.resolve({ data: null, error: null }),
+            delete: () => Promise.resolve({ data: null, error: null }),
+          }),
+          insert: () => Promise.resolve({ data: null, error: null }),
+          upsert: () => Promise.resolve({ data: null, error: null }),
+        });
+      }
+      if (prop === 'auth') {
+        return {
+          getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+          getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+          signInWithPassword: () => Promise.resolve({ data: { user: { id: 'mock-user' } }, error: null }),
+          signOut: () => Promise.resolve({ error: null }),
+        };
+      }
+      return () => Promise.resolve({ data: [], error: null });
+    }
   });
 }

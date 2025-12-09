@@ -33,19 +33,21 @@ import { createBrowserClient } from '@supabase/ssr';
 
 /**
  * Get Supabase URL from environment
- * Throws error if not configured (no fallback for security)
+ * Throws error if not configured, unless in Mock Mode
  */
 function getSupabaseUrl(): string {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const isMock = process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 
   if (!url) {
+    if (isMock) return 'https://mock.supabase.co';
     throw new Error(
       '[Supabase] NEXT_PUBLIC_SUPABASE_URL is not configured. ' +
         'Please set this environment variable.'
     );
   }
 
-  if (url === 'https://placeholder.supabase.co' || url.toLowerCase().includes('placeholder')) {
+  if (!isMock && (url === 'https://placeholder.supabase.co' || url.toLowerCase().includes('placeholder'))) {
     throw new Error(
       '[Supabase] NEXT_PUBLIC_SUPABASE_URL contains placeholder value. ' +
         'Please set a valid Supabase URL.'
@@ -61,19 +63,21 @@ function getSupabaseUrl(): string {
  * SEC-022: This key is intentionally public. Security is enforced via RLS.
  * See module-level comment for details.
  *
- * Throws error if not configured (no fallback for security)
+ * Throws error if not configured, unless in Mock Mode
  */
 function getSupabaseAnonKey(): string {
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const isMock = process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
 
   if (!key) {
+    if (isMock) return 'mock-anon-key';
     throw new Error(
       '[Supabase] NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured. ' +
         'Please set this environment variable.'
     );
   }
 
-  if (key === 'placeholder-key' || key.toLowerCase().includes('placeholder')) {
+  if (!isMock && (key === 'placeholder-key' || key.toLowerCase().includes('placeholder'))) {
     throw new Error(
       '[Supabase] NEXT_PUBLIC_SUPABASE_ANON_KEY contains placeholder value. ' +
         'Please set a valid Supabase anon key.'
@@ -85,7 +89,7 @@ function getSupabaseAnonKey(): string {
 
 /**
  * Check if Supabase is properly configured
- * Returns true only if valid credentials are available
+ * Returns true only if valid credentials are available or if in Mock Mode
  */
 export function isSupabaseConfigured(): boolean {
   try {
@@ -98,9 +102,60 @@ export function isSupabaseConfigured(): boolean {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UntypedBrowserClient = ReturnType<typeof createBrowserClient<any>>;
+type UntypedBrowserClient = ReturnType<typeof createBrowserClient<any>> | any;
+
+function createMockClient(): any {
+  console.warn('[Supabase Client] Running in MOCK MODE. Database operations are simulated.');
+  return new Proxy({}, {
+    get: (target, prop) => {
+      if (prop === 'from') {
+        return () => ({
+          select: () => ({
+            eq: () => ({
+              single: () => Promise.resolve({ data: null, error: null }),
+              maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              order: () => Promise.resolve({ data: [], error: null }),
+            }),
+            order: () => Promise.resolve({ data: [], error: null }),
+            limit: () => Promise.resolve({ data: [], error: null }),
+            insert: () => Promise.resolve({ data: null, error: null }),
+            update: () => Promise.resolve({ data: null, error: null }),
+            delete: () => Promise.resolve({ data: null, error: null }),
+            url: { href: 'https://mock.supabase.co/rest/v1/mock' }
+          }),
+          insert: () => Promise.resolve({ data: null, error: null }),
+          upsert: () => Promise.resolve({ data: null, error: null }),
+        });
+      }
+      if (prop === 'auth') {
+        return {
+          getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+          getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+          signInWithPassword: () => Promise.resolve({ data: { user: { id: 'mock-user' } }, error: null }),
+          signOut: () => Promise.resolve({ error: null }),
+          onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }),
+        };
+      }
+      if (prop === 'storage') {
+        return {
+          from: () => ({
+            upload: () => Promise.resolve({ data: { path: 'mock-path' }, error: null }),
+            getPublicUrl: () => ({ data: { publicUrl: 'https://mock.supabase.co/storage/mock.jpg' } }),
+          })
+        };
+      }
+      return () => Promise.resolve({ data: [], error: null });
+    }
+  });
+}
 
 export function createClient(): UntypedBrowserClient {
+  const isMock = process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
+
+  if (isMock) {
+    return createMockClient();
+  }
+
   const url = getSupabaseUrl();
   const key = getSupabaseAnonKey();
 

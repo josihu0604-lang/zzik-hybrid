@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useReviewStore } from '@/stores/review-store';
+import { useReviewStore } from '@/lib/stores/review-store';
 import { ReviewDraft } from '@/types/review';
 
 export const useReviews = (targetId?: string) => {

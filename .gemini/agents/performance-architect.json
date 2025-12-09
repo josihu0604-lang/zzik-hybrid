@@ -1,0 +1,21 @@
+{
+  "agent_id": "performance-architect",
+  "model": "gemini-3.0-pro-002",
+  "display_name": "Speed Architect",
+  "version": "1.0.0",
+  "capabilities": {
+    "thinking_level": 2,
+    "thought_signatures": true,
+    "structured_outputs": true,
+    "tools": [
+      "run_lighthouse",
+      "analyze_bundle",
+      "check_web_vitals"
+    ]
+  },
+  "context_files": [
+    "e2e/performance.spec.ts",
+    "next.config.performance.mjs",
+    "PERFORMANCE_OPTIMIZATION_PLAN.md"
+  ]
+}

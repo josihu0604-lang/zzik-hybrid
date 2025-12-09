@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, createContext, useContext } from 'react';
 
 export type Currency = 'USD' | 'KRW' | 'JPY' | 'CNY' | 'EUR' | 'GBP';
 
@@ -27,7 +27,22 @@ const CURRENCY_SYMBOLS: Record<Currency, string> = {
   GBP: '£',
 };
 
-export function useCurrency() {
+interface CurrencyContextType {
+  currency: Currency;
+  setCurrency: (currency: Currency) => void;
+  rates: ExchangeRates;
+  loading: boolean;
+  convertPrice: (amountInUSD: number) => number;
+  convert: (amount: number, from: Currency, to: Currency) => number;
+  formatPrice: (amountInUSD: number, options?: { showSymbol?: boolean; decimals?: number }) => string;
+  getExchangeRate: (from?: Currency, to?: Currency) => number;
+  refreshRates: () => Promise<void>;
+  symbol: string;
+}
+
+const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
+
+export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const [currency, setCurrency] = useState<Currency>('USD');
   const [rates, setRates] = useState<ExchangeRates>(MOCK_EXCHANGE_RATES);
   const [loading, setLoading] = useState(false);
@@ -49,12 +64,7 @@ export function useCurrency() {
   const fetchRates = useCallback(async () => {
     setLoading(true);
     try {
-      // In production, call real API like:
-      // const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-      // const data = await response.json();
-      // setRates(data.rates);
-
-      // For now, use mock data
+      // In production, call real API
       await new Promise((resolve) => setTimeout(resolve, 500));
       setRates(MOCK_EXCHANGE_RATES);
     } catch (error) {
@@ -123,16 +133,30 @@ export function useCurrency() {
     [currency, rates]
   );
 
-  return {
-    currency,
-    setCurrency,
-    rates,
-    loading,
-    convertPrice,
-    convert,
-    formatPrice,
-    getExchangeRate,
-    refreshRates: fetchRates,
-    symbol: CURRENCY_SYMBOLS[currency],
-  };
+  return (
+    <CurrencyContext.Provider
+      value={{
+        currency,
+        setCurrency,
+        rates,
+        loading,
+        convertPrice,
+        convert,
+        formatPrice,
+        getExchangeRate,
+        refreshRates: fetchRates,
+        symbol: CURRENCY_SYMBOLS[currency],
+      }}
+    >
+      {children}
+    </CurrencyContext.Provider>
+  );
+}
+
+export function useCurrency() {
+  const context = useContext(CurrencyContext);
+  if (context === undefined) {
+    throw new Error('useCurrency must be used within a CurrencyProvider');
+  }
+  return context;
 }

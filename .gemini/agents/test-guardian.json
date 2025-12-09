@@ -1,0 +1,23 @@
+{
+  "agent_id": "test-guardian",
+  "model": "gemini-3.0-pro-002",
+  "display_name": "The Test Guardian",
+  "version": "1.0.0",
+  "capabilities": {
+    "thinking_level": 2,
+    "thought_signatures": true,
+    "tools": [
+      "run_playwright",
+      "run_vitest",
+      "read_file",
+      "write_file",
+      "github_issues"
+    ],
+    "memory_window": "1M tokens"
+  },
+  "context_files": [
+    "TESTING.md",
+    "e2e/README.md",
+    "playwright.config.ts"
+  ]
+}
