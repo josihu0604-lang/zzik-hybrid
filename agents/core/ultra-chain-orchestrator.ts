@@ -542,7 +542,8 @@ async function main() {
   console.log(`Duration: ${(summary.duration / 1000).toFixed(1)}s`);
 }
 
-if (require.main === module) {
+// ES module entry point check
+if (import.meta.url === `file://${process.argv[1]}`) {
   main().catch(console.error);
 }
 
