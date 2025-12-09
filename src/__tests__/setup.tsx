@@ -57,50 +57,61 @@ vi.mock('stripe', () => {
 });
 
 // Mock framer-motion
-vi.mock('framer-motion', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('framer-motion')>();
+vi.mock('framer-motion', () => {
+  const createMotionComponent = (tag: string) => {
+    return function MotionComponent(props: any) {
+      const { children, ...rest } = props;
+      const validProps = { ...rest };
+      
+      // Remove motion-specific props
+      delete validProps.initial;
+      delete validProps.animate;
+      delete validProps.exit;
+      delete validProps.transition;
+      delete validProps.variants;
+      delete validProps.whileHover;
+      delete validProps.whileTap;
+      delete validProps.onPan;
+      delete validProps.onPanStart;
+      delete validProps.onPanEnd;
+      delete validProps.layout;
+      delete validProps.layoutId;
+
+      const Component = tag as any;
+      return <Component {...validProps}>{children}</Component>;
+    };
+  };
+
   const m = {
-    div: 'div',
-    span: 'span',
-    button: 'button',
-    a: 'a',
-    ul: 'ul',
-    li: 'li',
-    nav: 'nav',
-    section: 'section',
-    article: 'article',
-    aside: 'aside',
-    header: 'header',
-    footer: 'footer',
-    main: 'main',
-    form: 'form',
-    input: 'input',
-    label: 'label',
-    p: 'p',
-    h1: 'h1',
-    h2: 'h2',
-    h3: 'h3',
-    h4: 'h4',
-    h5: 'h5',
-    h6: 'h6',
-    img: 'img',
-    svg: 'svg',
-    path: 'path',
-    circle: 'circle',
-    rect: 'rect',
-    line: 'line',
-    polyline: 'polyline',
-    polygon: 'polygon',
+    div: createMotionComponent('div'),
+    span: createMotionComponent('span'),
+    button: createMotionComponent('button'),
+    a: createMotionComponent('a'),
+    ul: createMotionComponent('ul'),
+    li: createMotionComponent('li'),
+    nav: createMotionComponent('nav'),
+    section: createMotionComponent('section'),
+    p: createMotionComponent('p'),
+    img: (props: any) => <img {...props} alt={props.alt || ''} />,
+    // Add other elements as needed
+    form: createMotionComponent('form'),
+    input: createMotionComponent('input'),
+    label: createMotionComponent('label'),
+    h1: createMotionComponent('h1'),
+    h2: createMotionComponent('h2'),
+    h3: createMotionComponent('h3'),
   };
 
   return {
-    ...actual,
-    m: m,
-    AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
+    __esModule: true, // Important for Vitest/Jest to handle default/named exports correctly
+    m,
     motion: {
       ...m,
-      custom: (component: any) => component,
+      custom: (component: any) => createMotionComponent(component),
     },
+    AnimatePresence: ({ children }: any) => children,
+    LazyMotion: ({ children }: any) => children,
+    domAnimation: {},
   };
 });
 

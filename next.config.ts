@@ -85,6 +85,9 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
+  // Enable standalone output for Docker/Cloudflare optimizations
+  output: 'standalone',
+
   // Headers for caching, security, and performance
   async headers() {
     return [
