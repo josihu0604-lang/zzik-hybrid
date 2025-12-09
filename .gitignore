@@ -106,3 +106,4 @@ scripts/
 !scripts/get-local-ip.js
 !scripts/mobile-dev-setup.js
 apply_ux_fixes.sh
+core
