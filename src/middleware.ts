@@ -1,6 +1,10 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
 import { checkRateLimitAsync, getClientIP } from '@/lib/rate-limiter';
+
+function generateTraceId(): string {
+  return crypto.randomUUID();
+}
 
 /**
  * Get allowed origins for CORS

@@ -11,12 +11,12 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/Skeleton';
 
-const BarChartView = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.BarChartView })), {
+const DynamicBarChart = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.BarChartView })), {
   loading: () => <Skeleton className="h-28 w-full rounded-lg bg-white/5" />,
   ssr: false
 });
 
-const LineChartView = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.LineChartView })), {
+const DynamicLineChart = dynamic(() => import('./EarningsChart').then(mod => ({ default: mod.LineChartView })), {
   loading: () => <Skeleton className="h-28 w-full rounded-lg bg-white/5" />,
   ssr: false
 });
@@ -207,7 +207,7 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
       <div className="px-4 pb-2">
         <AnimatePresence mode="wait">
           {chartType === 'bar' ? (
-            <BarChartView
+            <DynamicBarChart
               key="bar"
               data={chartData}
               maxAmount={maxAmount}
@@ -215,7 +215,7 @@ export function EarningsChart({ data, data30Days, className = '' }: EarningsChar
               prefersReducedMotion={prefersReducedMotion}
             />
           ) : (
-            <LineChartView
+            <DynamicLineChart
               key="line"
               data={chartData}
               maxAmount={maxAmount}
@@ -358,7 +358,7 @@ export const BarChartView = memo(function BarChartView({
       </div>
     </m.div>
   );
-}
+});
 
 export const LineChartView = memo(function LineChartView({
   data,
@@ -554,7 +554,7 @@ export const LineChartView = memo(function LineChartView({
       </svg>
     </m.div>
   );
-}
+});
 
 // Demo data generators
 export function generateDemoEarningsData(days: number = 7): DailyEarning[] {

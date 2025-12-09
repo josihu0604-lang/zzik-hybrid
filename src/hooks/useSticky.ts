@@ -18,7 +18,7 @@ interface UseStickyOptions {
 
 interface UseStickyReturn<T extends HTMLElement> {
   /** Ref to attach to the sticky element */
-  ref: React.RefObject<T>;
+  ref: React.RefObject<T | null>;
   /** Whether the element is currently stuck */
   isSticky: boolean;
   /** Current scroll direction */
@@ -114,7 +114,7 @@ export function useSticky<T extends HTMLElement = HTMLDivElement>(
  */
 export function useStickySimple<T extends HTMLElement = HTMLDivElement>(
   stickyOffset: number = 0
-): { ref: React.RefObject<T>; isSticky: boolean } {
+): { ref: React.RefObject<T | null>; isSticky: boolean } {
   const ref = useRef<T>(null);
   const [isSticky, setIsSticky] = useState(false);
 

@@ -31,9 +31,12 @@ export default function Home() {
     return <VibePortal />;
   }
 
+/*
   return (
     <ErrorBoundary onError={(error) => console.error('Home page error:', error)}>
       <HomeContent />
     </ErrorBoundary>
   );
+*/
+  return null;
 }

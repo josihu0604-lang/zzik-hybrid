@@ -19,6 +19,8 @@ import { CurrencyProvider } from '@/hooks/useCurrency';
 import { PerformanceMonitor } from '@/hooks/usePerformanceMode';
 import './globals.css';
 
+export const dynamic = 'force-dynamic';
+
 // Inter - Latin (English, numbers) - Primary font
 const inter = Inter({
   subsets: ['latin'],

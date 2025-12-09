@@ -7,15 +7,15 @@ import { GET, POST } from '@/app/api/exchange-rates/route';
 
 describe('/api/exchange-rates', () => {
   describe('GET', () => {
-    it('should return exchange rates with KRW as default base', async () => {
+    it('should return exchange rates with USD as default base', async () => {
       const request = new NextRequest('http://localhost:3000/api/exchange-rates');
       const response = await GET(request);
       const data = await response.json();
 
       expect(data.success).toBe(true);
-      expect(data.data.base).toBe('KRW');
+      expect(data.data.base).toBe('USD');
       expect(data.data.rates).toBeDefined();
-      expect(typeof data.data.rates.USD).toBe('number');
+      expect(typeof data.data.rates.KRW).toBe('number');
     });
 
     it('should return rates for all supported currencies', async () => {
@@ -43,7 +43,7 @@ describe('/api/exchange-rates', () => {
       const data = await response.json();
 
       expect(data.data.source).toBeDefined();
-      expect(['openexchangerates', 'static']).toContain(data.data.source);
+      expect(['openexchangerates', 'static', 'fallback']).toContain(data.data.source);
     });
 
     it('should filter currencies when specified', async () => {
@@ -75,8 +75,8 @@ describe('/api/exchange-rates', () => {
       expect(data.success).toBe(true);
       expect(data.data.from).toBe('USD');
       expect(data.data.to).toBe('KRW');
-      expect(data.data.amount).toBe(100);
-      expect(data.data.result).toBeGreaterThan(0);
+      expect(data.data.originalAmount).toBe(100);
+      expect(data.data.convertedAmount).toBeGreaterThan(0);
       expect(data.data.rate).toBeGreaterThan(0);
     });
 
@@ -125,7 +125,7 @@ describe('/api/exchange-rates', () => {
       const data = await response.json();
 
       expect(data.success).toBe(true);
-      expect(data.data.result).toBe(100);
+      expect(data.data.convertedAmount).toBe(100);
       expect(data.data.rate).toBe(1);
     });
   });

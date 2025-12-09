@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect, useRef, memo } from 'react';
-import Map, { Marker, ViewStateChangeEvent, MapRef } from 'react-map-gl';
+import Map, { Marker, ViewStateChangeEvent, MapRef } from 'react-map-gl/mapbox';
 // Note: mapbox-gl.css is imported in map/page.tsx to avoid loading on non-map pages
 import { colors } from '@/lib/design-tokens';
 import { m } from 'framer-motion';

@@ -79,7 +79,7 @@ export function FilterPanel({
   // Focus trap with WCAG 2.1 AA compliance
   const { containerRef: panelRef } = useFocusTrap<HTMLDivElement>({
     enabled: isOpen,
-    initialFocus: closeButtonRef,
+    initialFocus: closeButtonRef as unknown as React.RefObject<HTMLElement>,
     returnFocus: true,
     onEscape: onClose,
     preventScroll: true,

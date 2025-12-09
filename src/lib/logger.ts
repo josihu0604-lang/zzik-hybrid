@@ -40,7 +40,12 @@ function formatMessage(level: LogLevel, message: string, context?: LogContext): 
   return `${timestamp} ${level.toUpperCase()} ${moduleName}${traceId} ${message}${tags}`;
 }
 
-// ... existing code ...
+function getContextData(context?: LogContext): any {
+  if (!context) return '';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { module, traceId, tags, ...rest } = context as LogContextObject || {};
+  return Object.keys(rest).length > 0 ? rest : '';
+}
 
 export const logger = {
   debug(message: string, context?: LogContext): void {

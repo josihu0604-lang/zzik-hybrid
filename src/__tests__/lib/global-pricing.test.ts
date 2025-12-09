@@ -37,7 +37,8 @@ describe('global-pricing', () => {
     it('should convert to correct currency for Japan (JPY)', () => {
       const result = getTierPrice('gold', 'JP', 'monthly');
       expect(result.currency).toBe('JPY');
-      expect(result.formatted).toContain('¥');
+      // Accept both Halfwidth and Fullwidth Yen
+      expect(result.formatted).toMatch(/[¥￥]/);
     });
 
     it('should convert to correct currency for USA (USD)', () => {
@@ -84,7 +85,8 @@ describe('global-pricing', () => {
 
     it('should format JPY without decimals', () => {
       const result = formatCurrency(1100, 'JPY');
-      expect(result).toContain('¥');
+      // Accept both Halfwidth and Fullwidth Yen
+      expect(result).toMatch(/[¥￥]/);
       expect(result).not.toContain('.');
     });
 

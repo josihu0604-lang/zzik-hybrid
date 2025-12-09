@@ -7,7 +7,7 @@ if (!process.env.NEXT_PUBLIC_PRIVY_APP_ID) {
 }
 
 export const privyConfig: PrivyClientConfig = {
-  appId: process.env.NEXT_PUBLIC_PRIVY_APP_ID || '',
+  // appId is passed directly to PrivyProvider
   loginMethods: ['email', 'google', 'apple'],
   appearance: {
     theme: 'dark',

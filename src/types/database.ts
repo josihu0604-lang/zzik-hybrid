@@ -260,6 +260,89 @@ export interface Database {
           is_active?: boolean;
         };
       };
+      experiences: {
+        Row: {
+          id: string;
+          title: string;
+          description: string | null;
+          price: number;
+          currency: string;
+          location: string;
+          date: string;
+          duration_minutes: number;
+          max_participants: number;
+          current_participants: number;
+          host_id: string;
+          status: 'active' | 'cancelled' | 'completed';
+          category: 'fan_meeting' | 'concert_vip' | 'backstage' | 'culture_tour';
+          images: string[] | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          description?: string | null;
+          price: number;
+          currency?: string;
+          location: string;
+          date: string;
+          duration_minutes: number;
+          max_participants: number;
+          current_participants?: number;
+          host_id: string;
+          status?: 'active' | 'cancelled' | 'completed';
+          category: 'fan_meeting' | 'concert_vip' | 'backstage' | 'culture_tour';
+          images?: string[] | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          title?: string;
+          description?: string | null;
+          price?: number;
+          currency?: string;
+          location?: string;
+          date?: string;
+          duration_minutes?: number;
+          max_participants?: number;
+          current_participants?: number;
+          status?: 'active' | 'cancelled' | 'completed';
+          category?: 'fan_meeting' | 'concert_vip' | 'backstage' | 'culture_tour';
+          images?: string[] | null;
+          updated_at?: string;
+        };
+      };
+      bookings: {
+        Row: {
+          id: string;
+          experience_id: string;
+          user_id: string;
+          status: 'pending' | 'confirmed' | 'cancelled' | 'refunded';
+          payment_status: 'pending' | 'paid' | 'failed';
+          payment_intent_id: string | null;
+          amount_paid: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          experience_id: string;
+          user_id: string;
+          status?: 'pending' | 'confirmed' | 'cancelled' | 'refunded';
+          payment_status?: 'pending' | 'paid' | 'failed';
+          payment_intent_id?: string | null;
+          amount_paid: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          status?: 'pending' | 'confirmed' | 'cancelled' | 'refunded';
+          payment_status?: 'pending' | 'paid' | 'failed';
+          payment_intent_id?: string | null;
+          updated_at?: string;
+        };
+      };
       popups: {
         Row: {
           id: string;
@@ -778,6 +861,266 @@ export interface Database {
           type?: string;
           status?: string;
           tx_hash?: string | null;
+        };
+      },
+      vip_tickets: {
+        Row: {
+          id: string;
+          user_id: string;
+          tier: 'free' | 'silver' | 'gold' | 'platinum';
+          region: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL';
+          start_date: string;
+          end_date: string;
+          is_active: boolean | null;
+          auto_renew: boolean | null;
+          stripe_subscription_id: string | null;
+          stripe_customer_id: string | null;
+          stripe_price_id: string | null;
+          metadata: Json | null;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          tier?: 'free' | 'silver' | 'gold' | 'platinum';
+          region?: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL';
+          start_date?: string;
+          end_date: string;
+          is_active?: boolean | null;
+          auto_renew?: boolean | null;
+          stripe_subscription_id?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_price_id?: string | null;
+          metadata?: Json | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          user_id?: string;
+          tier?: 'free' | 'silver' | 'gold' | 'platinum';
+          region?: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL';
+          start_date?: string;
+          end_date?: string;
+          is_active?: boolean | null;
+          auto_renew?: boolean | null;
+          stripe_subscription_id?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_price_id?: string | null;
+          metadata?: Json | null;
+          updated_at?: string | null;
+        };
+      },
+      payment_transactions: {
+        Row: {
+          id: string;
+          ticket_id: string | null;
+          user_id: string;
+          amount: number;
+          currency: string;
+          status: 'pending' | 'processing' | 'completed' | 'failed' | 'refunded' | 'cancelled';
+          transaction_type: 'subscription' | 'upgrade' | 'renewal' | 'refund' | 'one_time';
+          stripe_payment_intent_id: string | null;
+          stripe_charge_id: string | null;
+          stripe_invoice_id: string | null;
+          description: string | null;
+          metadata: Json | null;
+          error_message: string | null;
+          created_at: string | null;
+          updated_at: string | null;
+          completed_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          ticket_id?: string | null;
+          user_id: string;
+          amount: number;
+          currency?: string;
+          status?: 'pending' | 'processing' | 'completed' | 'failed' | 'refunded' | 'cancelled';
+          transaction_type?: 'subscription' | 'upgrade' | 'renewal' | 'refund' | 'one_time';
+          stripe_payment_intent_id?: string | null;
+          stripe_charge_id?: string | null;
+          stripe_invoice_id?: string | null;
+          description?: string | null;
+          metadata?: Json | null;
+          error_message?: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+          completed_at?: string | null;
+        };
+        Update: {
+          amount?: number;
+          currency?: string;
+          status?: 'pending' | 'processing' | 'completed' | 'failed' | 'refunded' | 'cancelled';
+          transaction_type?: 'subscription' | 'upgrade' | 'renewal' | 'refund' | 'one_time';
+          stripe_payment_intent_id?: string | null;
+          stripe_charge_id?: string | null;
+          stripe_invoice_id?: string | null;
+          description?: string | null;
+          metadata?: Json | null;
+          error_message?: string | null;
+          updated_at?: string | null;
+          completed_at?: string | null;
+        };
+      },
+      user_preferences: {
+        Row: {
+          user_id: string;
+          region: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL' | null;
+          locale: 'ko' | 'en' | 'ja' | 'zh-TW' | 'zh-CN' | 'th' | null;
+          currency: 'KRW' | 'JPY' | 'TWD' | 'CNY' | 'THB' | 'USD' | 'EUR' | 'SGD' | null;
+          timezone: string | null;
+          email_notifications: boolean | null;
+          push_notifications: boolean | null;
+          marketing_emails: boolean | null;
+          theme: 'light' | 'dark' | 'system' | null;
+          metadata: Json | null;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          user_id: string;
+          region?: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL' | null;
+          locale?: 'ko' | 'en' | 'ja' | 'zh-TW' | 'zh-CN' | 'th' | null;
+          currency?: 'KRW' | 'JPY' | 'TWD' | 'CNY' | 'THB' | 'USD' | 'EUR' | 'SGD' | null;
+          timezone?: string | null;
+          email_notifications?: boolean | null;
+          push_notifications?: boolean | null;
+          marketing_emails?: boolean | null;
+          theme?: 'light' | 'dark' | 'system' | null;
+          metadata?: Json | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          region?: 'KR' | 'JP' | 'TW' | 'CN' | 'TH' | 'US' | 'EU' | 'SEA' | 'GLOBAL' | null;
+          locale?: 'ko' | 'en' | 'ja' | 'zh-TW' | 'zh-CN' | 'th' | null;
+          currency?: 'KRW' | 'JPY' | 'TWD' | 'CNY' | 'THB' | 'USD' | 'EUR' | 'SGD' | null;
+          timezone?: string | null;
+          email_notifications?: boolean | null;
+          push_notifications?: boolean | null;
+          marketing_emails?: boolean | null;
+          theme?: 'light' | 'dark' | 'system' | null;
+          metadata?: Json | null;
+          updated_at?: string | null;
+        };
+      },
+      k_experiences: {
+        Row: {
+          id: string;
+          category: 'kpop' | 'kdrama' | 'kbeauty' | 'kfood' | 'kfashion';
+          title: Json;
+          description: Json;
+          location_lat: number | null;
+          location_lng: number | null;
+          address: Json | null;
+          cover_image: string | null;
+          images: string[] | null;
+          tags: string[] | null;
+          related_content: Json | null;
+          verification_count: number | null;
+          view_count: number | null;
+          rating: number | null;
+          review_count: number | null;
+          is_featured: boolean | null;
+          is_verified: boolean | null;
+          is_active: boolean | null;
+          start_date: string | null;
+          end_date: string | null;
+          partner_id: string | null;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          category: 'kpop' | 'kdrama' | 'kbeauty' | 'kfood' | 'kfashion';
+          title?: Json;
+          description?: Json;
+          location_lat?: number | null;
+          location_lng?: number | null;
+          address?: Json | null;
+          cover_image?: string | null;
+          images?: string[] | null;
+          tags?: string[] | null;
+          related_content?: Json | null;
+          verification_count?: number | null;
+          view_count?: number | null;
+          rating?: number | null;
+          review_count?: number | null;
+          is_featured?: boolean | null;
+          is_verified?: boolean | null;
+          is_active?: boolean | null;
+          start_date?: string | null;
+          end_date?: string | null;
+          partner_id?: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          category?: 'kpop' | 'kdrama' | 'kbeauty' | 'kfood' | 'kfashion';
+          title?: Json;
+          description?: Json;
+          location_lat?: number | null;
+          location_lng?: number | null;
+          address?: Json | null;
+          cover_image?: string | null;
+          images?: string[] | null;
+          tags?: string[] | null;
+          related_content?: Json | null;
+          verification_count?: number | null;
+          view_count?: number | null;
+          rating?: number | null;
+          review_count?: number | null;
+          is_featured?: boolean | null;
+          is_verified?: boolean | null;
+          is_active?: boolean | null;
+          start_date?: string | null;
+          end_date?: string | null;
+          partner_id?: string | null;
+          updated_at?: string | null;
+        };
+      },
+      experience_verifications: {
+        Row: {
+          id: string;
+          user_id: string;
+          experience_id: string;
+          verification_method: 'gps' | 'qr' | 'receipt' | 'manual';
+          status: 'pending' | 'verified' | 'rejected';
+          location_lat: number | null;
+          location_lng: number | null;
+          verification_data: Json | null;
+          rating: number | null;
+          review: string | null;
+          photos: string[] | null;
+          created_at: string | null;
+          verified_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          experience_id: string;
+          verification_method?: 'gps' | 'qr' | 'receipt' | 'manual';
+          status?: 'pending' | 'verified' | 'rejected';
+          location_lat?: number | null;
+          location_lng?: number | null;
+          verification_data?: Json | null;
+          rating?: number | null;
+          review?: string | null;
+          photos?: string[] | null;
+          created_at?: string | null;
+          verified_at?: string | null;
+        };
+        Update: {
+          verification_method?: 'gps' | 'qr' | 'receipt' | 'manual';
+          status?: 'pending' | 'verified' | 'rejected';
+          location_lat?: number | null;
+          location_lng?: number | null;
+          verification_data?: Json | null;
+          rating?: number | null;
+          review?: string | null;
+          photos?: string[] | null;
+          verified_at?: string | null;
         };
       };
     };

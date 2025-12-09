@@ -17,7 +17,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
 
   return (
     <PrivyProvider
-      appId={privyConfig.appId!}
+      appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ''}
       config={privyConfig}
     >
       <QueryClientProvider client={queryClient}>

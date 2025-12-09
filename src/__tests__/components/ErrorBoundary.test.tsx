@@ -300,7 +300,7 @@ describe('ErrorBoundary', () => {
     });
 
     it('should handle different error messages', () => {
-      function ThrowCustomError({ message }: { message: string }): JSX.Element {
+      function ThrowCustomError({ message }: { message: string }): ReactNode {
         throw new Error(message);
       }
 
@@ -367,7 +367,7 @@ describe('ErrorBoundary', () => {
     });
 
     it('should handle error without message', () => {
-      function ThrowEmptyError(): JSX.Element {
+      function ThrowEmptyError(): ReactNode {
         throw new Error();
       }
 
@@ -386,7 +386,7 @@ describe('ErrorBoundary', () => {
   // =============================================================================
   describe('Integration scenarios', () => {
     it('should work with async errors', async () => {
-      function AsyncError(): JSX.Element {
+      function AsyncError(): ReactNode {
         throw new Error('Async error');
       }
 

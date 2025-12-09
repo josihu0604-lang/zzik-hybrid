@@ -20,7 +20,7 @@ export const UserProfileSchema = z.object({
   name: z.string().min(2).optional(),
   bio: z.string().max(300).optional(),
   phone: z.string().regex(/^01[0-9]-?[0-9]{3,4}-?[0-9]{4}$/, 'Invalid phone number').optional(),
-  preferences: z.record(z.any()).optional(),
+  preferences: z.record(z.string(), z.any()).optional(),
 });
 
 export const UserRoleSchema = z.enum(['user', 'host', 'admin', 'superadmin']);

@@ -11,9 +11,55 @@ import { vi, beforeAll, afterAll, afterEach } from 'vitest';
 // GLOBAL MOCKS
 // ============================================================================
 
+console.log('Test setup file loaded!');
+
+// Mock Stripe
+vi.mock('stripe', () => {
+  return {
+    default: vi.fn().mockImplementation(function() {
+      return {
+        checkout: {
+          sessions: {
+            create: vi.fn().mockResolvedValue({
+              id: 'cs_test_123',
+              url: 'https://checkout.stripe.com/test',
+            }),
+          },
+        },
+        billingPortal: {
+          sessions: {
+            create: vi.fn().mockResolvedValue({
+              url: 'https://billing.stripe.com/test',
+            }),
+          },
+        },
+        subscriptions: {
+          update: vi.fn().mockResolvedValue({
+            id: 'sub_123',
+            status: 'active',
+          }),
+          retrieve: vi.fn().mockResolvedValue({
+            id: 'sub_123',
+            items: {
+              data: [{ id: 'si_123', price: { id: 'price_123', recurring: { interval: 'month' } } }],
+            },
+          }),
+        },
+        webhooks: {
+          constructEvent: vi.fn().mockReturnValue({
+            type: 'checkout.session.completed',
+            data: { object: {} },
+          }),
+        },
+      };
+    }),
+  };
+});
+
 // Mock framer-motion
-vi.mock('framer-motion', () => ({
-  motion: {
+vi.mock('framer-motion', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('framer-motion')>();
+  const m = {
     div: 'div',
     span: 'span',
     button: 'button',
@@ -45,51 +91,18 @@ vi.mock('framer-motion', () => ({
     line: 'line',
     polyline: 'polyline',
     polygon: 'polygon',
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
-  useAnimation: () => ({
-    start: vi.fn(),
-    stop: vi.fn(),
-    set: vi.fn(),
-  }),
-  useMotionValue: (initial: number) => ({
-    get: () => initial,
-    set: vi.fn(),
-    onChange: vi.fn(),
-  }),
-  useTransform: () => ({
-    get: () => 0,
-    set: vi.fn(),
-  }),
-  useSpring: () => ({
-    get: () => 0,
-    set: vi.fn(),
-  }),
-  useReducedMotion: () => false,
-  useInView: () => true,
-  useScroll: () => ({
-    scrollY: { get: () => 0 },
-    scrollX: { get: () => 0 },
-    scrollYProgress: { get: () => 0 },
-    scrollXProgress: { get: () => 0 },
-  }),
-  useDragControls: () => ({
-    start: vi.fn(),
-  }),
-  Reorder: {
-    Group: 'div',
-    Item: 'div',
-  },
-  LayoutGroup: ({ children }: { children: React.ReactNode }) => children,
-  LazyMotion: ({ children }: { children: React.ReactNode }) => children,
-  domAnimation: {},
-  domMax: {},
-  m: {
-    div: 'div',
-    span: 'span',
-    button: 'button',
-  },
-}));
+  };
+
+  return {
+    ...actual,
+    m: m,
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
+    motion: {
+      ...m,
+      custom: (component: any) => component,
+    },
+  };
+});
 
 // Mock Next.js navigation
 vi.mock('next/navigation', () => ({

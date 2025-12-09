@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { m } from 'framer-motion';
-import { Marker } from 'react-map-gl';
+import { Marker } from 'react-map-gl/mapbox';
 import { Check, Flame } from 'lucide-react';
 import { colors } from '@/lib/design-tokens';
 import { getCategoryColor } from '@/lib/color-utils';

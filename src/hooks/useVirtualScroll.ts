@@ -39,7 +39,7 @@ export interface UseVirtualScrollReturn<T> {
   /** @tanstack/react-virtual의 Virtualizer 인스턴스 */
   virtualizer: Virtualizer<HTMLDivElement, Element>;
   /** 스크롤 컨테이너 ref */
-  scrollRef: React.RefObject<HTMLDivElement>;
+  scrollRef: React.RefObject<HTMLDivElement | null>;
   /** 현재 스크롤 위치 */
   scrollOffset: number;
   /** 특정 인덱스로 스크롤 */

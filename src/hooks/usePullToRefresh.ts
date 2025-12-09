@@ -40,7 +40,7 @@ interface UsePullToRefreshReturn {
     onTouchEnd: () => void;
   };
   /** 컨테이너 ref */
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function usePullToRefresh({

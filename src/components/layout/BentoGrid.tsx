@@ -129,7 +129,7 @@ export function BentoGrid({ children, gap = 3, animated = true, className = '' }
       }
 
       if (child.type === BentoItem) {
-        return cloneElement(child, {
+        return cloneElement(child as React.ReactElement<BentoItemProps>, {
           ...(child.props as BentoItemProps),
           size: (child.props as BentoItemProps).size || size,
         });

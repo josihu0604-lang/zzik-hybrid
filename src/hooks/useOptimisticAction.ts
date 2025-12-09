@@ -1,6 +1,6 @@
 
 import { useState, useCallback } from 'react';
-import { useToast } from '@/components/ui/use-toast'; // Assuming standard shadcn/ui toast exists
+import { useToast } from '@/components/ui'; // Import from barrel file
 
 /**
  * Optimistic UI Hook
@@ -19,7 +19,7 @@ export function useOptimisticAction<T, P>(
 ) {
   const [data, setData] = useState<T>(initialData);
   const [isPending, setIsPending] = useState(false);
-  const { toast } = useToast();
+  const { error } = useToast();
 
   const execute = useCallback(async (payload: P) => {
     // 1. Snapshot previous state
@@ -35,19 +35,15 @@ export function useOptimisticAction<T, P>(
       
       // 4. Confirm with server data (or keep optimistic if result matches)
       setData(result);
-    } catch (error) {
+    } catch (err) {
       // 5. Rollback on failure
       setData(previousData);
-      toast({
-        title: 'Action Failed',
-        description: 'Changes have been reverted.',
-        variant: 'destructive'
-      });
-      console.error(error);
+      error('Action Failed', 'Changes have been reverted.');
+      console.error(err);
     } finally {
       setIsPending(false);
     }
-  }, [data, asyncAction, optimisticUpdateFn, toast]);
+  }, [data, asyncAction, optimisticUpdateFn, error]);
 
   return {
     data,

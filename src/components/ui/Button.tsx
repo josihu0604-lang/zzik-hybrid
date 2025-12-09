@@ -87,6 +87,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       fullWidth = false,
       rounded = false,
       disabled,
+      type = 'button',
       children,
       ...props
     },
@@ -115,6 +116,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         disabled={disabled || isLoadingState}
+        type={type}
         {...props}
       >
         {isLoadingState ? (
