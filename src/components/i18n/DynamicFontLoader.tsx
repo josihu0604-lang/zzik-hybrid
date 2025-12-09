@@ -18,12 +18,17 @@ export function DynamicFontLoader() {
   useEffect(() => {
     if (!locale) return;
 
+    // Safety check for server-side or non-browser environments
+    if (typeof document === 'undefined' || !document.body) return;
+
     // Preload font for current locale
     preloadFontForLocale(locale);
 
-    // Apply font family to body
+    // Apply font family to body only if it changed
     const fontFamily = getFontFamilyForLocale(locale);
-    document.body.style.fontFamily = fontFamily;
+    if (document.body.style.fontFamily !== fontFamily) {
+      document.body.style.fontFamily = fontFamily;
+    }
 
     // Cleanup on unmount
     return () => {
