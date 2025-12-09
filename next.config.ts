@@ -43,7 +43,7 @@ const nextConfig: NextConfig = {
       'react-hook-form',
     ],
     // Performance optimizations
-    optimizeCss: true,
+    optimizeCss: false,
     optimizeServerReact: true,
     // Partial Prerendering is now enabled via cacheComponents
     // Note: PPR feature moved to cacheComponents in Next.js 15+

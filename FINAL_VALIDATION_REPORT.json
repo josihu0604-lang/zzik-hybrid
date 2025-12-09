@@ -1,0 +1,27 @@
+{
+  "survivalRate": 94.1,
+  "avgHealth": 82.09172307094529,
+  "topFailures": [
+    [
+      "Scenario C: Global Pandemic 2.0",
+      126
+    ],
+    [
+      "Scenario B: Tech Giant Entry + Scenario C: Global Pandemic 2.0",
+      92
+    ],
+    [
+      "Scenario C: Global Pandemic 2.0 + Scenario D: UX Friction",
+      72
+    ],
+    [
+      "Scenario B: Tech Giant Entry + Scenario D: UX Friction + Scenario E: Hype Collapse",
+      41
+    ],
+    [
+      "Scenario B: Tech Giant Entry + Scenario C: Global Pandemic 2.0 + Scenario D: UX Friction",
+      41
+    ]
+  ],
+  "assessment": "ADAMANTIUM (🛡️) - 어떤 공격에도 살아남음. 완벽한 준비."
+}

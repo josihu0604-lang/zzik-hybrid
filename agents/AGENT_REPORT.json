@@ -1,0 +1,96 @@
+{
+  "timestamp": "2025-12-09T21:06:56.967Z",
+  "mode": "all",
+  "dryRun": false,
+  "agents": [
+    {
+      "name": "i18n Fix Agent",
+      "emoji": "🌍",
+      "tasksTotal": 3,
+      "tasksCompleted": 3,
+      "issuesFound": 8,
+      "issuesFixed": 8,
+      "filesModified": [
+        "src/i18n/locales/en.json",
+        "src/i18n/locales/ko.json"
+      ],
+      "duration": 100
+    },
+    {
+      "name": "Hydration Fix Agent",
+      "emoji": "🔧",
+      "tasksTotal": 4,
+      "tasksCompleted": 4,
+      "issuesFound": 1,
+      "issuesFixed": 1,
+      "filesModified": [
+        "src/app/layout.tsx"
+      ],
+      "duration": 50
+    },
+    {
+      "name": "Auth Config Fix Agent",
+      "emoji": "🔐",
+      "tasksTotal": 3,
+      "tasksCompleted": 3,
+      "issuesFound": 1,
+      "issuesFixed": 1,
+      "filesModified": [
+        "src/components/providers/AppProviders.tsx"
+      ],
+      "duration": 30
+    },
+    {
+      "name": "Resource Path Fix Agent",
+      "emoji": "📦",
+      "tasksTotal": 2,
+      "tasksCompleted": 2,
+      "issuesFound": 2,
+      "issuesFixed": 2,
+      "filesModified": [
+        "src/lib/seo.ts"
+      ],
+      "duration": 20
+    },
+    {
+      "name": "Dark Mode Consistency Agent",
+      "emoji": "🌙",
+      "tasksTotal": 4,
+      "tasksCompleted": 4,
+      "issuesFound": 10,
+      "issuesFixed": 10,
+      "filesModified": [
+        "src/components/home/TouristHomeScreen.tsx"
+      ],
+      "duration": 200
+    },
+    {
+      "name": "Accessibility Agent",
+      "emoji": "♿",
+      "tasksTotal": 5,
+      "tasksCompleted": 5,
+      "issuesFound": 15,
+      "issuesFixed": 0,
+      "filesModified": [],
+      "duration": 300
+    },
+    {
+      "name": "Responsive Design Agent",
+      "emoji": "📱",
+      "tasksTotal": 5,
+      "tasksCompleted": 5,
+      "issuesFound": 8,
+      "issuesFixed": 0,
+      "filesModified": [],
+      "duration": 250
+    }
+  ],
+  "summary": {
+    "totalAgents": 7,
+    "totalTasks": 26,
+    "totalIssuesFound": 45,
+    "totalIssuesFixed": 22,
+    "totalFilesModified": 6,
+    "fixRate": "48.9%"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "agent_id": "code-evolutionary",
+  "model": "gemini-3.0-pro-002",
+  "display_name": "Code Evolutionary",
+  "version": "1.0.0",
+  "capabilities": {
+    "thinking_level": 1,
+    "thought_signatures": false,
+    "tools": [
+      "edit_file",
+      "create_file",
+      "git_commit",
+      "google_workspace"
+    ]
+  },
+  "context_files": [
+    "src/",
+    "DEVELOPMENT_ROADMAP.md",
+    "AI_TASKS.md"
+  ]
+}

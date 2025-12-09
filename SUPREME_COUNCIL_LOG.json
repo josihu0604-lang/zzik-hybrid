@@ -1,0 +1,30 @@
+{
+  "agents": [
+    {
+      "name": "Alpha",
+      "role": "Chief Strategy Officer",
+      "score": 95,
+      "opinion": "시장 장악력 확실함. 독점 계약(Lock-in) 전략은 신의 한 수. 관광객 니즈(환전무료)가 너무 강력해서 확산 속도가 규제 속도를 앞지를 것."
+    },
+    {
+      "name": "Beta",
+      "role": "Chief Financial Officer",
+      "score": 88,
+      "opinion": "수익성(Take rate) 1.5%는 낮음. 하지만 뷰티 시술(High Ticket) 중개 수수료가 캐시카우가 될 것. 초기 Burn Rate 관리가 관건."
+    },
+    {
+      "name": "Gamma",
+      "role": "Chief Technology Officer",
+      "score": 92,
+      "opinion": "Account Abstraction(계정 추상화) 도입으로 UX 장벽 제거한 건 훌륭함. 단, 오프라인 결제 시 네트워크 지연(Latency) 문제 해결이 필수."
+    },
+    {
+      "name": "Delta",
+      "role": "Chief Legal Officer",
+      "score": 85,
+      "opinion": "가장 위험한 건 '가상자산사업자(VASP)' 이슈. 하지만 '포인트 시스템'으로 우회한 구조는 법적 방어 논리가 성립됨. 샌드박스 신청 병행 필수."
+    }
+  ],
+  "avgScore": 90,
+  "verdict": "🚀 GO (Strong Buy)"
+}

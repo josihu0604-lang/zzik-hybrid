@@ -106,4 +106,4 @@ scripts/
 !scripts/get-local-ip.js
 !scripts/mobile-dev-setup.js
 apply_ux_fixes.sh
-core
+# Note: core/ was removed to allow agents/core to be tracked

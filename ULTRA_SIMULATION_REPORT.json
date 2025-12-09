@@ -1,0 +1,2807 @@
+{
+  "metadata": {
+    "generatedAt": "2025-12-09T15:33:24.069Z",
+    "simulationType": "Ultra Thinking Chain-of-Thought",
+    "totalSimulations": 10000,
+    "version": "2.0.0",
+    "methodology": [
+      "Monte Carlo Simulation with 10,000 iterations",
+      "7-Factor Chain-of-Thought Analysis",
+      "Real Market Data Integration (2024-2025)",
+      "Synergy-weighted Scoring System",
+      "Statistical Significance Testing"
+    ]
+  },
+  "executiveSummary": {
+    "unicornRate": "24.01%",
+    "survivalRate": "99.70%",
+    "topStrategy": {
+      "target": "Foreign Tourists",
+      "tech": "Stablecoin",
+      "location": "Hannam-dong",
+      "market": "Inbound Tourism Korea"
+    },
+    "keyFinding": "외국인 관광객 + 스테이블코인 조합이 압도적 유니콘 확률"
+  },
+  "statistics": {
+    "total": 10000,
+    "mean": 77.8023999999999,
+    "median": 77.2,
+    "stdDev": 11.044901821202378,
+    "min": 47.3,
+    "max": 100,
+    "distribution": {
+      "unicorns": {
+        "count": 2401,
+        "percentage": "24.01%"
+      },
+      "growing": {
+        "count": 5126,
+        "percentage": "51.26%"
+      },
+      "surviving": {
+        "count": 2443,
+        "percentage": "24.43%"
+      },
+      "dead": {
+        "count": 30,
+        "percentage": "0.30%"
+      }
+    }
+  },
+  "patterns": {
+    "unicornCount": 2401,
+    "topMarkets": [
+      [
+        "Inbound Tourism Korea",
+        759
+      ],
+      [
+        "Crypto Payments Asia",
+        546
+      ],
+      [
+        "K-Beauty Global",
+        492
+      ],
+      [
+        "Medical Tourism Korea",
+        306
+      ],
+      [
+        "DAO/Web3 Services",
+        298
+      ]
+    ],
+    "topTechs": [
+      [
+        "Stablecoin",
+        823
+      ],
+      [
+        "AI Skin Analysis",
+        619
+      ],
+      [
+        "Traditional Payment",
+        517
+      ],
+      [
+        "NFT Membership",
+        250
+      ],
+      [
+        "DAO Governance",
+        192
+      ]
+    ],
+    "topTargets": [
+      [
+        "Foreign Tourists",
+        1647
+      ],
+      [
+        "Korean Young Women 20-35",
+        341
+      ],
+      [
+        "Expats in Korea",
+        317
+      ],
+      [
+        "Korean Office Workers",
+        65
+      ],
+      [
+        "Crypto Enthusiasts",
+        31
+      ]
+    ],
+    "topLocations": [
+      [
+        "Hannam-dong",
+        632
+      ],
+      [
+        "Myeongdong",
+        583
+      ],
+      [
+        "Gangnam",
+        430
+      ],
+      [
+        "Seongsu-dong",
+        395
+      ],
+      [
+        "Hongdae",
+        361
+      ]
+    ],
+    "topCombinations": [
+      [
+        "Foreign Tourists + Stablecoin",
+        431
+      ],
+      [
+        "Foreign Tourists + AI Skin Analysis",
+        395
+      ],
+      [
+        "Foreign Tourists + Traditional Payment",
+        382
+      ],
+      [
+        "Foreign Tourists + NFT Membership",
+        247
+      ],
+      [
+        "Foreign Tourists + DAO Governance",
+        192
+      ],
+      [
+        "Korean Young Women 20-35 + Stablecoin",
+        177
+      ],
+      [
+        "Expats in Korea + Stablecoin",
+        149
+      ],
+      [
+        "Korean Young Women 20-35 + AI Skin Analysis",
+        108
+      ],
+      [
+        "Expats in Korea + AI Skin Analysis",
+        95
+      ],
+      [
+        "Expats in Korea + Traditional Payment",
+        71
+      ],
+      [
+        "Korean Young Women 20-35 + Traditional Payment",
+        55
+      ],
+      [
+        "Korean Office Workers + Stablecoin",
+        42
+      ],
+      [
+        "Crypto Enthusiasts + Stablecoin",
+        24
+      ],
+      [
+        "Korean Office Workers + AI Skin Analysis",
+        14
+      ],
+      [
+        "Korean Office Workers + Traditional Payment",
+        9
+      ],
+      [
+        "Crypto Enthusiasts + AI Skin Analysis",
+        7
+      ],
+      [
+        "Expats in Korea + NFT Membership",
+        2
+      ],
+      [
+        "Korean Young Women 20-35 + NFT Membership",
+        1
+      ]
+    ]
+  },
+  "topCombinations": [
+    {
+      "rank": 1,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Seongsu-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. ",
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 2,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 3,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 4,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 5,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! K-Beauty Global 시장과 타겟의 완벽한 정합성!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 90,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 6,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 7,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!프리미엄 로케이션 + 의료관광 시너지!",
+      "scores": {
+        "marketScore": 43,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 85,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 8,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 9,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 75,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 10,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 11,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 12,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Hannam-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. Inbound Tourism Korea 시장과 타겟의 완벽한 정합성!",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 13,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 14,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      }
+    },
+    {
+      "rank": 15,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! 명동은 저가 쇼핑 중심, 프리미엄 의료관광 부적합. ",
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 60,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 16,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! 명동은 저가 쇼핑 중심, 프리미엄 의료관광 부적합. ",
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 60,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 17,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Hannam-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. K-Beauty Global 시장과 타겟의 완벽한 정합성!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 18,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      }
+    },
+    {
+      "rank": 19,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! ",
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 75,
+        "timingScore": 100,
+        "executionScore": 100
+      }
+    },
+    {
+      "rank": 20,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "survivalProbability": 95,
+      "unicornProbability": 99.9,
+      "status": "UNICORN 🦄",
+      "keyInsight": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!",
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      }
+    }
+  ],
+  "unicornList": [
+    {
+      "id": 0,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Seongsu-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. "
+    },
+    {
+      "id": 2,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 5,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 86,
+      "unicornProbability": 53.3,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 60,
+        "timingScore": 75,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 8,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 86.5,
+      "unicornProbability": 55,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 9,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 92.1,
+      "unicornProbability": 73.7,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 14,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 17,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 98.8,
+      "unicornProbability": 95.8,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 27,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Hongdae"
+      },
+      "finalScore": 88.8,
+      "unicornProbability": 62.8,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 28,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 85.4,
+      "unicornProbability": 51.4,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 30,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 39,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 85.2,
+      "unicornProbability": 50.5,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 60,
+        "timingScore": 75,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 40,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Hongdae"
+      },
+      "finalScore": 90.5,
+      "unicornProbability": 68.2,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 41,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 94.4,
+      "unicornProbability": 81.1,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 43,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Expats in Korea",
+        "location": "Myeongdong"
+      },
+      "finalScore": 90.2,
+      "unicornProbability": 67.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 115.81818181818181,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 50,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 90,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! K-Beauty Global 시장과 타겟의 완벽한 정합성!"
+    },
+    {
+      "id": 55,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 56,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 61,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 63,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Myeongdong"
+      },
+      "finalScore": 94.3,
+      "unicornProbability": 80.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 65,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 75,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! "
+    },
+    {
+      "id": 67,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 89.9,
+      "unicornProbability": 66.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 71,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 91.6,
+      "unicornProbability": 71.8,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 72,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 73,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 87.7,
+      "unicornProbability": 58.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 74,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 90.1,
+      "unicornProbability": 66.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 76,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Traditional Payment",
+        "target": "Korean Young Women 20-35",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 89.2,
+      "unicornProbability": 63.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 114.65789473684211,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 60,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 79,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 93.6,
+      "unicornProbability": 78.7,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 86,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 87,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Korean Young Women 20-35",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 89.5,
+      "unicornProbability": 64.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 114.65789473684211,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 92,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 91.2,
+      "unicornProbability": 70.6,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 96,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Hongdae"
+      },
+      "finalScore": 86.8,
+      "unicornProbability": 56,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 99,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Hannam-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. Inbound Tourism Korea 시장과 타겟의 완벽한 정합성!"
+    },
+    {
+      "id": 100,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 89,
+      "unicornProbability": 63.1,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 60,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 103,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 89.9,
+      "unicornProbability": 66.3,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 60,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 110,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 86.4,
+      "unicornProbability": 54.5,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 113,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 98.8,
+      "unicornProbability": 95.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 114,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 86.6,
+      "unicornProbability": 55.2,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 65,
+        "timingScore": 70,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 115,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Traditional Payment",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 85.6,
+      "unicornProbability": 51.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 72,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 70,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 120,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 87.9,
+      "unicornProbability": 59.6,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 125,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 93.2,
+      "unicornProbability": 77.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 127,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 129,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 86,
+      "unicornProbability": 53.4,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 140,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Myeongdong"
+      },
+      "finalScore": 89.3,
+      "unicornProbability": 64.3,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 141,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Crypto Enthusiasts",
+        "location": "Myeongdong"
+      },
+      "finalScore": 86,
+      "unicornProbability": 53.4,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 66.88235294117646,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 143,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 144,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 91.2,
+      "unicornProbability": 70.7,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 148,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 95.4,
+      "unicornProbability": 84.6,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 60,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! 명동은 저가 쇼핑 중심, 프리미엄 의료관광 부적합. "
+    },
+    {
+      "id": 151,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Korean Young Women 20-35",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 86.1,
+      "unicornProbability": 53.7,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 114.65789473684211,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 157,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 93,
+      "unicornProbability": 76.6,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 158,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 90.8,
+      "unicornProbability": 69.3,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 159,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 85.6,
+      "unicornProbability": 51.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 163,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 97,
+      "unicornProbability": 90,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 167,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 95.6,
+      "unicornProbability": 85.3,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 168,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 89,
+      "unicornProbability": 63.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 175,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 60,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! 명동은 저가 쇼핑 중심, 프리미엄 의료관광 부적합. "
+    },
+    {
+      "id": 180,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 90.6,
+      "unicornProbability": 68.5,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 182,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 93.7,
+      "unicornProbability": 79,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 186,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Gangnam"
+      },
+      "finalScore": 89.7,
+      "unicornProbability": 65.6,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 187,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 87,
+      "unicornProbability": 56.5,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 189,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Korean Young Women 20-35",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 85.2,
+      "unicornProbability": 50.6,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 114.65789473684211,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 190,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 93.7,
+      "unicornProbability": 79.1,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 193,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 60,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! 명동은 저가 쇼핑 중심, 프리미엄 의료관광 부적합. "
+    },
+    {
+      "id": 197,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 88.2,
+      "unicornProbability": 60.6,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 199,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 92.9,
+      "unicornProbability": 76.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 200,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Traditional Payment",
+        "target": "Korean Young Women 20-35",
+        "location": "Myeongdong"
+      },
+      "finalScore": 87.5,
+      "unicornProbability": 58.1,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 72,
+        "targetScore": 114.65789473684211,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 70,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 202,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "AI Skin Analysis",
+        "target": "Expats in Korea",
+        "location": "Hongdae"
+      },
+      "finalScore": 85.3,
+      "unicornProbability": 51.1,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 76,
+        "targetScore": 115.81818181818181,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 60,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 204,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 88.7,
+      "unicornProbability": 62.1,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 211,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 95.4,
+      "unicornProbability": 84.4,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 212,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 89.3,
+      "unicornProbability": 64.3,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 215,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 90.2,
+      "unicornProbability": 67.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 223,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 94.9,
+      "unicornProbability": 82.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 229,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Hannam-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. K-Beauty Global 시장과 타겟의 완벽한 정합성!"
+    },
+    {
+      "id": 237,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 93.9,
+      "unicornProbability": 79.5,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 240,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 93.2,
+      "unicornProbability": 77.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 247,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 86.8,
+      "unicornProbability": 56.1,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 257,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hongdae"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 100,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 258,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 89.3,
+      "unicornProbability": 64.2,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 263,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 93.4,
+      "unicornProbability": 78,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 266,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 87.6,
+      "unicornProbability": 58.7,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 267,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 75,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! "
+    },
+    {
+      "id": 280,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 95,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!"
+    },
+    {
+      "id": 289,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 87.9,
+      "unicornProbability": 59.5,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 294,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 100,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! K-뷰티/의료관광 시장 완벽 매칭!AI 피부분석 + K-뷰티/의료관광 = 데이터 기반 추천으로 전환율 상승!프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 295,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 86,
+      "unicornProbability": 53.4,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 300,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 100,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Hannam-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 303,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Crypto Enthusiasts",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 85.8,
+      "unicornProbability": 52.6,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 66.88235294117646,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 305,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 87.5,
+      "unicornProbability": 58.4,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 313,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 90.1,
+      "unicornProbability": 66.8,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 315,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 96.5,
+      "unicornProbability": 88.2,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 316,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "DAO Governance",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 89,
+      "unicornProbability": 63.1,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 48,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 60,
+        "timingScore": 65,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 319,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "NFT Membership",
+        "target": "Foreign Tourists",
+        "location": "Gangnam"
+      },
+      "finalScore": 85.5,
+      "unicornProbability": 51.7,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 50,
+        "targetScore": 181.5,
+        "locationScore": 110.5,
+        "synergyScore": 50,
+        "timingScore": 75,
+        "executionScore": 70
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 320,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Expats in Korea",
+        "location": "Hongdae"
+      },
+      "finalScore": 86.3,
+      "unicornProbability": 54.3,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 72,
+        "targetScore": 115.81818181818181,
+        "locationScore": 104,
+        "synergyScore": 50,
+        "timingScore": 80,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 324,
+      "config": {
+        "market": "Crypto Payments Asia",
+        "tech": "Stablecoin",
+        "target": "Foreign Tourists",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 181.5,
+        "locationScore": 106.5,
+        "synergyScore": 95,
+        "timingScore": 100,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 관광객 + 스테이블코인 = 환전 없는 결제 니즈 완벽 해결! Seongsu-dong은 고소득 외국인 집중 지역으로 ARPU 극대화 가능. "
+    },
+    {
+      "id": 327,
+      "config": {
+        "market": "Inbound Tourism Korea",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Seongsu-dong"
+      },
+      "finalScore": 91.9,
+      "unicornProbability": 72.8,
+      "scores": {
+        "marketScore": 100,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 106.5,
+        "synergyScore": 50,
+        "timingScore": 95,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 333,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Korean Office Workers",
+        "location": "Myeongdong"
+      },
+      "finalScore": 85.4,
+      "unicornProbability": 51.2,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 82,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 336,
+      "config": {
+        "market": "DAO/Web3 Services",
+        "tech": "AI Skin Analysis",
+        "target": "Foreign Tourists",
+        "location": "Myeongdong"
+      },
+      "finalScore": 100,
+      "unicornProbability": 99.9,
+      "scores": {
+        "marketScore": 39.4,
+        "techScore": 76,
+        "targetScore": 181.5,
+        "locationScore": 150.9,
+        "synergyScore": 65,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: 외국인 + AI 피부분석 = K-뷰티 니즈 해결! "
+    },
+    {
+      "id": 338,
+      "config": {
+        "market": "Medical Tourism Korea",
+        "tech": "Traditional Payment",
+        "target": "Foreign Tourists",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 96.6,
+      "unicornProbability": 88.6,
+      "scores": {
+        "marketScore": 43,
+        "techScore": 72,
+        "targetScore": 181.5,
+        "locationScore": 147.5,
+        "synergyScore": 60,
+        "timingScore": 85,
+        "executionScore": 95
+      },
+      "reasoning": "시너지 분석: 프리미엄 로케이션 + 의료관광 시너지!"
+    },
+    {
+      "id": 342,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Myeongdong"
+      },
+      "finalScore": 90.6,
+      "unicornProbability": 68.8,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 346,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Expats in Korea",
+        "location": "Hannam-dong"
+      },
+      "finalScore": 86.1,
+      "unicornProbability": 53.7,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 115.81818181818181,
+        "locationScore": 147.5,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    },
+    {
+      "id": 349,
+      "config": {
+        "market": "K-Beauty Global",
+        "tech": "Stablecoin",
+        "target": "Korean Young Women 20-35",
+        "location": "Myeongdong"
+      },
+      "finalScore": 87.1,
+      "unicornProbability": 56.9,
+      "scores": {
+        "marketScore": 70.4,
+        "techScore": 80,
+        "targetScore": 114.65789473684211,
+        "locationScore": 150.9,
+        "synergyScore": 50,
+        "timingScore": 85,
+        "executionScore": 100
+      },
+      "reasoning": "시너지 분석: "
+    }
+  ],
+  "riskAnalysis": {
+    "highRiskCombinations": [
+      {
+        "combination": "Korean Office Workers + DAO Governance",
+        "reason": "니즈 미스매칭, 진입장벽 높음"
+      },
+      {
+        "combination": "Crypto Enthusiasts + Traditional Payment",
+        "reason": "타겟-기술 부정합"
+      },
+      {
+        "combination": "Myeongdong + Medical Tourism",
+        "reason": "프리미엄 서비스-저가 지역 미스매칭"
+      }
+    ],
+    "lowRiskCombinations": [
+      {
+        "combination": "Foreign Tourists + Stablecoin + Hannam-dong",
+        "reason": "니즈 완벽 해결, 높은 ARPU, 타이밍 최적"
+      },
+      {
+        "combination": "Foreign Tourists + AI Skin Analysis + Seongsu-dong",
+        "reason": "K-뷰티 니즈 + 트렌디 지역"
+      }
+    ]
+  }
+}

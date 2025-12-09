@@ -3,58 +3,86 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { m } from 'framer-motion';
-import { Home, Map, Flame, Bell, Wallet } from 'lucide-react';
+import { Map, QrCode, Sparkles, User } from 'lucide-react';
 import { colors, layout, gradients, shadows, rgba } from '@/lib/design-tokens';
 import { useHaptic } from '@/hooks/useHaptic';
 import { useNotifications } from '@/hooks/useNotifications';
 import { useAuth } from '@/context/auth-context';
 
 /**
- * BottomTabBar - 앱스토어 수준의 바텀 네비게이션
+ * BottomTabBar - 3-Pillar 구조 (Pay/Play/Beauty)
  *
- * Features:
- * - 5개 탭: 홈, 지도, FAB, 알림, MY
- * - 중앙 FAB 버튼 (돌출)
- * - 알림 배지
+ * 🌟 Features (UX-001):
+ * - 4개 탭: Play(Map), Pay(QR), Beauty(AI), Profile
+ * - 외국인 친화적 아이콘 (텍스트 최소화)
+ * - "코인/지갑" 용어 제거 → "Pay" 사용
  * - 햅틱 피드백
  * - Safe Area 처리
  * - Glassmorphism 배경
+ *
+ * 🎯 Design Goals:
+ * - 30초 내 기능 이해 가능
+ * - 아이콘만으로도 직관적 인식
+ * - 3-Pillar 명확한 구분
  */
 
 interface TabItem {
   id: string;
   label: string;
-  icon: typeof Home;
+  labelEn: string;  // 외국인용 영문 라벨
+  icon: typeof Map;
   path: string;
-  isCenter?: boolean;
+  ariaLabel: string;
 }
 
 const TABS: TabItem[] = [
-  { id: 'home', label: '홈', icon: Home, path: '/' },
-  { id: 'map', label: '지도', icon: Map, path: '/map' },
-  { id: 'hot', label: '', icon: Flame, path: '/', isCenter: true },
-  { id: 'alerts', label: '알림', icon: Bell, path: '/notifications' },
-  { id: 'wallet', label: '자산', icon: Wallet, path: '/wallet' },
+  { 
+    id: 'play', 
+    label: '탐색', 
+    labelEn: 'Play',
+    icon: Map, 
+    path: '/map',
+    ariaLabel: 'Explore local places with Z-Pay'
+  },
+  { 
+    id: 'pay', 
+    label: '결제', 
+    labelEn: 'Pay',
+    icon: QrCode, 
+    path: '/wallet/pay',
+    ariaLabel: 'Pay with QR code in 3 seconds'
+  },
+  { 
+    id: 'beauty', 
+    label: '뷰티', 
+    labelEn: 'Beauty',
+    icon: Sparkles, 
+    path: '/beauty',
+    ariaLabel: 'AI Skin Analysis & K-Beauty'
+  },
+  { 
+    id: 'profile', 
+    label: '프로필', 
+    labelEn: 'Me',
+    icon: User, 
+    path: '/me',
+    ariaLabel: 'My profile and settings'
+  },
 ];
 
 export function BottomTabBar() {
   const pathname = usePathname();
   const haptic = useHaptic();
   const { user } = useAuth();
-  const { unreadCount } = useNotifications(user?.id ?? null);
 
   // 특정 경로에서는 탭바 숨김 (팝업 상세, 온보딩 등)
-  const hiddenPaths = ['/popup/', '/onboarding', '/checkin'];
+  const hiddenPaths = ['/popup/', '/onboarding', '/checkin', '/beauty/analyze'];
   const shouldHide = hiddenPaths.some((p) => pathname.startsWith(p));
 
   if (shouldHide) return null;
 
   const handleTabPress = (tab: TabItem) => {
-    if (tab.isCenter) {
-      haptic.tap();
-    } else {
-      haptic.selection();
-    }
+    haptic.selection();
   };
 
   return (
@@ -79,91 +107,57 @@ export function BottomTabBar() {
 
       {/* 탭 컨테이너 */}
       <div
-        className="relative flex items-end justify-around"
+        className="relative flex items-center justify-around"
         style={{
           height: layout.bottomNav.height,
           padding: layout.bottomNav.padding,
         }}
       >
         {TABS.map((tab) => {
-          const isActive = tab.isCenter
-            ? false
-            : pathname === tab.path || (tab.path !== '/' && pathname.startsWith(tab.path));
+          const isActive = pathname === tab.path || (tab.path !== '/' && pathname.startsWith(tab.path));
 
-          // 중앙 FAB 버튼
-          if (tab.isCenter) {
-            return (
-              <Link
-                key={tab.id}
-                href={tab.path}
-                onClick={() => handleTabPress(tab)}
-                className="relative -mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame-500 rounded-full"
-                aria-label="핫 팝업 보기"
-              >
-                <m.div
-                  className="flex items-center justify-center rounded-full"
-                  style={{
-                    width: 56,
-                    height: 56,
-                    background: gradients.flame,
-                    boxShadow: shadows.glow.primary,
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <tab.icon size={28} color="#fff" strokeWidth={2.5} />
-                </m.div>
-              </Link>
-            );
-          }
-
-          // 일반 탭 버튼
           return (
             <Link
               key={tab.id}
               href={tab.path}
               onClick={() => handleTabPress(tab)}
-              className="relative flex flex-col items-center justify-center flex-1 h-full focus-visible:outline-none"
+              className="relative flex flex-col items-center justify-center flex-1 h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame-500 rounded-lg"
               aria-current={isActive ? 'page' : undefined}
+              aria-label={tab.ariaLabel}
             >
-              <m.div className="flex flex-col items-center gap-1" whileTap={{ scale: 0.9 }}>
+              <m.div 
+                className="flex flex-col items-center gap-1" 
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              >
                 {/* 아이콘 */}
                 <div className="relative">
                   <tab.icon
-                    size={24}
+                    size={26}
                     style={{
                       color: isActive ? colors.flame[500] : rgba.white[50],
                       strokeWidth: isActive ? 2.5 : 2,
                     }}
                   />
-
-                  {/* 알림 배지 */}
-                  {tab.id === 'alerts' && unreadCount > 0 && (
-                    <span
-                      className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] h-4 px-1 text-micro font-bold text-white rounded-full"
-                      style={{ background: colors.flame[500] }}
-                    >
-                      {unreadCount > 99 ? '99+' : unreadCount}
-                    </span>
-                  )}
                 </div>
 
-                {/* 라벨 */}
+                {/* 라벨 (영문 우선 표시) */}
                 <span
-                  className="text-micro font-medium"
+                  className="text-micro font-medium tracking-tight"
                   style={{
                     color: isActive ? colors.flame[500] : rgba.white[50],
                   }}
                 >
-                  {tab.label}
+                  {tab.labelEn}
                 </span>
 
                 {/* 활성 인디케이터 */}
                 {isActive && (
                   <m.div
                     layoutId="activeTab"
-                    className="absolute -bottom-1 w-1 h-1 rounded-full"
-                    style={{ background: colors.flame[500] }}
+                    className="absolute -bottom-2 w-12 h-0.5 rounded-full"
+                    style={{ background: gradients.flame }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 )}
               </m.div>

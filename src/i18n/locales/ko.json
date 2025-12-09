@@ -75,6 +75,16 @@
     "earnPoints": "{{points}} 포인트 획득!"
   },
   "onboarding": {
+    "welcome": "ZZIK에 오신 것을 환영합니다",
+    "selectLanguage": "언어를 선택하세요",
+    "selectCurrency": "통화를 선택하세요",
+    "currencyDescription": "가격 표시에 사용할 통화를 선택하세요",
+    "selectCountry": "국가를 선택하세요",
+    "threePillars": "K-익스피리언스 발견",
+    "featureDescription": "한국 여행에 필요한 모든 것",
+    "letsGo": "시작하기!",
+    "getStarted": "시작하기",
+    "continueButton": "계속하기",
     "slide1": {
       "headline": "좋아하는 브랜드 팝업,\n왜 맨날 못 가?",
       "subtext": "원하는 팝업이 열리지 않아 아쉬웠던 경험"
@@ -309,5 +319,37 @@
     "includes": "포함 사항",
     "notIncludes": "미포함 사항",
     "hostedBy": "호스트"
+  },
+  "home": {
+    "welcome": "다시 오셨군요",
+    "welcomeBack": "다시 오셨군요",
+    "quickActions": "빠른 메뉴",
+    "featuredExperiences": "추천 체험",
+    "trendingIn": "{{city}}에서 인기",
+    "trendingInSeoul": "서울에서 인기",
+    "exploreCategories": "카테고리 탐색",
+    "viewAll": "전체 보기",
+    "nearby": "내 주변",
+    "bookTable": "예약하기",
+    "aiPicks": "AI 추천",
+    "waitList": "웨이팅",
+    "trending": "트렌딩",
+    "rewards": "리워드",
+    "perPerson": "1인당",
+    "notifications": "알림",
+    "settings": "설정",
+    "morningGreeting": "좋은 아침이에요",
+    "afternoonGreeting": "좋은 오후예요",
+    "eveningGreeting": "좋은 저녁이에요",
+    "categories": {
+      "food": "맛집",
+      "cafe": "카페",
+      "kpop": "K-POP",
+      "beauty": "뷰티",
+      "shopping": "쇼핑",
+      "nightlife": "나이트라이프",
+      "culture": "문화",
+      "more": "더보기"
+    }
   }
 }

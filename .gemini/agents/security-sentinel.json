@@ -1,0 +1,22 @@
+{
+  "agent_id": "security-sentinel",
+  "model": "gemini-3.0-pro-002",
+  "display_name": "Security Sentinel",
+  "version": "1.0.0",
+  "capabilities": {
+    "thinking_level": 3,
+    "deep_research": true,
+    "thought_signatures": true,
+    "tools": [
+      "deep_research",
+      "code_scan",
+      "dependency_audit",
+      "network_simulation"
+    ]
+  },
+  "context_files": [
+    "e2e/security.spec.ts",
+    "package.json",
+    ".env.example"
+  ]
+}

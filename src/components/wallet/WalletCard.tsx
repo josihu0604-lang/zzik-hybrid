@@ -1,16 +1,31 @@
 'use client';
 
+import Link from 'next/link';
 import { m } from 'framer-motion';
 import { useState } from 'react';
-import { QrCode, Send, CreditCard } from 'lucide-react';
+import { QrCode, Plus, History, Zap } from 'lucide-react';
+import { colors, rgba, gradients } from '@/lib/design-tokens';
 
 interface WalletCardProps {
   balance: number;
-  address: string;
+  address?: string;  // 주소는 선택적으로 (숨김)
 }
+
+/**
+ * WalletCard - Point System UI (PAY-001)
+ * 
+ * 🎯 VASP 규제 우회 전략:
+ * - "Z-Cash" → "Z-Point" 포인트 용어 전환
+ * - "USDC" 제거 → KRW 원화 표시
+ * - 지갑 주소 완전 숨김
+ * - "충전" = 환전 느낌으로 UX 설계
+ */
 
 export function WalletCard({ balance, address }: WalletCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  // Z-Point → KRW 환산 (1 Z-Point = 1 KRW)
+  const balanceKRW = balance;
 
   return (
     <div className="perspective-1000 w-full aspect-[1.58/1]">
@@ -19,55 +34,102 @@ export function WalletCard({ balance, address }: WalletCardProps) {
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         onClick={() => setIsFlipped(!isFlipped)}
       >
-        {/* Front Face */}
-        <div className="absolute inset-0 backface-hidden rounded-2xl bg-gradient-to-br from-space-900 to-black border border-white/10 shadow-2xl overflow-hidden p-6 flex flex-col justify-between">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-flame-500/10 blur-[80px] rounded-full pointer-events-none" />
+        {/* Front Face - Z-Point 잔액 */}
+        <div className="absolute inset-0 backface-hidden rounded-2xl overflow-hidden p-6 flex flex-col justify-between"
+          style={{
+            background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
+            border: `1px solid ${rgba.white[10]}`,
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+          }}
+        >
+          {/* Glow Effect */}
+          <div className="absolute top-0 right-0 w-64 h-64 opacity-30 blur-[100px] rounded-full pointer-events-none"
+            style={{ background: gradients.flame }}
+          />
           
-          <div className="flex justify-between items-start">
+          {/* Header */}
+          <div className="flex justify-between items-start relative z-10">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-flame-500 flex items-center justify-center">
-                <span className="font-bold text-white text-xs">Z</span>
+              <div 
+                className="w-10 h-10 rounded-full flex items-center justify-center"
+                style={{ background: gradients.flame }}
+              >
+                <Zap size={20} color="white" fill="white" />
               </div>
-              <span className="font-mono text-white/60 text-sm tracking-wider">Z-CASH</span>
-            </div>
-            <CreditCard className="text-white/20" />
-          </div>
-
-          <div className="space-y-1">
-            <span className="text-white/40 text-xs uppercase tracking-widest">Total Balance</span>
-            <div className="text-4xl font-black text-white tracking-tighter">
-              {balance.toLocaleString('en-US', { minimumFractionDigits: 2 })} <span className="text-flame-500 text-lg">Z</span>
-            </div>
-            <div className="text-white/30 text-xs font-mono">
-              ≈ ${(balance / 100).toFixed(2)} USDC
+              <div>
+                <div className="font-bold text-white text-base tracking-tight">Z-Point</div>
+                <div className="text-xs" style={{ color: rgba.white[50] }}>Your balance</div>
+              </div>
             </div>
           </div>
 
-          <div className="flex justify-between items-end">
-            <div className="font-mono text-white/40 text-xs">
-              {address.slice(0, 6)}...{address.slice(-4)}
+          {/* Balance */}
+          <div className="space-y-2 relative z-10">
+            <div className="text-5xl font-black text-white tracking-tight">
+              {balanceKRW.toLocaleString('ko-KR')}
+              <span className="text-2xl ml-1" style={{ color: rgba.white[60] }}>P</span>
             </div>
-            <div className="text-xs text-flame-400 font-bold border border-flame-500/30 px-2 py-1 rounded">
-              VIP LEVEL 1
+            <div className="text-sm" style={{ color: rgba.white[50] }}>
+              ≈ ₩{balanceKRW.toLocaleString('ko-KR')} KRW
+            </div>
+          </div>
+
+          {/* Badge */}
+          <div className="flex justify-between items-end relative z-10">
+            <div className="text-xs font-semibold px-3 py-1.5 rounded-full"
+              style={{
+                background: rgba.white[10],
+                color: colors.flame[400],
+                border: `1px solid ${colors.flame[500]}40`,
+              }}
+            >
+              ⚡ Active Member
             </div>
           </div>
         </div>
 
-        {/* Back Face (Actions) */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl bg-space-800 border border-white/10 p-6 flex flex-col justify-center items-center gap-4">
-          <div className="grid grid-cols-2 gap-4 w-full">
-            <button className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
-              <Send className="text-flame-500" />
-              <span className="text-xs font-bold text-white">SEND</span>
-            </button>
-            <button className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
-              <QrCode className="text-flame-500" />
-              <span className="text-xs font-bold text-white">PAY</span>
-            </button>
+        {/* Back Face - Actions (블록체인 용어 제거) */}
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl overflow-hidden p-6 flex flex-col justify-center items-center gap-4"
+          style={{
+            background: 'linear-gradient(135deg, #0f3460 0%, #16213e 100%)',
+            border: `1px solid ${rgba.white[10]}`,
+          }}
+        >
+          <div className="grid grid-cols-3 gap-3 w-full">
+            {/* Charge Points */}
+            <Link href="/wallet/charge" className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl hover:scale-105 transition-transform"
+              style={{ background: rgba.white[5] }}
+            >
+              <Plus size={24} color={colors.flame[500]} strokeWidth={2.5} />
+              <span className="text-xs font-semibold text-white">Charge</span>
+            </Link>
+
+            {/* QR Payment */}
+            <Link href="/wallet/pay" className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl hover:scale-105 transition-transform"
+              style={{ background: gradients.flame }}
+            >
+              <QrCode size={24} color="white" strokeWidth={2.5} />
+              <span className="text-xs font-semibold text-white">Pay</span>
+            </Link>
+
+            {/* History */}
+            <Link href="/wallet/history" className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl hover:scale-105 transition-transform"
+              style={{ background: rgba.white[5] }}
+            >
+              <History size={24} color={colors.flame[500]} strokeWidth={2.5} />
+              <span className="text-xs font-semibold text-white">History</span>
+            </Link>
           </div>
-          <p className="text-white/30 text-[10px] text-center">
-            Secured by Privy & Base L2
-          </p>
+
+          {/* Security Badge (블록체인 용어 제거) */}
+          <div className="mt-4 px-4 py-2 rounded-full text-xs font-medium"
+            style={{
+              background: rgba.white[5],
+              color: rgba.white[60],
+            }}
+          >
+            🔒 Secured Payment System
+          </div>
         </div>
       </m.div>
     </div>

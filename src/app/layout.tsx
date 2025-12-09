@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Noto_Sans_KR } from 'next/font/google';
 import { AuthProvider } from '@/context/auth-context';
 import { ToastProvider } from '@/components/ui/Toast';
 import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration';
@@ -17,27 +16,11 @@ import { WebVitalsMonitor } from '@/components/analytics/WebVitalsMonitor';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { CurrencyProvider } from '@/hooks/useCurrency';
 import { PerformanceMonitor } from '@/hooks/usePerformanceMode';
+import { getFontVariables } from '@/lib/fonts';
+import { DynamicFontLoader } from '@/components/i18n/DynamicFontLoader';
 import './globals.css';
 
 export const dynamic = 'force-dynamic';
-
-// Inter - Latin (English, numbers) - Primary font
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-  preload: true,
-});
-
-// Noto Sans KR - Korean font (from Google Fonts)
-// Alternative to Pretendard with similar aesthetics
-const notoSansKR = Noto_Sans_KR({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-  variable: '--font-noto-sans-kr',
-  preload: true,
-});
 
 // Extended metadata with SEO base
 export const metadata: Metadata = {
@@ -61,8 +44,10 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const fontVariables = getFontVariables();
+  
   return (
-    <html lang="ko" className={`dark ${inter.variable} ${notoSansKR.variable}`}>
+    <html lang="ko" suppressHydrationWarning className={`dark ${fontVariables}`}>
       <body className="min-h-screen bg-black text-white antialiased font-sans">
         <PerformanceMonitor />
         {/* Desktop Background Decoration */}
@@ -75,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionProvider>
           <AppProviders>
             <LanguageProvider>
+              <DynamicFontLoader />
               <CurrencyProvider>
                 <AuthProvider>
                   <ToastProvider>
