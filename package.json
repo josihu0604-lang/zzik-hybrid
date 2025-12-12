@@ -85,7 +85,7 @@
     "framer-motion": "^12.0.0",
     "lucide-react": "^0.556.0",
     "mapbox-gl": "^3.17.0",
-    "next": "^16.0.7",
+    "next": "^16.0.9",
     "next-intl": "^4.5.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
